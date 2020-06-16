@@ -6,8 +6,8 @@ import time
 import csv
 from googleAPIKey import getAPIKey
 
+#must have google API key for this to run.
 API_KEY = getAPIKey()
-
 gmaps = googlemaps.Client(key = API_KEY)
 
 #All possible search terms (May get dups)
@@ -22,6 +22,7 @@ typeList = ['accounting', 'airport', 'amusement_park', 'aquarium', 'art_gallery'
             'shoe_store', 'shopping_mall', 'spa', 'stadium', 'storage', 'store', 'subway_station', 'supermarket', 'synagogue', 'taxi_stand', 'tourist_attraction',
             'train_station', 'transit_station', 'travel_agency', 'university', 'veterinary_care', 'zoo']
 
+#open file
 with open('placeData.tsv', 'w') as tsvfile:
     writer = csv.writer(tsvfile, delimiter='\t')
 
@@ -30,15 +31,14 @@ with open('placeData.tsv', 'w') as tsvfile:
         #get inital search quary
         placesNear = gmaps.places_nearby(location = '43.549999,-80.250000', radius = 20000, open_now = False, type = typeList[j])
 
-        
-        #loop through all data given from search(including other pages)
-        while True:#bless pythons lil heart this is the best it can do for do while loops apperntly
+        #loop through all data given from search(including other pages) using do while loop... sort of, python is weird
+        while True:
+            #loop through each place and get information
             for place in placesNear['results']:
-                placeID = place['place_id']#get id for more info query
+                placeID = place['place_id']
                 name = place['name']
                 location = place['geometry']['location']
 
-                #get specified feilds
                 searchFeilds = ['formatted_address','opening_hours']
                 data = gmaps.place(place_id = placeID, fields = searchFeilds)
 
@@ -62,7 +62,7 @@ with open('placeData.tsv', 'w') as tsvfile:
                 else:
                     hours = 'Unknown'
                     
-                #Write all data to file
+                #Write all data to file in tsv format
                 writer.writerow([name, data['result']['formatted_address'], hours, str(location['lat']), str(location['lng']), typeList[j]])
 
                 #print data to console  
