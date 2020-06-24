@@ -1,7 +1,7 @@
-#include "testing.h"
-#include "PetData.h"
 #include <iostream>
+#include "../include/simulation.hh"
 
 int main(){
+
     return 0;
 }

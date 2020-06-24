@@ -1,23 +1,23 @@
 CC = g++
 CFLAGS = -Wall -std=c++11
-OBJECTS = testing.o PetData.o
+OBJECTS = agent.o simulation.o
 
-all: testingThing
+all: abmSim
 
-testingThing: $(OBJECTS)
+abmSim: $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@
 
-testing.o: testing.cpp
-	$(CC) $(CFLAGS) -c testing.cpp -o $@
+agent.o: agent.cpp
+	$(CC) $(CFLAGS) -c agent.cpp -o $@
 
-PetData.o: PetData.cpp
-	$(CC) $(CFLAGS) -c PetData.cpp -o $@
+simulation.o: simulation.cpp
+	$(CC) $(CFLAGS) -c simulation.cpp -o $@
 
 run:
-	./testingThing
+	./abmSim
 
 memtest:
-	valgrind --leak-check=full ./testingThing
+	valgrind --leak-check=full ./abmSim
 
 clean:
-	rm $(OBJECTS) testingThing
+	rm $(OBJECTS) abmSim
