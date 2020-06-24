@@ -13,7 +13,7 @@ class Location {
     string name;
     string sector;
     int population;
-
+    //TYPE location;
 
     public:
     int getPopulation();

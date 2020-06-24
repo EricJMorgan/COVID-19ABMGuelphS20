@@ -10,10 +10,15 @@ using namespace std;
 class Simulation{
     private:
     string name;
-    int age;
+    int susceptible;
+    int infected;
+    int recovered;
+    int deceased;
+    int vaccinated;
 
     public:
-    void printData();
+    void makeGraph();
+    void displayMap();
 };
 
 

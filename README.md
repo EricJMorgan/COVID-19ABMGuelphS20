@@ -1,4 +1,4 @@
-README
+README - add to this as we go
 
 Initial work on creating a very simple abm to exchange infections
 
