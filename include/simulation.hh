@@ -1,3 +1,12 @@
+/****************
+ * COVID-19ABMGuelphS20
+ * 26/06/20
+ * ver 0.01
+ * 
+ * This is the header file for the simulation class
+ ***************/
+
+
 #ifndef SIMULATION_H_
 #define SIMULATION_H_
 
@@ -17,6 +26,7 @@ class Simulation{
     int vaccinated;
 
     public:
+    Simulation();
     void makeGraph();
     void displayMap();
 };

@@ -1,9 +1,18 @@
+/****************
+ * COVID-19ABMGuelphS20
+ * 26/06/20
+ * ver 0.01
+ * 
+ * This is the header file for the agent class
+ ***************/
+
+
 #ifndef AGENT_H_
 #define AGENT_H_
 
 #include <string>
 #include <iostream>
-#include "../include/location.hh"
+//#include "location.hh"
 
 using namespace std;
 
@@ -25,6 +34,7 @@ class Agent{
     //TYPE currLocation;
 
     public:
+    Agent();
     void goGrocery();
     void goWork();
     void goSchool();

@@ -1,9 +1,18 @@
+/****************
+ * COVID-19ABMGuelphS20
+ * 26/06/20
+ * ver 0.01
+ * 
+ * This is the header file for the location class
+ ***************/
+
+
 #ifndef LOCATION_H_
 #define LOCATION_H_
 
 #include <string>
 #include <iostream>
-#include "../include/agent.hh"
+#include "agent.hh"
 
 using namespace std;
 
@@ -16,6 +25,7 @@ class Location {
     //TYPE location;
 
     public:
+    Location();
     int getPopulation();
     Agent* getSusceptible();
     Agent* getInfected();
