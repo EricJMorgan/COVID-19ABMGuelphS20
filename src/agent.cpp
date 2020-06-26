@@ -1,5 +1,14 @@
+/****************
+ * COVID-19ABMGuelphS20
+ * 26/06/20
+ * ver 0.01
+ * 
+ * This is the class file for the agent class
+ ***************/
+
+
 #include <iostream>
-#include "../include/agent.hh"
+#include "agent.hh"
 
 // Constructor
 Agent::Agent() {

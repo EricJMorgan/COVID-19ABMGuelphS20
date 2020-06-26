@@ -1,7 +1,16 @@
+/****************
+ * COVID-19ABMGuelphS20
+ * 26/06/20
+ * ver 0.01
+ * 
+ * This is the main for the COVID-19 eABM
+ ***************/
+
+
 #include <iostream>
-#include "../include/simulation.hh"
+#include "simulation.hh"
 
 int main(){
-    std::cout << "Hello world";
+    std::cout << "Hello world" << endl;
     return 0;
 }
