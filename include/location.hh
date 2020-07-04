@@ -13,6 +13,7 @@
 #include <string>
 #include <iostream>
 #include "agent.hh"
+#include "geographicalrisk.hh"
 
 using namespace std;
 
@@ -20,9 +21,14 @@ using namespace std;
 class Location {
     private:
     string name;
-    string sector;
+    string sector; //wtf is this
     int population;
-    //TYPE location;
+    //TYPE location; need GIS stuff
+    int pplDensity;
+    int avgTimeSpent;
+    int avgAgentInteraction;
+    GeographicalRisk avgLocationRisk;
+    Agent* currentAgents;
 
     public:
     Location();
@@ -30,7 +36,6 @@ class Location {
     Agent* getSusceptible();
     Agent* getInfected();
     Agent* getRecovered();
-
 };
 
 #endif

@@ -12,23 +12,34 @@
 
 #include <string>
 #include <iostream>
+#include <location.hh>
+#include <agent.hh>
 
 using namespace std;
 
 //Declare simulation class
-class Simulation{
+class Simulation {
     private:
-    string name;
-    int susceptible;
-    int infected;
-    int recovered;
-    int deceased;
-    int vaccinated;
+    Agent* simAgents;
+    Location guelphMap[];
+
+    // user inputs
+    int timeStep;
+    int incubationPeriod;
+    int socialDistancingSeverity;
+    bool socialDistaning;
+    int timeQuarantined;
+    //TYPE map;
+    int initiallyInfected;
+    bool fluSeason;
 
     public:
     Simulation();
-    void makeGraph();
-    void displayMap();
+    void runSim();
+    void simulateTimeStep();
+    void updateOutput();
+    void removeAgentsResolved();
+    void updateSIRGraphic();
 };
 
 

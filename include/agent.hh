@@ -12,7 +12,7 @@
 
 #include <string>
 #include <iostream>
-//#include "location.hh"
+#include "location.hh"
 
 using namespace std;
 
@@ -23,7 +23,7 @@ class Agent{
     string ethnicity;
     string gender;
     string maritalStatus;
-    //TYPE addrress;
+    Location addrress;
     string education;
     string major;
     bool employment;
@@ -31,7 +31,7 @@ class Agent{
     bool hygiene;
     bool socialDistancing;
     bool wearingMask;
-    //TYPE currLocation;
+    Location currLocation;
 
     public:
     Agent();
