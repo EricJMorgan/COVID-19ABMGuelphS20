@@ -12,16 +12,16 @@
 
 #include <string>
 #include <iostream>
-#include <location.hh>
-#include <agent.hh>
 
 using namespace std;
 
+class Agent;
+class Location;
 //Declare simulation class
 class Simulation {
     private:
     Agent* simAgents;
-    Location guelphMap[];
+    Location* guelphMap;
 
     // user inputs
     int timeStep;

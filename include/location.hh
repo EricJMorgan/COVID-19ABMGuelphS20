@@ -12,10 +12,12 @@
 
 #include <string>
 #include <iostream>
-#include "agent.hh"
-#include "geographicalrisk.hh"
 
 using namespace std;
+
+//Forward declarations
+class Agent;
+class GeographicalRisk;
 
 //Declare simulation class
 class Location {
@@ -27,7 +29,7 @@ class Location {
     int pplDensity;
     int avgTimeSpent;
     int avgAgentInteraction;
-    GeographicalRisk avgLocationRisk;
+    GeographicalRisk* avgLocationRisk;
     Agent* currentAgents;
 
     public:

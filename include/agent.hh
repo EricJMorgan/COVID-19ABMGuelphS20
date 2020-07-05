@@ -12,10 +12,11 @@
 
 #include <string>
 #include <iostream>
-#include "location.hh"
+#pragma once
 
 using namespace std;
 
+class Location;
 //Declare simulation class
 class Agent{
     private:
@@ -23,7 +24,7 @@ class Agent{
     string ethnicity;
     string gender;
     string maritalStatus;
-    Location addrress;
+    Location* addrress;
     string education;
     string major;
     bool employment;
@@ -31,7 +32,7 @@ class Agent{
     bool hygiene;
     bool socialDistancing;
     bool wearingMask;
-    Location currLocation;
+    Location* currLocation;
 
     public:
     Agent();

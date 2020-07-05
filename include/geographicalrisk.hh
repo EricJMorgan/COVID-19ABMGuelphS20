@@ -10,12 +10,13 @@
 #ifndef GEOGRAPHICALRISK_H_
 #define GEOGRAPHICALRISK_H_
 
+#pragma once
 #include <string>
 #include <iostream>
-#include "location.hh"
 
 using namespace std;
 
+class Location;
 //Declare simulation class
 class GeographicalRisk {
     private:
@@ -28,7 +29,7 @@ class GeographicalRisk {
     double sexRatio;
     int infectedTotal;
     int susceptibleTotal;
-    Location avgLocationRisk;
+    Location* avgLocationRisk;
 
     public:
     GeographicalRisk();

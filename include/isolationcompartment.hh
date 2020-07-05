@@ -12,14 +12,16 @@
 
 #include <string>
 #include <iostream>
-#include "agent.hh"
 
 using namespace std;
+
+//Forward declarations
+class Agent;
 
 //Declare simulation class
 class IsolationCompartment {
     private:
-    Agent agents[];
+    Agent* agents;
 
     public:
     IsolationCompartment();

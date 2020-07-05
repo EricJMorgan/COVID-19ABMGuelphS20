@@ -12,21 +12,23 @@
 
 #include <string>
 #include <iostream>
-#include <location.hh>
-#include <agent.hh>
 
 using namespace std;
 
 enum TransportType { BUS, CAR, WALK };
 
+//Forward declarations
+class Location;
+class Agent;
+
 //Declare simulation class
 class Transportation {
     private:
     TransportType type;
-    Location guelphBusRoutes[];
-    Location agentOrigin;
-    Location agentDestination;
-    Agent currAgent;
+    Location* guelphBusRoute;
+    Location* agentOrigin;
+    Location* agentDestination;
+    Agent* currAgent;
 
     public:
     Transportation();

@@ -11,14 +11,14 @@
 #define TRANSPORTATION_H_
 
 #include <iostream>
-#include <location.hh>
 
 using namespace std;
 
+class Location;
 //Declare simulation class
 class GUIOutput {
     private:
-    Location GuelphMap[];
+    Location* GuelphMap;
 
     public:
     GUIOutput();
