@@ -10,7 +10,7 @@ INCDIR = ./include/
 
 CC = g++
 CFLAGS = -std=c++11 -Wall -I./include
-OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o
+OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCode.o
 
 all: $(BINDIR)abmSim
 
@@ -28,6 +28,9 @@ $(BINDIR)simulation.o: $(SRCDIR)simulation.cpp $(INCDIR)simulation.hh
 
 $(BINDIR)location.o: $(SRCDIR)location.cpp $(INCDIR)location.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)location.cpp -o $@
+
+$(BINDIR)postalCode.o: $(SRCDIR)postalCode.cpp $(INCDIR)postalCode.hh
+	$(CC) $(CFLAGS) -c $(SRCDIR)postalCode.cpp -o $@
 
 run:
 	$(BINDIR)abmSim
