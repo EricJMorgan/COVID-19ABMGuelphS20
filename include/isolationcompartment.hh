@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 30/06/20
- * ver 0.01
+ * 06/07/20
+ * ver 0.02
  * 
  * This is the header file for the isolation compartment class
  ***************/
