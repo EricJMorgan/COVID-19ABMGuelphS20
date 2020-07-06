@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/06/20
- * ver 0.01
+ * 06/07/20
+ * ver 0.02
  * 
  * This is the header file for the transportation class
  ***************/
@@ -25,10 +25,8 @@ class Agent;
 class Transportation {
     private:
     TransportType type;
-    Location* guelphBusRoute;
-    Location* agentOrigin;
-    Location* agentDestination;
-    Agent* currAgent;
+    Location* destination;
+    bool isStillInTransport;
 
     public:
     Transportation();

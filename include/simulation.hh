@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 26/06/20
- * ver 0.01
+ * 06/07/20
+ * ver 0.02
  * 
  * This is the header file for the simulation class
  ***************/
@@ -21,15 +21,14 @@ class Location;
 class Simulation {
     private:
     Agent* simAgents;
-    Location* guelphMap;
+    Location* guelphMap; //map
 
     // user inputs
     int timeStep;
     int incubationPeriod;
     int socialDistancingSeverity;
-    bool socialDistaning;
+    bool socialDistancing;
     int timeQuarantined;
-    //TYPE map;
     int initiallyInfected;
     bool fluSeason;
 

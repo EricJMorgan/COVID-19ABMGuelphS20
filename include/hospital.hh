@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 30/06/20
- * ver 0.01
+ * 06/07/20
+ * ver 0.02
  * 
  * This is the header file for the hospital class
  ***************/
@@ -12,22 +12,24 @@
 
 #include <string>
 #include <iostream>
-#include "location.hh"
 
 using namespace std;
 
 //Declare simulation class
-class Hospital: public Location {
+class Hospital {
     private:
     int totalBedCount;
     int icuBedCount;
     int numberPpl;
+    int icuCount;
 
     public:
     Hospital();
-    void FreeBeds();
+    void FreeIcuBeds();
+    void FreeHospitalBeds();
     void IndicateOverflow();
     void IncreaseHospitalCount();
+    void increaseIcuCount();
 };
 
 #endif

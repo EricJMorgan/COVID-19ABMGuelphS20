@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 26/06/20
- * ver 0.01
+ * 06/07/20
+ * ver 0.02
  * 
  * This is the header file for the business class
  ***************/
@@ -12,14 +12,13 @@
 
 #include <string>
 #include <iostream>
-#include "location.hh"
 
 using namespace std;
 
 enum BusinessTypes { SCHOOL, MALL, ETC };
 
 //Declare simulation class
-class Business: public Location {
+class Business {
     private:
     bool isEssential;
     int openHour;

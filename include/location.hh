@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 26/06/20
- * ver 0.01
+ * 06/07/20
+ * ver 0.02
  * 
  * This is the header file for the location class
  ***************/
@@ -12,25 +12,29 @@
 
 #include <string>
 #include <iostream>
+#include "SIRtotals.hh"
+#include "transportation.hh"
+#include "geographicalrisk.hh"
+#include "business.hh"
 
 using namespace std;
 
 //Forward declarations
 class Agent;
-class GeographicalRisk;
 
 //Declare simulation class
 class Location {
     private:
-    string name;
-    string sector; //wtf is this
+    string name; //postal code
     int population;
-    //TYPE location; need GIS stuff
     int pplDensity;
     int avgTimeSpent;
     int avgAgentInteraction;
-    GeographicalRisk* avgLocationRisk;
     Agent* currentAgents;
+    Business* locationBusiness;
+    Transportation* transportaionRoutesFromLocation;
+    GeographicalRisk avgLocationRisk;
+    SIRtotals sirTotalLocation;
 
     public:
     Location();
