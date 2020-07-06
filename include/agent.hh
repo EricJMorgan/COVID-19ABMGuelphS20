@@ -28,7 +28,7 @@ class Agent{
     string ethnicity;
     string gender;
     string maritalStatus;
-    Location* addrress;
+    Location* address;
     string education;
     string major;
     bool employment;
@@ -44,7 +44,6 @@ class Agent{
     void goWork();
     void goSchool();
     void goHome();
-    void brownianMotion();
     void quarantineTime();
     void goodHygiene();
     void followWearMask();
