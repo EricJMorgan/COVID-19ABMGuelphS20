@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 26/06/20
- * ver 0.01
+ * 06/07/20
+ * ver 0.02
  * 
  * This is the header file for the simulation class
  ***************/
@@ -15,20 +15,30 @@
 
 using namespace std;
 
+class Agent;
+class Location;
 //Declare simulation class
-class Simulation{
+class Simulation {
     private:
-    string name;
-    int susceptible;
-    int infected;
-    int recovered;
-    int deceased;
-    int vaccinated;
+    Agent* simAgents;
+    Location* guelphMap; //map
+
+    // user inputs
+    int timeStep;
+    int incubationPeriod;
+    int socialDistancingSeverity;
+    bool socialDistancing;
+    int timeQuarantined;
+    int initiallyInfected;
+    bool fluSeason;
 
     public:
     Simulation();
-    void makeGraph();
-    void displayMap();
+    void runSim();
+    void simulateTimeStep();
+    void updateOutput();
+    void removeAgentsResolved();
+    void updateSIRGraphic();
 };
 
 

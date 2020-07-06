@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 26/06/20
- * ver 0.01
+ * 06/07/20
+ * ver 0.02
  * 
  * This is the header file for the location class
  ***************/
@@ -12,17 +12,29 @@
 
 #include <string>
 #include <iostream>
-#include "agent.hh"
+#include "SIRtotals.hh"
+#include "transportation.hh"
+#include "geographicalrisk.hh"
+#include "business.hh"
 
 using namespace std;
+
+//Forward declarations
+class Agent;
 
 //Declare simulation class
 class Location {
     private:
-    string name;
-    string sector;
+    string name; //postal code
     int population;
-    //TYPE location;
+    int pplDensity;
+    int avgTimeSpent;
+    int avgAgentInteraction;
+    Agent* currentAgents;
+    Business* locationBusiness;
+    Transportation* transportaionRoutesFromLocation;
+    GeographicalRisk avgLocationRisk;
+    SIRtotals sirTotalLocation;
 
     public:
     Location();
@@ -30,7 +42,6 @@ class Location {
     Agent* getSusceptible();
     Agent* getInfected();
     Agent* getRecovered();
-
 };
 
 #endif

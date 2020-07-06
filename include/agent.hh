@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 26/06/20
- * ver 0.01
+ * 06/07/20
+ * ver 0.02
  * 
  * This is the header file for the agent class
  ***************/
@@ -12,18 +12,23 @@
 
 #include <string>
 #include <iostream>
-//#include "location.hh"
+#pragma once
 
 using namespace std;
 
+enum AgeGroup { };
+enum HouseholdIncome { };
+
+class Location;
 //Declare simulation class
 class Agent{
     private:
-    int age;
+    AgeGroup age;
+    HouseholdIncome income;
     string ethnicity;
     string gender;
     string maritalStatus;
-    //TYPE addrress;
+    Location* address;
     string education;
     string major;
     bool employment;
@@ -31,7 +36,7 @@ class Agent{
     bool hygiene;
     bool socialDistancing;
     bool wearingMask;
-    //TYPE currLocation;
+    Location* currLocation;
 
     public:
     Agent();
@@ -39,7 +44,6 @@ class Agent{
     void goWork();
     void goSchool();
     void goHome();
-    void brownianMotion();
     void quarantineTime();
     void goodHygiene();
     void followWearMask();
