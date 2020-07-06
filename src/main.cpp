@@ -9,12 +9,11 @@
 
 #include <iostream>
 #include "simulation.hh"
-#include <fstream>
 
 int main(){
 
     Simulation sim;
-    
+    sim.setUpAgents("demographicGuelph.csv");
 
 
     return 0;

@@ -39,7 +39,7 @@ class Simulation {
     void updateOutput();
     void removeAgentsResolved();
     void updateSIRGraphic();
-    void setUpAgents();
+    void setUpAgents(string fileName);
 };
 
 

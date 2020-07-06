@@ -11,6 +11,7 @@
 #include "agent.hh"
 
 // Constructor
-Agent::Agent() {
-    //
+Agent::Agent(AgeGroup agegroup, string agentGender) {
+    age = agegroup;
+    gender = agentGender;
 }
