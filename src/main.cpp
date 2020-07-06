@@ -9,8 +9,13 @@
 
 #include <iostream>
 #include "simulation.hh"
+#include <fstream>
 
 int main(){
-    std::cout << "Hello world" << endl;
+
+    Simulation sim;
+    
+
+
     return 0;
 }

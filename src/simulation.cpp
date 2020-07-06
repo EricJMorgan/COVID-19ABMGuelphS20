@@ -12,5 +12,4 @@
 
 // Constructor
 Simulation::Simulation() {
-    //
 }
