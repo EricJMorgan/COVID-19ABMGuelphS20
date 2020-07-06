@@ -10,7 +10,8 @@ INCDIR = ./include/
 
 CC = g++
 CFLAGS = -std=c++11 -Wall -I./include
-OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCode.o
+
+OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCode.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)business.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
 
 all: $(BINDIR)abmSim
 
@@ -31,6 +32,27 @@ $(BINDIR)location.o: $(SRCDIR)location.cpp $(INCDIR)location.hh
 
 $(BINDIR)postalCode.o: $(SRCDIR)postalCode.cpp $(INCDIR)postalCode.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)postalCode.cpp -o $@
+
+$(BINDIR)SIR.o: $(SRCDIR)SIR.cpp $(INCDIR)SIR.hh
+	$(CC) $(CFLAGS) -c $(SRCDIR)SIR.cpp -o $@
+
+$(BINDIR)SIRtotals.o: $(SRCDIR)SIRtotals.cpp $(INCDIR)SIRtotals.hh
+	$(CC) $(CFLAGS) -c $(SRCDIR)SIRtotals.cpp -o $@
+
+$(BINDIR)transportation.o: $(SRCDIR)transportation.cpp $(INCDIR)transportation.hh
+	$(CC) $(CFLAGS) -c $(SRCDIR)transportation.cpp -o $@
+
+$(BINDIR)business.o: $(SRCDIR)business.cpp $(INCDIR)business.hh
+	$(CC) $(CFLAGS) -c $(SRCDIR)business.cpp -o $@
+
+$(BINDIR)geographicalrisk.o: $(SRCDIR)geographicalrisk.cpp $(INCDIR)geographicalrisk.hh
+	$(CC) $(CFLAGS) -c $(SRCDIR)geographicalrisk.cpp -o $@
+
+$(BINDIR)hospital.o: $(SRCDIR)hospital.cpp $(INCDIR)hospital.hh
+	$(CC) $(CFLAGS) -c $(SRCDIR)hospital.cpp -o $@
+
+$(BINDIR)isolationcompartment.o: $(SRCDIR)isolationcompartment.cpp $(INCDIR)isolationcompartment.hh
+	$(CC) $(CFLAGS) -c $(SRCDIR)isolationcompartment.cpp -o $@
 
 run:
 	$(BINDIR)abmSim
