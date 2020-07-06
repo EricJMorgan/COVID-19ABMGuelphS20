@@ -10,7 +10,7 @@ INCDIR = ./include/
 
 CC = g++
 CFLAGS = -std=c++11 -Wall -I./include
-OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)business.o $(BINDIR)geographicalrisk.o $(BINDIR)GUIoutput.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
+OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)business.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
 
 all: $(BINDIR)abmSim
 
@@ -43,9 +43,6 @@ $(BINDIR)business.o: $(SRCDIR)business.cpp $(INCDIR)business.hh
 
 $(BINDIR)geographicalrisk.o: $(SRCDIR)geographicalrisk.cpp $(INCDIR)geographicalrisk.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)geographicalrisk.cpp -o $@
-
-$(BINDIR)GUIoutput.o: $(SRCDIR)GUIoutput.cpp $(INCDIR)GUIoutput.hh
-	$(CC) $(CFLAGS) -c $(SRCDIR)GUIoutput.cpp -o $@
 
 $(BINDIR)hospital.o: $(SRCDIR)hospital.cpp $(INCDIR)hospital.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)hospital.cpp -o $@

@@ -27,8 +27,8 @@ class GeographicalRisk {
     int avgHygiene;
     int ethnicityRatios[5];
     double sexRatio;
-    int infectedTotal;
-    int susceptibleTotal;
+    int socialDistancingSeverity;
+    bool socialDistancing;
     Location* avgLocationRisk;
 
     public:

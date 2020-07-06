@@ -21,15 +21,14 @@ class Location;
 class Simulation {
     private:
     Agent* simAgents;
-    Location* guelphMap;
+    Location* guelphMap; //map
 
     // user inputs
     int timeStep;
     int incubationPeriod;
     int socialDistancingSeverity;
-    bool socialDistaning;
+    bool socialDistancing;
     int timeQuarantined;
-    //TYPE map;
     int initiallyInfected;
     bool fluSeason;
 

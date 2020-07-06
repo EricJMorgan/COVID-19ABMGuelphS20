@@ -12,22 +12,24 @@
 
 #include <string>
 #include <iostream>
-#include "location.hh"
 
 using namespace std;
 
 //Declare simulation class
-class Hospital: public Location {
+class Hospital {
     private:
     int totalBedCount;
     int icuBedCount;
     int numberPpl;
+    int icuCount;
 
     public:
     Hospital();
-    void FreeBeds();
+    void FreeIcuBeds();
+    void FreeHospitalBeds();
     void IndicateOverflow();
     void IncreaseHospitalCount();
+    void increaseIcuCount();
 };
 
 #endif

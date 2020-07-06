@@ -23,15 +23,15 @@ class SIR {
     SIRSeverity currentSeverity;
     int incubationPeriod;
     int infectDuration;
-    int recovered;
+    bool recovered;
     bool quarantineCase;
     bool isolateCase;
     bool hospitalCase;
+    bool icuCase;
     int fatalRisk;
 
     public:
     SIR();
-    void CurrentlyExposed();
     void QuarantineAgent();
     void AgentSymptoms();
     void HospitalAgent();

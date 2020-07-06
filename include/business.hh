@@ -12,14 +12,13 @@
 
 #include <string>
 #include <iostream>
-#include "location.hh"
 
 using namespace std;
 
 enum BusinessTypes { SCHOOL, MALL, ETC };
 
 //Declare simulation class
-class Business: public Location {
+class Business {
     private:
     bool isEssential;
     int openHour;

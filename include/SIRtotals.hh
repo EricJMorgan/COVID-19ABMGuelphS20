@@ -22,7 +22,6 @@ class SIRtotals {
     int infected;
     int recovered;
     int diseased;
-    //int vaccinated;
 
     public:
     SIRtotals();

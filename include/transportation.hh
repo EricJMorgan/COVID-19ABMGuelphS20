@@ -25,10 +25,8 @@ class Agent;
 class Transportation {
     private:
     TransportType type;
-    Location* guelphBusRoute;
-    Location* agentOrigin;
-    Location* agentDestination;
-    Agent* currAgent;
+    Location* destination;
+    bool isStillInTransport;
 
     public:
     Transportation();
