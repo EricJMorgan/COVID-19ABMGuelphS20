@@ -20,7 +20,7 @@ class Location;
 //Declare simulation class
 class Simulation {
     private:
-    Agent* simAgents;
+    Agent* simAgents[132000];
     Location* guelphMap; //map
 
     // user inputs

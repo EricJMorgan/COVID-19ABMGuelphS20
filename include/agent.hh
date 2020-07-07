@@ -52,6 +52,7 @@ class Agent{
     void goodHygiene();
     void followWearMask();
     void followSocialDistancing();
+    void DecideEthnicity();
 };
 
 #endif
