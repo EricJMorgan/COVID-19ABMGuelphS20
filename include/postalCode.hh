@@ -62,7 +62,6 @@ class PostalCodeHash{
     PostalCodeHash(string tsvFile, int hashSize);
     PostalCodeData *hashTable;
     static int getPostalHash(int hashSize, string postalTSVToHash);
-    
 };
 
 #endif

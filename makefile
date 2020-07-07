@@ -54,7 +54,6 @@ $(BINDIR)hospital.o: $(SRCDIR)hospital.cpp $(INCDIR)hospital.hh
 $(BINDIR)isolationcompartment.o: $(SRCDIR)isolationcompartment.cpp $(INCDIR)isolationcompartment.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)isolationcompartment.cpp -o $@
 
-
 run:
 	$(BINDIR)abmSim
 
