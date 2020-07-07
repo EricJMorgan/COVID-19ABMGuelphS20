@@ -20,6 +20,10 @@ AgentInfo Agent::getAgentInfo(){
     return info;
 }
 
+string Agent::getEthnicity(){
+    return ethnicity;
+}
+
 void Agent::DecideEthnicity() {
     if (!ethnicity.empty()) {
         return;

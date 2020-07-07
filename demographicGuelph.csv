@@ -15,7 +15,7 @@ Gender,Male 65-69,2805
 Gender,Male 70-74,1950
 Gender,Male 75-79,1350
 Gender,Male 80-84,1080
-Gender,Male 85+,1050
+Gender,Male 85,1050
 Gender,Female 0-4,3630
 Gender,Female 5-9,3780
 Gender,Female 10-14,3625
@@ -33,7 +33,7 @@ Gender,Female 65-69,3265
 Gender,Female 70-74,2410
 Gender,Female 75-79,1845
 Gender,Female 80-84,1455
-Gender,Female 85+,2020
+Gender,Female 85,2020
 Marital Status,Single,31690
 Marital Status,Common Law,10745
 Marital Status,Married,51040

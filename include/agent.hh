@@ -66,6 +66,7 @@ class Agent{
     void followSocialDistancing();
     void DecideEthnicity();
     AgentInfo getAgentInfo();
+    string getEthnicity();
 };
 
 #endif

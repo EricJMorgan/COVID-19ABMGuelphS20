@@ -26,11 +26,24 @@ Simulation::~Simulation(){
     delete[] simAgents;
 }
 
+/*************************
+ * getAgentAt
+ * 
+ * Given the index of the agent this will get a copy of the agent at
+ * the given location in the simAgents array
+ * 
+ * NOTE: must add error handling to function
+ ************************/
 Agent Simulation::getAgentAt(int index){//TODO add error checking for array bounds
     Agent holder = Agent(simAgents[index]->getAgentInfo());
     return holder;
 }
 
+/*************************
+ * addNewAgent
+ * 
+ * This adds a set of new agents to the arra
+ ************************/
 void Simulation::addNewAgent(string personInfo, int amountToAdd){
     for(int i = 0; i < amountToAdd; i++){
         Agent* tempAgent = new Agent(AgentInfoMap[personInfo]);
@@ -40,7 +53,12 @@ void Simulation::addNewAgent(string personInfo, int amountToAdd){
 }
 
 
-
+/*************************
+ * setUpAgents
+ * 
+ * This takes in the filename and parses the file
+ * and then places the data into the array
+ ************************/
 void Simulation::setUpAgents(string filename) {
     ifstream demographicFile;
     demographicFile.open(filename, ios::in);
