@@ -1,6 +1,6 @@
 # COVID-19ABMGuelphS20
-# 26/06/20
-# ver 0.01
+# 07/07/20
+# ver 0.02
 #
 # Makefile for the COVID-19 eABM
 
@@ -53,6 +53,7 @@ $(BINDIR)hospital.o: $(SRCDIR)hospital.cpp $(INCDIR)hospital.hh
 
 $(BINDIR)isolationcompartment.o: $(SRCDIR)isolationcompartment.cpp $(INCDIR)isolationcompartment.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)isolationcompartment.cpp -o $@
+
 
 run:
 	$(BINDIR)abmSim
