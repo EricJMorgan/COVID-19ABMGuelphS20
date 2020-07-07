@@ -1,6 +1,6 @@
 # COVID-19ABMGuelphS20
-# 26/06/20
-# ver 0.01
+# 07/07/20
+# ver 0.02
 #
 # Makefile for the COVID-19 eABM
 
@@ -10,7 +10,8 @@ INCDIR = ./include/
 
 CC = g++
 CFLAGS = -std=c++11 -Wall -I./include
-OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)business.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
+
+OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCode.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)business.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
 
 all: $(BINDIR)abmSim
 
@@ -28,6 +29,9 @@ $(BINDIR)simulation.o: $(SRCDIR)simulation.cpp $(INCDIR)simulation.hh
 
 $(BINDIR)location.o: $(SRCDIR)location.cpp $(INCDIR)location.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)location.cpp -o $@
+
+$(BINDIR)postalCode.o: $(SRCDIR)postalCode.cpp $(INCDIR)postalCode.hh
+	$(CC) $(CFLAGS) -c $(SRCDIR)postalCode.cpp -o $@
 
 $(BINDIR)SIR.o: $(SRCDIR)SIR.cpp $(INCDIR)SIR.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)SIR.cpp -o $@

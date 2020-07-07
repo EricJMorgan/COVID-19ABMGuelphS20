@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include "simulation.hh"
+#include "postalCode.hh"
 
 int main(){
 
