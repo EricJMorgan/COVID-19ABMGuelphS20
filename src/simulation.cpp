@@ -28,7 +28,6 @@ void Simulation::setUpAgents(string filename) {
     getline(demographicFile, line, ',');
     
     while (line.compare("Gender") == 0) {
-
         getline(demographicFile, agegroup, ',');
         getline(demographicFile, line, ',');
         if (agegroup.compare("Male 0-4") == 0) {
@@ -251,5 +250,6 @@ void Simulation::setUpAgents(string filename) {
     
         getline(demographicFile, line, ',');
     }
+    
     demographicFile.close();
 }
