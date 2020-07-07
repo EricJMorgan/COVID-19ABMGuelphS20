@@ -37,7 +37,7 @@ void Agent::DecideHouseholdIncome() {
 
     double randomNumber = (double) rand()/RAND_MAX;
 
-    // Marital probabilities backed by Gov of Canada Census
+    // Household income probabilities probabilities backed by Gov of Canada Census
     if (0 <= randomNumber && randomNumber < 0.0118064) {
         income = H0TO4;
     } else if (0.0118064 <= randomNumber && randomNumber < 0.0244768) {
