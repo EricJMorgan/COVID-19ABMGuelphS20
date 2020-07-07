@@ -9,8 +9,9 @@
 
 #include <iostream>
 #include "simulation.hh"
+#include "postalCode.hh"
 
 int main(){
-    std::cout << "Hello world" << endl;
+    
     return 0;
 }
