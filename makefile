@@ -9,7 +9,12 @@ BINDIR = ./bin/
 INCDIR = ./include/
 
 CC = g++
-CFLAGS = -std=c++11 -Wall -I./include
+OS := $(shell uname)#This checks for OSX or Linux
+ifeq ($(OS),Darwin)
+	CFLAGS = -std=c++11 -Wall -I./include -I/opt/local/include
+else
+	CFLAGS = -std=c++11 -Wall -I./include
+endif
 
 OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCode.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)business.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
 
