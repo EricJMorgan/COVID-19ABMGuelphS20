@@ -60,6 +60,8 @@
         "cinttypes": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "__split_buffer": "cpp",
+        "hashtable": "cpp"
     }
 }

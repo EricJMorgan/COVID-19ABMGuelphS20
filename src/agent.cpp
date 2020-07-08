@@ -16,6 +16,7 @@ Agent::Agent(AgentInfo agentInfo) {
     DecideEthnicity();
     DecideMartialStatus();
     DecideHouseholdIncome();
+    DecideEducation();
 }
 
 AgentInfo Agent::getAgentInfo(){
@@ -26,12 +27,16 @@ string Agent::getEthnicity(){
     return ethnicity;
 }
 
+void Agent::DecideEducation() {
+
+}
+
 void Agent::DecideHouseholdIncome() {
-    if (!HouseholdIncome.empty()) {
+    if (income != NULL) {
         return;
     }
 
-    if (info < 4 || 18 <= info <= 21) {
+    if (info < MALE20TO24 || FEMALE0TO4 <= info && info <= FEMALE15TO19) {
         income = HNA;
     }
 
