@@ -115,17 +115,17 @@ void Agent::DecideMartialStatus() {
     
     // Marital probabilities backed by Gov of Canada Census
     if (0 <= randomNumber && randomNumber < 0.2904142) {
-        ethnicity = "Single";
+        maritalStatus = "Single";
     } else if (0.2904142 <= randomNumber && randomNumber < 0.3888837) {
-        ethnicity = "Common Law";
+        maritalStatus = "Common Law";
     } else if (0.3888837 <= randomNumber && randomNumber < 0.8566257) {
-        ethnicity = "Married";
+        maritalStatus = "Married";
     } else if (0.8566257 <= randomNumber && randomNumber < 0.8867302) {
-        ethnicity = "Seperated";
+        maritalStatus = "Seperated";
     } else if (0.8867302 <= randomNumber && randomNumber < 0.9468475) {
-        ethnicity = "Divorced";
+        maritalStatus = "Divorced";
     } else {
-        ethnicity = "Widowed";
+        maritalStatus = "Widowed";
     }
 }
 
@@ -171,4 +171,20 @@ void Agent::DecideEthnicity() {
         ethnicity = "White";
     }
 
+}
+
+string Agent::agentToString(){
+    string agentString = "";
+
+    agentString.append(AgentInfoMapReverse[info]);
+    agentString.append(" ");
+    agentString.append(ethnicity);
+    agentString.append(" ");
+    agentString.append(maritalStatus);
+    agentString.append(" ");
+    agentString.append(HouseholdIncomeMap[income]);
+    agentString.append(" ");
+    agentString.append(EducationMap[education]);
+
+    return agentString;
 }
