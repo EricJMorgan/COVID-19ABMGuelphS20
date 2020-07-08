@@ -14,8 +14,7 @@
 
 int main(){
 
-    Simulation sim;
-    sim.setUpAgents("demographicGuelph.csv");
+    Simulation sim = Simulation("demographicGuelph.csv");
     for(int i = 0; i < 131805; i++){
         cout << sim.getAgentAt(i).getAgentInfo() << " " << sim.getAgentAt(i).getEthnicity() << endl;
     }

@@ -35,17 +35,17 @@ class Simulation {
     int agentCount;
 
     void addNewAgent(string personInfo, int amountToAdd);
+    void setUpAgents(string filename);
 
 
     public:
-    Simulation();
+    Simulation(string fileName);
     ~Simulation();//Destructor
     void runSim();
     void simulateTimeStep();
     void updateOutput();
     void removeAgentsResolved();
     void updateSIRGraphic();
-    void setUpAgents(string fileName);
     Agent getAgentAt(int index);
     
 };
