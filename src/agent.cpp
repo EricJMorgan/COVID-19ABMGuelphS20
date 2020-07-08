@@ -27,16 +27,44 @@ string Agent::getEthnicity(){
     return ethnicity;
 }
 
+/*************************
+ * DecideEducation
+ * 
+ * This function randomly decides an agents educational background income based on demographics
+ * of guelph from the Canadian Census of 2017
+ ************************/
 void Agent::DecideEducation() {
-
-}
-
-void Agent::DecideHouseholdIncome() {
-    if (income != NULL) {
-        return;
+    if (info < MALE20TO24 || (FEMALE0TO4 <= info && info <= FEMALE15TO19)) {
+        education = NA;
     }
 
-    if (info < MALE20TO24 || FEMALE0TO4 <= info && info <= FEMALE15TO19) {
+    double randomNumber = (double) rand()/RAND_MAX;
+
+    // Household income probabilities probabilities backed by Gov of Canada Census
+    if (0 <= randomNumber && randomNumber < 0.1902620) {
+        education = NOCERTIF;
+    } else if (0.1902620 <= randomNumber && randomNumber < 0.5289553) {
+        education = HIGHSCHOOL;
+    } else if (0.5289553 <= randomNumber && randomNumber < 0.5901270) {
+        education = APPRENTICESHIP;
+    } else if (0.5901270 <= randomNumber && randomNumber < 0.6203755) {
+        education = COLLEGE;
+    } else if (0.6203755 <= randomNumber && randomNumber < 0.6437085) {
+        education = BELOWDEGREE;
+    } else {
+        education = UNIVERSITY;
+    }
+    
+}
+
+/*************************
+ * DecideHouseholdIncome
+ * 
+ * This function randomly decides an agents household income based on demographics
+ * of guelph from the Canadian Census of 2017
+ ************************/
+void Agent::DecideHouseholdIncome() {
+    if (info < MALE20TO24 || (FEMALE0TO4 <= info && info <= FEMALE15TO19)) {
         income = HNA;
     }
 
@@ -72,11 +100,13 @@ void Agent::DecideHouseholdIncome() {
     }
 }
 
+/*************************
+ * DecideMartialStatus
+ * 
+ * This function randomly decides an agents marital status based 
+ * on demographics of guelph from the Canadian Census of 2017
+ ************************/
 void Agent::DecideMartialStatus() { 
-    if (!maritalStatus.empty()) {
-        return;
-    }
-
     if (info < 4 || (18 <= info && info <= 21)) {
         maritalStatus = "Single";
     }
@@ -99,11 +129,13 @@ void Agent::DecideMartialStatus() {
     }
 }
 
+/*************************
+ * DecideEthnicity
+ * 
+ * This function randomly decides an agents ethnicity based on 
+ * demographics of guelph from the Canadian Census of 2017
+ ************************/
 void Agent::DecideEthnicity() {
-    if (!ethnicity.empty()) {
-        return;
-    }
-
     double randomNumber = (double) rand()/RAND_MAX;
     
     // Race probabilities backed by Gov of Canada Census

@@ -18,6 +18,7 @@
 
 using namespace std;
 
+// Various possible age and sex groups 
 enum AgentInfo { MALE0TO4, MALE5TO9, MALE10TO14, MALE15TO19, MALE20TO24, MALE25TO29, MALE30TO34, MALE35TO39, MALE40TO44, MALE45TO49,
                 MALE50TO54, MALE55TO59, MALE60TO64, MALE65TO69, MALE70TO74, MALE75TO79, MALE80TO84, MALE85, FEMALE0TO4, FEMALE5TO9, 
                 FEMALE10TO14, FEMALE15TO19, FEMALE20TO24, FEMALE25TO29, FEMALE30TO34, FEMALE35TO39, FEMALE40TO44, FEMALE45TO49,
@@ -32,8 +33,10 @@ static std::map<std::string, AgentInfo> AgentInfoMap = boost::assign::map_list_o
 ("Female 60-64", FEMALE60TO64)("Female 65-69", FEMALE65TO69)("Female 70-74", FEMALE70TO74)("Female 75-79", FEMALE75TO79)("Female 80-84", FEMALE80TO84)
 ("Female 85", FEMALE85);
 
+// Household income groups
 enum HouseholdIncome { H0TO4, H5TO9, H10TO14, H15TO19, H20TO29, H30TO39, H40TO49, H50TO59, H60TO79, H80TO99, H100TO124, H125TO149, H150, HNA};
 
+// Education level for agent
 enum Education { NOCERTIF, HIGHSCHOOL, APPRENTICESHIP, COLLEGE, BELOWDEGREE, UNIVERSITY, NA};
 
 
@@ -55,6 +58,11 @@ class Agent{
     bool wearingMask;
     Location* currLocation;
 
+    void DecideEthnicity();
+    void DecideMartialStatus();
+    void DecideHouseholdIncome();
+    void DecideEducation();
+
     public:
     Agent(AgentInfo agentInfo);
     void goGrocery();
@@ -65,10 +73,6 @@ class Agent{
     void goodHygiene();
     void followWearMask();
     void followSocialDistancing();
-    void DecideEthnicity();
-    void DecideMartialStatus();
-    void DecideHouseholdIncome();
-    void DecideEducation();
     AgentInfo getAgentInfo();
     string getEthnicity();
 };
