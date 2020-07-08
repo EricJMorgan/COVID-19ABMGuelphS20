@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 07/07/20
- * ver 0.02
+ * 08/07/20
+ * ver 0.03
  * 
  * This is the class file for the agent class
  ***************/
@@ -27,11 +27,7 @@ string Agent::getEthnicity(){
 }
 
 void Agent::DecideHouseholdIncome() {
-    if (!HouseholdIncome.empty()) {
-        return;
-    }
-
-    if (info < 4 || 18 <= info <= 21) {
+    if (info < 4 || (18 <= info && info <= 21)) {
         income = HNA;
     }
 
@@ -72,7 +68,7 @@ void Agent::DecideMartialStatus() {
         return;
     }
 
-    if (info < 4 || 18 <= info <= 21) {
+    if (info < 4 || (18 <= info && info <= 21)) {
         maritalStatus = "Single";
     }
 
