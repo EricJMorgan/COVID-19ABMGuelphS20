@@ -15,8 +15,34 @@
 #include <boost/algorithm/string.hpp>
 
 // Constructor
-Simulation::Simulation() {
-    simAgents = new Agent*[132000];
+Simulation::Simulation(string fileName) {
+    ifstream demographicFile;
+    demographicFile.open(fileName, ios::in);
+    string line;
+    int arraySize = 0;
+
+    if(!demographicFile.good()){
+        cout << "Error invalid file" << endl;
+        return;
+    }
+
+    getline(demographicFile, line);
+    vector<string> csvValues;
+    split(csvValues, line, boost::is_any_of(","));
+
+    //loop while it is getting the gender statistic
+    while(csvValues[0].compare("Gender") == 0){
+        arraySize += stoi(csvValues[2]);
+        getline(demographicFile, line);
+        split(csvValues, line, boost::is_any_of(","));
+    }
+
+    simAgents = new Agent*[arraySize];
+    demographicFile.close();
+
+    setUpAgents(fileName);
+    
+
 }
 // Destructor
 Simulation::~Simulation(){
@@ -35,6 +61,11 @@ Simulation::~Simulation(){
  * NOTE: must add error handling to function
  ************************/
 Agent Simulation::getAgentAt(int index){//TODO add error checking for array bounds
+    if(index >= agentCount || index < 0){
+        cerr << "ERROR INVALID INDEX" << endl;
+        return Agent(MALE0TO4);
+    }
+
     Agent holder = Agent(simAgents[index]->getAgentInfo());
     return holder;
 }
