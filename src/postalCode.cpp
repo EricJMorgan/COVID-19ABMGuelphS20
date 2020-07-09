@@ -23,54 +23,15 @@ PostalCodeData::PostalCodeData(){
 //Constructor fills postal code string and sets all locationcounts to 0
 PostalCodeData::PostalCodeData(string newPostalCode){
     postalCode = newPostalCode;
-    for(int i = 0; i < 96; i++){
+    for(int i = 0; i < 9; i++){
         locationCount[i] = 0;
     }
 }
 
 
+
+
 /*********************************************************************/
-
-int PostalCodeHash::getPostalHash(int hashSize, string postalCodeToHash){
-    if(postalCodeToHash.length() <= 3) return 0;
-
-    int hashTotal = 0;
-    for(int i = 0; i < (int)postalCodeToHash.length(); i++){
-        if(postalCodeToHash.at(i) == ' ');//Every postal code has a space so no need for adding it to the hash total
-        else{
-            if(isalpha(postalCodeToHash.at(i))){
-                hashTotal += (postalCodeToHash.at(i) - 65) * pow(5, i);
-            }else{
-                hashTotal += (postalCodeToHash.at(i)) * pow(7, i);
-            }
-        }
-    }
-
-    return hashTotal % (hashSize - 1);
-}
-
-/*************************
- * getPostalCode
- * 
- * This takes in the full address string given from the google places API
- * and gets just the postal code from it. 
- * NOTE, as of now the format by default is incorrect as it has the province 
- * and the postal code not sepreated by a comma so that must be changed before using
- * anything
- ************************/
-string PostalCodeHash::getPostalCode(string fullAddress){
-    if(fullAddress.empty()) return "";
-    vector<string> commaValues;//Comma holder
-    split(commaValues, fullAddress, boost::is_any_of(","));
-    for(int i = 0; i < (int)commaValues.size(); i++){
-        if(commaValues[i].length() == 7 || commaValues[i].length() == 3){
-            if(isalpha(commaValues[i][0]) && isdigit(commaValues[i][1]) && isalpha(commaValues[i][2])) return commaValues[i];
-        }
-    }
-
-    return "unknown";
-}
-
 /*************************
  * PostalCodeHash
  * 
@@ -119,3 +80,51 @@ PostalCodeHash::PostalCodeHash(string tsvFile, int hashSize){
     }
     toParse.close();
 }
+
+PostalCodeHash::~PostalCodeHash(){
+    delete[] hashTable;
+}
+
+
+
+
+int PostalCodeHash::getPostalHash(int hashSize, string postalCodeToHash){
+    if(postalCodeToHash.length() <= 3) return 0;
+
+    int hashTotal = 0;
+    for(int i = 0; i < (int)postalCodeToHash.length(); i++){
+        if(postalCodeToHash.at(i) == ' ');//Every postal code has a space so no need for adding it to the hash total
+        else{
+            if(isalpha(postalCodeToHash.at(i))){
+                hashTotal += (postalCodeToHash.at(i) - 65) * pow(5, i);
+            }else{
+                hashTotal += (postalCodeToHash.at(i)) * pow(7, i);
+            }
+        }
+    }
+
+    return hashTotal % (hashSize - 1);
+}
+
+/*************************
+ * getPostalCode
+ * 
+ * This takes in the full address string given from the google places API
+ * and gets just the postal code from it. 
+ * NOTE, as of now the format by default is incorrect as it has the province 
+ * and the postal code not sepreated by a comma so that must be changed before using
+ * anything
+ ************************/
+string PostalCodeHash::getPostalCode(string fullAddress){
+    if(fullAddress.empty()) return "";
+    vector<string> commaValues;//Comma holder
+    split(commaValues, fullAddress, boost::is_any_of(","));
+    for(int i = 0; i < (int)commaValues.size(); i++){
+        if(commaValues[i].length() == 7 || commaValues[i].length() == 3){
+            if(isalpha(commaValues[i][0]) && isdigit(commaValues[i][1]) && isalpha(commaValues[i][2])) return commaValues[i];
+        }
+    }
+
+    return "unknown";
+}
+
