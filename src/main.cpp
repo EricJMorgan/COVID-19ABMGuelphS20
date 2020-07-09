@@ -14,7 +14,7 @@
 
 int main(){
 
-    Simulation sim = Simulation("demographicGuelph.csv");
+    //Simulation sim = Simulation("demographicGuelph.csv");
     // for(int i = 0; i < 131805; i++){
     //     cout << sim.getAgentAt(i).agentToString() << endl;
     // }

@@ -58,7 +58,7 @@ PostalCodeHash::PostalCodeHash(string tsvFile, int hashSize){
     while(getline(toParse, holder)){
         vector<string> tabValues;
         split(tabValues, holder, boost::is_any_of("\t"));//Splits data into vector holder
-
+        if(tabValues.size() != 6) continue;
         currPostalCode = getPostalCode(tabValues[1]);
         if(currPostalCode.compare("unknown") == 0);
         else{
