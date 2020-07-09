@@ -12,5 +12,43 @@
 
 // Constructor
 Location::Location() {
-    //
+    postalCode = "";
+    for(int i = 0; i < 9; i++){
+        locationCount[i] = 0;
+    }
+    population = 0;
+    pplDensity = 0;
+    avgTimeSpent = 0;
+    avgAgentInteraction = 0;
+    currentAgents = NULL;
+    transportaionRoutesFromLocation = NULL;
+}
+
+Location::Location(string postalCode, int shopData[9]){
+    postalCode = "";
+    for(int i = 0; i < 9; i++){
+        locationCount[i] = shopData[i];
+    }
+    population = 0;
+    pplDensity = 0;
+    avgTimeSpent = 0;
+    avgAgentInteraction = 0;
+    currentAgents = NULL;
+    transportaionRoutesFromLocation = NULL;
+}
+
+int Location::getPopulation(){
+    return population;
+}
+
+Agent *Location::getSusceptible(){
+    return NULL;
+}
+
+Agent *Location::getInfected(){
+    return NULL;
+}
+
+Agent *Location::getRecovered(){
+    return NULL;
 }

@@ -11,7 +11,7 @@ INCDIR = ./include/
 CC = g++
 CFLAGS = -std=c++11 -Wall -I./include -I/opt/local/include
 
-OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCode.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)business.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
+OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCode.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
 
 all: $(BINDIR)abmSim
 
@@ -41,9 +41,6 @@ $(BINDIR)SIRtotals.o: $(SRCDIR)SIRtotals.cpp $(INCDIR)SIRtotals.hh
 
 $(BINDIR)transportation.o: $(SRCDIR)transportation.cpp $(INCDIR)transportation.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)transportation.cpp -o $@
-
-$(BINDIR)business.o: $(SRCDIR)business.cpp $(INCDIR)business.hh
-	$(CC) $(CFLAGS) -c $(SRCDIR)business.cpp -o $@
 
 $(BINDIR)geographicalrisk.o: $(SRCDIR)geographicalrisk.cpp $(INCDIR)geographicalrisk.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)geographicalrisk.cpp -o $@

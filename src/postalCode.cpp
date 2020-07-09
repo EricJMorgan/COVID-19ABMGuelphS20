@@ -14,6 +14,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include "location.hh"
 
 //Default constructor for creating arrays of postal codes
 PostalCodeData::PostalCodeData(){
@@ -46,7 +47,7 @@ PostalCodeHash::PostalCodeHash(string tsvFile, int hashSize){
     string currPostalCode;
     bool placed;
     int currHashValue;
-    hashTable = new PostalCodeData[hashSize];
+    hashTable = new Location[hashSize];
 
     toParse.open(tsvFile, ios::in);//open the file for reading
     if(!toParse.good()){

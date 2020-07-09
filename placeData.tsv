@@ -388,7 +388,6 @@ Diamond Detailing	355 Elmira Rd N, Guelph, ON,N1K 1S5, Canada	0830-1700	43.53448
 Canadian Tire Gas+	14 Woodlawn Rd E, Guelph, ON,N1H 1G7, Canada	0600-2300	43.5660781	-80.27670069999999	car_wash
 Canadian Tire Gas+	615 Scottsdale Dr, Guelph, ON,N1G 3P4, Canada	0600-0000	43.5150464	-80.23941110000001	car_wash
 Pete's Pro Detailing	1035 Victoria Rd S, Guelph, ON,N1L 1B3, Canada	0800-1700	43.53035010000001	-80.19449	car_wash
-Power Shine Mobile Wash	10180 Guelph Line, Campbellville, ON,L0P 1B0, Canada	Unknown	43.5083596	-80.0125944	car_wash
 Valet Car Wash	1007 Gordon St, Guelph, ON,N1G 4X1, Canada	0900-1700	43.521042	-80.211744	car_wash
 Supreme Car Wash & Car Detailing Center	20 Woolwich St, Guelph, ON,N1H 3T9, Canada	0830-1730	43.5470604	-80.2453577	car_wash
 Auto Reflections Car Care	705 Southgate Dr, Guelph, ON,N1G 4S2, Canada	Unknown	43.4921199	-80.2093579	car_wash
@@ -522,7 +521,6 @@ Petro-Canada	7017 Wellington Rd #124, Guelph, ON,N1H 6J3, Canada	0700-2000	43.48
 Pioneer Energy	256 Brock Rd S, Guelph, ON,N1H 6H9, Canada	Unknown	43.4587874	-80.1317557	convenience_store
 Petro-Canada	292 Brock Rd S, Guelph, ON,N1H 6H9, Canada	Unknown	43.4569	-80.1291	convenience_store
 Shell	315 Brock Rd S, Guelph, ON,N1H 6H9, Canada	Unknown	43.4557296	-80.1288199	convenience_store
-Petro-Canada	10779 Guelph Line, Campbellville, ON,L0P 1B0, Canada	0530-2300	43.52501090000001	-80.0359359	convenience_store
 7-Eleven	328 Speedvale Ave E, Guelph, ON,N1E 1N5, Canada	Unknown	43.5667033	-80.2581014	convenience_store
 Rexall	55 Wyndham St N, Guelph, ON,N1H 7T8, Canada	0900-2000	43.5464831	-80.24633419999999	convenience_store
 Rexall	666 Woolwich St #140, Guelph, ON,N1H 7G5, Canada	0900-2200	43.5582773	-80.2696571	convenience_store
@@ -787,7 +785,6 @@ ABERFOYLE ESSO	227 Brock Rd S, Guelph, ON,N1H 6H9, Canada	Unknown	43.4595024	-80
 Pioneer Energy	256 Brock Rd S, Guelph, ON,N1H 6H9, Canada	Unknown	43.4587874	-80.1317557	gas_station
 Petro-Canada	292 Brock Rd S, Guelph, ON,N1H 6H9, Canada	Unknown	43.4569	-80.1291	gas_station
 Shell	315 Brock Rd S, Guelph, ON,N1H 6H9, Canada	Unknown	43.4557296	-80.1288199	gas_station
-Petro-Canada	10779 Guelph Line, Campbellville, ON,L0P 1B0, Canada	0530-2300	43.52501090000001	-80.0359359	gas_station
 7-Eleven	328 Speedvale Ave E, Guelph, ON,N1E 1N5, Canada	Unknown	43.5667033	-80.2581014	gas_station
 ESSO CIRCLE K	138 College Ave W, Guelph, ON,N1G 1S4, Canada	Unknown	43.5249074	-80.2416958	gas_station
 OSPRINGE GAS AND VARIETY	8906 Wellington Rd 124 RR 1, Guelph, ON,N1H 6H7, Canada	0530-2030	43.69898389999999	-80.1330401	gas_station
@@ -1344,7 +1341,6 @@ Almira Trucking	25 Cope Crt, Guelph, ON,N1K 0A4, Canada	Unknown	43.5424374	-80.3
 Guelph Junk Removal	7000 Wellington Rd 32, Guelph, ON,N1H 6J4, Canada	0900-1700	43.52493339999999	-80.3319963	moving_company
 Pro Movers	27 Kingsbury Square, Guelph, ON,N1L 1C3, Canada	0900-1700	43.513955	-80.173323	moving_company
 luxBorealis - photographs by Terry A. McDonald	79 Vanier Dr, Guelph, ON,N1G 2K9, Canada	1000-1600	43.5247594	-80.2490232	museum
-Halton County Railway Milton Museum	13629 Guelph Line, Milton, ON,L0P, Canada	Unknown	43.5794833	-80.1137916	museum
 Trappers Alley	100 Carden St, Guelph, ON,N1H 4E3, Canada	2000-0200	43.5451928	-80.2469394	night_club
 Opus Lounge	92 Macdonell St, Guelph, ON,N1H 4E5, Canada	Unknown	43.5454872	-80.2471517	night_club
 TABU Nightclub	96 Macdonell St, Guelph, ON,N1H 4E5, Canada	Unknown	43.5451404	-80.247039	night_club
@@ -2028,7 +2024,6 @@ World By SKY	15 Carter Road, R.R. 2, Guelph, ON,N1H 6H8, Canada	Unknown	43.53121
 Katharine Lewis Independent by Flight Centre	158 Goodwin Dr, Guelph, ON,N1L 0B2, Canada	1000-1600	43.5107113	-80.1788534	travel_agency
 Digi Travel	128 Main St N, Guelph/Eramosa, ON,N0B 2K0, Canada	0900-1700	43.6195425	-80.1448863	travel_agency
 Aberfoyle Go Park and Ride	198-, 202 Brock Rd S, Guelph, ON,N1H 6H9, Canada	Unknown	43.46113820000001	-80.1335411	travel_agency
-BR Equestrian Services	12104 Guelph Line, Campbellville, ON,L0P 1B0, Canada	0800-2200	43.5471729	-80.06798210000001	travel_agency
 University of Guelph	50 Stone Rd E, Guelph, ON,N1G 2W1, Canada	Unknown	43.5327217	-80.22618039999999	university
 Tri University Library	110 Malcolm Rd, Guelph, ON,N1K 1B1, Canada	Unknown	43.5356317	-80.322249	university
 Lift-Off Aviation	32 University Ave W, Guelph, ON,N1G 1N4, Canada	Unknown	43.5314693	-80.2374772	university
@@ -2089,5 +2084,4 @@ Upper Grand Veterinary Services	7707 Mill Rd, Guelph, ON,N1H 6J1, Canada	0800-17
 Guelph Poultry Veterinary Services	519 Maltby Rd W, Guelph, ON,N1L 1G3, Canada	Unknown	43.4801111	-80.1806308	veterinary_care
 Weber Lloyd J Dr	519 Maltby Rd W, Guelph, ON,N1L 1G3, Canada	0900-1700	43.4748165	-80.1890708	veterinary_care
 Ferguson Equine Veterinary Svc	341 Jolliffe Ave, Guelph/Eramosa, ON,N0B, Canada	Unknown	43.6139567	-80.13311	veterinary_care
-Brookville Veterinary Clinic	11280 Guelph Line, Campbellville, ON,L0P 1B0, Canada	0730-1900	43.53143499999999	-80.0467875	veterinary_care
 Ironwood Zoo	393 Ironwood Rd, Guelph, ON,N1G 3P2, Canada	Unknown	43.509066	-80.2272522	zoo
