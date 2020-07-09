@@ -20,14 +20,14 @@ int main(){
     }
 
     PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", 5000);
-    for(int i = 0; i < 1000; i++){
-        cout << postalCodeStuff.hashTable[i].postalCode << " ";
+    for(int i = 0; i < 5000; i++){
         if(postalCodeStuff.hashTable[i].postalCode.compare("") != 0){
-            for(int j = 0; j < 9; j++){
-                cout << postalCodeStuff.hashTable[i].locationCount[j] << " ";
-            }
+            cout << postalCodeStuff.hashTable[i].postalCode << " ";
+                for(int j = 0; j < 9; j++){
+                    cout << postalCodeStuff.hashTable[i].locationCount[j] << " ";
+                }
+            cout << endl;
         }
-        cout << endl;
     }
 
     return 0;
