@@ -19,5 +19,16 @@ int main(){
         cout << sim.getAgentAt(i).agentToString() << endl;
     }
 
+    PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", 5000);
+    for(int i = 0; i < 1000; i++){
+        cout << postalCodeStuff.hashTable[i].postalCode << " ";
+        if(postalCodeStuff.hashTable[i].postalCode.compare("") != 0){
+            for(int j = 0; j < 9; j++){
+                cout << postalCodeStuff.hashTable[i].locationCount[j] << " ";
+            }
+        }
+        cout << endl;
+    }
+
     return 0;
 }
