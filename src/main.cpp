@@ -9,15 +9,15 @@
 
 #include <iostream>
 #include "simulation.hh"
-#include "postalCode.hh"
+#include "postalCodeHash.hh"
 #include "agent.hh"
 
 int main(){
 
-    Simulation sim = Simulation("demographicGuelph.csv");
-    for(int i = 0; i < 131805; i++){
-        cout << sim.getAgentAt(i).agentToString() << endl;
-    }
+    //Simulation sim = Simulation("demographicGuelph.csv");
+    // for(int i = 0; i < 131805; i++){
+    //     cout << sim.getAgentAt(i).agentToString() << endl;
+    // }
 
     PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", 5000);
     for(int i = 0; i < 5000; i++){

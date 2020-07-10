@@ -1,37 +1,12 @@
- /****************
- * COVID-19ABMGuelphS20
- * 06/07/20
- * ver 0.01
- * 
- * This is the src file for the postalCode classes
- ***************/
-
-#include "postalCode.hh"
-
+#include "postalCodeHash.hh"
 #include <boost/algorithm/string.hpp>
 #include <ctype.h>
 #include <math.h>
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include "location.hh"
 
-//Default constructor for creating arrays of postal codes
-PostalCodeData::PostalCodeData(){
-    PostalCodeData("");
-}
-
-//Constructor fills postal code string and sets all locationcounts to 0
-PostalCodeData::PostalCodeData(string newPostalCode){
-    postalCode = newPostalCode;
-    for(int i = 0; i < 9; i++){
-        locationCount[i] = 0;
-    }
-}
-
-
-
-
-/*********************************************************************/
 /*************************
  * PostalCodeHash
  * 
@@ -46,7 +21,7 @@ PostalCodeHash::PostalCodeHash(string tsvFile, int hashSize){
     string currPostalCode;
     bool placed;
     int currHashValue;
-    hashTable = new PostalCodeData[hashSize];
+    hashTable = new Location[hashSize];
 
     toParse.open(tsvFile, ios::in);//open the file for reading
     if(!toParse.good()){
@@ -57,7 +32,7 @@ PostalCodeHash::PostalCodeHash(string tsvFile, int hashSize){
     while(getline(toParse, holder)){
         vector<string> tabValues;
         split(tabValues, holder, boost::is_any_of("\t"));//Splits data into vector holder
-
+        if(tabValues.size() != 6) continue;
         currPostalCode = getPostalCode(tabValues[1]);
         if(currPostalCode.compare("unknown") == 0);
         else{
@@ -127,4 +102,3 @@ string PostalCodeHash::getPostalCode(string fullAddress){
 
     return "unknown";
 }
-
