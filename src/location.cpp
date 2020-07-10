@@ -25,7 +25,7 @@ Location::Location() {
 }
 
 Location::Location(string postalCode, int shopData[9]){
-    postalCode = "";
+    postalCode = postalCode;
     for(int i = 0; i < 9; i++){
         locationCount[i] = shopData[i];
     }

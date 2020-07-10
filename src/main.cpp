@@ -9,7 +9,7 @@
 
 #include <iostream>
 #include "simulation.hh"
-#include "postalCode.hh"
+#include "postalCodeHash.hh"
 #include "agent.hh"
 
 int main(){
@@ -20,15 +20,15 @@ int main(){
     // }
 
     PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", 5000);
-    // for(int i = 0; i < 5000; i++){
-    //     if(postalCodeStuff.hashTable[i].postalCode.compare("") != 0){
-    //         cout << postalCodeStuff.hashTable[i].postalCode << " ";
-    //             for(int j = 0; j < 9; j++){
-    //                 cout << postalCodeStuff.hashTable[i].locationCount[j] << " ";
-    //             }
-    //         cout << endl;
-    //     }
-    // }
+    for(int i = 0; i < 5000; i++){
+        if(postalCodeStuff.hashTable[i].postalCode.compare("") != 0){
+            cout << postalCodeStuff.hashTable[i].postalCode << " ";
+                for(int j = 0; j < 9; j++){
+                    cout << postalCodeStuff.hashTable[i].locationCount[j] << " ";
+                }
+            cout << endl;
+        }
+    }
 
     return 0;
 }

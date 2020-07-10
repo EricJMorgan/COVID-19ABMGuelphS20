@@ -1,13 +1,4 @@
- /****************
- * COVID-19ABMGuelphS20
- * 06/07/20
- * ver 0.01
- * 
- * This is the src file for the postalCode classes
- ***************/
-
-#include "postalCode.hh"
-
+#include "postalCodeHash.hh"
 #include <boost/algorithm/string.hpp>
 #include <ctype.h>
 #include <math.h>
@@ -16,23 +7,6 @@
 #include <iostream>
 #include "location.hh"
 
-//Default constructor for creating arrays of postal codes
-PostalCodeData::PostalCodeData(){
-    PostalCodeData("");
-}
-
-//Constructor fills postal code string and sets all locationcounts to 0
-PostalCodeData::PostalCodeData(string newPostalCode){
-    postalCode = newPostalCode;
-    for(int i = 0; i < 9; i++){
-        locationCount[i] = 0;
-    }
-}
-
-
-
-
-/*********************************************************************/
 /*************************
  * PostalCodeHash
  * 
@@ -128,4 +102,3 @@ string PostalCodeHash::getPostalCode(string fullAddress){
 
     return "unknown";
 }
-

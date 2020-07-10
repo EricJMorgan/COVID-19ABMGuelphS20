@@ -15,7 +15,7 @@
 #include "SIRtotals.hh"
 #include "transportation.hh"
 #include "geographicalrisk.hh"
-#include "postalCode.hh"
+#include "postalCodeData.hh"
 
 using namespace std;
 

@@ -79,15 +79,6 @@ class PostalCodeData{
     PostalCodeData(string newPostalCode);
 };
 
-class PostalCodeHash{
-    private:
-    string getPostalCode(string fullAddress);
 
-    public:
-    PostalCodeHash(string tsvFile, int hashSize);
-    ~PostalCodeHash();
-    PostalCodeData *hashTable;
-    static int getPostalHash(int hashSize, string postalTSVToHash);
-};
 
 #endif
