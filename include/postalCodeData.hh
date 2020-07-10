@@ -16,6 +16,8 @@
 using namespace std;
 
 //An enum representing every possible location that the google places API allows us to use
+//NOTE this is now an outdated enum and map. It is being kept incase it is ever needed again but for now dont use it
+/*
 enum locationType {accounting, airport, amusement_park, aquarium, art_gallery, atm, bakery, bank, bar, beauty_salon,
             bicycle_store, book_store, bowling_alley, bus_station, cafe, campground, car_dealer, car_rental, car_repair,
             car_wash, casino, cemetery, church, city_hall, clothing_store, convenience_store, courthouse, dentist, department_store,
@@ -26,6 +28,7 @@ enum locationType {accounting, airport, amusement_park, aquarium, art_gallery, a
             plumber, police, post_office, primary_school, real_estate_agency, restaurant, roofing_contractor, rv_park, school, secondary_school,
             shoe_store, shopping_mall, spa, stadium, storage, store, subway_station, supermarket, synagogue, taxi_stand, tourist_attraction,
             train_station, transit_station, travel_agency, university, veterinary_care, zoo};
+
 
 //A map allowing the convertion of the location string into an enum to place it in the array
 static std::map<std::string, locationType> locationTypeMap = boost::assign::map_list_of("accounting", accounting)("airport", airport)("amusement_park", amusement_park)
@@ -45,23 +48,37 @@ static std::map<std::string, locationType> locationTypeMap = boost::assign::map_
 ("store", store)("subway_station", subway_station)("supermarket", supermarket)("synagogue", synagogue)("taxi_stand", taxi_stand)("tourist_attraction", tourist_attraction)
 ("train_station", train_station)("transit_station", transit_station)("travel_agency", travel_agency)("university", university)("veterinary_care", veterinary_care)
 ("zoo", zoo);
+*/
+
+enum condenseLocationType {GENSTORE, TRANSPORT, SCHOOL, PARKSANDREC, SERVICES, ENTERTAINMENT, HEALTH, PLACEOFWORSHIP, UNNEEDED};
+
+static std::map<std::string, condenseLocationType> locationTypeMap = boost::assign::map_list_of("accounting", SERVICES)("airport", TRANSPORT)("amusement_park", PARKSANDREC)
+("aquarium", ENTERTAINMENT)("art_gallery", ENTERTAINMENT)("atm", UNNEEDED)("bakery", GENSTORE)("bank", SERVICES)("bar", ENTERTAINMENT)("beauty_salon", SERVICES)("bicycle_store", GENSTORE)
+("book_store", GENSTORE)("bowling_alley", ENTERTAINMENT)("bus_station", TRANSPORT)("cafe", ENTERTAINMENT)("campground", PARKSANDREC)("car_dealer", SERVICES)
+("car_rental", SERVICES)("car_repair", SERVICES)("car_wash", SERVICES)("casino", ENTERTAINMENT)("cemetery", PARKSANDREC)("church", PLACEOFWORSHIP)("city_hall", SERVICES)
+("clothing_store", GENSTORE)("convenience_store", GENSTORE)("courthouse", SERVICES)("dentist", HEALTH)("department_store", GENSTORE)("doctor", HEALTH)("drugstore", GENSTORE)
+("electrician", SERVICES)("electronics_store", GENSTORE)("embassy", SERVICES)("fire_station", SERVICES)("florist", SERVICES)("funeral_home", PLACEOFWORSHIP)
+("furniture_store", GENSTORE)("gas_station", GENSTORE)("gym", ENTERTAINMENT)("hair_care", SERVICES)("hardware_store", GENSTORE)("hindu_temple", PLACEOFWORSHIP)
+("home_goods_store", GENSTORE)("hospital", HEALTH)("insurance_agency", SERVICES)("jewelry_store", GENSTORE)("laundry", SERVICES)("lawyer", SERVICES)
+("library", ENTERTAINMENT)("light_rail_station", TRANSPORT)("liquor_store", GENSTORE)("local_government_office", SERVICES)("locksmith", SERVICES)
+("lodging", PARKSANDREC)("meal_delivery", GENSTORE)("meal_takeaway", GENSTORE)("mosque", PLACEOFWORSHIP)("movie_rental", SERVICES)("movie_theater", ENTERTAINMENT)
+("moving_company", SERVICES)("museum", ENTERTAINMENT)("night_club", ENTERTAINMENT)("painter", SERVICES)("park", PARKSANDREC)("parking", TRANSPORT)("pet_store", GENSTORE)
+("pharmacy", HEALTH)("physiotherapist", HEALTH)("plumber", SERVICES)("police", SERVICES)("post_office", SERVICES)("primary_school", SCHOOL)
+("real_estate_agency", SERVICES)("restaurant", ENTERTAINMENT)("roofing_contractor", SERVICES)("rv_park", PARKSANDREC)("school", SCHOOL)
+("secondary_school", SCHOOL)("shoe_store", GENSTORE)("shopping_mall", ENTERTAINMENT)("spa", HEALTH)("stadium", ENTERTAINMENT)("storage", SERVICES)
+("store", GENSTORE)("subway_station", TRANSPORT)("supermarket", GENSTORE)("synagogue", PLACEOFWORSHIP)("taxi_stand", TRANSPORT)("tourist_attraction", ENTERTAINMENT)
+("train_station", TRANSPORT)("transit_station", TRANSPORT)("travel_agency", SERVICES)("university", SCHOOL)("veterinary_care", SERVICES)
+("zoo", ENTERTAINMENT);
+
 
 class PostalCodeData{
     public:
     string postalCode;
-    int locationCount[96];//each index is counted using the enum i.e the amount of accounting locations in the postal code would be at [0]
+    int locationCount[9];//each index is counted using the enum i.e the amount of general store locations in the postal code would be at [0]
     PostalCodeData();
     PostalCodeData(string newPostalCode);
 };
 
-class PostalCodeHash{
-    private:
-    string getPostalCode(string fullAddress);
 
-    public:
-    PostalCodeHash(string tsvFile, int hashSize);
-    PostalCodeData *hashTable;
-    static int getPostalHash(int hashSize, string postalTSVToHash);
-};
 
 #endif

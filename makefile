@@ -9,14 +9,9 @@ BINDIR = ./bin/
 INCDIR = ./include/
 
 CC = g++
-OS := $(shell uname)#This checks for OSX or Linux
-ifeq ($(OS),Darwin)
-	CFLAGS = -std=c++11 -Wall -I./include -I/opt/local/include
-else
-	CFLAGS = -std=c++11 -Wall -I./include
-endif
+CFLAGS = -std=c++11 -Wall -I./include -I/opt/local/include
 
-OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCode.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)business.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
+OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCodeData.o $(BINDIR)postalCodeHash.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
 
 all: $(BINDIR)abmSim
 
@@ -35,8 +30,11 @@ $(BINDIR)simulation.o: $(SRCDIR)simulation.cpp $(INCDIR)simulation.hh
 $(BINDIR)location.o: $(SRCDIR)location.cpp $(INCDIR)location.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)location.cpp -o $@
 
-$(BINDIR)postalCode.o: $(SRCDIR)postalCode.cpp $(INCDIR)postalCode.hh
-	$(CC) $(CFLAGS) -c $(SRCDIR)postalCode.cpp -o $@
+$(BINDIR)postalCodeData.o: $(SRCDIR)postalCodeData.cpp $(INCDIR)postalCodeData.hh
+	$(CC) $(CFLAGS) -c $(SRCDIR)postalCodeData.cpp -o $@
+
+$(BINDIR)postalCodeHash.o: $(SRCDIR)postalCodeHash.cpp $(INCDIR)postalCodeHash.hh
+	$(CC) $(CFLAGS) -c $(SRCDIR)postalCodeHash.cpp -o $@
 
 $(BINDIR)SIR.o: $(SRCDIR)SIR.cpp $(INCDIR)SIR.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)SIR.cpp -o $@
@@ -46,9 +44,6 @@ $(BINDIR)SIRtotals.o: $(SRCDIR)SIRtotals.cpp $(INCDIR)SIRtotals.hh
 
 $(BINDIR)transportation.o: $(SRCDIR)transportation.cpp $(INCDIR)transportation.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)transportation.cpp -o $@
-
-$(BINDIR)business.o: $(SRCDIR)business.cpp $(INCDIR)business.hh
-	$(CC) $(CFLAGS) -c $(SRCDIR)business.cpp -o $@
 
 $(BINDIR)geographicalrisk.o: $(SRCDIR)geographicalrisk.cpp $(INCDIR)geographicalrisk.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)geographicalrisk.cpp -o $@

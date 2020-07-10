@@ -12,6 +12,7 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -20,7 +21,7 @@ class Location;
 //Declare simulation class
 class Simulation {
     private:
-    Agent* simAgents;
+    Agent** simAgents;
     Location* guelphMap; //map
 
     // user inputs
@@ -31,14 +32,22 @@ class Simulation {
     int timeQuarantined;
     int initiallyInfected;
     bool fluSeason;
+    int agentCount;
+
+    void addNewAgent(string personInfo, int amountToAdd);
+    void setUpAgents(string filename);
+
 
     public:
-    Simulation();
+    Simulation(string fileName);
+    ~Simulation();//Destructor
     void runSim();
     void simulateTimeStep();
     void updateOutput();
     void removeAgentsResolved();
     void updateSIRGraphic();
+    Agent getAgentAt(int index);
+    
 };
 
 
