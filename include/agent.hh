@@ -58,7 +58,7 @@ static std::map<Education, std::string> EducationMap = boost::assign::map_list_o
 
 class Location;
 //Declare simulation class
-class Agent{
+class Agent : public SIR {
     public:
     AgentInfo getAgentInfo();
     string getEthnicity();
