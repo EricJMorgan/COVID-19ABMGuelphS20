@@ -14,3 +14,42 @@
 SIR::SIR() {
     //
 }
+
+void SIR::AgentInfected() {
+    currentSeverity = INFECTED;
+    incubationPeriod = std::rand()%7 + std::rand()%7;
+
+    // if()
+}
+
+void SIR::AgentSymptoms() {
+    // if (infectDuration >= ) {
+    //     /* code */
+    // }
+    
+}
+
+
+
+void SIR::HospitalAgent() {
+
+}
+
+void SIR::QuarantineAgent() {
+    currentSeverity = ISOLATED;
+}
+
+void SIR::PlaceAgentInICU() {
+    currentSeverity = ICU;
+}
+
+void SIR::RecoverAgent() {
+    fatalRisk = 0;
+    currentSeverity = RECOVERED;
+} 
+
+void SIR::AgentDeceased() {
+    fatalRisk = 100;
+    currentSeverity = DECEASED;
+} 
+

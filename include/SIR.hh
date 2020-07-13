@@ -12,23 +12,21 @@
 
 #include <string>
 #include <iostream>
+#include "agent.hh"
 
 using namespace std;
 
-enum SIRSeverity { SUSCEPTIBLE, INFECTED, ICU, RECOVERED, DECEASED };
+enum SIRSeverity { SUSCEPTIBLE, INFECTED, ISOLATED, HOSPITAL, ICU, RECOVERED, DECEASED };
 
 //Declare simulation class
 class SIR {
     private:
-    SIRSeverity currentSeverity;
+    SIRSeverity currentSeverity = SUSCEPTIBLE;
     int incubationPeriod;
     int infectDuration;
-    bool recovered;
-    bool quarantineCase;
-    bool isolateCase;
-    bool hospitalCase;
-    bool icuCase;
     int fatalRisk;
+    bool showsSymptoms;
+    bool seriousCase;
 
     public:
     SIR();
@@ -41,7 +39,6 @@ class SIR {
     void AgentInfected();
     void DetermineSeverity();
     void DetermineRecoveryTime();
-
 };
 
 
