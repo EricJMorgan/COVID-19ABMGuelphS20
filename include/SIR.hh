@@ -16,12 +16,12 @@
 
 using namespace std;
 
-enum SIRSeverity { SUSCEPTIBLE, INFECTED, ISOLATED, HOSPITAL, ICU, RECOVERED, DECEASED };
+enum SIRSeverity { SUSCEPTIBLE, INFECTED, ISOLATED, HOSPITALIZED, ICU, RECOVERED, DECEASED };
 
 //Declare simulation class
 class SIR {
     private:
-    SIRSeverity currentSeverity = SUSCEPTIBLE;
+    SIRSeverity currentSeverity;
     int incubationPeriod;
     int infectDuration;
     int fatalRisk;
@@ -37,8 +37,8 @@ class SIR {
     void RecoverAgent();
     void AgentDeceased();
     void AgentInfected();
-    void DetermineSeverity();
-    void DetermineRecoveryTime();
+    // void DetermineSeverity();
+    // void DetermineRecoveryTime();
 };
 
 

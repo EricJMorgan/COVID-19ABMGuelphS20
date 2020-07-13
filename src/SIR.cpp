@@ -12,8 +12,12 @@
 
 // Constructor
 SIR::SIR() {
-    //
+    currentSeverity = SUSCEPTIBLE;
 }
+
+// 45% asymptomatic if not srs
+// 25% icu death rate
+// 6% need hospital
 
 void SIR::AgentInfected() {
     currentSeverity = INFECTED;
@@ -32,7 +36,7 @@ void SIR::AgentSymptoms() {
 
 
 void SIR::HospitalAgent() {
-
+    currentSeverity = HOSPITALIZED;
 }
 
 void SIR::QuarantineAgent() {
