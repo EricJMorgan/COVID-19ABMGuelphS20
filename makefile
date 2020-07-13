@@ -11,7 +11,7 @@ INCDIR = ./include/
 CC = g++
 CFLAGS = -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0
 
-OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCodeData.o $(BINDIR)postalCodeHash.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
+OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCodeHash.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
 
 all: $(BINDIR)abmSim
 
@@ -29,9 +29,6 @@ $(BINDIR)simulation.o: $(SRCDIR)simulation.cpp $(INCDIR)simulation.hh
 
 $(BINDIR)location.o: $(SRCDIR)location.cpp $(INCDIR)location.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)location.cpp -o $@
-
-$(BINDIR)postalCodeData.o: $(SRCDIR)postalCodeData.cpp $(INCDIR)postalCodeData.hh
-	$(CC) $(CFLAGS) -c $(SRCDIR)postalCodeData.cpp -o $@
 
 $(BINDIR)postalCodeHash.o: $(SRCDIR)postalCodeHash.cpp $(INCDIR)postalCodeHash.hh
 	$(CC) $(CFLAGS) -c $(SRCDIR)postalCodeHash.cpp -o $@
