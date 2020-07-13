@@ -45,6 +45,63 @@ class Agent;
 
 //Declare simulation class
 class Location {
+    public:
+    /**
+     * Location
+     * 
+     * This is the defual constructor for the location obect
+     */
+    Location();
+
+    /**
+     * Location
+     * 
+     * This is the constructor for the location object that takes in data
+     * 
+     * @param postalCode, a string of the postalCode
+     * @param shopData, an array of size 9 of ints that holds each type of shop based on the enum condenseLocationType
+     */
+    Location(string postalCode, int shopData[9]);
+
+    /**
+     * getPopulation
+     * 
+     * This function gets the population of the location
+     * 
+     * @return the amount of agents in a given location
+     */
+    int getPopulation();
+
+    /**
+     * getSusceptible
+     * 
+     * This function gets the array of susceptible agents in the location
+     * 
+     * @return the array of Suseptible agents in the location
+     */
+    Agent* getSusceptible();
+
+    /**
+     * getInfected
+     * 
+     * This function gets the array of Infected agents in the location
+     * 
+     * @return the array of Infected agents in the location
+     */
+    Agent* getInfected();
+
+    /**
+     * getRecovered
+     * 
+     * This function gets the array of Recoverd agents in the location
+     * 
+     * @return the array of Recovered agents in the location
+     */
+    Agent* getRecovered();
+    
+    string postalCode;
+    int locationCount[9];
+
     private:
     int population;
     int pplDensity;
@@ -54,16 +111,6 @@ class Location {
     Transportation* transportaionRoutesFromLocation;
     GeographicalRisk avgLocationRisk;
     SIRtotals sirTotalLocation;
-
-    public:
-    Location();
-    Location(string postalCode, int shopData[9]);
-    int getPopulation();
-    Agent* getSusceptible();
-    Agent* getInfected();
-    Agent* getRecovered();
-    string postalCode;
-    int locationCount[9];
 };
 
 #endif
