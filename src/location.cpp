@@ -26,8 +26,8 @@ Location::Location() {
     transportaionRoutesFromLocation = NULL;
 }
 
-Location::Location(string postalCode, int shopData[9]){
-    postalCode = postalCode;
+Location::Location(string newPostalCode, int shopData[9]){
+    postalCode = newPostalCode;
     for(int i = 0; i < 9; i++){
         locationCount[i] = shopData[i];
     }
