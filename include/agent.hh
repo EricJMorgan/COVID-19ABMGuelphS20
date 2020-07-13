@@ -92,10 +92,6 @@ class Agent : public SIR {
     AgentInfo getAgentInfo();
     string getEthnicity();
     string agentToString();
-<<<<<<< HEAD
-=======
-    SIRSeverity getStatus();
->>>>>>> dcf37f5c77f67f686059c391c305952dd35f788c
 };
 
 #endif
