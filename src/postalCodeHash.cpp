@@ -43,7 +43,9 @@ PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int has
 }
 
 PostalCodeHash::~PostalCodeHash(){
-    delete[] hashTable;
+    if(hashTable != NULL){
+        delete[] hashTable;
+    }
 }
 
 int PostalCodeHash::getPostalHash(int hashSize, string postalCodeToHash){
