@@ -58,7 +58,7 @@ static std::map<Education, std::string> EducationMap = boost::assign::map_list_o
 
 class Location;
 //Declare simulation class
-class Agent{
+class Agent : public SIR {
     private:
     AgentInfo info;
     HouseholdIncome income;
@@ -73,7 +73,6 @@ class Agent{
     bool socialDistancing;
     bool wearingMask;
     Location* currLocation;
-    SIR agentSIR;
 
     void DecideEthnicity();
     void DecideMartialStatus();
@@ -93,7 +92,6 @@ class Agent{
     AgentInfo getAgentInfo();
     string getEthnicity();
     string agentToString();
-    string getStatus();
 };
 
 #endif

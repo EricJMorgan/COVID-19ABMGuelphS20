@@ -7,8 +7,8 @@
  ***************/
 
 
-#ifndef SIMULATION_H_
-#define SIMULATION_H_
+#ifndef SIR_H_
+#define SIR_H_
 
 #include <string>
 #include <iostream>
@@ -17,7 +17,7 @@ using namespace std;
 
 enum SIRSeverity { SUSCEPTIBLE, INFECTED, ICU, RECOVERED, DECEASED };
 
-//Declare simulation class
+//Declare SIR class
 class SIR {
     private:
     SIRSeverity currentSeverity;
@@ -39,9 +39,8 @@ class SIR {
     void RecoverAgent();
     void AgentDeceased();
     void AgentInfected();
-    string DetermineSeverity();
+    SIRSeverity DetermineSeverity();
     void DetermineRecoveryTime();
-
 };
 
 

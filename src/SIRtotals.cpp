@@ -19,9 +19,9 @@ void SIRtotals::updateTotals() {
     susceptible = 0;
     infected = 0;
     for(int i = 0; i < 131805; i++){
-        if(simAgents[i].getStatus().compare("SUSCEPTIBLE") == 0){
+        if(simAgents[i].DetermineSeverity() == SUSCEPTIBLE){
             susceptible++;
-        } else if(simAgents[i].getStatus().compare("INFECTED") == 0){
+        } else if(simAgents[i].DetermineSeverity() == INFECTED){
             infected++;
         }
     }
