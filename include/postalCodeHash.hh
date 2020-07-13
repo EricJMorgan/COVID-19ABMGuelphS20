@@ -12,6 +12,40 @@
 #include "location.hh"
 
 class PostalCodeHash{
+    //PUBLIC FUNCTIONS
+    public:
+    Location *hashTable;
+
+    /**
+     * PostalCodeHash
+     * 
+     * This is the constructor for the postalcode hash object,
+     * it takes in 2 file names representing the google places api printout and a list
+     * of postal codes each on a new line and the wanted hashSize
+     * NOTE: hashSize will soon be automated but for now it is manual
+     * 
+     * @param tsvFile, the string of the google places API print out, MUST HAVE POSTAL CODE IN FORMAT of ON,LNL NLN,
+     * @param evenMoreLocations, the string of the full postalcode file
+     * @param hashSize, the size of the wanted hashtable
+     */
+    PostalCodeHash(string tsvFile, string evenMoreLocations, int hashSize);
+
+    /**
+     * ~PostalCodeHash
+     * 
+     * This is the deconstructor of the postalCodeHash object
+     */
+    ~PostalCodeHash();
+
+    /**
+     * getPostaLHash
+     * 
+     * this function will return the hash value of a given postal code
+     * 
+     * @param hashSize, an int of the size of the hash table
+     * @param postalTSVToHash, the string of the postalCode
+     */
+    static int getPostalHash(int hashSize, string postalTSVToHash);
     //PRIVATE FUNCTIONS
     private:
     /**
@@ -61,40 +95,7 @@ class PostalCodeHash{
      * @return the ifstream object of the file, will be closed if invalid
      */
     ifstream openFile(string fileName);
-    //PUBLIC FUNCTIONS
-    public:
-    /**
-     * PostalCodeHash
-     * 
-     * This is the constructor for the postalcode hash object,
-     * it takes in 2 file names representing the google places api printout and a list
-     * of postal codes each on a new line and the wanted hashSize
-     * NOTE: hashSize will soon be automated but for now it is manual
-     * 
-     * @param tsvFile, the string of the google places API print out, MUST HAVE POSTAL CODE IN FORMAT of ON,LNL NLN,
-     * @param evenMoreLocations, the string of the full postalcode file
-     * @param hashSize, the size of the wanted hashtable
-     */
-    PostalCodeHash(string tsvFile, string evenMoreLocations, int hashSize);
-
-    /**
-     * ~PostalCodeHash
-     * 
-     * This is the deconstructor of the postalCodeHash object
-     */
-    ~PostalCodeHash();
-
-    /**
-     * getPostaLHash
-     * 
-     * this function will return the hash value of a given postal code
-     * 
-     * @param hashSize, an int of the size of the hash table
-     * @param postalTSVToHash, the string of the postalCode
-     */
-    static int getPostalHash(int hashSize, string postalTSVToHash);
-
-    Location *hashTable;
+    
 };
 
 #endif
