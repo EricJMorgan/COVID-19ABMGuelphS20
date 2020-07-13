@@ -19,7 +19,7 @@ int main(){
     //     cout << sim.getAgentAt(i).agentToString() << endl;
     // }
 
-    PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", 5000);
+    PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
     for(int i = 0; i < 5000; i++){
         if(postalCodeStuff.hashTable[i].postalCode.compare("") != 0){
             cout << postalCodeStuff.hashTable[i].postalCode << " ";
