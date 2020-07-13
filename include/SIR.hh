@@ -39,8 +39,15 @@ class SIR {
     void RecoverAgent();
     void AgentDeceased();
     void AgentInfected();
+<<<<<<< HEAD
     SIRSeverity DetermineSeverity();
     void DetermineRecoveryTime();
+=======
+    void DetermineSeverity();
+    void DetermineRecoveryTime();
+    SIRSeverity getSeverity();
+
+>>>>>>> dcf37f5c77f67f686059c391c305952dd35f788c
 };
 
 

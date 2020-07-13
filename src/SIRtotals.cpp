@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/06/20
- * ver 0.01
+ * 13/07/20
+ * ver 0.02
  * 
  * This is the class file for the SIR totals class
  ***************/
@@ -19,10 +19,10 @@ void SIRtotals::updateTotals() {
     susceptible = 0;
     infected = 0;
     for(int i = 0; i < 131805; i++){
-        if(simAgents[i].DetermineSeverity() == SUSCEPTIBLE){
-            susceptible++;
-        } else if(simAgents[i].DetermineSeverity() == INFECTED){
-            infected++;
+        switch(simAgents[i].DetermineSeverity()){
+            case SUSCEPTIBLE: susceptible++; break;
+            case INFECTED: infected++; break;
+            default: break;
         }
     }
 }
