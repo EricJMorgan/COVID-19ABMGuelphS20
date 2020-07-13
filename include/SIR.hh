@@ -41,6 +41,7 @@ class SIR {
     void AgentInfected();
     void DetermineSeverity();
     void DetermineRecoveryTime();
+    SIRSeverity getSeverity();
 
 };
 

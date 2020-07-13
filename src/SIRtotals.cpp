@@ -19,10 +19,10 @@ void SIRtotals::updateTotals() {
     susceptible = 0;
     infected = 0;
     for(int i = 0; i < 131805; i++){
-        if(simAgents[i].getStatus().compare("SUSCEPTIBLE") == 0){
-            susceptible++;
-        } else if(simAgents[i].getStatus().compare("INFECTED") == 0){
-            infected++;
+        switch(simAgents[i].getStatus){
+            case SUSCEPTIBLE: susceptible++; break;
+            case INFECTED: infected++; break;
+            default: break;
         }
     }
 }

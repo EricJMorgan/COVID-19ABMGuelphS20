@@ -189,8 +189,6 @@ string Agent::agentToString(){
     return agentString;
 }
 
-string Agent::getStatus(){
-    string status = "";
-    status.append(agentSIR.DetermineSeverity());
-    return status;
+SIRSeverity Agent::getStatus(){
+    return agentSIR.getSeverity();
 }

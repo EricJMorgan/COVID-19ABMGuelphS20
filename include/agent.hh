@@ -93,7 +93,7 @@ class Agent{
     AgentInfo getAgentInfo();
     string getEthnicity();
     string agentToString();
-    string getStatus();
+    SIRSeverity getStatus();
 };
 
 #endif
