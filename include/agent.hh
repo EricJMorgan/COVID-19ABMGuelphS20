@@ -14,6 +14,7 @@
 #include <iostream>
 #include <boost/assign/list_of.hpp>
 #include <map>
+#include "SIR.hh"
 #pragma once
 
 using namespace std;
@@ -72,6 +73,7 @@ class Agent{
     bool socialDistancing;
     bool wearingMask;
     Location* currLocation;
+    SIR agentSIR;
 
     void DecideEthnicity();
     void DecideMartialStatus();
@@ -91,6 +93,7 @@ class Agent{
     AgentInfo getAgentInfo();
     string getEthnicity();
     string agentToString();
+    string getStatus();
 };
 
 #endif

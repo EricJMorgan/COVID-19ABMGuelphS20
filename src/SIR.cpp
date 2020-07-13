@@ -14,3 +14,11 @@
 SIR::SIR() {
     //
 }
+
+string SIR::DetermineSeverity() {
+    switch(currentSeverity){
+        case SUSCEPTIBLE : return "SUSCEPTIBLE";
+        case INFECTED : return "INFECTED";
+        default: return "NA";
+    }
+}

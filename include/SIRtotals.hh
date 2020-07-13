@@ -12,6 +12,7 @@
 
 #include <string>
 #include <iostream>
+#include "agent.hh"
 
 using namespace std;
 
@@ -20,8 +21,7 @@ class SIRtotals {
     private:
     int susceptible;
     int infected;
-    int recovered;
-    int diseased;
+    Agent* simAgents;
 
     public:
     SIRtotals();
