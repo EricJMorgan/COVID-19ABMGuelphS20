@@ -19,6 +19,17 @@ using namespace std;
 class Location;
 //Declare simulation class
 class GeographicalRisk {
+    public:
+    /**
+     * GeographicalRisk
+     * 
+     * This is the default constructor for the Geographical risk class
+     */
+    GeographicalRisk();
+    void updateAvgCounts();
+    void infectPeople();
+    void updateRegionRisk();
+
     private:
     int symptomaticCarriers;
     int avgAgentAge;
@@ -30,12 +41,6 @@ class GeographicalRisk {
     int socialDistancingSeverity;
     bool socialDistancing;
     Location* avgLocationRisk;
-
-    public:
-    GeographicalRisk();
-    void updateAvgCounts();
-    void infectPeople();
-    void updateRegionRisk();
 
 };
 

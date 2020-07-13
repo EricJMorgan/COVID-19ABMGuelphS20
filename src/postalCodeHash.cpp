@@ -15,14 +15,6 @@
 #include <iostream>
 #include "location.hh"
 
-/*************************
- * PostalCodeHash
- * 
- * This is the constructor. When called it will take a file and
- * size of the hash table(will be changed later to be smart). It will
- * then generate the hash table for the postal code data which can be accessed as
- * it is public.
- ************************/
 PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int hashSize){
     ifstream toParse;
     string holder;
@@ -50,18 +42,11 @@ PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int has
     }
 }
 
-/*************************
- * ~PostalCodeHash
- * 
- * This is the deconstructor for the PostalCodeHash object
- ************************/
 PostalCodeHash::~PostalCodeHash(){
-    delete[] hashTable;
+    if(hashTable != NULL){
+        delete[] hashTable;
+    }
 }
-
-
-
-
 
 int PostalCodeHash::getPostalHash(int hashSize, string postalCodeToHash){
     if(postalCodeToHash.length() <= 3) return 0;
@@ -83,15 +68,7 @@ int PostalCodeHash::getPostalHash(int hashSize, string postalCodeToHash){
 
 /*************************PRIVATE FUNCTIONS******************************/
 
-/*************************
- * getPostalCode
- * 
- * This takes in the full address string given from the google places API
- * and gets just the postal code from it. 
- * NOTE, as of now the format by default is incorrect as it has the province 
- * and the postal code not sepreated by a comma so that must be changed before using
- * anything
- ************************/
+
 string PostalCodeHash::getPostalCode(string fullAddress){
     if(fullAddress.empty()) return "";
     vector<string> commaValues;//Comma holder
@@ -105,6 +82,7 @@ string PostalCodeHash::getPostalCode(string fullAddress){
     return "unknown";
 }
 
+
 ifstream PostalCodeHash::openFile(string fileName){
     ifstream fileHolder;
     fileHolder.open(fileName, ios::in);//open the file for reading
@@ -113,6 +91,7 @@ ifstream PostalCodeHash::openFile(string fileName){
     }
     return fileHolder;
 }
+
 
 void PostalCodeHash::placePostalInHash(string newPostalCode, int hashSize){
     int currHashValue;
@@ -134,6 +113,7 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, int hashSize){
         }
     }
 }
+
 
 void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName, int hashSize){
     int currHashValue;
