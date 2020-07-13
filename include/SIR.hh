@@ -39,7 +39,7 @@ class SIR {
     void RecoverAgent();
     void AgentDeceased();
     void AgentInfected();
-    string DetermineSeverity();
+    void DetermineSeverity();
     void DetermineRecoveryTime();
 
 };
