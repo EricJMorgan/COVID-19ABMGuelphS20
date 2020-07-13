@@ -15,12 +15,10 @@
  * then generate the hash table for the postal code data which can be accessed as
  * it is public.
  ************************/
-PostalCodeHash::PostalCodeHash(string tsvFile, int hashSize){
+PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int hashSize){
     ifstream toParse;
     string holder;
     string currPostalCode;
-    bool placed;
-    int currHashValue;
     hashTable = new Location[hashSize];
 
     toParse.open(tsvFile, ios::in);//open the file for reading
@@ -34,32 +32,68 @@ PostalCodeHash::PostalCodeHash(string tsvFile, int hashSize){
         split(tabValues, holder, boost::is_any_of("\t"));//Splits data into vector holder
         if(tabValues.size() != 6) continue;
         currPostalCode = getPostalCode(tabValues[1]);
-        if(currPostalCode.compare("unknown") == 0);
-        else{
-            currHashValue = PostalCodeHash::getPostalHash(hashSize, currPostalCode);
-            placed = false;
-             while(placed == false){
-                if(hashTable[currHashValue].postalCode.compare("") == 0){//If the bucket is empty
-                    hashTable[currHashValue].postalCode = currPostalCode;
-                    hashTable[currHashValue].locationCount[locationTypeMap[tabValues[5]]]++;
-                    placed = true;
-                }else if(hashTable[currHashValue].postalCode.compare(currPostalCode) == 0){//If the bucket has the same postal code
-                    hashTable[currHashValue].locationCount[locationTypeMap[tabValues[5]]]++;
-                    placed = true;
-                }else{//If occupied by a differnt postal code go to the next one
-                    if(currHashValue == hashSize - 1) currHashValue = 0;
-                    else currHashValue++;
-                }
-            }
-        }
+        placePostalInHash(currPostalCode, tabValues[5] , hashSize);
     }
     toParse.close();
+
+    toParse.open(evenMoreLocations, ios::in);
+    if(!toParse.good()){
+        return;
+    }
+    while(getline(toParse, holder)){
+        placePostalInHash(holder, hashSize);
+    }
 }
+
 
 PostalCodeHash::~PostalCodeHash(){
     delete[] hashTable;
 }
 
+void PostalCodeHash::placePostalInHash(string newPostalCode, int hashSize){
+    int currHashValue;
+    bool placed;
+    if(newPostalCode.compare("unknown") == 0);
+    else{
+        currHashValue = PostalCodeHash::getPostalHash(hashSize, newPostalCode);
+        placed = false;
+            while(placed == false){
+            if(hashTable[currHashValue].postalCode.compare("") == 0){//If the bucket is empty
+                hashTable[currHashValue].postalCode = newPostalCode;
+                placed = true;
+            }else if(hashTable[currHashValue].postalCode.compare(newPostalCode) == 0){//If the bucket has the same postal code
+                placed = true;
+            }else{//If occupied by a differnt postal code go to the next one
+                if(currHashValue == hashSize - 1) currHashValue = 0;
+                else currHashValue++;
+            }
+        }
+    }
+}
+
+void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName, int hashSize){
+    int currHashValue;
+    bool placed;
+
+    if(newPostalCode.compare("unknown") == 0);
+    else{
+        currHashValue = PostalCodeHash::getPostalHash(hashSize, newPostalCode);
+        placed = false;
+            while(placed == false){
+            if(hashTable[currHashValue].postalCode.compare("") == 0){//If the bucket is empty
+                hashTable[currHashValue].postalCode = newPostalCode;
+                hashTable[currHashValue].locationCount[locationTypeMap[locationName]]++;
+                placed = true;
+            }else if(hashTable[currHashValue].postalCode.compare(newPostalCode) == 0){//If the bucket has the same postal code
+                hashTable[currHashValue].locationCount[locationTypeMap[locationName]]++;
+                placed = true;
+            }else{//If occupied by a differnt postal code go to the next one
+                if(currHashValue == hashSize - 1) currHashValue = 0;
+                else currHashValue++;
+            }
+        }
+    }
+}
 
 
 
