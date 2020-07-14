@@ -95,6 +95,17 @@ class PostalCodeHash{
      * @return the ifstream object of the file, will be closed if invalid
      */
     ifstream openFile(string fileName);
+
+    /**
+     * getFirstFiveChars
+     * 
+     * This function takes in a postal code and returns the first 5 chars of the postal code
+     * not including the space.
+     * 
+     * @param fullPostal, This is the full postal code.
+     * @return a string in the format LNL NL
+     */
+    string getFirstFiveChars(string fullPostal);
     
 };
 

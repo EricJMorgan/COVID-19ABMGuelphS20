@@ -13,6 +13,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <vector>
 #include <boost/assign/list_of.hpp>
 #include "SIRtotals.hh"
 #include "transportation.hh"
@@ -99,8 +100,9 @@ class Location {
      */
     Agent* getRecovered();
     
-    string postalCode;
+    string postalCodeGrouping;
     int locationCount[9];
+    std::vector<string> postalCodes;
 
     private:
     int population;

@@ -14,7 +14,7 @@
 
 // Constructor
 Location::Location() {
-    postalCode = "";
+    postalCodeGrouping = "";
     for(int i = 0; i < 9; i++){
         locationCount[i] = 0;
     }
@@ -27,7 +27,7 @@ Location::Location() {
 }
 
 Location::Location(string newPostalCode, int shopData[9]){
-    postalCode = newPostalCode;
+    postalCodeGrouping = newPostalCode;
     for(int i = 0; i < 9; i++){
         locationCount[i] = shopData[i];
     }

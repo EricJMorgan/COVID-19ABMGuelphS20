@@ -13,6 +13,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 #include "location.hh"
 
 PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int hashSize){
@@ -96,17 +97,22 @@ ifstream PostalCodeHash::openFile(string fileName){
 void PostalCodeHash::placePostalInHash(string newPostalCode, int hashSize){
     int currHashValue;
     bool placed;
+    string newGroupedPostalCode;
     if(newPostalCode.compare("unknown") == 0);
     else{
-        currHashValue = PostalCodeHash::getPostalHash(hashSize, newPostalCode);
+        newGroupedPostalCode = getFirstFiveChars(newPostalCode);
+        currHashValue = PostalCodeHash::getPostalHash(hashSize, newGroupedPostalCode);
         placed = false;
             while(placed == false){
-            if(hashTable[currHashValue].postalCode.compare("") == 0){//If the bucket is empty
-                hashTable[currHashValue].postalCode = newPostalCode;
+            if(hashTable[currHashValue].postalCodeGrouping.compare("") == 0){//If the bucket is empty
+                hashTable[currHashValue].postalCodeGrouping = newGroupedPostalCode;
+                hashTable[currHashValue].postalCodes.push_back(newPostalCode);
                 placed = true;
-            }else if(hashTable[currHashValue].postalCode.compare(newPostalCode) == 0){//If the bucket has the same postal code
+            }else if(hashTable[currHashValue].postalCodeGrouping.compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping 
+                if(std::find(hashTable[currHashValue].postalCodes.begin(), hashTable[currHashValue].postalCodes.end(), newPostalCode)
+                    != hashTable[currHashValue].postalCodes.end()) hashTable[currHashValue].postalCodes.push_back(newPostalCode);//This line searches the vector to see if it has a dup string
                 placed = true;
-            }else{//If occupied by a differnt postal code go to the next one
+            }else{//If occupied by a differnt postal code grouping  go to the next one
                 if(currHashValue == hashSize - 1) currHashValue = 0;
                 else currHashValue++;
             }
@@ -118,23 +124,33 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, int hashSize){
 void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName, int hashSize){
     int currHashValue;
     bool placed;
-
+    string newGroupedPostalCode;
     if(newPostalCode.compare("unknown") == 0);
     else{
-        currHashValue = PostalCodeHash::getPostalHash(hashSize, newPostalCode);
+        newGroupedPostalCode = getFirstFiveChars(newPostalCode);
+        currHashValue = PostalCodeHash::getPostalHash(hashSize, newGroupedPostalCode);
         placed = false;
             while(placed == false){
-            if(hashTable[currHashValue].postalCode.compare("") == 0){//If the bucket is empty
-                hashTable[currHashValue].postalCode = newPostalCode;
+            if(hashTable[currHashValue].postalCodeGrouping.compare("") == 0){//If the bucket is empty
+                hashTable[currHashValue].postalCodeGrouping = newGroupedPostalCode;
                 hashTable[currHashValue].locationCount[locationTypeMap[locationName]]++;
+                hashTable[currHashValue].postalCodes.push_back(newPostalCode);
                 placed = true;
-            }else if(hashTable[currHashValue].postalCode.compare(newPostalCode) == 0){//If the bucket has the same postal code
+            }else if(hashTable[currHashValue].postalCodeGrouping.compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping
                 hashTable[currHashValue].locationCount[locationTypeMap[locationName]]++;
+                if(std::find(hashTable[currHashValue].postalCodes.begin(), hashTable[currHashValue].postalCodes.end(), newPostalCode)
+                    != hashTable[currHashValue].postalCodes.end()) hashTable[currHashValue].postalCodes.push_back(newPostalCode);
                 placed = true;
-            }else{//If occupied by a differnt postal code go to the next one
+            }else{//If occupied by a differnt postal code grouping go to the next one
                 if(currHashValue == hashSize - 1) currHashValue = 0;
                 else currHashValue++;
             }
         }
     }
+}
+
+string PostalCodeHash::getFirstFiveChars(string fullPostal){
+    if(fullPostal.empty()) return "";
+    if(fullPostal.length() == 3) return fullPostal;
+    return fullPostal.substr(0, 6);
 }
