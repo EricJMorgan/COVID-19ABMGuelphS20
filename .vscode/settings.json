@@ -62,6 +62,9 @@
         "typeinfo": "cpp",
         "variant": "cpp",
         "__split_buffer": "cpp",
-        "hashtable": "cpp"
+        "hashtable": "cpp",
+        "__locale": "cpp",
+        "__string": "cpp",
+        "filesystem": "cpp"
     }
 }

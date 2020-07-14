@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 07/07/20
- * ver 0.03
+ * 13/07/20
+ * ver 0.04
  * 
  * This is the header file for the agent class
  ***************/
@@ -14,6 +14,7 @@
 #include <iostream>
 #include <boost/assign/list_of.hpp>
 #include <map>
+#include "SIR.hh"
 #pragma once
 
 using namespace std;
@@ -57,7 +58,7 @@ static std::map<Education, std::string> EducationMap = boost::assign::map_list_o
 
 class Location;
 //Declare simulation class
-class Agent{
+class Agent : public SIR {
     public:
     AgentInfo getAgentInfo();
     string getEthnicity();
