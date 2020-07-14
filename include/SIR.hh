@@ -24,9 +24,8 @@ class SIR {
     SIRSeverity currentSeverity;
     int incubationPeriod;
     int infectDuration;
-    int fatalRisk;
+    bool fatalCase;
     bool showsSymptoms;
-    bool seriousCase;
 
     public:
     SIR();
@@ -36,9 +35,9 @@ class SIR {
     void PlaceAgentInICU();
     void RecoverAgent();
     void AgentDeceased();
-    void AgentInfected();
-    // void DetermineSeverity();
-    // void DetermineRecoveryTime();
+    void AgentInfected(AgentInfo info);
+    void SIRTimeStep();
+    void DecideFatalCase(double infectedNumb, double infectedChance);
 };
 
 
