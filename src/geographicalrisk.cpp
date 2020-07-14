@@ -12,5 +12,5 @@
 
 // Constructor
 GeographicalRisk::GeographicalRisk() {
-    //
+    // x agent is infected AgentInfected()
 }
