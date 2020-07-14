@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 08/07/20
- * ver 0.03
+ * 13/07/20
+ * ver 0.04
  * 
  * This is the class file for the agent class
  ***************/

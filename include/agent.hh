@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 07/07/20
- * ver 0.03
+ * 13/07/20
+ * ver 0.04
  * 
  * This is the header file for the agent class
  ***************/
@@ -14,6 +14,7 @@
 #include <iostream>
 #include <boost/assign/list_of.hpp>
 #include <map>
+#include "SIR.hh"
 #pragma once
 
 using namespace std;
@@ -57,7 +58,57 @@ static std::map<Education, std::string> EducationMap = boost::assign::map_list_o
 
 class Location;
 //Declare simulation class
-class Agent{
+class Agent : public SIR {
+    public:
+    AgentInfo getAgentInfo();
+    string getEthnicity();
+    string agentToString();
+
+    /**
+     * Agent
+     * 
+     * This is the constructor for the agent class it takes in the the gender/age enum and gives it 
+     * a race, income, education, and marital status
+     * 
+     * @param agentInfo, the enum of the gender/Age based on the AgentInfo enum
+     */
+    Agent(AgentInfo agentInfo);
+
+    /**
+     * goGrocery
+     * 
+     * This tells the specific agent to go to the closest grocery store
+     */
+    void goGrocery();
+
+    /**
+     * goWork
+     * 
+     * This tells the agent to go to its job so its not a freeloading hippie
+     */
+    void goWork();
+
+    /**
+     * goSchool
+     * 
+     * This tells the agent to go to school
+     */
+    void goSchool();
+
+    /**
+     * goHome
+     * 
+     * This tells the agent to go to its house
+     */
+    void goHome();
+
+    //UNKNOWEN TO ME HOW THESE WORK.
+    void quarantineTime();
+    void goodHygiene();
+    void followWearMask();
+    void followSocialDistancing();
+    
+
     private:
     AgentInfo info;
     HouseholdIncome income;
@@ -73,24 +124,38 @@ class Agent{
     bool wearingMask;
     Location* currLocation;
 
+    /**
+     * DecideEthnicity
+     * 
+     * Decides the agents ethnicity based on the stats collected from
+     * the canadian census
+     */
     void DecideEthnicity();
+
+    /**
+     * DecideMartialStatus
+     * 
+     * Decides the agents MartialStatus based on the status collected
+     * from the canadian census
+     */
     void DecideMartialStatus();
+
+    /**
+     * DecideHouseholdIncome
+     * 
+     * Decides the agents household income based on the stats
+     * collected from the canadian census
+     */
     void DecideHouseholdIncome();
+
+    /**
+     * DecideEducation
+     * 
+     * Decides the agents education based on the stats
+     * collected from the canadian census
+     */
     void DecideEducation();
 
-    public:
-    Agent(AgentInfo agentInfo);
-    void goGrocery();
-    void goWork();
-    void goSchool();
-    void goHome();
-    void quarantineTime();
-    void goodHygiene();
-    void followWearMask();
-    void followSocialDistancing();
-    AgentInfo getAgentInfo();
-    string getEthnicity();
-    string agentToString();
 };
 
 #endif

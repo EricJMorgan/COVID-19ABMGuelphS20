@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 06/07/20
- * ver 0.02
+ * 13/07/20
+ * ver 0.03
  * 
  * This is the header file for the SIR totals class
  ***************/
@@ -12,6 +12,7 @@
 
 #include <string>
 #include <iostream>
+#include "agent.hh"
 
 using namespace std;
 
@@ -20,8 +21,7 @@ class SIRtotals {
     private:
     int susceptible;
     int infected;
-    int recovered;
-    int diseased;
+    Agent* simAgents;
 
     public:
     SIRtotals();

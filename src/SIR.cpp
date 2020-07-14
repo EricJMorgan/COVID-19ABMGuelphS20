@@ -155,3 +155,6 @@ void SIR::RecoverAgent() {
 void SIR::AgentDeceased() {
     currentSeverity = DECEASED;
 } 
+SIRSeverity SIR::DetermineSeverity() {
+    return currentSeverity;
+}
