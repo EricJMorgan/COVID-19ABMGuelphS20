@@ -22,22 +22,28 @@ enum SIRSeverity { SUSCEPTIBLE, INFECTED, ISOLATED, HOSPITALIZED, ICU, RECOVERED
 class SIR {
     private:
     SIRSeverity currentSeverity;
-    int incubationPeriod;
-    int infectDuration;
     bool fatalCase;
     bool showsSymptoms;
+    bool needHospital;
+    bool needIcu;
+    bool isIncubating;
+    double incubationPeriod;
+    double timeTilHospital;
+    double timeTilICU;
+    double timeTilDeath;
+    double timeTilRecovery;
 
-    public:
-    SIR();
+    void DecideSIRCase(double infectedNumb, double infectedChance);
     void QuarantineAgent();
-    void AgentSymptoms();
     void HospitalAgent();
     void PlaceAgentInICU();
     void RecoverAgent();
     void AgentDeceased();
+
+    public:
+    SIR();
     void AgentInfected(AgentInfo info);
-    void SIRTimeStep();
-    void DecideFatalCase(double infectedNumb, double infectedChance);
+    void SIRTimeStep(double timeStep);
 };
 
 
