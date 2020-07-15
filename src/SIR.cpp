@@ -15,8 +15,7 @@ SIR::SIR() {
     currentSeverity = SUSCEPTIBLE;
 }
 
-// leave these
-// check all references
+// leave these to check all references
 // can all be changed to user inputs
 // 45% asymptomatic if not srs (check)
 // 25% icu death rate once in ICU
@@ -26,7 +25,6 @@ SIR::SIR() {
 // icu 1 to 3 days after hospitilization
 // non-icu recovery 14 days
 // icu death after 5 days
-
 //possible timestep 0.125 3 hrs
 
 /*************************
@@ -35,7 +33,7 @@ SIR::SIR() {
  * This progresses agents through their various SIR model paths.
  ************************/
 void SIR::SIRTimeStep(double timeStep) {
-    // incubating stage infect other ppl?
+    // incubating stage (infect other ppl?)
     if (isIncubating && showsSymptoms) {
         incubationPeriod -= timeStep;
 
@@ -77,45 +75,47 @@ void SIR::SIRTimeStep(double timeStep) {
 void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
     // decide if the case is fatal
     if (infectedNumb <  infectedChance) {
-        fatalCase = true;
-        timeTilHospital = 7; // (make user input)
+        showsSymptoms = true;
         needIcu = true;
         needHospital = true;
-        timeTilICU = 3; // Days from general hospital ward to ICU (user input)
-        timeTilDeath = 5; // Days from ICU to death (make user input)
-        showsSymptoms = true;
+        fatalCase = true;
+        timeTilHospital = 7;
+        timeTilICU = 3;
+        timeTilDeath = 5;
       // if the case is not fatal decide path to recovery
     } else {
-        double randomNumber = (double) rand()/RAND_MAX;
         fatalCase = false;
+
+        double randomNumber = (double) rand()/RAND_MAX;
         // case is asymptomatic
-        if (randomNumber < 0.45) { // asymptomatic probability if non fatal (user input)
+        if (randomNumber < 0.45) {
             showsSymptoms = false;
             needHospital = false;
             needIcu = false;
-            timeTilRecovery = 14; // asymptomatic recovery (user input)
+            timeTilRecovery = 14;
           // case requires hospitilzation
-        } else if (randomNumber >= 0.45 && randomNumber <= 0.65) { //hospitilization chance per case (user input)
-            needHospital = true;
+        } else if (randomNumber >= 0.45 && randomNumber <= 0.65) {
             showsSymptoms = true;
-            timeTilHospital = 7; //time needed to get srs enough for hospital (make user input)
+            needHospital = true;
+            timeTilHospital = 7;
+
             double icuNeeded = (double) rand()/RAND_MAX;
             // case requires icu
-            if (icuNeeded < 0.06) { //chance of u needing icu if hospitalized (look this up)
-                timeTilICU = 3; //time needed from hospital to ICU (make user input)
-                timeTilRecovery = 26; //recovery from ICU on average (make user input)
+            if (icuNeeded < 0.06) {
                 needIcu = true;
+                timeTilICU = 3;
+                timeTilRecovery = 26;
               // case requires general ward hospital
             } else {
                 needIcu = false;
-                timeTilRecovery = 10; //Time til Hospital recovery (make user input)
+                timeTilRecovery = 10;
             }
           // case requires no hospital but shows symptoms
         } else {
             showsSymptoms = true;
             needHospital = false;
             needIcu = false;
-            timeTilRecovery = 14; //Time til non ICU and non Hospital recovery (make user input)
+            timeTilRecovery = 14;
         }
     }
 }

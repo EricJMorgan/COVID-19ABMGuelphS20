@@ -95,11 +95,13 @@ class SIR {
     bool isIncubating;
 
     // time periods of various cases, user inputs
-    double incubationPeriod;
-    double timeTilHospital;
-    double timeTilICU;
-    double timeTilDeath;
-    double timeTilRecovery;
+    double incubationPeriod; // time take to incubate virus
+    double timeTilHospital; // time taken to get admitted to hospital after incubation, assuming hospital case
+    double timeTilICU; // time taken to get admitted to icu after hospitilization, assuming icu case
+    double timeTilDeath; // time taken to til death after icu, assuming fatal case
+    double timeTilRecovery; // time taken to til recovery after recovery starts at any stage, assuming non-fatal case
+                            // time til recovery will differ depending on which path to recovery is decided
+
 
     /**
      * QuarantineAgent
