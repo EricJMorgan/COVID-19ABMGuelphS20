@@ -153,6 +153,7 @@ string PostalCodeHash::getFirstFiveChars(string fullPostal){
     return fullPostal.substr(0, 6);
 }
 
+//code
 bool PostalCodeHash::postalCodeListContainsDup(int currHashValue, string newPostalCode){
     return std::find(hashTable[currHashValue].postalCodes.begin(), hashTable[currHashValue].postalCodes.end(), newPostalCode)
                     != hashTable[currHashValue].postalCodes.end();
