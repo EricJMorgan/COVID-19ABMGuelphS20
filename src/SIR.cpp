@@ -95,7 +95,7 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
             needIcu = false;
             timeTilRecovery = 14; // asymptomatic recovery (user input)
           // case requires hospitilzation
-        } else if (0.45 <= randomNumber <= 0.65) { //hospitilization chance per case (user input)
+        } else if (randomNumber >= 0.45 && randomNumber <= 0.65) { //hospitilization chance per case (user input)
             needHospital = true;
             showsSymptoms = true;
             timeTilHospital = 7; //time needed to get srs enough for hospital (make user input)
@@ -186,10 +186,6 @@ void SIR::AgentDeceased() {
  * 
  * Get the current severity of the agents case.
  ************************/
-SIRSeverity SIR::DetermineSeverity() {
-    return currentSeverity;
-}
-
 SIRSeverity SIR::DetermineSeverity() {
     return currentSeverity;
 }
