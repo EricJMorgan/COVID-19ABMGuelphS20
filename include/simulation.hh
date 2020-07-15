@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 06/07/20
- * ver 0.02
+ * 15/07/20
+ * ver 0.03
  * 
  * This is the header file for the simulation class
  ***************/
