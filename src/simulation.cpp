@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 07/07/20
- * ver 0.02
+ * 15/07/20
+ * ver 0.03
  * 
  * This is the class file for the simulation class
  ***************/
@@ -20,6 +20,7 @@ Simulation::Simulation(string fileName) {
     demographicFile.open(fileName, ios::in);
     string line;
     int arraySize = 0;
+    population = 0;
 
     if(!demographicFile.good()){
         cout << "Error invalid file" << endl;
@@ -39,6 +40,8 @@ Simulation::Simulation(string fileName) {
 
     simAgents = new Agent*[arraySize];
     demographicFile.close();
+
+    population = arraySize;
 
     setUpAgents(fileName);
     
@@ -114,4 +117,8 @@ void Simulation::setUpAgents(string filename) {
     }
 
     demographicFile.close();
+}
+
+int Simulation::getPopulation(){
+    return population;
 }
