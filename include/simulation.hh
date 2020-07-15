@@ -33,6 +33,7 @@ class Simulation {
     int initiallyInfected;
     bool fluSeason;
     int agentCount;
+    int population;
 
     void addNewAgent(string personInfo, int amountToAdd);
     void setUpAgents(string filename);
@@ -47,7 +48,7 @@ class Simulation {
     void removeAgentsResolved();
     void updateSIRGraphic();
     Agent getAgentAt(int index);
-    
+    int getPopulation();
 };
 
 
