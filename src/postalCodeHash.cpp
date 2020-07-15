@@ -109,8 +109,7 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, int hashSize){
                 hashTable[currHashValue].postalCodes.push_back(newPostalCode);
                 placed = true;
             }else if(hashTable[currHashValue].postalCodeGrouping.compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping 
-                if(std::find(hashTable[currHashValue].postalCodes.begin(), hashTable[currHashValue].postalCodes.end(), newPostalCode)
-                    == hashTable[currHashValue].postalCodes.end()) hashTable[currHashValue].postalCodes.push_back(newPostalCode);//This line searches the vector to see if it has a dup string
+                if(!postalCodeListContainsDup(currHashValue, newPostalCode)) hashTable[currHashValue].postalCodes.push_back(newPostalCode);//This line searches the vector to see if it has a dup string
                 placed = true;
             }else{//If occupied by a differnt postal code grouping  go to the next one
                 if(currHashValue == hashSize - 1) currHashValue = 0;
@@ -138,8 +137,7 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
                 placed = true;
             }else if(hashTable[currHashValue].postalCodeGrouping.compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping
                 hashTable[currHashValue].locationCount[locationTypeMap[locationName]]++;
-                if(std::find(hashTable[currHashValue].postalCodes.begin(), hashTable[currHashValue].postalCodes.end(), newPostalCode)
-                    == hashTable[currHashValue].postalCodes.end()) hashTable[currHashValue].postalCodes.push_back(newPostalCode);//This line searches the vector to see if it already has the postal code in it
+                if(!postalCodeListContainsDup(currHashValue, newPostalCode)) hashTable[currHashValue].postalCodes.push_back(newPostalCode);//This line searches the vector to see if it already has the postal code in it
                 placed = true;
             }else{//If occupied by a differnt postal code grouping go to the next one
                 if(currHashValue == hashSize - 1) currHashValue = 0;
@@ -153,4 +151,9 @@ string PostalCodeHash::getFirstFiveChars(string fullPostal){
     if(fullPostal.empty()) return "";
     if(fullPostal.length() == 3) return fullPostal;
     return fullPostal.substr(0, 6);
+}
+
+bool PostalCodeHash::postalCodeListContainsDup(int currHashValue, string newPostalCode){
+    return std::find(hashTable[currHashValue].postalCodes.begin(), hashTable[currHashValue].postalCodes.end(), newPostalCode)
+                    != hashTable[currHashValue].postalCodes.end();
 }

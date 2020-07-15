@@ -107,6 +107,17 @@ class PostalCodeHash{
      */
     string getFirstFiveChars(string fullPostal);
     
+    /**
+     * postalCodeListContainsDup
+     * 
+     * This function takes in the hash value and the postal code and checks the 
+     * vector if it already contains the postal code
+     * 
+     * @param currHashValue, the location in the hashtable
+     * @param newPostalCode, the postal code to go into the vector
+     * @return returns true if it contains the postal code
+     */
+    bool postalCodeListContainsDup(int currHashValue, string newPostalCode);
 };
 
 #endif

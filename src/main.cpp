@@ -22,15 +22,15 @@ int main(){
     PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
     for(int i = 0; i < 7000; i++){
         if(postalCodeStuff.hashTable[i].postalCodeGrouping.compare("") != 0){
-            cout << postalCodeStuff.hashTable[i].postalCodeGrouping << " ";
+            //cout << postalCodeStuff.hashTable[i].postalCodeGrouping << " ";
             for(int k = 0; k < 9; k++){
-                cout << postalCodeStuff.hashTable[i].locationCount[k] << " ";
+                //cout << postalCodeStuff.hashTable[i].locationCount[k] << " ";
             }
-            cout << endl;
+            //cout << endl;
             for(int j = 0; j < (int)postalCodeStuff.hashTable[i].postalCodes.size(); j++){
-                cout << postalCodeStuff.hashTable[i].postalCodes.at(j) << ", ";
+                //cout << postalCodeStuff.hashTable[i].postalCodes.at(j) << ", ";
             }
-            cout << endl << endl;
+            //cout << endl << endl;
         }
     }
     
