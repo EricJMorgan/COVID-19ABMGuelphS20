@@ -15,11 +15,11 @@ SIRtotals::SIRtotals() {
     //
 }
 
-void SIRtotals::updateTotals() {
+void SIRtotals::updateTotals(int population) {
     susceptible = 0;
     infected = 0;
     // TODO: James make this static
-    for(int i = 0; i < 131805; i++){
+    for(int i = 0; i < population; i++){
         switch(simAgents[i].DetermineSeverity()){
             case SUSCEPTIBLE: susceptible++; break;
             case INFECTED: infected++; break;

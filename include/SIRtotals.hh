@@ -25,7 +25,7 @@ class SIRtotals {
 
     public:
     SIRtotals();
-    void updateTotals();
+    void updateTotals(int population);
 };
 
 
