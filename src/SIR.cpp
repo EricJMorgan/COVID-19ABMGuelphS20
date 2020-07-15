@@ -189,3 +189,7 @@ void SIR::AgentDeceased() {
 SIRSeverity SIR::DetermineSeverity() {
     return currentSeverity;
 }
+
+SIRSeverity SIR::DetermineSeverity() {
+    return currentSeverity;
+}

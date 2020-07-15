@@ -34,7 +34,7 @@ static std::map<Education, std::string> EducationMap = boost::assign::map_list_o
 
 //Forward declare Location class
 class Location;
-
+//Declare simulation class
 class Agent : public SIR {
     public:
     AgentInfo getAgentInfo();
