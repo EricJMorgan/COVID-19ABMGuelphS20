@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 13/07/20
- * ver 0.03
+ * 15/07/20
+ * ver 0.04
  * 
  * This is the header file for the postalCodeHash object for the COVID-19 eABM
  ***************/
@@ -95,7 +95,29 @@ class PostalCodeHash{
      * @return the ifstream object of the file, will be closed if invalid
      */
     ifstream openFile(string fileName);
+
+    /**
+     * getFirstFiveChars
+     * 
+     * This function takes in a postal code and returns the first 5 chars of the postal code
+     * not including the space.
+     * 
+     * @param fullPostal, This is the full postal code.
+     * @return a string in the format LNL NL
+     */
+    string getFirstFiveChars(string fullPostal);
     
+    /**
+     * postalCodeListContainsDup
+     * 
+     * This function takes in the hash value and the postal code and checks the 
+     * vector if it already contains the postal code
+     * 
+     * @param currHashValue, the location in the hashtable
+     * @param newPostalCode, the postal code to go into the vector
+     * @return returns true if it contains the postal code
+     */
+    bool postalCodeListContainsDup(int currHashValue, string newPostalCode);
 };
 
 #endif
