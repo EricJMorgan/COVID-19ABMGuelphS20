@@ -36,10 +36,10 @@ SIR::SIR() {
  ************************/
 void SIR::SIRTimeStep(double timeStep) {
     // incubating stage infect other ppl?
-    if (isIncubating) {
+    if (isIncubating && showsSymptoms) {
         incubationPeriod -= timeStep;
 
-        if (incubationPeriod == 0 && showsSymptoms) {
+        if (incubationPeriod <= 0) {
             QuarantineAgent();
         }
         return;
