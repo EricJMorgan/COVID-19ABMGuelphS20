@@ -14,3 +14,7 @@
 SIR::SIR() {
     //
 }
+
+SIRSeverity SIR::DetermineSeverity() {
+    return currentSeverity;
+}
