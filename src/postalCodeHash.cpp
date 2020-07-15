@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 13/07/20
- * ver 0.03
+ * 15/07/20
+ * ver 0.04
  * 
  * This is the source code for the postalCodeHash object for the COVID-19 eABM
  ***************/
@@ -139,7 +139,7 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
             }else if(hashTable[currHashValue].postalCodeGrouping.compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping
                 hashTable[currHashValue].locationCount[locationTypeMap[locationName]]++;
                 if(std::find(hashTable[currHashValue].postalCodes.begin(), hashTable[currHashValue].postalCodes.end(), newPostalCode)
-                    != hashTable[currHashValue].postalCodes.end()) hashTable[currHashValue].postalCodes.push_back(newPostalCode);
+                    != hashTable[currHashValue].postalCodes.end()) hashTable[currHashValue].postalCodes.push_back(newPostalCode);//This line searches the vector to see if it already has the postal code in it
                 placed = true;
             }else{//If occupied by a differnt postal code grouping go to the next one
                 if(currHashValue == hashSize - 1) currHashValue = 0;
