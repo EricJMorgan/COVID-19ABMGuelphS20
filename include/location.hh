@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 09/07/20
- * ver 0.03
+ * 16/07/20
+ * ver 0.04
  * 
  * This is the header file for the location class
  ***************/
@@ -15,6 +15,7 @@
 #include <map>
 #include <vector>
 #include <boost/assign/list_of.hpp>
+#include <algorithm>
 #include "SIRtotals.hh"
 #include "transportation.hh"
 #include "geographicalrisk.hh"
@@ -98,21 +99,51 @@ class Location {
      * 
      * @return the array of Recovered agents in the location
      */
-    Agent* getRecovered();
-    
-    string postalCodeGrouping;
-    int locationCount[9];
-    std::vector<string> postalCodes;
+    Agent* getRecovered();//TODO remove
 
+    /**
+     * getIsResidential
+     * 
+     * This function gets the bool value of if a location
+     * is residential. For now residential is defined as a postal code grouping
+     * that contains no locations (the location count array is empty)
+     * 
+     * @return true if it is residential false if its not
+     */
+    bool getIsResidential();
+
+    /**
+     * setPostalCodeGrouping
+     * 
+     * This function sets a locations grouping string. For now this
+     * can be changed multiple times but in the future it should change to
+     * only be able to change once
+     * 
+     * @param newPostalCodeGrouping, this is the first 5 chars of the postalcode ie N1G 7J
+     */
+    void setPostalCodeGrouping(string newPostalCodeGrouping);
+    string getPostalCodeGrouping();
+
+    void increaseLocationCountAt(int index);
+    void increaseLocationCountAt(condenseLocationType index);
+    int getLocationCountAt(int index);
+    int getLocationCountAt(condenseLocationType index);
+    void addPostalCodeToList(string postalCode);
+    int getPostalCodeListLength();
+    string getPostalCodeAt(int index);
+    
     private:
     int population;
     int pplDensity;
     int avgTimeSpent;
     int avgAgentInteraction;
-    Agent* currentAgents;
+    bool isResidential;
     Transportation* transportaionRoutesFromLocation;
-    GeographicalRisk avgLocationRisk;
     SIRtotals sirTotalLocation;
+    string postalCodeGrouping;
+    int locationCount[9];
+    std::vector<string> postalCodes;
+    bool postalCodeListContainsDup(string newPostalCode);
 };
 
 #endif

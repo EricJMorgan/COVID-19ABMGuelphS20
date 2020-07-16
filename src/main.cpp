@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 15/07/20
- * ver 0.04
+ * 16/07/20
+ * ver 0.05
  * 
  * This is the main for the COVID-19 eABM
  ***************/
@@ -21,16 +21,16 @@ int main(){
 
     PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
     for(int i = 0; i < 7000; i++){
-        if(postalCodeStuff.hashTable[i].postalCodeGrouping.compare("") != 0){
-            //cout << postalCodeStuff.hashTable[i].postalCodeGrouping << " ";
+        if(postalCodeStuff.hashTable[i].getPostalCodeGrouping().compare("") != 0){
+            cout << postalCodeStuff.hashTable[i].getPostalCodeGrouping() << " ";
             for(int k = 0; k < 9; k++){
-                //cout << postalCodeStuff.hashTable[i].locationCount[k] << " ";
+                cout << postalCodeStuff.hashTable[i].getLocationCountAt(k) << " ";
             }
-            //cout << endl;
-            for(int j = 0; j < (int)postalCodeStuff.hashTable[i].postalCodes.size(); j++){
-                //cout << postalCodeStuff.hashTable[i].postalCodes.at(j) << ", ";
+            cout << endl;
+            for(int j = 0; j < (int)postalCodeStuff.hashTable[i].getPostalCodeListLength(); j++){
+                cout << postalCodeStuff.hashTable[i].getPostalCodeAt(j) << ", ";
             }
-            //cout << endl << endl;
+            cout << endl << endl;
         }
     }
     
