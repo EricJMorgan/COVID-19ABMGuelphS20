@@ -40,6 +40,10 @@ Location::Location(string newPostalCode, int shopData[9]){
     transportaionRoutesFromLocation = NULL;
 }
 
+bool Location::getIsResidential(){
+    return isResidential;
+}
+
 void Location::setPostalCodeGrouping(string newPostalCodeGrouping){
     postalCodeGrouping = newPostalCodeGrouping;
 }
@@ -85,16 +89,12 @@ int Location::getPopulation(){
     return population;
 }
 
-Agent *Location::getSusceptible(){
-    return NULL;
+vector<Agent *> Location::getSusceptible(){
+    return susceptible;
 }
 
-Agent *Location::getInfected(){
-    return NULL;
-}
-
-Agent *Location::getRecovered(){
-    return NULL;
+vector<Agent *> Location::getInfected(){
+    return infected;
 }
 
 
