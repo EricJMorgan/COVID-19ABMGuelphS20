@@ -13,6 +13,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "SIRtotals.hh"
 
 using namespace std;
 
@@ -48,6 +49,7 @@ class Simulation {
     void removeAgentsResolved();
     void updateSIRGraphic();
     Agent getAgentAt(int index);
+    SIRtotals totalSimSIRStats;
     int getPopulation();
 };
 

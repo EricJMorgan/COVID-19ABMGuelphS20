@@ -42,10 +42,14 @@ void SIRtotals::updateTotals(int population, Agent* simAgents) {
            showsSymptoms++;
         }
         
-        
         switch(simAgents[i].DetermineSeverity()){
             case SUSCEPTIBLE: susceptible++; break;
             case INFECTED: infected++; break;
+            case ISOLATED: infected++; break;
+            case HOSPITALIZED: infected++; break;
+            case ICU: infected++; break;
+            case RECOVERED: recovered++; break;
+            case DECEASED: deceased++; break;
             default: break;
         }
     }

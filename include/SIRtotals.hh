@@ -19,8 +19,13 @@ using namespace std;
 //Declare simulation class
 class SIRtotals {
     private:
+    // for general SIR 
     int susceptible;
     int infected;
+    int recovered;
+    int deceased;
+
+    // for geographic risk
     int maskWearer;
     int hygiene;
     int socialDistance;
@@ -34,6 +39,8 @@ class SIRtotals {
 
     int getSusceptible();
     int getInfected();
+    int getRecovered();
+    int getDeceased();
     int getMaskWearer();
     int getHygiene();
     int getSocialDistance();
