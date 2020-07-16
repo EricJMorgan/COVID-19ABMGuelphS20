@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 16/07/20
- * ver 0.04
+ * ver 0.06
  * 
  * This is the header file for the location class
  ***************/
@@ -81,7 +81,7 @@ class Location {
      * 
      * @return the array of Suseptible agents in the location
      */
-    Agent* getSusceptible();
+    std::vector<Agent *> getSusceptible();
 
     /**
      * getInfected
@@ -90,16 +90,7 @@ class Location {
      * 
      * @return the array of Infected agents in the location
      */
-    Agent* getInfected();
-
-    /**
-     * getRecovered
-     * 
-     * This function gets the array of Recoverd agents in the location
-     * 
-     * @return the array of Recovered agents in the location
-     */
-    Agent* getRecovered();//TODO remove
+    std::vector<Agent *> getInfected();
 
     /**
      * getIsResidential
@@ -215,6 +206,8 @@ class Location {
     string postalCodeGrouping;
     int locationCount[9];
     std::vector<string> postalCodes;
+    std::vector<Agent *> susceptible;
+    std::vector<Agent *> infected;
 
     /**
      * postalCodeListContainsDup

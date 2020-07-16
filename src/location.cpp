@@ -85,16 +85,12 @@ int Location::getPopulation(){
     return population;
 }
 
-Agent *Location::getSusceptible(){
-    return NULL;
+vector<Agent *> Location::getSusceptible(){
+    return susceptible;
 }
 
-Agent *Location::getInfected(){
-    return NULL;
-}
-
-Agent *Location::getRecovered(){
-    return NULL;
+vector<Agent *> Location::getInfected(){
+    return infected;
 }
 
 
