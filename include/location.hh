@@ -122,14 +122,86 @@ class Location {
      * @param newPostalCodeGrouping, this is the first 5 chars of the postalcode ie N1G 7J
      */
     void setPostalCodeGrouping(string newPostalCodeGrouping);
+
+    /**
+     * getPostalCodeGrouping
+     * 
+     * This function gets the locations postal code grouping
+     * 
+     * @return a string of the postal code grouping
+     */
     string getPostalCodeGrouping();
 
+    /**
+     * increaseLocationCountAt
+     * 
+     * This function will take a index of the wanted location
+     * index in the locationCount array and increment it by one
+     * 
+     * @param index, must be in range 0 <= index <= 8
+     */
     void increaseLocationCountAt(int index);
+
+    /**
+     * increaseLocationCountAt
+     * 
+     * This function will take a index of the wanted location
+     * index in the locationCount array and increment it by one
+     * 
+     * @param index, must be in range 0 <= index <= 8
+     */
     void increaseLocationCountAt(condenseLocationType index);
+
+    /**
+     * getLocationCountAt
+     * 
+     * This function will take in a index and return how many of
+     * the specified location index
+     * 
+     * @param index, must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
+     * @return a int of the amount of the specified shops in a location
+     */
     int getLocationCountAt(int index);
+
+    /**
+     * getLocationCountAt
+     * 
+     * This function will take in a index and return how many of
+     * the specified location index
+     * 
+     * @param index, must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
+     * @return a int of the amount of the specified shops in a location
+     */
     int getLocationCountAt(condenseLocationType index);
+
+    /**
+     * addPostalCodeToList
+     * 
+     * This function adds a full postal code to the location groupings
+     * list of postalCodes. It will not add dup postalCodes
+     * 
+     * @param postalCode, the postal code to add to the list
+     */
     void addPostalCodeToList(string postalCode);
+
+    /**
+     * getPostalCodeListLength
+     * 
+     * This gets the length of the vector of the postal codes
+     * int a postal code grouping
+     * 
+     * @return a int of the size of the vector of postalCodes
+     */
     int getPostalCodeListLength();
+
+    /**
+     * getPostalCodeAt
+     * 
+     * This gets the postal code in the vector at a specified location
+     * 
+     * @param index, must be in range of the list length
+     * @return the string of the postal code at the index
+     */
     string getPostalCodeAt(int index);
     
     private:
@@ -143,6 +215,17 @@ class Location {
     string postalCodeGrouping;
     int locationCount[9];
     std::vector<string> postalCodes;
+
+    /**
+     * postalCodeListContainsDup
+     * 
+     * THis is a helper function that makes sure there
+     * is no dups in the vector of postal codes before
+     * adding it into the list
+     * 
+     * @param newPostalCode, the postal code to check if it has a dup
+     * @return a bool true if it contains a dup false if it dosent
+     */
     bool postalCodeListContainsDup(string newPostalCode);
 };
 
