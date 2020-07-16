@@ -45,7 +45,7 @@ static std::map<std::string, condenseLocationType> locationTypeMap = boost::assi
 class Agent;
 
 //Declare simulation class
-class Location {
+class Location : public GeographicalRisk {
     public:
     /**
      * Location
@@ -105,14 +105,10 @@ class Location {
     std::vector<string> postalCodes;
 
     private:
-    int population;
     int pplDensity;
     int avgTimeSpent;
     int avgAgentInteraction;
-    Agent* currentAgents;
     Transportation* transportaionRoutesFromLocation;
-    GeographicalRisk avgLocationRisk;
-    SIRtotals sirTotalLocation;
 };
 
 #endif

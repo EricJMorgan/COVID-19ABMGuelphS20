@@ -22,7 +22,7 @@ class Location;
 class Simulation {
     private:
     Agent** simAgents;
-    Location* guelphMap; //map
+    Location** guelphMap; //map
 
     // user inputs
     int timeStep;

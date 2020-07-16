@@ -13,10 +13,11 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include "SIRtotals.hh"
+#include "agent.hh"
 
 using namespace std;
 
-class Location;
 //Declare simulation class
 class GeographicalRisk {
     public:
@@ -26,22 +27,23 @@ class GeographicalRisk {
      * This is the default constructor for the Geographical risk class
      */
     GeographicalRisk();
-    void updateAvgCounts();
+
+    int population;
+    double chanceOfInfection;
+    Agent* currentAgents;
+
+    void updateAvgCountsAndRisk();
     void infectPeople();
-    void updateRegionRisk();
 
     private:
-    int symptomaticCarriers;
-    int avgAgentAge;
-    double chanceOfInfection;
-    int avgMaskWearer;
-    int avgHygiene;
+    int avgSymptomaticCarriers;
+    double avgAgentAge;
+    double avgMaskWearer;
+    double avgHygiene;
     int ethnicityRatios[5];
-    double sexRatio;
-    int socialDistancingSeverity;
-    bool socialDistancing;
-    Location* avgLocationRisk;
-
+    double sexRatioMale;
+    int socialDistancingSeverity; // user input
+    SIRtotals sirTotalLocation;
 };
 
 #endif

@@ -14,3 +14,18 @@
 GeographicalRisk::GeographicalRisk() {
     // x agent is infected AgentInfected()
 }
+
+
+
+void GeographicalRisk::updateAvgCountsAndRisk() {
+    //idk if this will affect stuff
+    //avgAgentAge = (double)sirTotalLocation.getMaskWearer() / (double)population;
+
+    avgSymptomaticCarriers = 
+    avgMaskWearer = (double)sirTotalLocation.getMaskWearer() / (double)population;
+    avgHygiene = (double)sirTotalLocation.getMaskWearer() / (double)population;
+    sexRatioMale = (double)sirTotalLocation.getMaleCount() / (double)population;
+
+
+
+}

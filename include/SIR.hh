@@ -83,6 +83,8 @@ class SIR {
      */
     SIRSeverity DetermineSeverity();
 
+    bool getSymptoms();
+
     private:
     // current state
     SIRSeverity currentSeverity;
