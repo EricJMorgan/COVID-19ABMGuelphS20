@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 15/07/20
- * ver 0.04
+ * 16/07/20
+ * ver 0.05
  * 
  * This is the source code for the postalCodeHash object for the COVID-19 eABM
  ***************/
@@ -104,12 +104,12 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, int hashSize){
         currHashValue = PostalCodeHash::getPostalHash(hashSize, newGroupedPostalCode);
         placed = false;
             while(placed == false){
-            if(hashTable[currHashValue].postalCodeGrouping.compare("") == 0){//If the bucket is empty
-                hashTable[currHashValue].postalCodeGrouping = newGroupedPostalCode;
-                hashTable[currHashValue].postalCodes.push_back(newPostalCode);
+            if(hashTable[currHashValue].getPostalCodeGrouping().compare("") == 0){//If the bucket is empty
+                hashTable[currHashValue].setPostalCodeGrouping(newGroupedPostalCode);
+                hashTable[currHashValue].addPostalCodeToList(newPostalCode);
                 placed = true;
-            }else if(hashTable[currHashValue].postalCodeGrouping.compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping 
-                if(!postalCodeListContainsDup(currHashValue, newPostalCode)) hashTable[currHashValue].postalCodes.push_back(newPostalCode);//This line searches the vector to see if it has a dup string
+            }else if(hashTable[currHashValue].getPostalCodeGrouping().compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping 
+                hashTable[currHashValue].addPostalCodeToList(newPostalCode);
                 placed = true;
             }else{//If occupied by a differnt postal code grouping  go to the next one
                 if(currHashValue == hashSize - 1) currHashValue = 0;
@@ -130,14 +130,14 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
         currHashValue = PostalCodeHash::getPostalHash(hashSize, newGroupedPostalCode);
         placed = false;
             while(placed == false){
-            if(hashTable[currHashValue].postalCodeGrouping.compare("") == 0){//If the bucket is empty
-                hashTable[currHashValue].postalCodeGrouping = newGroupedPostalCode;
-                hashTable[currHashValue].locationCount[locationTypeMap[locationName]]++;
-                hashTable[currHashValue].postalCodes.push_back(newPostalCode);
+            if(hashTable[currHashValue].getPostalCodeGrouping().compare("") == 0){//If the bucket is empty
+                hashTable[currHashValue].setPostalCodeGrouping(newGroupedPostalCode);
+                hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
+                hashTable[currHashValue].addPostalCodeToList(newPostalCode);
                 placed = true;
-            }else if(hashTable[currHashValue].postalCodeGrouping.compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping
-                hashTable[currHashValue].locationCount[locationTypeMap[locationName]]++;
-                if(!postalCodeListContainsDup(currHashValue, newPostalCode)) hashTable[currHashValue].postalCodes.push_back(newPostalCode);//This line searches the vector to see if it already has the postal code in it
+            }else if(hashTable[currHashValue].getPostalCodeGrouping().compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping
+                hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
+                hashTable[currHashValue].addPostalCodeToList(newPostalCode);
                 placed = true;
             }else{//If occupied by a differnt postal code grouping go to the next one
                 if(currHashValue == hashSize - 1) currHashValue = 0;
@@ -153,8 +153,4 @@ string PostalCodeHash::getFirstFiveChars(string fullPostal){
     return fullPostal.substr(0, 6);
 }
 
-//code
-bool PostalCodeHash::postalCodeListContainsDup(int currHashValue, string newPostalCode){
-    return std::find(hashTable[currHashValue].postalCodes.begin(), hashTable[currHashValue].postalCodes.end(), newPostalCode)
-                    != hashTable[currHashValue].postalCodes.end();
-}
+
