@@ -23,14 +23,14 @@ int main(){
     for(int i = 0; i < 7000; i++){
         if(postalCodeStuff.hashTable[i].getPostalCodeGrouping().compare("") != 0){
             cout << postalCodeStuff.hashTable[i].getPostalCodeGrouping() << " ";
-            for(int k = 0; k < 9; k++){
+            for(int k = 0; k < LOCATIONTYPESIZE; k++){
                 cout << postalCodeStuff.hashTable[i].getLocationCountAt(k) << " ";
             }
             cout << endl;
             for(int j = 0; j < (int)postalCodeStuff.hashTable[i].getPostalCodeListLength(); j++){
                 cout << postalCodeStuff.hashTable[i].getPostalCodeAt(j) << ", ";
             }
-            cout << endl << "Is residential " << postalCodeStuff.hashTable[i].getIsResidential() << endl << endl;
+            cout << endl << endl;
         }
     }
     

@@ -37,7 +37,7 @@ PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int has
     toParse = openFile(evenMoreLocations);
     if(toParse.is_open()){
         while(getline(toParse, holder)){
-            placePostalInHash(holder, hashSize);
+            placePostalInHash(holder, "residential", hashSize);
         }
         toParse.close();
     }
@@ -132,11 +132,16 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
             while(placed == false){
             if(hashTable[currHashValue].getPostalCodeGrouping().compare("") == 0){//If the bucket is empty
                 hashTable[currHashValue].setPostalCodeGrouping(newGroupedPostalCode);
-                hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
+                //hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
                 hashTable[currHashValue].addPostalCodeToList(newPostalCode);
+                if((locationName.compare("residential") == 0 && !hashTable[currHashValue].postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
+                     hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
+                }
                 placed = true;
             }else if(hashTable[currHashValue].getPostalCodeGrouping().compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping
-                hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
+                if((locationName.compare("residential") == 0 && !hashTable[currHashValue].postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
+                    hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
+                }
                 hashTable[currHashValue].addPostalCodeToList(newPostalCode);
                 placed = true;
             }else{//If occupied by a differnt postal code grouping go to the next one

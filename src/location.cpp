@@ -15,7 +15,7 @@
 // Constructor
 Location::Location() {
     postalCodeGrouping = "";
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < LOCATIONTYPESIZE; i++){
         locationCount[i] = 0;
     }
     population = 0;
@@ -23,25 +23,19 @@ Location::Location() {
     avgTimeSpent = 0;
     avgAgentInteraction = 0;
     transportaionRoutesFromLocation = NULL;
-    isResidential = true;
 }
 
-Location::Location(string newPostalCode, int shopData[9]){
+Location::Location(string newPostalCode, int shopData[LOCATIONTYPESIZE]){
     postalCodeGrouping = newPostalCode;
-    isResidential = true;
     for(int i = 0; i < 9; i++){
         locationCount[i] = shopData[i];
-        if(shopData[i] != 0) isResidential = false;
+        //if(shopData[i] != 0) isResidential = false;
     }
     population = 0;
     pplDensity = 0;
     avgTimeSpent = 0;
     avgAgentInteraction = 0;
     transportaionRoutesFromLocation = NULL;
-}
-
-bool Location::getIsResidential(){
-    return isResidential;
 }
 
 void Location::setPostalCodeGrouping(string newPostalCodeGrouping){
@@ -53,9 +47,9 @@ string Location::getPostalCodeGrouping(){
 }
 
 void Location::increaseLocationCountAt(int index){
-    if(index < 0 || index > 8) return;
+    if(index < 0 || index > LOCATIONTYPESIZE) return;
     locationCount[index]++;
-    isResidential = false;
+    //isResidential = false;
 }
 
 void Location::increaseLocationCountAt(condenseLocationType index){
@@ -63,7 +57,7 @@ void Location::increaseLocationCountAt(condenseLocationType index){
 }
 
 int Location::getLocationCountAt(int index){
-    if(index < 0 || index > 8) return -1;
+    if(index < 0 || index > LOCATIONTYPESIZE) return -1;
     return locationCount[index];
 }
 
