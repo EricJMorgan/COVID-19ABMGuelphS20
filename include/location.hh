@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 16/07/20
- * ver 0.06
+ * ver 0.07
  * 
  * This is the header file for the location class
  ***************/

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 16/07/20
- * ver 0.05
+ * ver 0.06
  * 
  * This is the main for the COVID-19 eABM
  ***************/
