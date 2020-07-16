@@ -30,7 +30,7 @@ int main(){
             for(int j = 0; j < (int)postalCodeStuff.hashTable[i].getPostalCodeListLength(); j++){
                 cout << postalCodeStuff.hashTable[i].getPostalCodeAt(j) << ", ";
             }
-            cout << endl << endl;
+            cout << endl << "Is residential " << postalCodeStuff.hashTable[i].getIsResidential() << endl << endl;
         }
     }
     

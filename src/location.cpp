@@ -40,6 +40,10 @@ Location::Location(string newPostalCode, int shopData[9]){
     transportaionRoutesFromLocation = NULL;
 }
 
+bool Location::getIsResidential(){
+    return isResidential;
+}
+
 void Location::setPostalCodeGrouping(string newPostalCodeGrouping){
     postalCodeGrouping = newPostalCodeGrouping;
 }
