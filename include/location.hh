@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 16/07/20
- * ver 0.07
+ * 17/07/20
+ * ver 0.08
  * 
  * This is the header file for the location class
  ***************/
@@ -197,7 +197,90 @@ class Location {
      * @return a bool true if it contains a dup false if it dosent
      */
     bool postalCodeListContainsDup(string newPostalCode);
-    
+
+    /**
+     * addAgentToSusceptible
+     * 
+     * This takes in an agent pointer and adds it to the locations 
+     * susceptible vector
+     * 
+     * @param toAdd, the agent pointer
+     */
+    void addAgentToSusceptible(Agent *toAdd);
+
+    /**
+     * addAgentToInfected
+     * 
+     * This takes in an agent pointer and adds it to the locations
+     * infected vector
+     * 
+     * @param toAdd, the agent pointer
+     */
+    void addAgentToInfected(Agent *toAdd);
+
+    /**
+     * removeSusceptibleAgent
+     * 
+     * This takes in an index and removes an agent at the the wanted 
+     * index from the susceptible vector and returns its pointer
+     * 
+     * @param index, the index to remove from
+     * @return the pointer to the removed agent
+     */
+    Agent *removeSusceptibleAgent(int index);
+
+    /**
+     * removeInfectedAgent
+     * 
+     * This takes in an index and removes an agent at the wanted
+     * index from the infected vector and returns its pointer
+     * 
+     * @param index, the index to remove from
+     * @return the pointer to the removed agent
+     */
+    Agent *removeInfectedAgent(int index);
+
+    /**
+     * getSusceptibleAgentAt
+     * 
+     * This takes in an index and returns the agent
+     * at the wanted index from the sus vector
+     * 
+     * @param index, the index to get the agent from
+     * @return a pointer to the agent
+     */
+    Agent *getSusceptibleAgentAt(int index);
+
+    /**
+     * getInfectedAgentAt
+     * 
+     * This takes in an index and returns the agent
+     * at the wanted index from the infected vector
+     * 
+     * @param index, the index to get the agent from
+     * @return a pointer to the agent
+     */
+    Agent *getInfectedAgentAt(int index);
+
+    /**
+     * getSusceptibleSize
+     * 
+     * This returns the size of the Susceptible vector
+     * 
+     * @return size of sus vector
+     */
+    int getSusceptibleSize();
+
+    /**
+     * getInfectedSize
+     * 
+     * This returns the size of the infected vector
+     * 
+     * @return size of infected vector
+     */
+    int getInfectedSize();
+
+
     private:
     int population;
     int pplDensity;
