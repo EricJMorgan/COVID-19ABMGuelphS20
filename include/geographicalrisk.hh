@@ -18,6 +18,10 @@
 
 using namespace std;
 
+#define LOCATIONTYPESIZE 10
+
+enum condenseLocationType {GENSTORE, TRANSPORT, SCHOOL, PARKSANDREC, SERVICES, ENTERTAINMENT, HEALTH, PLACEOFWORSHIP, UNNEEDED, RESIDENTIAL};
+
 //Declare simulation class
 class GeographicalRisk {
     public:
@@ -31,8 +35,9 @@ class GeographicalRisk {
     int population;
     double chanceOfInfection;
     Agent* currentAgents;
-    int locationCount[9];
+    int locationCount[LOCATIONTYPESIZE];
 
+    
     /**
      * getLocationCountAt
      * 
@@ -43,6 +48,17 @@ class GeographicalRisk {
      * @return a int of the amount of the specified shops in a location
      */
     int getLocationCountAt(int index);
+
+    /**
+     * getLocationCountAt
+     * 
+     * This function will take in a index and return how many of
+     * the specified location index
+     * 
+     * @param index, must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
+     * @return a int of the amount of the specified shops in a location
+     */
+    int getLocationCountAt(condenseLocationType index);
 
     void infectPeople();
 

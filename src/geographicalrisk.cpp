@@ -80,6 +80,10 @@ void GeographicalRisk::infectPeople() {
 }
 
 int GeographicalRisk::getLocationCountAt(int index){
-    if(index < 0 || index > 8) return -1;
+    if(index < 0 || index > LOCATIONTYPESIZE) return -1;
     return locationCount[index];
+}
+
+int GeographicalRisk::getLocationCountAt(condenseLocationType index){
+    return getLocationCountAt((int)index);
 }
