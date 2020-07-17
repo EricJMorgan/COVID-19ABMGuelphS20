@@ -59,7 +59,7 @@ void Hospital::increaseHospitalCount(int numAgents) {
 
 void Hospital::increaseIcuCount(int numAgents) {
     if(numAgents > 0) {
-        numberPpl = numberPpl + icuCount;
+        icuCount = icuCount + numAgents;
         indicateOverflow();
     } else {
         cout << "ERROR: Number of agents is negative" << endl;
