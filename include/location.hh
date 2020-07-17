@@ -152,17 +152,6 @@ class Location : public GeographicalRisk {
      * @param index, must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
      * @return a int of the amount of the specified shops in a location
      */
-    int getLocationCountAt(int index);
-
-    /**
-     * getLocationCountAt
-     * 
-     * This function will take in a index and return how many of
-     * the specified location index
-     * 
-     * @param index, must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
-     * @return a int of the amount of the specified shops in a location
-     */
     int getLocationCountAt(condenseLocationType index);
 
     /**
@@ -203,7 +192,6 @@ class Location : public GeographicalRisk {
     Transportation* transportaionRoutesFromLocation;
     SIRtotals sirTotalLocation;
     string postalCodeGrouping;
-    int locationCount[9];
     std::vector<string> postalCodes;
     std::vector<Agent *> susceptible;
     std::vector<Agent *> infected;

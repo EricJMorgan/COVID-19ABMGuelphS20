@@ -62,11 +62,6 @@ void Location::increaseLocationCountAt(condenseLocationType index){
     increaseLocationCountAt((int)index);
 }
 
-int Location::getLocationCountAt(int index){
-    if(index < 0 || index > 8) return -1;
-    return locationCount[index];
-}
-
 int Location::getLocationCountAt(condenseLocationType index){
     return getLocationCountAt((int)index);
 }

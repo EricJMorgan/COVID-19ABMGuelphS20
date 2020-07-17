@@ -31,11 +31,23 @@ class GeographicalRisk {
     int population;
     double chanceOfInfection;
     Agent* currentAgents;
+    int locationCount[9];
 
-    void updateAvgCountsAndRisk();
+    /**
+     * getLocationCountAt
+     * 
+     * This function will take in a index and return how many of
+     * the specified location index
+     * 
+     * @param index, must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
+     * @return a int of the amount of the specified shops in a location
+     */
+    int getLocationCountAt(int index);
+
     void infectPeople();
 
     private:
+    void updateAvgCountsAndRisk();
     int avgSymptomaticCarriers;
     double avgMaskWearer;
     double avgHygiene;
