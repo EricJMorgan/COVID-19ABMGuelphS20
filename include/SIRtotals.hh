@@ -29,7 +29,6 @@ class SIRtotals {
     int maskWearer;
     int hygiene;
     int socialDistance;
-    int avgAgentAge;
     int maleCount;
     int showsSymptoms;
 

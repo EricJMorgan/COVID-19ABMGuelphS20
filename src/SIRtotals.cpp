@@ -63,6 +63,14 @@ int SIRtotals::getInfected() {
     return infected;
 }
 
+int SIRtotals::getRecovered() {
+    return recovered;
+}
+
+int SIRtotals::getDeceased() {
+    return deceased;
+}
+
 int SIRtotals::getMaskWearer() {
     return maskWearer;
 }
@@ -73,10 +81,6 @@ int SIRtotals::getHygiene() {
 
 int SIRtotals::getSocialDistance() {
     return socialDistance;
-}
-
-int SIRtotals::getAvgAgentAge() {
-    return avgAgentAge;
 }
 
 int SIRtotals::getMaleCount() {

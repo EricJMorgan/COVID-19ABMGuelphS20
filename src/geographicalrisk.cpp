@@ -15,17 +15,23 @@ GeographicalRisk::GeographicalRisk() {
     // x agent is infected AgentInfected()
 }
 
-
-
 void GeographicalRisk::updateAvgCountsAndRisk() {
-    //idk if this will affect stuff
-    //avgAgentAge = (double)sirTotalLocation.getMaskWearer() / (double)population;
+    sirTotalLocation.updateTotals(population, currentAgents);
 
-    avgSymptomaticCarriers = 
+    // calculate averages in compartment during current timestep
+    avgSymptomaticCarriers = (double)sirTotalLocation.getShowsSymptoms() / (double)population;
     avgMaskWearer = (double)sirTotalLocation.getMaskWearer() / (double)population;
     avgHygiene = (double)sirTotalLocation.getMaskWearer() / (double)population;
-    sexRatioMale = (double)sirTotalLocation.getMaleCount() / (double)population;
 
+    // do this tmrrw
+}
 
+void GeographicalRisk::infectPeople() {
+    for (size_t i = 0; i < population; i++) {
+        double infectionChance = (double) rand()/RAND_MAX;
 
+        if (infectionChance < chanceOfInfection) {
+            currentAgents[i].AgentInfected(currentAgents[i].getAgentInfo());
+        }
+    }
 }

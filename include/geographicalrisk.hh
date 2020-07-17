@@ -37,11 +37,8 @@ class GeographicalRisk {
 
     private:
     int avgSymptomaticCarriers;
-    double avgAgentAge;
     double avgMaskWearer;
     double avgHygiene;
-    int ethnicityRatios[5];
-    double sexRatioMale;
     int socialDistancingSeverity; // user input
     SIRtotals sirTotalLocation;
 };
