@@ -45,7 +45,7 @@ static std::map<std::string, condenseLocationType> locationTypeMap = boost::assi
 class Agent;
 
 //Declare simulation class
-class Location {
+class Location : public GeographicalRisk {
     public:
     /**
      * Location

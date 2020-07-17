@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/06/20
- * ver 0.01
+ * 17/07/20
+ * ver 0.02
  * 
  * This is the class file for the geographical risk class
  ***************/
@@ -12,7 +12,7 @@
 
 // Constructor
 GeographicalRisk::GeographicalRisk() {
-    // x agent is infected AgentInfected()
+    //
 }
 
 void GeographicalRisk::updateAvgCountsAndRisk() {
@@ -54,17 +54,20 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     // PLACEOFWORSHIP 0.8
     // RESIDENTIAL 0.5
 
-    double locationRiskTotal;
-    double locationRisks[9];
+    double locationRiskTotal = 0.0;
+    double locationRisks[9] = {0.6, 0.8, 0.9, 0.2, 0.2, 0.8, 0.9, 0.8, 0.5};
+    int totalBusiness = 0;
 
     // loop through various business and add to risk
     for(int k = 0; k < 9; k++){
-        cout << getLocationCountAt(k) << " ";
-
+        totalBusiness += getLocationCountAt(k);
+        locationRiskTotal += totalBusiness*locationRisks[k];
     }
 
-    //
-    chanceOfInfection = (avgSymptomaticCarriers + avgMaskWearerRisk + avgAsymptomaticRisk + avgHygieneRisk) / 5 ;
+    locationRiskTotal = locationRiskTotal / (double)totalBusiness;
+
+    // update chance of infection based on all factors
+    chanceOfInfection = (avgSymptomaticCarriers + avgMaskWearerRisk + avgAsymptomaticRisk + avgHygieneRisk + locationRiskTotal) / 5 ;
 }
 
 void GeographicalRisk::infectPeople() {
@@ -73,7 +76,7 @@ void GeographicalRisk::infectPeople() {
     for (size_t i = 0; i < population; i++) {
         double agentInfectionChance = (double) rand()/RAND_MAX;
 
-        if (agentInfectionChance < chanceOfInfection) {
+        if (currentAgents[i].DetermineSeverity() == 0 && agentInfectionChance < chanceOfInfection) {
             currentAgents[i].AgentInfected(currentAgents[i].getAgentInfo());
         }
     }
