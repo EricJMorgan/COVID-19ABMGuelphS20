@@ -28,6 +28,7 @@ class Hospital {
     static int icuBedCount;   //total ICU beds
     int numberPpl;            //excluding ICU patients
     int icuCount;             //total ICU patients
+    bool overflow;
 
     public:
     /**
