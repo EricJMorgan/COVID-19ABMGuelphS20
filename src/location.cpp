@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 16/07/20
- * ver 0.04
+ * 17/07/20
+ * ver 0.05
  * 
  * This is the class file for the location class
  ***************/
@@ -94,4 +94,38 @@ vector<Agent *> Location::getInfected(){
 
 bool Location::postalCodeListContainsDup(string newPostalCode){
     return std::find(postalCodes.begin(), postalCodes.end(), newPostalCode) != postalCodes.end();
+}
+
+void Location::addAgentToSusceptible(Agent *toAdd){
+    if(toAdd == NULL) return;
+    susceptible.push_back(toAdd);
+}
+
+void Location::addAgentToInfected(Agent *toAdd){
+    if(toAdd == NULL) return;
+    infected.push_back(toAdd);
+}
+
+Agent *Location::removeSusceptibleAgent(int index){//TODO stress test these as they could be very inificent
+    if(index < 0 || index >= (int)susceptible.size()) return NULL;
+    Agent *holder = susceptible.at(index);
+    susceptible.erase(susceptible.begin() + index);
+    return holder;
+}
+
+Agent *Location::removeInfectedAgent(int index){
+    if(index < 0 || index >= (int)infected.size()) return NULL;
+    Agent *holder = infected.at(index);
+    infected.erase(infected.begin() + index);
+    return holder;
+}
+
+Agent *Location::getSusceptibleAgentAt(int index){
+    if(index < 0 || index >= (int)susceptible.size()) return NULL;
+    return susceptible.at(index);
+}
+
+Agent *Location::getInfectedAgentAt(int index){
+    if(index < 0 || index >= (int)susceptible.size()) return NULL;
+    return infected.at(index);
 }
