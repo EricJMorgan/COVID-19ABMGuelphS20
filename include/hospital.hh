@@ -24,10 +24,10 @@ using namespace std;
 //Declare simulation class
 class Hospital {
     private:
-    int totalBedCount = 130;
-    int icuBedCount = 22;
-    int numberPpl;
-    int icuCount;
+    static int totalBedCount; //excluding ICU beds
+    static int icuBedCount;   //total ICU beds
+    int numberPpl;            //excluding ICU patients
+    int icuCount;             //total ICU patients
 
     public:
     /**
