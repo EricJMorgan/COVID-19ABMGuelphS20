@@ -48,7 +48,8 @@ class GeographicalRisk {
 
     private:
     void updateAvgCountsAndRisk();
-    int avgSymptomaticCarriers;
+    double avgSymptomaticCarriers;
+    double avgAsymptomatic;
     double avgMaskWearer;
     double avgHygiene;
     int socialDistancingSeverity; // user input
