@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 16/07/20
- * ver 0.05
+ * ver 0.06
  * 
  * This is the source code for the postalCodeHash object for the COVID-19 eABM
  ***************/
@@ -37,7 +37,7 @@ PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int has
     toParse = openFile(evenMoreLocations);
     if(toParse.is_open()){
         while(getline(toParse, holder)){
-            placePostalInHash(holder, hashSize);
+            placePostalInHash(holder, "residential", hashSize);
         }
         toParse.close();
     }
@@ -93,33 +93,6 @@ ifstream PostalCodeHash::openFile(string fileName){
     return fileHolder;
 }
 
-
-void PostalCodeHash::placePostalInHash(string newPostalCode, int hashSize){
-    int currHashValue;
-    bool placed;
-    string newGroupedPostalCode;
-    if(newPostalCode.compare("unknown") == 0);
-    else{
-        newGroupedPostalCode = getFirstFiveChars(newPostalCode);
-        currHashValue = PostalCodeHash::getPostalHash(hashSize, newGroupedPostalCode);
-        placed = false;
-            while(placed == false){
-            if(hashTable[currHashValue].getPostalCodeGrouping().compare("") == 0){//If the bucket is empty
-                hashTable[currHashValue].setPostalCodeGrouping(newGroupedPostalCode);
-                hashTable[currHashValue].addPostalCodeToList(newPostalCode);
-                placed = true;
-            }else if(hashTable[currHashValue].getPostalCodeGrouping().compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping 
-                hashTable[currHashValue].addPostalCodeToList(newPostalCode);
-                placed = true;
-            }else{//If occupied by a differnt postal code grouping  go to the next one
-                if(currHashValue == hashSize - 1) currHashValue = 0;
-                else currHashValue++;
-            }
-        }
-    }
-}
-
-
 void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName, int hashSize){
     int currHashValue;
     bool placed;
@@ -132,11 +105,15 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
             while(placed == false){
             if(hashTable[currHashValue].getPostalCodeGrouping().compare("") == 0){//If the bucket is empty
                 hashTable[currHashValue].setPostalCodeGrouping(newGroupedPostalCode);
-                hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
                 hashTable[currHashValue].addPostalCodeToList(newPostalCode);
+                if((locationName.compare("residential") == 0 && !hashTable[currHashValue].postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
+                     hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
+                }
                 placed = true;
             }else if(hashTable[currHashValue].getPostalCodeGrouping().compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping
-                hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
+                if((locationName.compare("residential") == 0 && !hashTable[currHashValue].postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
+                    hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
+                }
                 hashTable[currHashValue].addPostalCodeToList(newPostalCode);
                 placed = true;
             }else{//If occupied by a differnt postal code grouping go to the next one

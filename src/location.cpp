@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 16/07/20
- * ver 0.03
+ * 17/07/20
+ * ver 0.05
  * 
  * This is the class file for the location class
  ***************/
@@ -11,11 +11,10 @@
 #include <iostream>
 
 
-
 // Constructor
 Location::Location() {
     postalCodeGrouping = "";
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < LOCATIONTYPESIZE; i++){
         locationCount[i] = 0;
     }
     population = 0;
@@ -23,25 +22,19 @@ Location::Location() {
     avgTimeSpent = 0;
     avgAgentInteraction = 0;
     transportaionRoutesFromLocation = NULL;
-    isResidential = true;
 }
 
-Location::Location(string newPostalCode, int shopData[9]){
+Location::Location(string newPostalCode, int shopData[LOCATIONTYPESIZE]){
     postalCodeGrouping = newPostalCode;
-    isResidential = true;
     for(int i = 0; i < 9; i++){
         locationCount[i] = shopData[i];
-        if(shopData[i] != 0) isResidential = false;
+        //if(shopData[i] != 0) isResidential = false;
     }
     population = 0;
     pplDensity = 0;
     avgTimeSpent = 0;
     avgAgentInteraction = 0;
     transportaionRoutesFromLocation = NULL;
-}
-
-bool Location::getIsResidential(){
-    return isResidential;
 }
 
 void Location::setPostalCodeGrouping(string newPostalCodeGrouping){
@@ -53,17 +46,13 @@ string Location::getPostalCodeGrouping(){
 }
 
 void Location::increaseLocationCountAt(int index){
-    if(index < 0 || index > 8) return;
+    if(index < 0 || index > LOCATIONTYPESIZE) return;
     locationCount[index]++;
-    isResidential = false;
+    //isResidential = false;
 }
 
 void Location::increaseLocationCountAt(condenseLocationType index){
     increaseLocationCountAt((int)index);
-}
-
-int Location::getLocationCountAt(condenseLocationType index){
-    return getLocationCountAt((int)index);
 }
 
 void Location::addPostalCodeToList(string postalCode){
@@ -95,4 +84,46 @@ vector<Agent *> Location::getInfected(){
 
 bool Location::postalCodeListContainsDup(string newPostalCode){
     return std::find(postalCodes.begin(), postalCodes.end(), newPostalCode) != postalCodes.end();
+}
+
+void Location::addAgentToSusceptible(Agent *toAdd){
+    if(toAdd == NULL) return;
+    susceptible.push_back(toAdd);
+}
+
+void Location::addAgentToInfected(Agent *toAdd){
+    if(toAdd == NULL) return;
+    infected.push_back(toAdd);
+}
+
+Agent *Location::removeSusceptibleAgent(int index){//TODO stress test these as they could be very inificent
+    if(index < 0 || index >= (int)susceptible.size()) return NULL;
+    Agent *holder = susceptible.at(index);
+    susceptible.erase(susceptible.begin() + index);
+    return holder;
+}
+
+Agent *Location::removeInfectedAgent(int index){
+    if(index < 0 || index >= (int)infected.size()) return NULL;
+    Agent *holder = infected.at(index);
+    infected.erase(infected.begin() + index);
+    return holder;
+}
+
+Agent *Location::getSusceptibleAgentAt(int index){
+    if(index < 0 || index >= (int)susceptible.size()) return NULL;
+    return susceptible.at(index);
+}
+
+Agent *Location::getInfectedAgentAt(int index){
+    if(index < 0 || index >= (int)susceptible.size()) return NULL;
+    return infected.at(index);
+}
+
+int Location::getSusceptibleSize(){
+    return (int)susceptible.size();
+}
+
+int Location::getInfectedSize(){
+    return (int)susceptible.size();
 }
