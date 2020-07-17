@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 16/07/20
- * ver 0.06
+ * ver 0.07
  * 
  * This is the header file for the location class
  ***************/
@@ -21,7 +21,9 @@
 #include "geographicalrisk.hh"
 
 using namespace std;
-enum condenseLocationType {GENSTORE, TRANSPORT, SCHOOL, PARKSANDREC, SERVICES, ENTERTAINMENT, HEALTH, PLACEOFWORSHIP, UNNEEDED};
+#define LOCATIONTYPESIZE 10
+
+enum condenseLocationType {GENSTORE, TRANSPORT, SCHOOL, PARKSANDREC, SERVICES, ENTERTAINMENT, HEALTH, PLACEOFWORSHIP, UNNEEDED, RESIDENTIAL};
 
 static std::map<std::string, condenseLocationType> locationTypeMap = boost::assign::map_list_of("accounting", SERVICES)("airport", TRANSPORT)("amusement_park", PARKSANDREC)
 ("aquarium", ENTERTAINMENT)("art_gallery", ENTERTAINMENT)("atm", UNNEEDED)("bakery", GENSTORE)("bank", SERVICES)("bar", ENTERTAINMENT)("beauty_salon", SERVICES)("bicycle_store", GENSTORE)
@@ -38,8 +40,8 @@ static std::map<std::string, condenseLocationType> locationTypeMap = boost::assi
 ("real_estate_agency", SERVICES)("restaurant", ENTERTAINMENT)("roofing_contractor", SERVICES)("rv_park", PARKSANDREC)("school", SCHOOL)
 ("secondary_school", SCHOOL)("shoe_store", GENSTORE)("shopping_mall", ENTERTAINMENT)("spa", HEALTH)("stadium", ENTERTAINMENT)("storage", SERVICES)
 ("store", GENSTORE)("subway_station", TRANSPORT)("supermarket", GENSTORE)("synagogue", PLACEOFWORSHIP)("taxi_stand", TRANSPORT)("tourist_attraction", ENTERTAINMENT)
-("train_station", TRANSPORT)("transit_station", TRANSPORT)("travel_agency", SERVICES)("university", SCHOOL)("veterinary_care", SERVICES)
-("zoo", ENTERTAINMENT);
+("train_station", TRANSPORT)("transit_station", TRANSPORT)("travel_agency", SERVICES)("university", SCHOOL)("veterinary_care", SERVICES)("zoo", ENTERTAINMENT)
+("residential", RESIDENTIAL);
 
 
 //Forward declarations
@@ -63,7 +65,7 @@ class Location {
      * @param postalCode, a string of the postalCode
      * @param shopData, an array of size 9 of ints that holds each type of shop based on the enum condenseLocationType
      */
-    Location(string postalCode, int shopData[9]);
+    Location(string postalCode, int shopData[LOCATIONTYPESIZE]);
 
     /**
      * getPopulation
@@ -93,17 +95,6 @@ class Location {
     std::vector<Agent *> getInfected();
 
     /**
-     * getIsResidential
-     * 
-     * This function gets the bool value of if a location
-     * is residential. For now residential is defined as a postal code grouping
-     * that contains no locations (the location count array is empty)
-     * 
-     * @return true if it is residential false if its not
-     */
-    bool getIsResidential();
-
-    /**
      * setPostalCodeGrouping
      * 
      * This function sets a locations grouping string. For now this
@@ -129,7 +120,7 @@ class Location {
      * This function will take a index of the wanted location
      * index in the locationCount array and increment it by one
      * 
-     * @param index, must be in range 0 <= index <= 8
+     * @param index, must be in range 0 <= index < LOCATIONTYPESIZE
      */
     void increaseLocationCountAt(int index);
 
@@ -139,7 +130,7 @@ class Location {
      * This function will take a index of the wanted location
      * index in the locationCount array and increment it by one
      * 
-     * @param index, must be in range 0 <= index <= 8
+     * @param index, must be in range 0 <= index < LOCATIONTYPESIZE
      */
     void increaseLocationCountAt(condenseLocationType index);
 
@@ -160,7 +151,7 @@ class Location {
      * This function will take in a index and return how many of
      * the specified location index
      * 
-     * @param index, must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
+     * @param index, must be in range 0 <= index < LOCATIONTYPESIZE Refer to condenseLocationType enum for which index you want
      * @return a int of the amount of the specified shops in a location
      */
     int getLocationCountAt(condenseLocationType index);
@@ -194,20 +185,6 @@ class Location {
      * @return the string of the postal code at the index
      */
     string getPostalCodeAt(int index);
-    
-    private:
-    int population;
-    int pplDensity;
-    int avgTimeSpent;
-    int avgAgentInteraction;
-    bool isResidential;
-    Transportation* transportaionRoutesFromLocation;
-    SIRtotals sirTotalLocation;
-    string postalCodeGrouping;
-    int locationCount[9];
-    std::vector<string> postalCodes;
-    std::vector<Agent *> susceptible;
-    std::vector<Agent *> infected;
 
     /**
      * postalCodeListContainsDup
@@ -220,6 +197,19 @@ class Location {
      * @return a bool true if it contains a dup false if it dosent
      */
     bool postalCodeListContainsDup(string newPostalCode);
+    
+    private:
+    int population;
+    int pplDensity;
+    int avgTimeSpent;
+    int avgAgentInteraction;
+    Transportation* transportaionRoutesFromLocation;
+    SIRtotals sirTotalLocation;
+    string postalCodeGrouping;
+    int locationCount[LOCATIONTYPESIZE];
+    std::vector<string> postalCodes;
+    std::vector<Agent *> susceptible;
+    std::vector<Agent *> infected;
 };
 
 #endif
