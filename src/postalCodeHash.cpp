@@ -105,7 +105,6 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
             while(placed == false){
             if(hashTable[currHashValue].getPostalCodeGrouping().compare("") == 0){//If the bucket is empty
                 hashTable[currHashValue].setPostalCodeGrouping(newGroupedPostalCode);
-                //hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
                 hashTable[currHashValue].addPostalCodeToList(newPostalCode);
                 if((locationName.compare("residential") == 0 && !hashTable[currHashValue].postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
                      hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
