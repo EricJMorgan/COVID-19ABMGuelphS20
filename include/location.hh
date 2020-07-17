@@ -262,6 +262,24 @@ class Location {
      */
     Agent *getInfectedAgentAt(int index);
 
+    /**
+     * getSusceptibleSize
+     * 
+     * This returns the size of the Susceptible vector
+     * 
+     * @return size of sus vector
+     */
+    int getSusceptibleSize();
+
+    /**
+     * getInfectedSize
+     * 
+     * This returns the size of the infected vector
+     * 
+     * @return size of infected vector
+     */
+    int getInfectedSize();
+
 
     private:
     int population;
