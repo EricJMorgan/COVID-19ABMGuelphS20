@@ -10,9 +10,6 @@
 #include <iostream>
 #include "hospital.hh"
 
-int Hospital::totalBedCount = 130;
-int Hospital::icuBedCount = 22;
-
 // Constructor
 Hospital::Hospital() {
     numberPpl = 0;
