@@ -8,12 +8,19 @@
 
 
 #include <iostream>
+#include <time.h>
+// should be the only thing included after finished
 #include "simulation.hh"
+
+//testing
 #include "postalCodeHash.hh"
 #include "agent.hh"
 #include "transportation.hh"//TODO REMOVE THIS AND MOVE ALL CALLS INTO SIMULATION
 
+
 int main(){
+
+    srand((unsigned int)time(NULL));
 
     //Simulation sim = Simulation("demographicGuelph.csv");
     // for(int i = 0; i < 131805; i++){
@@ -37,6 +44,18 @@ int main(){
 
     Simulation sim = Simulation("demographicGuelph.csv");//TODO MOVE THIS ALL INTO THIS CONSTRUCTOR
 
+    // testing SIR Model
+    // Agent* tempAgent = new Agent(AgentInfoMap["Male 20-24"]);
+    // cout << tempAgent->DetermineSeverity() << endl;
+    // tempAgent->AgentInfected();
+    // while (tempAgent->DetermineSeverity() != RECOVERED && tempAgent->DetermineSeverity() != DECEASED) {
+        // cout << tempAgent->DetermineSeverity() << "yesirr" << endl;
+    //     tempAgent->SIRTimeStep(1);
+    // }
+
+    // cout << tempAgent->DetermineSeverity() << endl;
+
+    // free(tempAgent);
     
     return 0;
 }

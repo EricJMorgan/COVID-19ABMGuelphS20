@@ -60,9 +60,8 @@ class SIR {
      * This infects an Agent with the COVID19 virus. The function decides the severity of the case and whether
      * the case will be fatal or not. 
      * 
-     * @param info, the enum of the gender/Age based on the AgentInfo enum
      */
-    void AgentInfected(AgentInfo info);
+    void AgentInfected();
 
     /**
      * SIRTimeStep
@@ -83,6 +82,7 @@ class SIR {
      */
     SIRSeverity DetermineSeverity();
 
+    AgentInfo info;
     bool getSymptoms();
 
     private:

@@ -79,7 +79,7 @@ void GeographicalRisk::infectPeople() {
         double agentInfectionChance = (double) rand()/RAND_MAX;
 
         if (currentAgents[i].DetermineSeverity() == 0 && agentInfectionChance < chanceOfInfection) {
-            currentAgents[i].AgentInfected(currentAgents[i].getAgentInfo());
+            currentAgents[i].AgentInfected();
         }
     }
 }
