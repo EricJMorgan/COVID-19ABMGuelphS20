@@ -84,6 +84,10 @@ class Agent : public SIR {
     void goodHygiene();
     void followWearMask();
     void followSocialDistancing();
+
+    bool agentHygiene;
+    bool socialDistancing;
+    bool wearingMask;
     
 
     private:
@@ -96,9 +100,6 @@ class Agent : public SIR {
     string major;
     bool employment;
     string sector;
-    bool hygiene;
-    bool socialDistancing;
-    bool wearingMask;
     Location* currLocation;
 
     /**
