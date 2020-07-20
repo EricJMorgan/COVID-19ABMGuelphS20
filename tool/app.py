@@ -14,6 +14,11 @@ app = dash.Dash(__name__)
 server = app.server
 #app.config.suppress_callback_exceptions = True
 
+text_style = {
+    'color': "#FCDE9C",
+    'font-family': 'Open Sans'
+}
+
 def header():
     return html.Div(
         [
@@ -21,6 +26,7 @@ def header():
             html.H2("COVID-19 Simulation in Guelph"),
         ],
         className = "header__title",
+
     )
 
 #Dash App Layout
