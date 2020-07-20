@@ -41,15 +41,18 @@ int main(){
     //     }
     // }
 
-    Agent* tempAgent = new Agent(AgentInfoMap["Male 20-24"]);
-    cout << tempAgent->DetermineSeverity() << endl;
-    tempAgent->AgentInfected();
-    while (tempAgent->DetermineSeverity() != RECOVERED && tempAgent->DetermineSeverity() != DECEASED) {
-        cout << tempAgent->DetermineSeverity() << endl;
-        tempAgent->SIRTimeStep(1);
-    }
+    // testing SIR Model
+    // Agent* tempAgent = new Agent(AgentInfoMap["Male 20-24"]);
+    // cout << tempAgent->DetermineSeverity() << endl;
+    // tempAgent->AgentInfected();
+    // while (tempAgent->DetermineSeverity() != RECOVERED && tempAgent->DetermineSeverity() != DECEASED) {
+        // cout << tempAgent->DetermineSeverity() << "yesirr" << endl;
+    //     tempAgent->SIRTimeStep(1);
+    // }
 
-    free(tempAgent);
+    // cout << tempAgent->DetermineSeverity() << endl;
+
+    // free(tempAgent);
     
     return 0;
 }

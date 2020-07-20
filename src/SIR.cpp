@@ -12,7 +12,6 @@
 
 // Constructor
 SIR::SIR() {
-    cout << "lol";
     currentSeverity = SUSCEPTIBLE;
 }
 
@@ -39,9 +38,8 @@ void SIR::SIRTimeStep(double timeStep) {
     }
     
     // incubating stage (infect other ppl?)
-    if (isIncubating && showsSymptoms) {
+    if (isIncubating) {
         incubationPeriod -= timeStep;
-        cout << incubationPeriod << endl;
 
         if (incubationPeriod <= 0) {
             QuarantineAgent();
@@ -88,19 +86,18 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
         timeTilHospital = 7;
         timeTilICU = 3;
         timeTilDeath = 5;
-        cout << "Fatal case";
       // if the case is not fatal decide path to recovery
     } else {
         fatalCase = false;
 
         double randomNumber = (double) rand()/RAND_MAX;
+
         // case is asymptomatic
         if (randomNumber < 0.45) {
             showsSymptoms = false;
             needHospital = false;
             needIcu = false;
             timeTilRecovery = 14;
-            cout << "Asymptomatic case";
           // case requires hospitilzation
         } else if (randomNumber >= 0.45 && randomNumber <= 0.65) {
             showsSymptoms = true;
@@ -108,21 +105,19 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
             timeTilHospital = 7;
 
             double icuNeeded = (double) rand()/RAND_MAX;
+
             // case requires icu
             if (icuNeeded < 0.2) {
                 needIcu = true;
                 timeTilICU = 3;
                 timeTilRecovery = 26;
-                cout << "ICU case";
               // case requires general ward hospital
             } else {
                 needIcu = false;
                 timeTilRecovery = 10;
-                cout << "General ward case";
             }
           // case requires no hospital but shows symptoms
         } else {
-            cout << "Isolation case";
             showsSymptoms = true;
             needHospital = false;
             needIcu = false;
@@ -139,10 +134,9 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
 void SIR::AgentInfected() {
     currentSeverity = INFECTED;
     isIncubating = true;
-    incubationPeriod = std::rand()%7 + std::rand()%7 + 1;
+    incubationPeriod = rand()%7 + rand()%7 + 1;
 
-    // double randomDeathSentence = (double) rand()/RAND_MAX;
-    double randomDeathSentence = 0.001;
+    double randomDeathSentence = (double) rand()/RAND_MAX;
 
     // based on worldometer death rates for each age group
     if(MALE0TO4 == info || MALE5TO9 == info || FEMALE0TO4 == info || FEMALE5TO9 == info) {
@@ -150,7 +144,6 @@ void SIR::AgentInfected() {
     } else if (MALE10TO14 == info || MALE15TO19 == info || FEMALE10TO14 == info || FEMALE15TO19 == info) {
         DecideSIRCase(randomDeathSentence, 0.002);
     } else if (MALE20TO24 == info || MALE25TO29 == info || FEMALE20TO24 == info || FEMALE25TO29 == info) {
-        cout << randomDeathSentence << endl;
         DecideSIRCase(randomDeathSentence, 0.002);
     } else if (MALE30TO34 == info || MALE35TO39 == info || FEMALE30TO34 == info || FEMALE35TO39 == info) {
         DecideSIRCase(randomDeathSentence, 0.002);
