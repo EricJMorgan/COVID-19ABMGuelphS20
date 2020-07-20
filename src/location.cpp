@@ -11,7 +11,6 @@
 #include <iostream>
 
 
-
 // Constructor
 Location::Location() {
     postalCodeGrouping = "";
@@ -54,15 +53,6 @@ void Location::increaseLocationCountAt(int index){
 
 void Location::increaseLocationCountAt(condenseLocationType index){
     increaseLocationCountAt((int)index);
-}
-
-int Location::getLocationCountAt(int index){
-    if(index < 0 || index > LOCATIONTYPESIZE) return -1;
-    return locationCount[index];
-}
-
-int Location::getLocationCountAt(condenseLocationType index){
-    return getLocationCountAt((int)index);
 }
 
 void Location::addPostalCodeToList(string postalCode){

@@ -186,6 +186,7 @@ void SIR::PlaceAgentInICU() {
 
 void SIR::RecoverAgent() {
     currentSeverity = RECOVERED;
+    showsSymptoms = false;
 } 
 
 void SIR::AgentDeceased() {
@@ -199,4 +200,8 @@ void SIR::AgentDeceased() {
  ************************/
 SIRSeverity SIR::DetermineSeverity() {
     return currentSeverity;
+}
+
+bool SIR::getSymptoms() {
+    return showsSymptoms;
 }
