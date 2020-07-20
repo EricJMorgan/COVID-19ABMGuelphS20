@@ -66,5 +66,6 @@
         "__locale": "cpp",
         "__string": "cpp",
         "filesystem": "cpp"
-    }
+    },
+    "python.pythonPath": "venv\\Scripts\\python.exe"
 }
