@@ -9,6 +9,7 @@
 
 #include "simulation.hh"
 #include "agent.hh"
+#include "transportation.hh"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -44,6 +45,8 @@ Simulation::Simulation(string fileName) {
     population = arraySize;
 
     setUpAgents(fileName);
+
+    locationInfo = new Transportation(simAgents, population);
     
 
 }
@@ -53,6 +56,7 @@ Simulation::~Simulation(){
         delete simAgents[i];
     }
     delete[] simAgents;
+    delete locationInfo;
 }
 
 /*************************

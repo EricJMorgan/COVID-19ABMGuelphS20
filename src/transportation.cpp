@@ -13,15 +13,21 @@
 
 using namespace std;
 
-Transportation::Transportation(){
+Transportation::Transportation(Agent **arr, int arrSize){
     postalCodes = new PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
     for(int i = 0; i < 7000; i++){
         if(postalCodes->hashTable[i].getPostalCodeGrouping().compare("") != 0){
             locationList.push_back(postalCodes->hashTable[i]);
         }
     }
+    for(int i = 0; i < arrSize; i++){
+        //cout << arr[i]->DetermineSeverity() << endl;
+    }
 
+}
 
+Transportation::~Transportation(){
+    delete postalCodes;
 }
 
 int Transportation::getLocationListLength(){

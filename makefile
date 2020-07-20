@@ -55,7 +55,7 @@ run:
 	$(BINDIR)abmSim
 
 memtest:
-	valgrind --leak-check=full $(BINDIR)abmSim
+	valgrind --leak-check=full -s $(BINDIR)abmSim
 
 clean:
 	rm $(OBJECTS) $(BINDIR)abmSim

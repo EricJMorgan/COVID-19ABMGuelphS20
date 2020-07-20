@@ -35,10 +35,8 @@ int main(){
     //     }
     // }
 
-    Transportation transportation = Transportation();
-    for(int i = 0; i < transportation.getLocationListLength(); i++){
-        cout << transportation.getLocationAt(i).getPostalCodeGrouping() << endl;
-    }
+    Simulation sim = Simulation("demographicGuelph.csv");//TODO MOVE THIS ALL INTO THIS CONSTRUCTOR
+
     
     return 0;
 }
