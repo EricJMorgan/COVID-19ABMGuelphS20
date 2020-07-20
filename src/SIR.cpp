@@ -12,6 +12,7 @@
 
 // Constructor
 SIR::SIR() {
+    cout << "lol";
     currentSeverity = SUSCEPTIBLE;
 }
 
@@ -140,7 +141,8 @@ void SIR::AgentInfected() {
     isIncubating = true;
     incubationPeriod = std::rand()%7 + std::rand()%7 + 1;
 
-    double randomDeathSentence = (double) rand()/RAND_MAX;
+    // double randomDeathSentence = (double) rand()/RAND_MAX;
+    double randomDeathSentence = 0.001;
 
     // based on worldometer death rates for each age group
     if(MALE0TO4 == info || MALE5TO9 == info || FEMALE0TO4 == info || FEMALE5TO9 == info) {

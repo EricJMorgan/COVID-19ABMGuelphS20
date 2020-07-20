@@ -42,8 +42,10 @@ int main(){
     // }
 
     Agent* tempAgent = new Agent(AgentInfoMap["Male 20-24"]);
+    cout << tempAgent->DetermineSeverity() << endl;
     tempAgent->AgentInfected();
     while (tempAgent->DetermineSeverity() != RECOVERED && tempAgent->DetermineSeverity() != DECEASED) {
+        cout << tempAgent->DetermineSeverity() << endl;
         tempAgent->SIRTimeStep(1);
     }
 

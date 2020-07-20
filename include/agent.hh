@@ -41,6 +41,7 @@ class Agent : public SIR {
     string getEthnicity();
     string agentToString();
 
+
     /**
      * Agent
      * 

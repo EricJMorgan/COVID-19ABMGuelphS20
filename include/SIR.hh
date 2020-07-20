@@ -83,6 +83,7 @@ class SIR {
     SIRSeverity DetermineSeverity();
 
     AgentInfo info;
+    bool getSymptoms();
 
     private:
     // current state
