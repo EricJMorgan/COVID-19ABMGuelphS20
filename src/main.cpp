@@ -13,7 +13,6 @@
 //testing
 #include "postalCodeHash.hh"
 #include "agent.hh"
-#include "transportation.hh"//TODO REMOVE THIS AND MOVE ALL CALLS INTO SIMULATION
 
 
 int main(){
@@ -40,7 +39,7 @@ int main(){
     //     }
     // }
 
-    Simulation sim = Simulation("demographicGuelph.csv");//TODO MOVE THIS ALL INTO THIS CONSTRUCTOR
+    Simulation sim = Simulation("demographicGuelph.csv");
 
     // testing SIR Model
     // Agent* tempAgent = new Agent(AgentInfoMap["Male 20-24"]);

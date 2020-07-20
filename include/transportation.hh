@@ -20,12 +20,6 @@
 
 using namespace std;
 
-//Forward declarations
-// class Location;
-// class Agent;
-//sclass Simulation;
-//class PostalCodeHash;
-
 //Declare simulation class
 class Transportation {
     public:
