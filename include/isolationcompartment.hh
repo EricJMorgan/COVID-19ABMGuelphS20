@@ -22,7 +22,7 @@ class Agent;
 //Declare simulation class
 class IsolationCompartment {
     private:
-    Agent* agents;
+    std::vector<Agent *> isolated;
 
     public:
     /**
@@ -53,7 +53,7 @@ class IsolationCompartment {
      * 
      * This function quarantines/isolates agents that have mild symptoms
      */
-    void AddMildlyInfectedAgents();
+    void AddMildlyInfectedAgents(Agent *toIsolate);
 };
 
 #endif

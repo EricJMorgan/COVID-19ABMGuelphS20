@@ -12,13 +12,18 @@
 
 // Constructor
 IsolationCompartment::IsolationCompartment() {
-    //
+    //Nothing to construct...
+}
+
+vector<Agent *> IsolationCompartment::isolatedAgents() {
+    return isolated;
 }
 
 void IsolationCompartment::ReleaseRecoveredAgents() {
 
 }
 
-void IsolationCompartment::AddMildlyInfectedAgents() {
-
+void IsolationCompartment::AddMildlyInfectedAgents(Agent *toIsolate) {
+    if(toIsolate == NULL) return;
+    isolated.push_back(toIsolate);
 }
