@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 16/07/20
- * ver 0.06
+ * 20/07/20
+ * ver 0.07
  * 
  * This is the main for the COVID-19 eABM
  ***************/
@@ -38,6 +38,8 @@ int main(){
     //         cout << endl << endl;
     //     }
     // }
+
+    Simulation sim = Simulation("demographicGuelph.csv");
 
     // testing SIR Model
     // Agent* tempAgent = new Agent(AgentInfoMap["Male 20-24"]);

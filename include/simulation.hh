@@ -14,6 +14,7 @@
 #include <iostream>
 #include <vector>
 #include "SIRtotals.hh"
+#include "transportation.hh"
 
 using namespace std;
 
@@ -51,6 +52,7 @@ class Simulation {
     Agent getAgentAt(int index);
     SIRtotals totalSimSIRStats;
     int getPopulation();
+    Transportation *locationInfo = NULL;
 };
 
 
