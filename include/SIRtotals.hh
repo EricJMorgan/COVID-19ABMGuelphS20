@@ -19,13 +19,33 @@ using namespace std;
 //Declare simulation class
 class SIRtotals {
     private:
+    // for general SIR 
     int susceptible;
     int infected;
-    Agent* simAgents;
+    int recovered;
+    int deceased;
+
+    // for geographic risk
+    int maskWearer;
+    int hygiene;
+    int socialDistance;
+    int maleCount;
+    int showsSymptoms;
 
     public:
     SIRtotals();
-    void updateTotals(int population);
+    void updateTotals(int population, Agent* simAgents);
+
+    int getSusceptible();
+    int getInfected();
+    int getRecovered();
+    int getDeceased();
+    int getMaskWearer();
+    int getHygiene();
+    int getSocialDistance();
+    int getAvgAgentAge();
+    int getMaleCount();
+    int getShowsSymptoms();
 };
 
 
