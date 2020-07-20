@@ -20,8 +20,8 @@ vector<Agent *> IsolationCompartment::isolatedAgents() {
 }
 
 void IsolationCompartment::ReleaseRecoveredAgents(int index) {
-    if(index < 0 || index >= (int)isolated.size()) return NULL;
-    isolated.erase(isolated.begin() + index);
+    if(index < 0 || index >= (int)isolated.size());
+    isolated.erase(isolated.begin(), isolated.begin() + index);
     //Should this function return the agent to be removed from the isolated vector?
 }
 
