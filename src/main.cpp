@@ -9,9 +9,7 @@
 
 #include <iostream>
 #include <time.h>
-// should be the only thing included after finished
 #include "simulation.hh"
-
 //testing
 #include "postalCodeHash.hh"
 #include "agent.hh"
