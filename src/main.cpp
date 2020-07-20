@@ -43,7 +43,9 @@ int main(){
 
     Agent* tempAgent = new Agent(AgentInfoMap["Male 20-24"]);
     tempAgent->AgentInfected();
-    tempAgent->SIRTimeStep(1);
+    while (tempAgent->DetermineSeverity() != RECOVERED && tempAgent->DetermineSeverity() != DECEASED) {
+        tempAgent->SIRTimeStep(1);
+    }
 
     free(tempAgent);
     

@@ -40,6 +40,7 @@ void SIR::SIRTimeStep(double timeStep) {
     // incubating stage (infect other ppl?)
     if (isIncubating && showsSymptoms) {
         incubationPeriod -= timeStep;
+        cout << incubationPeriod << endl;
 
         if (incubationPeriod <= 0) {
             QuarantineAgent();
