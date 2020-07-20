@@ -33,6 +33,10 @@ SIR::SIR() {
  * This progresses agents through their various SIR model paths.
  ************************/
 void SIR::SIRTimeStep(double timeStep) {
+    if (currentSeverity == SUSCEPTIBLE || currentSeverity == RECOVERED || currentSeverity == DECEASED) {
+        return;
+    }
+    
     // incubating stage (infect other ppl?)
     if (isIncubating && showsSymptoms) {
         incubationPeriod -= timeStep;
@@ -82,6 +86,7 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
         timeTilHospital = 7;
         timeTilICU = 3;
         timeTilDeath = 5;
+        cout << "Fatal case";
       // if the case is not fatal decide path to recovery
     } else {
         fatalCase = false;
@@ -93,6 +98,7 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
             needHospital = false;
             needIcu = false;
             timeTilRecovery = 14;
+            cout << "Asymptomatic case";
           // case requires hospitilzation
         } else if (randomNumber >= 0.45 && randomNumber <= 0.65) {
             showsSymptoms = true;
@@ -101,17 +107,20 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
 
             double icuNeeded = (double) rand()/RAND_MAX;
             // case requires icu
-            if (icuNeeded < 0.06) {
+            if (icuNeeded < 0.2) {
                 needIcu = true;
                 timeTilICU = 3;
                 timeTilRecovery = 26;
+                cout << "ICU case";
               // case requires general ward hospital
             } else {
                 needIcu = false;
                 timeTilRecovery = 10;
+                cout << "General ward case";
             }
           // case requires no hospital but shows symptoms
         } else {
+            cout << "Isolation case";
             showsSymptoms = true;
             needHospital = false;
             needIcu = false;
@@ -125,7 +134,7 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
  * 
  * Infect the agent and decide their path through the SIR model.
  ************************/
-void SIR::AgentInfected(AgentInfo info) {
+void SIR::AgentInfected() {
     currentSeverity = INFECTED;
     isIncubating = true;
     incubationPeriod = std::rand()%7 + std::rand()%7 + 1;
@@ -138,6 +147,7 @@ void SIR::AgentInfected(AgentInfo info) {
     } else if (MALE10TO14 == info || MALE15TO19 == info || FEMALE10TO14 == info || FEMALE15TO19 == info) {
         DecideSIRCase(randomDeathSentence, 0.002);
     } else if (MALE20TO24 == info || MALE25TO29 == info || FEMALE20TO24 == info || FEMALE25TO29 == info) {
+        cout << randomDeathSentence << endl;
         DecideSIRCase(randomDeathSentence, 0.002);
     } else if (MALE30TO34 == info || MALE35TO39 == info || FEMALE30TO34 == info || FEMALE35TO39 == info) {
         DecideSIRCase(randomDeathSentence, 0.002);

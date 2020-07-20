@@ -87,7 +87,6 @@ class Agent : public SIR {
     
 
     private:
-    AgentInfo info;
     HouseholdIncome income;
     string ethnicity;
     string maritalStatus;

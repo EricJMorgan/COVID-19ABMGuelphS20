@@ -41,7 +41,6 @@ class GeographicalRisk {
     int socialDistancingSeverity;
     bool socialDistancing;
     Location* avgLocationRisk;
-
 };
 
 #endif
