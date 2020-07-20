@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 17/07/20
- * ver 0.02
+ * 20/07/20
+ * ver 0.03
  * 
  * This is the class file for the geographical risk class
  ***************/
@@ -33,6 +33,8 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     } else {
         socialDistancing = (10.0 - (double)socialDistancingSeverity) / 10.0;
     }
+
+    cout << socialDistancing << endl;//TODO REMOVE THIS AND ADD IN GET SOCIAL DISTANCING METHOD
 
     // mask cuts risk by 65%
     double avgMaskWearerRisk = 0.45 * avgMaskWearer;
@@ -73,7 +75,7 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
 void GeographicalRisk::infectPeople() {
     updateAvgCountsAndRisk();
 
-    for (size_t i = 0; i < population; i++) {
+    for (int i = 0; i < population; i++) {
         double agentInfectionChance = (double) rand()/RAND_MAX;
 
         if (currentAgents[i].DetermineSeverity() == 0 && agentInfectionChance < chanceOfInfection) {

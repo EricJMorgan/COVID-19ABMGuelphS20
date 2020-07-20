@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 16/07/20
- * ver 0.06
+ * 20/07/20
+ * ver 0.07
  * 
  * This is the main for the COVID-19 eABM
  ***************/
@@ -11,6 +11,7 @@
 #include "simulation.hh"
 #include "postalCodeHash.hh"
 #include "agent.hh"
+#include "transportation.hh"//TODO REMOVE THIS AND MOVE ALL CALLS INTO SIMULATION
 
 int main(){
 
@@ -33,8 +34,11 @@ int main(){
     //         cout << endl << endl;
     //     }
     // }
-    
 
+    Transportation transportation = Transportation();
+    for(int i = 0; i < transportation.getLocationListLength(); i++){
+        cout << transportation.getLocationAt(i).getPostalCodeGrouping() << endl;
+    }
     
     return 0;
 }
