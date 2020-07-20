@@ -33,8 +33,12 @@ SIR::SIR() {
  * This progresses agents through their various SIR model paths.
  ************************/
 void SIR::SIRTimeStep(double timeStep) {
+    if (currentSeverity == SUSCEPTIBLE || currentSeverity == RECOVERED || currentSeverity == DECEASED) {
+        return;
+    }
+    
     // incubating stage (infect other ppl?)
-    if (isIncubating && showsSymptoms) {
+    if (isIncubating) {
         incubationPeriod -= timeStep;
 
         if (incubationPeriod <= 0) {
@@ -87,6 +91,7 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
         fatalCase = false;
 
         double randomNumber = (double) rand()/RAND_MAX;
+
         // case is asymptomatic
         if (randomNumber < 0.45) {
             showsSymptoms = false;
@@ -100,8 +105,9 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
             timeTilHospital = 7;
 
             double icuNeeded = (double) rand()/RAND_MAX;
+
             // case requires icu
-            if (icuNeeded < 0.06) {
+            if (icuNeeded < 0.2) {
                 needIcu = true;
                 timeTilICU = 3;
                 timeTilRecovery = 26;
@@ -125,10 +131,10 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
  * 
  * Infect the agent and decide their path through the SIR model.
  ************************/
-void SIR::AgentInfected(AgentInfo info) {
+void SIR::AgentInfected() {
     currentSeverity = INFECTED;
     isIncubating = true;
-    incubationPeriod = std::rand()%7 + std::rand()%7 + 1;
+    incubationPeriod = rand()%7 + rand()%7 + 1;
 
     double randomDeathSentence = (double) rand()/RAND_MAX;
 
