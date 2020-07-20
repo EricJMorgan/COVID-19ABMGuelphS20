@@ -19,10 +19,11 @@ vector<Agent *> IsolationCompartment::isolatedAgents() {
     return isolated;
 }
 
-void IsolationCompartment::ReleaseRecoveredAgents(int index) {
-    if(index < 0 || index >= (int)isolated.size());
+Agent *IsolationCompartment::ReleaseRecoveredAgents(int index) {
+    if(index < 0 || index >= (int)isolated.size()) return NULL;
+    Agent *toBeReleased = isolated.at(index);
     isolated.erase(isolated.begin(), isolated.begin() + index);
-    //Should this function return the agent to be removed from the isolated vector?
+    return toBeReleased;
 }
 
 void IsolationCompartment::AddMildlyInfectedAgents(Agent *toIsolate) {

@@ -46,7 +46,7 @@ class IsolationCompartment {
      * 
      * This function releases agents when they have recovered
      */
-    void ReleaseRecoveredAgents(int index);
+    Agent *ReleaseRecoveredAgents(int index);
 
     /**
      * AddMildlyInfectedAgents
