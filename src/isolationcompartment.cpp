@@ -14,3 +14,11 @@
 IsolationCompartment::IsolationCompartment() {
     //
 }
+
+void IsolationCompartment::ReleaseRecoveredAgents() {
+
+}
+
+void IsolationCompartment::AddMildlyInfectedAgents() {
+    
+}

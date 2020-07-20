@@ -8,11 +8,14 @@
 
 
 #include <iostream>
+#include <time.h>
 #include "simulation.hh"
 #include "postalCodeHash.hh"
 #include "agent.hh"
 
 int main(){
+
+    srand((unsigned int)time(NULL));
 
     //Simulation sim = Simulation("demographicGuelph.csv");
     // for(int i = 0; i < 131805; i++){
