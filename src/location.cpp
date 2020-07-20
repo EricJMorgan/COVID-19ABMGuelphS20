@@ -22,7 +22,6 @@ Location::Location() {
     pplDensity = 0;
     avgTimeSpent = 0;
     avgAgentInteraction = 0;
-    transportaionRoutesFromLocation = NULL;
 }
 
 Location::Location(string newPostalCode, int shopData[LOCATIONTYPESIZE]){
@@ -35,7 +34,6 @@ Location::Location(string newPostalCode, int shopData[LOCATIONTYPESIZE]){
     pplDensity = 0;
     avgTimeSpent = 0;
     avgAgentInteraction = 0;
-    transportaionRoutesFromLocation = NULL;
 }
 
 void Location::setPostalCodeGrouping(string newPostalCodeGrouping){

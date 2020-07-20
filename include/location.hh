@@ -17,7 +17,6 @@
 #include <boost/assign/list_of.hpp>
 #include <algorithm>
 #include "SIRtotals.hh"
-#include "transportation.hh"
 #include "geographicalrisk.hh"
 
 using namespace std;
@@ -286,7 +285,6 @@ class Location {
     int pplDensity;
     int avgTimeSpent;
     int avgAgentInteraction;
-    Transportation* transportaionRoutesFromLocation;
     SIRtotals sirTotalLocation;
     string postalCodeGrouping;
     int locationCount[LOCATIONTYPESIZE];

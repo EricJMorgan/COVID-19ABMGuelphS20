@@ -9,8 +9,26 @@
 
 #include "transportation.hh"
 #include <iostream>
+#include <string>
 
-// Constructor
-Transportation::Transportation() {
-    //
+using namespace std;
+
+Transportation::Transportation(){
+    postalCodes = new PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
+    for(int i = 0; i < 7000; i++){
+        if(postalCodes->hashTable[i].getPostalCodeGrouping().compare("") != 0){
+            locationList.push_back(postalCodes->hashTable[i]);
+        }
+    }
+
+
+}
+
+int Transportation::getLocationListLength(){
+    return (int)locationList.size();
+}
+
+Location Transportation::getLocationAt(int index){
+    if(index < 0 || index >= getLocationListLength()) return Location();
+    return locationList.at(index);
 }

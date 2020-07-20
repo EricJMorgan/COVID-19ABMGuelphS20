@@ -12,27 +12,30 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
+
+#include "postalCodeHash.hh"
 
 using namespace std;
 
-enum TransportType { BUS, CAR, WALK };
-
 //Forward declarations
-class Location;
-class Agent;
+// class Location;
+// class Agent;
+//sclass Simulation;
+//class PostalCodeHash;
 
 //Declare simulation class
 class Transportation {
-    private:
-    TransportType type;
-    Location* destination;
-    bool isStillInTransport;
-
     public:
     Transportation();
-    void selectBestPath();
-    void jumpCompartment();
-    void determineAgentDestination();
+    int getLocationListLength();
+    Location getLocationAt(int index);
+
+
+    private:
+    PostalCodeHash *postalCodes;
+    std::vector<Location> locationList;
+
 };
 
 
