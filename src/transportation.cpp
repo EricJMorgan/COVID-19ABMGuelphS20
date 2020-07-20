@@ -31,16 +31,6 @@ Transportation::Transportation(Agent **arr, int arrSize){
     for(int i = 0; i < arrSize; i++){
         locationList.at(distr(gen)).addAgentToSusceptible(arr[i]);
     }
-
-
-    int popTotal = 0;
-    for(int i = 0; i < getLocationListLength(); i++){
-        cout << locationList.at(i).getSusceptibleSize() << endl;
-        popTotal += locationList.at(i).getSusceptibleSize();
-    }
-
-    cout << "******" << popTotal << "******" << endl;
-
 }
 
 Transportation::~Transportation(){
