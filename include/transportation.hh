@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 06/07/20
- * ver 0.02
+ * 20/07/20
+ * ver 0.03
  * 
  * This is the header file for the transportation class
  ***************/
@@ -13,6 +13,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <random>
 
 #include "postalCodeHash.hh"
 #include "agent.hh"
@@ -31,12 +32,20 @@ class Transportation {
     /**
      * Transportation
      * 
-     * This is the default constructor for the Transportation
-     * class
+     * This is the constructor for the Transportation class
+     * it takes in an array of agent pointers and the size of said array
      * 
+     * 
+     * @param **arr, and array of agent pointers
+     * @param arrSize, the size of the array
      */
     Transportation(Agent **arr, int arrSize);
 
+    /**
+     * ~Transportation
+     * 
+     * This is the de-constructor for the class
+     */
     ~Transportation();
 
     /**
@@ -65,6 +74,8 @@ class Transportation {
     private:
     PostalCodeHash *postalCodes;
     std::vector<Location> locationList;
+
+    int randomInRange(int floor, int ceiling);
 
 };
 
