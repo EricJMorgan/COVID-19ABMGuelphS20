@@ -30,10 +30,6 @@ void SIRtotals::updateTotals(int population, Agent* simAgents) {
             hygiene++;
         }
 
-        if (simAgents[i].socialDistancing) {
-           socialDistance++;
-        }
-
         if (simAgents[i].getAgentInfo() < 18) {
            maleCount++;
         }
@@ -45,9 +41,6 @@ void SIRtotals::updateTotals(int population, Agent* simAgents) {
         switch(simAgents[i].DetermineSeverity()){
             case SUSCEPTIBLE: susceptible++; break;
             case INFECTED: infected++; break;
-            case ISOLATED: infected++; break;
-            case HOSPITALIZED: infected++; break;
-            case ICU: infected++; break;
             case RECOVERED: recovered++; break;
             case DECEASED: deceased++; break;
             default: break;

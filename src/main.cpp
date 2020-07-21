@@ -19,13 +19,15 @@ int main(){
 
     srand((unsigned int)time(NULL));
 
-    //Simulation sim = Simulation("demographicGuelph.csv");
-    // for(int i = 0; i < 131805; i++){
-    //     cout << sim.getAgentAt(i).agentToString() << endl;
-    // }
+    Simulation sim = Simulation("demographicGuelph.csv");
+    for(int i = 0; i < 10; i++){
+        cout << sim.getAgentAt(i).agentToString() << endl;
+    }
 
-    // PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
-    // for(int i = 0; i < 7000; i++){
+    sim.getAgentAt(0).AgentInfected();
+
+    PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
+    // for(int i = 0; i < 14; i++){
     //     if(postalCodeStuff.hashTable[i].getPostalCodeGrouping().compare("") != 0){
     //         cout << postalCodeStuff.hashTable[i].getPostalCodeGrouping() << " ";
     //         for(int k = 0; k < LOCATIONTYPESIZE; k++){
@@ -39,7 +41,22 @@ int main(){
     //     }
     // }
 
-    Simulation sim = Simulation("demographicGuelph.csv");
+    // testing geographical risk stuff
+    // for(int k = 0; k < LOCATIONTYPESIZE; k++){
+    //     cout << postalCodeStuff.hashTable[0].getLocationCountAt(k) << " ";
+    // }
+    // cout << endl;
+    // for(int j = 0; j < (int)postalCodeStuff.hashTable[0].getPostalCodeListLength(); j++){
+    //     cout << postalCodeStuff.hashTable[0].getPostalCodeAt(j) << ", ";
+    // }
+
+    // postalCodeStuff.hashTable[0].addAgentToInfected(&sim.getAgentAt(0));
+    // for(int i = 1; i < 10; i++){
+    //     postalCodeStuff.hashTable[0].addAgentToSusceptible(&sim.getAgentAt(i));
+    // }
+
+    // postalCodeStuff.hashTable[0].infectPeople();
+
 
     // testing SIR Model
     // Agent* tempAgent = new Agent(AgentInfoMap["Male 20-24"]);
@@ -53,6 +70,8 @@ int main(){
     // cout << tempAgent->DetermineSeverity() << endl;
 
     // free(tempAgent);
+
+
     
     return 0;
 }

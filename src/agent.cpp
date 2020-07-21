@@ -17,6 +17,7 @@ Agent::Agent(AgentInfo agentInfo) {
     DecideMartialStatus();
     DecideHouseholdIncome();
     DecideEducation();
+    DecideMigitationStrategy();
 }
 
 AgentInfo Agent::getAgentInfo(){
@@ -173,7 +174,28 @@ void Agent::DecideEthnicity() {
 
 }
 
-string Agent::agentToString(){
+/*************************
+ * DecideMigitationStrategy
+ * 
+ * This function randomly decides an agents chance of wearing 
+ * a face mask and practicing good hygiene
+ ************************/
+void Agent::DecideMigitationStrategy() {
+    double maskChance = (double) rand()/RAND_MAX;
+    double hygieneChance = (double) rand()/RAND_MAX;
+
+    if (maskChance < 0.5) {
+        wearingMask = true;
+    }
+
+    if (hygieneChance < 0.5) {
+        agentHygiene = true;
+    }
+    
+    
+}
+
+string Agent::agentToString() {
     string agentString = "";
 
     agentString.append(AgentInfoMapReverse[info]);

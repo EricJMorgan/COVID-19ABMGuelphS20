@@ -87,10 +87,8 @@ class Agent : public SIR {
     void followSocialDistancing();
 
     bool agentHygiene;
-    bool socialDistancing;
     bool wearingMask;
     
-
     private:
     HouseholdIncome income;
     string ethnicity;
@@ -134,6 +132,13 @@ class Agent : public SIR {
      */
     void DecideEducation();
 
+    /**
+     * DecideMigitationStrategy
+     * 
+     * Decides the agents chance of wearing a mask and following appropriate hygiene
+     * 
+     */
+    void DecideMigitationStrategy();
 };
 
 #endif
