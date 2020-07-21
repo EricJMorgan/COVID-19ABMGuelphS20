@@ -34,7 +34,7 @@ class Hospital {
     /**
      * Hospital
      * 
-     * This is the default constructor for the location object
+     * This is the default constructor for the hospital object
      */
     Hospital();
 

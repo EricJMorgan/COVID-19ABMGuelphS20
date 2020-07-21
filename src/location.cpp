@@ -11,7 +11,6 @@
 #include <iostream>
 
 
-
 // Constructor
 Location::Location() {
     postalCodeGrouping = "";
@@ -22,7 +21,6 @@ Location::Location() {
     pplDensity = 0;
     avgTimeSpent = 0;
     avgAgentInteraction = 0;
-    transportaionRoutesFromLocation = NULL;
 }
 
 Location::Location(string newPostalCode, int shopData[LOCATIONTYPESIZE]){
@@ -35,7 +33,6 @@ Location::Location(string newPostalCode, int shopData[LOCATIONTYPESIZE]){
     pplDensity = 0;
     avgTimeSpent = 0;
     avgAgentInteraction = 0;
-    transportaionRoutesFromLocation = NULL;
 }
 
 void Location::setPostalCodeGrouping(string newPostalCodeGrouping){
@@ -54,15 +51,6 @@ void Location::increaseLocationCountAt(int index){
 
 void Location::increaseLocationCountAt(condenseLocationType index){
     increaseLocationCountAt((int)index);
-}
-
-int Location::getLocationCountAt(int index){
-    if(index < 0 || index > LOCATIONTYPESIZE) return -1;
-    return locationCount[index];
-}
-
-int Location::getLocationCountAt(condenseLocationType index){
-    return getLocationCountAt((int)index);
 }
 
 void Location::addPostalCodeToList(string postalCode){

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 15/07/20
- * ver 0.03
+ * ver 0.04
  * 
  * This is the class file for the simulation class
  ***************/
@@ -9,6 +9,7 @@
 
 #include "simulation.hh"
 #include "agent.hh"
+#include "transportation.hh"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -44,6 +45,8 @@ Simulation::Simulation(string fileName) {
     population = arraySize;
 
     setUpAgents(fileName);
+
+    locationInfo = new Transportation(simAgents, population);
     
 
 }
@@ -53,6 +56,7 @@ Simulation::~Simulation(){
         delete simAgents[i];
     }
     delete[] simAgents;
+    delete locationInfo;
 }
 
 /*************************

@@ -17,13 +17,9 @@
 #include <boost/assign/list_of.hpp>
 #include <algorithm>
 #include "SIRtotals.hh"
-#include "transportation.hh"
 #include "geographicalrisk.hh"
 
 using namespace std;
-#define LOCATIONTYPESIZE 10
-
-enum condenseLocationType {GENSTORE, TRANSPORT, SCHOOL, PARKSANDREC, SERVICES, ENTERTAINMENT, HEALTH, PLACEOFWORSHIP, UNNEEDED, RESIDENTIAL};
 
 static std::map<std::string, condenseLocationType> locationTypeMap = boost::assign::map_list_of("accounting", SERVICES)("airport", TRANSPORT)("amusement_park", PARKSANDREC)
 ("aquarium", ENTERTAINMENT)("art_gallery", ENTERTAINMENT)("atm", UNNEEDED)("bakery", GENSTORE)("bank", SERVICES)("bar", ENTERTAINMENT)("beauty_salon", SERVICES)("bicycle_store", GENSTORE)
@@ -48,7 +44,7 @@ static std::map<std::string, condenseLocationType> locationTypeMap = boost::assi
 class Agent;
 
 //Declare simulation class
-class Location {
+class Location : public GeographicalRisk {
     public:
     /**
      * Location
@@ -133,28 +129,6 @@ class Location {
      * @param index, must be in range 0 <= index < LOCATIONTYPESIZE
      */
     void increaseLocationCountAt(condenseLocationType index);
-
-    /**
-     * getLocationCountAt
-     * 
-     * This function will take in a index and return how many of
-     * the specified location index
-     * 
-     * @param index, must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
-     * @return a int of the amount of the specified shops in a location
-     */
-    int getLocationCountAt(int index);
-
-    /**
-     * getLocationCountAt
-     * 
-     * This function will take in a index and return how many of
-     * the specified location index
-     * 
-     * @param index, must be in range 0 <= index < LOCATIONTYPESIZE Refer to condenseLocationType enum for which index you want
-     * @return a int of the amount of the specified shops in a location
-     */
-    int getLocationCountAt(condenseLocationType index);
 
     /**
      * addPostalCodeToList
@@ -286,10 +260,8 @@ class Location {
     int pplDensity;
     int avgTimeSpent;
     int avgAgentInteraction;
-    Transportation* transportaionRoutesFromLocation;
     SIRtotals sirTotalLocation;
     string postalCodeGrouping;
-    int locationCount[LOCATIONTYPESIZE];
     std::vector<string> postalCodes;
     std::vector<Agent *> susceptible;
     std::vector<Agent *> infected;
