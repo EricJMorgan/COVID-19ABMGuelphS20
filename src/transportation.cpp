@@ -45,3 +45,23 @@ Location Transportation::getLocationAt(int index){
     if(index < 0 || index >= getLocationListLength()) return Location();
     return locationList.at(index);
 }
+
+Agent *Transportation::moveSusceptibleAgent(int locationOne, int locationTwo, int agentIndex){
+    if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;//Test cases to make sure input is valid
+    if(locationTwo < 0 || locationTwo >= getLocationListLength()) return NULL;
+    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne).getSusceptibleSize()) return NULL;
+
+    Agent *holder = locationList.at(locationOne).removeSusceptibleAgent(agentIndex);
+    locationList.at(locationTwo).addAgentToSusceptible(holder);
+    return holder;
+}
+
+Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int agentIndex){
+    if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;//Test cases to make sure input is valid
+    if(locationTwo < 0 || locationTwo >= getLocationListLength()) return NULL;
+    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne).getInfectedSize()) return NULL;
+
+    Agent *holder = locationList.at(locationOne).removeInfectedAgent(agentIndex);
+    locationList.at(locationTwo).addAgentToInfected(holder);
+    return holder;
+}
