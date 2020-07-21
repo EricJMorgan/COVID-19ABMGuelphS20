@@ -18,29 +18,12 @@
 
 using namespace std;
 
+enum DayOfWeek{MON, TUE, WED, THU, FRI, SAT, SUN};
+
 class Agent;
 class Location;
 //Declare simulation class
 class Simulation {
-    private:
-    Agent** simAgents;
-    Location** guelphMap; //map
-
-    // user inputs
-    int timeStep;
-    int incubationPeriod;
-    int socialDistancingSeverity;
-    bool socialDistancing;
-    int timeQuarantined;
-    int initiallyInfected;
-    bool fluSeason;
-    int agentCount;
-    int population;
-
-    void addNewAgent(string personInfo, int amountToAdd);
-    void setUpAgents(string filename);
-
-
     public:
     Simulation(string fileName);
     ~Simulation();//Destructor
@@ -53,6 +36,53 @@ class Simulation {
     SIRtotals totalSimSIRStats;
     int getPopulation();
     Transportation *locationInfo = NULL;
+
+    private:
+    Agent** simAgents;
+    Location** guelphMap; //map
+
+    // user inputs
+    int timeStep;
+    int currTime;
+    DayOfWeek currDay;
+    int incubationPeriod;
+    int socialDistancingSeverity;
+    bool socialDistancing;
+    int timeQuarantined;
+    int initiallyInfected;
+    bool fluSeason;
+    int agentCount;
+    int population;
+
+    /**
+     * addNewAgent
+     * 
+     * This function takes in the agents info and the amount of said
+     * agent and adds that amount to the array of people
+     * 
+     * @param personInfo, this is a string in the fomat GENDER N-N where N is the age range
+     * @param amountToAdd, this is a int of how many of that agent there are for the area i.e there are 3875 males 0-4 in guelph
+     */
+    void addNewAgent(string personInfo, int amountToAdd);
+
+    /**
+     * setUpAgents
+     * 
+     * This function takes in the file name of the demographic file
+     * of an area in the format typeOfData,DataInfo,AmountOfPeople
+     * 
+     * @param filename, must be in the above format
+     */
+    void setUpAgents(string filename);
+
+    /**
+     * stepTime
+     * 
+     * This function is a helper function to push the time and day
+     * forward on every iteration of the timesetp
+     */
+    void stepTime();
+    DayOfWeek getNextDay(DayOfWeek currDay);
 };
 
 

@@ -22,6 +22,9 @@ Simulation::Simulation(string fileName) {
     string line;
     int arraySize = 0;
     population = 0;
+    currTime = 0;
+    timeStep = 2;
+    currDay = MON;
 
     if(!demographicFile.good()){
         cout << "Error invalid file" << endl;
@@ -125,4 +128,33 @@ void Simulation::setUpAgents(string filename) {
 
 int Simulation::getPopulation(){
     return population;
+}
+
+void Simulation::stepTime(){
+    currTime += timeStep;
+    if(currTime >= 24){
+        currTime = 0;
+        currDay = getNextDay(currDay);
+    }
+}
+
+DayOfWeek Simulation::getNextDay(DayOfWeek oldDay){
+    switch (oldDay){
+        case MON:
+            return TUE;
+        case TUE:
+            return WED;
+        case WED:
+            return THU;
+        case THU:
+            return FRI;
+        case FRI:
+            return SAT;
+        case SAT:
+            return SUN;
+        case SUN:
+            return MON;
+        default:
+            return MON;
+    }
 }
