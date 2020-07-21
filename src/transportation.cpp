@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 20/07/20
- * ver 0.02
+ * 21/07/20
+ * ver 0.03
  * 
  * This is the class file for the transportation class
  ***************/
@@ -45,3 +45,33 @@ Location Transportation::getLocationAt(int index){
     if(index < 0 || index >= getLocationListLength()) return Location();
     return locationList.at(index);
 }
+
+Agent *Transportation::moveSusceptibleAgent(int locationOne, int locationTwo, int agentIndex){
+    if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;//Test cases to make sure input is valid
+    if(locationTwo < 0 || locationTwo >= getLocationListLength()) return NULL;
+    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne).getSusceptibleSize()) return NULL;
+
+    Agent *holder = locationList.at(locationOne).removeSusceptibleAgent(agentIndex);
+    locationList.at(locationTwo).addAgentToSusceptible(holder);
+    return holder;
+}
+
+Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int agentIndex){
+    if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;//Test cases to make sure input is valid
+    if(locationTwo < 0 || locationTwo >= getLocationListLength()) return NULL;
+    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne).getInfectedSize()) return NULL;
+
+    Agent *holder = locationList.at(locationOne).removeInfectedAgent(agentIndex);
+    locationList.at(locationTwo).addAgentToInfected(holder);
+    return holder;
+}
+
+// Agent *Transportation::moveSusceptibleToInfected(int locationIndex, int agentIndex){
+//     if(locationIndex < 0 || locationIndex >= getLocationListLength()) return NULL;
+//     if(agentIndex < 0 || agentIndex >= getLocationAt(locationIndex).getSusceptibleSize()) return NULL;
+
+//     Agent *holder = locationList.at(locationIndex).removeSusceptibleAgent(agentIndex);
+//     holder->AgentInfected();//TODO not sure if its ok to use SIR class here
+//     locationList.at(locationIndex).addAgentToInfected(holder);
+//     return holder;
+// }

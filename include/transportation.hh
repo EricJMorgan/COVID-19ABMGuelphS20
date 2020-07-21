@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 20/07/20
- * ver 0.03
+ * 21/07/20
+ * ver 0.04
  * 
  * This is the header file for the transportation class
  ***************/
@@ -63,6 +63,44 @@ class Transportation {
      * @return a copy of the location object
      */
     Location getLocationAt(int index);
+
+    /**
+     * moveSusceptibleAgent
+     * 
+     * This will move a susceptible agent from one location to another
+     * by removing it from one vector into another based on the given index
+     * 
+     * @param locationOne, the locations index from which to remove the sus agent
+     * @param locationTwo, the locations index from which to add the sus agent
+     * @param agentIndex, the agents index from location ones susceptible vector
+     * @return the pointer to the moved agent, NULL if error occured
+     */
+    Agent *moveSusceptibleAgent(int locationOne, int locationTwo, int agentIndex);
+
+    /**
+     * moveInfectedAgent
+     * 
+     * This will move a infected agent from one location to another
+     * by removing it from one vector into another based on the given index
+     * 
+     * @param locationOne, the locations index from which to remove the infected agent
+     * @param locationTwo, the locations index from which to add the infected agent
+     * @param agentIndex, the agents index from location ones infected vector
+     * @return the pointer to the moved agent, NULL if error occured
+     */
+    Agent *moveInfectedAgent(int locationOne, int locationTwo, int agentIndex);
+
+    /**
+     * moveSusceptibleToInfected
+     * 
+     * This will move a susceptible agent to infected in a given location
+     * and will update the agents internal SIR data
+     * 
+     * @param locationIndex, the index of the wanted location to shift the agent
+     * @param agentIndex, the index of the agent from the locations sus vector
+     * @return a pointer to the shifted agent, NULL if error occurs
+     */
+    Agent *moveSusceptibleToInfected(int locationIndex, int agentIndex);
 
 
     private:
