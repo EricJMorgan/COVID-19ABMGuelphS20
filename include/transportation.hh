@@ -90,6 +90,18 @@ class Transportation {
      */
     Agent *moveInfectedAgent(int locationOne, int locationTwo, int agentIndex);
 
+    /**
+     * moveSusceptibleToInfected
+     * 
+     * This will move a susceptible agent to infected in a given location
+     * and will update the agents internal SIR data
+     * 
+     * @param locationIndex, the index of the wanted location to shift the agent
+     * @param agentIndex, the index of the agent from the locations sus vector
+     * @return a pointer to the shifted agent, NULL if error occurs
+     */
+    Agent *moveSusceptibleToInfected(int locationIndex, int agentIndex);
+
 
     private:
     PostalCodeHash *postalCodes;

@@ -65,3 +65,13 @@ Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int a
     locationList.at(locationTwo).addAgentToInfected(holder);
     return holder;
 }
+
+Agent *Transportation::moveSusceptibleToInfected(int locationIndex, int agentIndex){
+    if(locationIndex < 0 || locationIndex >= getLocationListLength()) return NULL;
+    if(agentIndex < 0 || agentIndex >= getLocationAt(locationIndex).getSusceptibleSize()) return NULL;
+
+    Agent *holder = locationList.at(locationIndex).removeSusceptibleAgent(agentIndex);
+    holder->AgentInfected();//TODO not sure if its ok to use SIR class here
+    locationList.at(locationIndex).addAgentToInfected(holder);
+    return holder;
+}
