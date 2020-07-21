@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 20/07/20
- * ver 0.03
+ * 21/07/20
+ * ver 0.04
  * 
  * This is the header file for the transportation class
  ***************/
