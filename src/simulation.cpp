@@ -53,7 +53,7 @@ Simulation::Simulation(string fileName) {
     
 
 }
-// Destructor
+
 Simulation::~Simulation(){
     for(int i = 0; i < agentCount; i++){
         delete simAgents[i];
@@ -66,15 +66,13 @@ int Simulation::getPopulation(){
     return population;
 }
 
-/*************************
- * getAgentAt
- * 
- * Given the index of the agent this will get a copy of the agent at
- * the given location in the simAgents array
- * 
- * NOTE: must add error handling to function
- ************************/
-Agent Simulation::getAgentAt(int index){//TODO add error checking for array bounds
+void Simulation::simulateTimeStep(){
+    //TODO add agent movment and infection
+
+    stepTime();//increase time at end of day
+}
+
+Agent Simulation::getAgentAt(int index){
     if(index >= agentCount || index < 0){
         cerr << "ERROR INVALID INDEX" << endl;
         return Agent(MALE0TO4);

@@ -25,16 +25,60 @@ class Location;
 //Declare simulation class
 class Simulation {
     public:
+    /**
+     * Simulation
+     * 
+     * This is the constructor for the simulation class it takes
+     * in a file name of the csv file of the demographic data and creates
+     * all the needed data to start the simulation
+     * 
+     * @param fileName, the file name of the census data
+     */
     Simulation(string fileName);
+
+    /**
+     * ~Simulation
+     * 
+     * This is the deconstructor for the simlation class
+     */
     ~Simulation();//Destructor
-    void runSim();
+
+    /**
+     * simulateTimeStep
+     * 
+     * when called this will simulate one time step in the simulation
+     * it will do everything for agent movement, infection spread, and time
+     * and date.
+     */
     void simulateTimeStep();
+
+    /**
+     * getAgentAt
+     * 
+     * This function gets a specific agent from the internal data for 
+     * what ever reason. It returns a copy of the agent instead of the original pointer
+     * 
+     * @param index, the index in the internal array must be in range of 0 <= index < population
+     */
+    Agent getAgentAt(int index);
+
+    /**
+     * getPopulation
+     * 
+     * This gets the population of the simulation based on
+     * the amount of agents in the simulation
+     * 
+     * @return the amount of agents in the internal array
+     */
+    int getPopulation();
+
+    void runSim();
     void updateOutput();
     void removeAgentsResolved();
     void updateSIRGraphic();
-    Agent getAgentAt(int index);
+    
     SIRtotals totalSimSIRStats;
-    int getPopulation();
+    
     Transportation *locationInfo = NULL;
 
     private:
