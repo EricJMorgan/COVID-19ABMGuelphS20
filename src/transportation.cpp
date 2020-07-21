@@ -66,6 +66,21 @@ Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int a
     return holder;
 }
 
+void Transportation::simulateAgentMovment(){
+    int locationListSize = getLocationListLength();//This is done so this function is not called more that once
+    int amountOfAgents;
+    for(int i = 0; i < locationListSize; i++){
+        amountOfAgents = getLocationAt(i).getSusceptibleSize();
+        for(int j = 0; j < amountOfAgents; j++){
+            //TODO MOVE SUS AGENTS AROUND
+        }
+        amountOfAgents = getLocationAt(i).getInfectedSize();
+        for(int j = 0; j < amountOfAgents; j++){
+            //TODO MOVE INFECTED AGENTS AROUND
+        }
+    }
+}
+
 // Agent *Transportation::moveSusceptibleToInfected(int locationIndex, int agentIndex){
 //     if(locationIndex < 0 || locationIndex >= getLocationListLength()) return NULL;
 //     if(agentIndex < 0 || agentIndex >= getLocationAt(locationIndex).getSusceptibleSize()) return NULL;
