@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 15/07/20
- * ver 0.04
+ * 21/07/20
+ * ver 0.05
  * 
  * This is the class file for the simulation class
  ***************/
@@ -62,6 +62,10 @@ Simulation::~Simulation(){
     delete locationInfo;
 }
 
+int Simulation::getPopulation(){
+    return population;
+}
+
 /*************************
  * getAgentAt
  * 
@@ -80,11 +84,7 @@ Agent Simulation::getAgentAt(int index){//TODO add error checking for array boun
     return holder;
 }
 
-/*************************
- * addNewAgent
- * 
- * This adds a set of new agents to the arra
- ************************/
+/********************Private functions***************************************/
 void Simulation::addNewAgent(string personInfo, int amountToAdd){
     for(int i = 0; i < amountToAdd; i++){
         Agent* tempAgent = new Agent(AgentInfoMap[personInfo]);
@@ -93,13 +93,6 @@ void Simulation::addNewAgent(string personInfo, int amountToAdd){
     }
 }
 
-
-/*************************
- * setUpAgents
- * 
- * This takes in the filename and parses the file
- * and then places the data into the array
- ************************/
 void Simulation::setUpAgents(string filename) {
     ifstream demographicFile;
     demographicFile.open(filename, ios::in);
@@ -126,9 +119,6 @@ void Simulation::setUpAgents(string filename) {
     demographicFile.close();
 }
 
-int Simulation::getPopulation(){
-    return population;
-}
 
 void Simulation::stepTime(){
     currTime += timeStep;

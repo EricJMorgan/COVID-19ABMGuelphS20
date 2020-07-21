@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 15/07/20
- * ver 0.03
+ * 21/07/20
+ * ver 0.04
  * 
  * This is the header file for the simulation class
  ***************/
@@ -82,6 +82,13 @@ class Simulation {
      * forward on every iteration of the timesetp
      */
     void stepTime();
+
+    /**
+     * getNextDay
+     * 
+     * This is a helper function to increment the currDay counter
+     * int the program
+     */
     DayOfWeek getNextDay(DayOfWeek currDay);
 };
 
