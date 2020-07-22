@@ -118,6 +118,8 @@ class Transportation {
 
     int randomInRange(int floor, int ceiling);
 
+    void InfectAgentsPostMovement();
+
 };
 
 

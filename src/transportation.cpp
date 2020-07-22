@@ -43,6 +43,7 @@ int Transportation::getLocationListLength(){
     return (int)locationList.size();
 }
 
+// NO POINTER ASK JAMES 
 Location Transportation::getLocationAt(int index){
     if(index < 0 || index >= getLocationListLength()) return Location();
     return locationList.at(index);
@@ -80,6 +81,16 @@ void Transportation::simulateAgentMovment(){
         for(int j = 0; j < amountOfAgents; j++){
             //TODO MOVE INFECTED AGENTS AROUND
         }
+    }
+
+    InfectAgentsPostMovement();
+}
+
+void Transportation::InfectAgentsPostMovement(){
+    int locationListSize = getLocationListLength();//This is done so this function is not called more that once
+    for(int i = 0; i < locationListSize; i++){
+        // will take care of all infecting
+        getLocationAt(i).infectPeople(); // THIS IS NOT A POINTER ASK JAMES
     }
 }
 

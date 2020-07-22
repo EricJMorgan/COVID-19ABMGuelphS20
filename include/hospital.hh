@@ -12,6 +12,8 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
+#include "agent.hh"
 
 using namespace std;
 
@@ -23,13 +25,6 @@ using namespace std;
 
 //Declare simulation class
 class Hospital {
-    private:
-    const int totalBedCount = 130;  //excluding ICU beds
-    const int icuBedCount = 22;     //total ICU beds
-    int numberPpl;                  //excluding ICU patients
-    int icuCount;                   //total ICU patients
-    bool overflow;
-
     public:
     /**
      * Hospital
@@ -56,15 +51,6 @@ class Hospital {
      * @param freeNum, this is the number of beds to be freed
      */
     void freeHospitalBeds(int freeNum);
-
-    /**
-     * indicateOverflow
-     * 
-     * This function checks if the hospital has exceeded its bed limitations for
-     * either ICU or non-ICU beds; the simulation continues to run even when there
-     * is an overflow
-     */
-    void indicateOverflow();
 
     /**
      * increaseHospitcalCount
@@ -103,6 +89,38 @@ class Hospital {
      * @return the number of agents in ICU cases
      */
     int getIcuBeds();
+
+    /**
+     * HospitalTimeStep
+     * 
+     * 
+     */
+    void HospitalTimeStep(double timestep);
+
+
+    // returns to be read and cleared
+    std::vector<Agent *> newlyDeceased;
+    std::vector<Agent *> newlyRecovered;
+
+    private:
+    const int totalBedCount = 130;  //excluding ICU beds
+    const int icuBedCount = 22;     //total ICU beds
+    int numberPpl;                  //excluding ICU patients
+    int icuCount;                   //total ICU patients
+    bool overflow;
+
+    // TODO ask joice to implement instead of just numbers
+    std::vector<Agent *> hospitalGeneralWard;
+    std::vector<Agent *> hospitalICU;
+
+    /**
+     * indicateOverflow
+     * 
+     * This function checks if the hospital has exceeded its bed limitations for
+     * either ICU or non-ICU beds; the simulation continues to run even when there
+     * is an overflow
+     */
+    void indicateOverflow();
 };
 
 #endif

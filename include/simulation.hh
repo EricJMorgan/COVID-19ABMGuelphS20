@@ -15,13 +15,15 @@
 #include <vector>
 #include "SIRtotals.hh"
 #include "transportation.hh"
+#include "agent.hh"
+#include "location.hh"
+#include "hospital.hh"
+#include "isolationcompartment.hh"
 
 using namespace std;
 
 enum DayOfWeek{MON, TUE, WED, THU, FRI, SAT, SUN};
 
-class Agent;
-class Location;
 //Declare simulation class
 class Simulation {
     public:
@@ -81,8 +83,13 @@ class Simulation {
     
     Transportation *locationInfo = NULL;
 
+    std::vector<Agent *> recoveredAgents;
+    std::vector<Agent *> deceasedAgents;
+
     private:
     Agent** simAgents;
+    Hospital guelphHospital;
+    IsolationCompartment isoCompartment;
 
     // user inputs
     int timeStep;

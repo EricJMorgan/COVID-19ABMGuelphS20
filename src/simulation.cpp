@@ -69,11 +69,40 @@ int Simulation::getPopulation(){
 void Simulation::simulateTimeStep(){
     //TODO add agent movment and infection
 
-    // agent sir time step
-    // infection geographical time step infect
     // hospital
+    guelphHospital.HospitalTimeStep(timeStep);
+    deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
+    guelphHospital.newlyDeceased.clear();
+    recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());
+    guelphHospital.newlyRecovered.clear();
+
     // isolation compartment
-    // transport agents
+    isoCompartment.SimulateIsoTimeStep(timeStep);
+    recoveredAgents.insert(recoveredAgents.end(), isoCompartment.newlyRecovered.begin(), isoCompartment.newlyRecovered.end());
+    isoCompartment.newlyRecovered.clear();
+    // Hospital insert function @Joyce
+    isoCompartment.newlyHospitalized.clear();
+
+    // agent sir time step
+    for (int i = 0; i < locationInfo->getLocationListLength(); i++) {
+        vector<Agent*> currentInfected = locationInfo->getLocationAt(i).getInfected();
+        for (int j = 0; j < currentInfected.size(); j++) {
+            string sirResponse = currentInfected[j]->SIRTimeStep(timeStep);
+            if (sirResponse == "ISOAGENT") {
+                Agent* toIsolate = locationInfo->getLocationAt(i).removeInfectedAgent(j);
+                isoCompartment.AddMildlyInfectedAgents(toIsolate);
+                j--;
+            } else if (sirResponse == "RECOVERAGENT") {
+                Agent* recoveredAgent = locationInfo->getLocationAt(i).removeInfectedAgent(j);
+                isoCompartment.AddMildlyInfectedAgents(recoveredAgent);
+                recoveredAgents.push_back(recoveredAgent);
+                j--;
+            }
+        }
+    }
+    
+    // transport agents and infect ppl
+    locationInfo->simulateAgentMovment();
 
     stepTime();//increase time at end of day
 }
