@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 20/07/20
- * ver 0.04
+ * 22/07/20
+ * ver 0.05
  * 
  * This is the header file for the geographical risk class
  ***************/
@@ -63,11 +63,14 @@ class GeographicalRisk {
      */
     void infectPeople();
 
+    //int getAmountOfLocations();
+
     // attributes shared by location and risk
     int population;
     double chanceOfInfection;
     Agent* currentAgents;
     int locationCount[LOCATIONTYPESIZE];
+    int amountOfLocations;
 
     private:
 

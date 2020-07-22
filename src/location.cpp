@@ -21,12 +21,14 @@ Location::Location() {
     pplDensity = 0;
     avgTimeSpent = 0;
     avgAgentInteraction = 0;
+    amountOfLocations = 0;
 }
 
 Location::Location(string newPostalCode, int shopData[LOCATIONTYPESIZE]){
     postalCodeGrouping = newPostalCode;
     for(int i = 0; i < 9; i++){
         locationCount[i] = shopData[i];
+        if(i != 8) amountOfLocations += shopData[i];
         //if(shopData[i] != 0) isResidential = false;
     }
     population = 0;
