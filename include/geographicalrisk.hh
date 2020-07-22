@@ -85,7 +85,7 @@ class GeographicalRisk {
     double avgAsymptomatic;
     double avgMaskWearer;
     double avgHygiene;
-    int socialDistancingSeverity; // user input
+    int socialDistancingSeverity = 1; // user input on a scale of 1 to 10, front end slider?
     SIRtotals sirTotalLocation;
 };
 

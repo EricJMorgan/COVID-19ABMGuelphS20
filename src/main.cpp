@@ -19,12 +19,12 @@ int main(){
 
     srand((unsigned int)time(NULL));
 
-    //Simulation sim = Simulation("demographicGuelph.csv");
+    Simulation sim = Simulation("demographicGuelph.csv");
     // for(int i = 0; i < 131805; i++){
     //     cout << sim.getAgentAt(i).agentToString() << endl;
     // }
 
-    // PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
+    PostalCodeHash postalCodeStuff = PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
     // for(int i = 0; i < 7000; i++){
     //     if(postalCodeStuff.hashTable[i].getPostalCodeGrouping().compare("") != 0){
     //         cout << postalCodeStuff.hashTable[i].getPostalCodeGrouping() << " ";
@@ -38,21 +38,6 @@ int main(){
     //         cout << endl << endl;
     //     }
     // }
-
-    Simulation sim = Simulation("demographicGuelph.csv");
-
-    // testing SIR Model
-    // Agent* tempAgent = new Agent(AgentInfoMap["Male 20-24"]);
-    // cout << tempAgent->DetermineSeverity() << endl;
-    // tempAgent->AgentInfected();
-    // while (tempAgent->DetermineSeverity() != RECOVERED && tempAgent->DetermineSeverity() != DECEASED) {
-        // cout << tempAgent->DetermineSeverity() << "yesirr" << endl;
-    //     tempAgent->SIRTimeStep(1);
-    // }
-
-    // cout << tempAgent->DetermineSeverity() << endl;
-
-    // free(tempAgent);
     
     return 0;
 }
