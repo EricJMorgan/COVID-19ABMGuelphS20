@@ -108,11 +108,13 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
                 hashTable[currHashValue].addPostalCodeToList(newPostalCode);
                 if((locationName.compare("residential") == 0 && !hashTable[currHashValue].postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
                      hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
+                     if(locationName.compare("residential") != 0) hashTable[currHashValue].amountOfLocations++;
                 }
                 placed = true;
             }else if(hashTable[currHashValue].getPostalCodeGrouping().compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping
                 if((locationName.compare("residential") == 0 && !hashTable[currHashValue].postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
                     hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
+                    if(locationName.compare("residential") != 0) hashTable[currHashValue].amountOfLocations++;
                 }
                 hashTable[currHashValue].addPostalCodeToList(newPostalCode);
                 placed = true;
