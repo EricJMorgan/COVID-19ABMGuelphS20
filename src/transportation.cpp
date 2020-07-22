@@ -24,6 +24,10 @@ Transportation::Transportation(Agent **arr, int arrSize){
         }
     }
 
+    sort(locationList.begin(), locationList.end(), [](const Location& lhs, const Location& rhs){//Just to sort the list based on amount of locations
+        return lhs.amountOfLocations < rhs.amountOfLocations;
+    });
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(0, getLocationListLength() - 1);
