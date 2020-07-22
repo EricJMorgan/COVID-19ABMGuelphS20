@@ -69,6 +69,12 @@ int Simulation::getPopulation(){
 void Simulation::simulateTimeStep(){
     //TODO add agent movment and infection
 
+    // agent sir time step
+    // infection geographical time step infect
+    // hospital
+    // isolation compartment
+    // transport agents
+
     stepTime();//increase time at end of day
 }
 
