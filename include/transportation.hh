@@ -62,9 +62,9 @@ class Transportation {
      * a copy of the object
      * 
      * @param index, the index of the wanted data must be in range 0 <= index < listLength
-     * @return a copy of the location object
+     * @return the location object
      */
-    Location getLocationAt(int index);
+    Location *getLocationAt(int index);
 
     /**
      * moveSusceptibleAgent
@@ -112,20 +112,18 @@ class Transportation {
      */
     void simulateAgentMovment();
 
-
-
     private:
     PostalCodeHash *postalCodes;
     std::vector<Location> locationList;
-    std::vector<Location> hasGenStore;
-    std::vector<Location> hasTransport;
-    std::vector<Location> hasSchool;
-    std::vector<Location> hasParksAndRec;
-    std::vector<Location> hasServices;
-    std::vector<Location> hasEntertainment;
-    std::vector<Location> hasHealth;
-    std::vector<Location> hasPlaceOfWorship;
-    std::vector<Location> hasResidential;
+    std::vector<Location*> hasGenStore;
+    std::vector<Location*> hasTransport;
+    std::vector<Location*> hasSchool;
+    std::vector<Location*> hasParksAndRec;
+    std::vector<Location*> hasServices;
+    std::vector<Location*> hasEntertainment;
+    std::vector<Location*> hasHealth;
+    std::vector<Location*> hasPlaceOfWorship;
+    std::vector<Location*> hasResidential;
 
     int randomInRange(int floor, int ceiling);
 
@@ -141,6 +139,8 @@ class Transportation {
      * @return the index that the agent will move to, -1 if it will stay in place
      */
     int agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDay);
+
+    void InfectAgentsPostMovement();
 
 };
 

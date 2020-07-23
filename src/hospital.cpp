@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 17/07/20
- * ver 0.02
+ * 23/07/20
+ * ver 0.03
  * 
  * This is the class file for the hospital class
  ***************/
@@ -47,6 +47,7 @@ void Hospital::indicateOverflow() {
     }
 }
 
+//Change this to take agent* as well
 void Hospital::increaseHospitalCount(int numAgents) {
     if(numAgents > 0) {
         numberPpl = numberPpl + numAgents;
@@ -57,6 +58,7 @@ void Hospital::increaseHospitalCount(int numAgents) {
     }
 }
 
+//Change this to take agent* as well
 void Hospital::increaseIcuCount(int numAgents) {
     if(numAgents > 0) {
         icuCount = icuCount + numAgents;
@@ -64,6 +66,35 @@ void Hospital::increaseIcuCount(int numAgents) {
     } else {
         cout << "ERROR: Number of agents is negative" << endl;
         cout << "Will add nothing to the number of ICU patients" << endl;
+    }
+}
+
+void Hospital::HospitalTimeStep(double timestep) {
+    for (int i = 0; i < (int)hospitalICU.size(); i++) {
+        string sirResponse  = hospitalICU[i]->SIRTimeStep(timestep);
+        if (sirResponse == "RECOVERAGENT") {
+            Agent *recoveredAgent = hospitalGeneralWard.at(i);
+            hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
+            newlyRecovered.push_back(recoveredAgent);
+        } else if (sirResponse == "DECEASEAGENT") {
+            Agent *deceasedAgent = hospitalGeneralWard.at(i);
+            hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
+            newlyDeceased.push_back(deceasedAgent);
+        }
+    }
+
+
+    for (int i = 0; i < (int)hospitalGeneralWard.size(); i++) {
+        string sirResponse  = hospitalGeneralWard[i]->SIRTimeStep(timestep);
+        if (sirResponse == "ICUAGENT") {
+            Agent *toICU = hospitalGeneralWard.at(i);
+            hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
+            hospitalICU.push_back(toICU);
+        } else if (sirResponse == "RECOVERAGENT") {
+            Agent *recoveredAgent = hospitalGeneralWard.at(i);
+            hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
+            newlyRecovered.push_back(recoveredAgent);
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.04
+ * 23/07/20
+ * ver 0.05
  * 
  * This is the class file for the geographical risk class
  ***************/
@@ -20,7 +20,7 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
 
     // calculate averages in compartment during current timestep
     avgSymptomaticCarriers = (double)sirTotalLocation.getShowsSymptoms() / (double)population;
-    avgAsymptomatic = 1 - avgSymptomaticCarriers;
+    avgAsymptomatic = ((double)sirTotalLocation.getInfected() - (double)sirTotalLocation.getShowsSymptoms()) / (double)population;
     avgMaskWearer = (double)sirTotalLocation.getMaskWearer() / (double)population;
     avgHygiene = (double)sirTotalLocation.getHygiene() / (double)population;
 

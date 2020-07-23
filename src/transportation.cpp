@@ -16,8 +16,6 @@ using namespace std;
 Transportation::Transportation(Agent **arr, int arrSize){
     postalCodes = new PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
    
-    
-
     for(int i = 0; i < 7000; i++){
         if(postalCodes->hashTable[i].getPostalCodeGrouping().compare("") != 0){
             locationList.push_back(postalCodes->hashTable[i]);
@@ -30,23 +28,19 @@ Transportation::Transportation(Agent **arr, int arrSize){
     });
 
     //This adds all the locations into lists to make the movement math eaiser
-    Location holder;
+    Location *holder;
     for(int i = 0; i < getLocationListLength(); i++){
-        getLocationAt(i).setLocationIndex(i);
+        getLocationAt(i)->setLocationIndex(i);
         holder = getLocationAt(i);
-        if(holder.getLocationCountAt(GENSTORE)) hasGenStore.push_back(holder);
-        if(holder.getLocationCountAt(TRANSPORT)) hasTransport.push_back(holder);
-        if(holder.getLocationCountAt(SCHOOL)) hasSchool.push_back(holder);
-        if(holder.getLocationCountAt(PARKSANDREC)) hasParksAndRec.push_back(holder);
-        if(holder.getLocationCountAt(SERVICES)) hasServices.push_back(holder);
-        if(holder.getLocationCountAt(ENTERTAINMENT)) hasEntertainment.push_back(holder);
-        if(holder.getLocationCountAt(HEALTH)) hasHealth.push_back(holder);
-        if(holder.getLocationCountAt(PLACEOFWORSHIP)) hasPlaceOfWorship.push_back(holder);
-        if(holder.getLocationCountAt(RESIDENTIAL)) hasResidential.push_back(holder);
-    }
-
-    for(int i = 0; i < getLocationListLength(); i++){
-        cout << getLocationAt(i).getLocationIndex() << endl;
+        if(holder->getLocationCountAt(GENSTORE)) hasGenStore.push_back(holder);
+        if(holder->getLocationCountAt(TRANSPORT)) hasTransport.push_back(holder);
+        if(holder->getLocationCountAt(SCHOOL)) hasSchool.push_back(holder);
+        if(holder->getLocationCountAt(PARKSANDREC)) hasParksAndRec.push_back(holder);
+        if(holder->getLocationCountAt(SERVICES)) hasServices.push_back(holder);
+        if(holder->getLocationCountAt(ENTERTAINMENT)) hasEntertainment.push_back(holder);
+        if(holder->getLocationCountAt(HEALTH)) hasHealth.push_back(holder);
+        if(holder->getLocationCountAt(PLACEOFWORSHIP)) hasPlaceOfWorship.push_back(holder);
+        if(holder->getLocationCountAt(RESIDENTIAL)) hasResidential.push_back(holder);
     }
 
     std::random_device rd;
@@ -66,28 +60,28 @@ int Transportation::getLocationListLength(){
     return (int)locationList.size();
 }
 
-Location Transportation::getLocationAt(int index){
-    if(index < 0 || index >= getLocationListLength()) return Location();
-    return locationList.at(index);
+Location* Transportation::getLocationAt(int index){
+    if(index < 0 || index >= getLocationListLength()) return NULL;
+    return &locationList.at(index);
 }
 
 Agent *Transportation::moveSusceptibleAgent(int locationOne, int locationTwo, int agentIndex){
     if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;//Test cases to make sure input is valid
     if(locationTwo < 0 || locationTwo >= getLocationListLength()) return NULL;
-    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne).getSusceptibleSize()) return NULL;
+    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne)->getSusceptibleSize()) return NULL;
 
-    Agent *holder = locationList.at(locationOne).removeSusceptibleAgent(agentIndex);
-    locationList.at(locationTwo).addAgentToSusceptible(holder);
+    Agent *holder = getLocationAt(locationOne)->removeSusceptibleAgent(agentIndex);
+    getLocationAt(locationTwo)->addAgentToSusceptible(holder);
     return holder;
 }
 
 Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int agentIndex){
     if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;//Test cases to make sure input is valid
     if(locationTwo < 0 || locationTwo >= getLocationListLength()) return NULL;
-    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne).getInfectedSize()) return NULL;
+    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne)->getInfectedSize()) return NULL;
 
-    Agent *holder = locationList.at(locationOne).removeInfectedAgent(agentIndex);
-    locationList.at(locationTwo).addAgentToInfected(holder);
+    Agent *holder = getLocationAt(locationOne)->removeInfectedAgent(agentIndex);
+    getLocationAt(locationTwo)->addAgentToInfected(holder);
     return holder;
 }
 
@@ -95,14 +89,25 @@ void Transportation::simulateAgentMovment(){
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     int amountOfAgents;
     for(int i = 0; i < locationListSize; i++){
-        amountOfAgents = getLocationAt(i).getSusceptibleSize();//TODO this could cause an issue when moving agents
+        amountOfAgents = getLocationAt(i)->getSusceptibleSize();
         for(int j = 0; j < amountOfAgents; j++){
             //TODO MOVE SUS AGENTS AROUND
         }
-        amountOfAgents = getLocationAt(i).getInfectedSize();
+        amountOfAgents = getLocationAt(i)->getInfectedSize();
         for(int j = 0; j < amountOfAgents; j++){
             //TODO MOVE INFECTED AGENTS AROUND
         }
+    }
+
+    InfectAgentsPostMovement();
+}
+
+void Transportation::InfectAgentsPostMovement(){
+    int locationListSize = getLocationListLength();//This is done so this function is not called more that once
+    for(int i = 0; i < locationListSize; i++){
+        // will take care of all infecting
+
+        getLocationAt(i)->infectPeople();
     }
 }
 
@@ -111,7 +116,7 @@ int Transportation::agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDa
     AgentInfo agentInfo = toMove->getAgentInfo();
     if(agentInfo== MALE0TO4 || agentInfo == FEMALE0TO4) return -1;//For now lets assume babies stay home all day
     if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){
-
+        
     }
 
     return -1;
