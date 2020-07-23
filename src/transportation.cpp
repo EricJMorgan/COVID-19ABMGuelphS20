@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.03
+ * 23/07/20
+ * ver 0.04
  * 
  * This is the class file for the transportation class
  ***************/
@@ -24,7 +24,8 @@ Transportation::Transportation(Agent **arr, int arrSize){
         }
     }
 
-    sort(locationList.begin(), locationList.end(), [](const Location& lhs, const Location& rhs){//Just to sort the list based on amount of locations
+    //This sorts the location list so that the more locations a postal code grouping has the further up the list they are
+    sort(locationList.begin(), locationList.end(), [](const Location& lhs, const Location& rhs){
         return lhs.amountOfLocations < rhs.amountOfLocations;
     });
 
@@ -74,7 +75,7 @@ void Transportation::simulateAgentMovment(){
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     int amountOfAgents;
     for(int i = 0; i < locationListSize; i++){
-        amountOfAgents = getLocationAt(i).getSusceptibleSize();
+        amountOfAgents = getLocationAt(i).getSusceptibleSize();//TODO this could cause an issue when moving agents
         for(int j = 0; j < amountOfAgents; j++){
             //TODO MOVE SUS AGENTS AROUND
         }
@@ -83,6 +84,17 @@ void Transportation::simulateAgentMovment(){
             //TODO MOVE INFECTED AGENTS AROUND
         }
     }
+}
+
+
+int Transportation::agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDay){
+    AgentInfo agentInfo = toMove->getAgentInfo();
+    if(agentInfo== MALE0TO4 || agentInfo == FEMALE0TO4) return -1;//For now lets assume babies stay home all day
+    if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){
+
+    }
+
+    return -1;
 }
 
 // Agent *Transportation::moveSusceptibleToInfected(int locationIndex, int agentIndex){

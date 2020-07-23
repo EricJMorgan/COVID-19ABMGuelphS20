@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.04
+ * 23/07/20
+ * ver 0.05
  * 
  * This is the header file for the simulation class
  ***************/
@@ -18,7 +18,7 @@
 
 using namespace std;
 
-enum DayOfWeek{MON, TUE, WED, THU, FRI, SAT, SUN};
+
 
 class Agent;
 class Location;

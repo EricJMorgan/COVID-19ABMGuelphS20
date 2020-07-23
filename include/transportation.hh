@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.04
+ * 23/07/20
+ * ver 0.05
  * 
  * This is the header file for the transportation class
  ***************/
@@ -19,6 +19,8 @@
 #include "agent.hh"
 
 using namespace std;
+
+enum DayOfWeek{MON, TUE, WED, THU, FRI, SAT, SUN};
 
 //Declare simulation class
 class Transportation {
@@ -115,8 +117,30 @@ class Transportation {
     private:
     PostalCodeHash *postalCodes;
     std::vector<Location> locationList;
+    std::vector<Location> hasGenStore;
+    std::vector<Location> hasTransport;
+    std::vector<Location> hasSchool;
+    std::vector<Location> hasParksAndRec;
+    std::vector<Location> hasServices;
+    std::vector<Location> hasEntertainment;
+    std::vector<Location> hasHealth;
+    std::vector<Location> hasPlaceOfWorship;
+    std::vector<Location> isResidential;
 
     int randomInRange(int floor, int ceiling);
+
+    /**
+     * agentMovingTo
+     * 
+     * This is a helper function that will look at the given data for
+     * an agent and will decide if and where it will move
+     * 
+     * @param toMove, the agent data it will look at to decide if it will move
+     * @param timeOfDay, the current time of day
+     * @param currDay, the day of the week
+     * @return the index that the agent will move to, -1 if it will stay in place
+     */
+    int agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDay);
 
 };
 
