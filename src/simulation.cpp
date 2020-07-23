@@ -86,7 +86,7 @@ void Simulation::simulateTimeStep(){
     // agent sir time step
     for (int i = 0; i < (int)locationInfo->getLocationListLength(); i++) {
         vector<Agent*> currentInfected = locationInfo->getLocationAt(i)->getInfected();
-        for (int j = 0; j < currentInfected.size(); j++) {
+        for (int j = 0; j < (int)currentInfected.size(); j++) {
             string sirResponse = currentInfected[j]->SIRTimeStep(timeStep);
             if (sirResponse == "ISOAGENT") {
                 Agent* toIsolate = locationInfo->getLocationAt(i)->removeInfectedAgent(j);
