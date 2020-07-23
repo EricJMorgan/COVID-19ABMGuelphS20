@@ -102,6 +102,15 @@ class Transportation {
      */
     Agent *moveSusceptibleToInfected(int locationIndex, int agentIndex);
 
+    /**
+     * simulateAgentMovment
+     * 
+     * When called this method will simulate the movment of the entire population of
+     * the given location
+     */
+    void simulateAgentMovment();
+
+
 
     private:
     PostalCodeHash *postalCodes;

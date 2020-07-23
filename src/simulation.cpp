@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 15/07/20
- * ver 0.04
+ * 21/07/20
+ * ver 0.05
  * 
  * This is the class file for the simulation class
  ***************/
@@ -22,6 +22,9 @@ Simulation::Simulation(string fileName) {
     string line;
     int arraySize = 0;
     population = 0;
+    currTime = 0;
+    timeStep = 2;
+    currDay = MON;
 
     if(!demographicFile.good()){
         cout << "Error invalid file" << endl;
@@ -50,7 +53,7 @@ Simulation::Simulation(string fileName) {
     
 
 }
-// Destructor
+
 Simulation::~Simulation(){
     for(int i = 0; i < agentCount; i++){
         delete simAgents[i];
@@ -59,15 +62,17 @@ Simulation::~Simulation(){
     delete locationInfo;
 }
 
-/*************************
- * getAgentAt
- * 
- * Given the index of the agent this will get a copy of the agent at
- * the given location in the simAgents array
- * 
- * NOTE: must add error handling to function
- ************************/
-Agent Simulation::getAgentAt(int index){//TODO add error checking for array bounds
+int Simulation::getPopulation(){
+    return population;
+}
+
+void Simulation::simulateTimeStep(){
+    //TODO add agent movment and infection
+
+    stepTime();//increase time at end of day
+}
+
+Agent Simulation::getAgentAt(int index){
     if(index >= agentCount || index < 0){
         cerr << "ERROR INVALID INDEX" << endl;
         return Agent(MALE0TO4);
@@ -77,11 +82,7 @@ Agent Simulation::getAgentAt(int index){//TODO add error checking for array boun
     return holder;
 }
 
-/*************************
- * addNewAgent
- * 
- * This adds a set of new agents to the arra
- ************************/
+/********************Private functions***************************************/
 void Simulation::addNewAgent(string personInfo, int amountToAdd){
     for(int i = 0; i < amountToAdd; i++){
         Agent* tempAgent = new Agent(AgentInfoMap[personInfo]);
@@ -90,13 +91,6 @@ void Simulation::addNewAgent(string personInfo, int amountToAdd){
     }
 }
 
-
-/*************************
- * setUpAgents
- * 
- * This takes in the filename and parses the file
- * and then places the data into the array
- ************************/
 void Simulation::setUpAgents(string filename) {
     ifstream demographicFile;
     demographicFile.open(filename, ios::in);
@@ -123,6 +117,32 @@ void Simulation::setUpAgents(string filename) {
     demographicFile.close();
 }
 
-int Simulation::getPopulation(){
-    return population;
+
+void Simulation::stepTime(){
+    currTime += timeStep;
+    if(currTime >= 24){
+        currTime = 0;
+        currDay = getNextDay(currDay);
+    }
+}
+
+DayOfWeek Simulation::getNextDay(DayOfWeek oldDay){
+    switch (oldDay){
+        case MON:
+            return TUE;
+        case TUE:
+            return WED;
+        case WED:
+            return THU;
+        case THU:
+            return FRI;
+        case FRI:
+            return SAT;
+        case SAT:
+            return SUN;
+        case SUN:
+            return MON;
+        default:
+            return MON;
+    }
 }
