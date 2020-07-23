@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.03
+ * 23/07/20
+ * ver 0.04
  * 
  * This is the class file for the transportation class
  ***************/
@@ -16,8 +16,6 @@ using namespace std;
 Transportation::Transportation(Agent **arr, int arrSize){
     postalCodes = new PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
    
-    
-
     for(int i = 0; i < 7000; i++){
         if(postalCodes->hashTable[i].getPostalCodeGrouping().compare("") != 0){
             locationList.push_back(postalCodes->hashTable[i]);
@@ -45,15 +43,15 @@ int Transportation::getLocationListLength(){
     return (int)locationList.size();
 }
 
-Location Transportation::getLocationAt(int index){
-    if(index < 0 || index >= getLocationListLength()) return Location();
-    return locationList.at(index);
+Location* Transportation::getLocationAt(int index){
+    if(index < 0 || index >= getLocationListLength()) return NULL;
+    return &locationList.at(index);
 }
 
 Agent *Transportation::moveSusceptibleAgent(int locationOne, int locationTwo, int agentIndex){
     if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;//Test cases to make sure input is valid
     if(locationTwo < 0 || locationTwo >= getLocationListLength()) return NULL;
-    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne).getSusceptibleSize()) return NULL;
+    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne)->getSusceptibleSize()) return NULL;
 
     Agent *holder = locationList.at(locationOne).removeSusceptibleAgent(agentIndex);
     locationList.at(locationTwo).addAgentToSusceptible(holder);
@@ -63,7 +61,7 @@ Agent *Transportation::moveSusceptibleAgent(int locationOne, int locationTwo, in
 Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int agentIndex){
     if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;//Test cases to make sure input is valid
     if(locationTwo < 0 || locationTwo >= getLocationListLength()) return NULL;
-    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne).getInfectedSize()) return NULL;
+    if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne)->getInfectedSize()) return NULL;
 
     Agent *holder = locationList.at(locationOne).removeInfectedAgent(agentIndex);
     locationList.at(locationTwo).addAgentToInfected(holder);
@@ -74,14 +72,25 @@ void Transportation::simulateAgentMovment(){
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     int amountOfAgents;
     for(int i = 0; i < locationListSize; i++){
-        amountOfAgents = getLocationAt(i).getSusceptibleSize();
+        amountOfAgents = getLocationAt(i)->getSusceptibleSize();
         for(int j = 0; j < amountOfAgents; j++){
             //TODO MOVE SUS AGENTS AROUND
         }
-        amountOfAgents = getLocationAt(i).getInfectedSize();
+        amountOfAgents = getLocationAt(i)->getInfectedSize();
         for(int j = 0; j < amountOfAgents; j++){
             //TODO MOVE INFECTED AGENTS AROUND
         }
+    }
+
+    InfectAgentsPostMovement();
+}
+
+void Transportation::InfectAgentsPostMovement(){
+    int locationListSize = getLocationListLength();//This is done so this function is not called more that once
+    for(int i = 0; i < locationListSize; i++){
+        // will take care of all infecting
+
+        getLocationAt(i)->infectPeople();
     }
 }
 

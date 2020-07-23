@@ -60,9 +60,9 @@ class Transportation {
      * a copy of the object
      * 
      * @param index, the index of the wanted data must be in range 0 <= index < listLength
-     * @return a copy of the location object
+     * @return the location object
      */
-    Location getLocationAt(int index);
+    Location *getLocationAt(int index);
 
     /**
      * moveSusceptibleAgent
@@ -110,13 +110,13 @@ class Transportation {
      */
     void simulateAgentMovment();
 
-
-
     private:
     PostalCodeHash *postalCodes;
     std::vector<Location> locationList;
 
     int randomInRange(int floor, int ceiling);
+
+    void InfectAgentsPostMovement();
 
 };
 
