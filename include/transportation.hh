@@ -150,6 +150,8 @@ class Transportation {
 
     bool inTimeRange(int timeOfDay, int min, int max);
 
+    bool willGoToSchool(DayOfWeek currDay, int timeOfDay);
+
 
 };
 

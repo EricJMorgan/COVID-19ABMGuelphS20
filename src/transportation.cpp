@@ -116,9 +116,20 @@ int Transportation::agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDa
     AgentInfo agentInfo = toMove->getAgentInfo();
     if(agentInfo== MALE0TO4 || agentInfo == FEMALE0TO4) return findIndexToMove(hasResidential);//For now lets assume babies stay home all day
     if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){//5to9 year olds only go to school and then go home really
-        if(isWeekDay(currDay) && (inTimeRange(timeOfDay, 8, 16))) return findIndexToMove(hasSchool);
+        if(willGoToSchool(currDay, timeOfDay)) return findIndexToMove(hasSchool);
         if(!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 18) && willMove(30)) return findIndexToMove(hasEntertainment);//TODO might change % chance based on income
         return findIndexToMove(hasResidential);
+    }
+    if(agentInfo == MALE10TO14 || agentInfo == FEMALE10TO14){
+        if(willGoToSchool(currDay, timeOfDay)) return findIndexToMove(hasSchool);
+        if(!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 18) && willMove(40)) return findIndexToMove(hasEntertainment);
+        return findIndexToMove(hasResidential);
+    }
+    if(agentInfo == MALE15TO19 || agentInfo == FEMALE15TO19){
+        if(willGoToSchool(currDay, timeOfDay) && willMove(85)) return findIndexToMove(hasSchool);
+        if(!isWeekDay(currDay) && willMove(40) && inTimeRange(timeOfDay, 9, 18)) return findIndexToMove(hasParksAndRec);
+        if((isWeekDay(currDay) && inTimeRange(timeOfDay, 11,20) && willMove(30)) || (!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 24) && willMove(75))) return findIndexToMove(hasEntertainment);
+        //TODO add mroe options to kids
     }
 
     return -1;
@@ -141,6 +152,10 @@ bool Transportation::willMove(int percentChance){//TODO return true if the rando
 bool Transportation::inTimeRange(int timeOfDay, int min, int max){
 
     return false;
+}
+
+bool Transportation::willGoToSchool(DayOfWeek currDay, int timeOfDay){
+    return isWeekDay(currDay) && (inTimeRange(timeOfDay, 8, 16));
 }
 // Agent *Transportation::moveSusceptibleToInfected(int locationIndex, int agentIndex){
 //     if(locationIndex < 0 || locationIndex >= getLocationListLength()) return NULL;
