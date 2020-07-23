@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 17/07/20
- * ver 0.02
+ * 23/07/20
+ * ver 0.03
  * 
  * This is the class file for the hospital class
  ***************/
@@ -70,7 +70,7 @@ void Hospital::increaseIcuCount(int numAgents) {
 }
 
 void Hospital::HospitalTimeStep(double timestep) {
-    for (int i = 0; i < hospitalICU.size(); i++) {
+    for (int i = 0; i < (int)hospitalICU.size(); i++) {
         string sirResponse  = hospitalICU[i]->SIRTimeStep(timestep);
         if (sirResponse == "RECOVERAGENT") {
             Agent *recoveredAgent = hospitalGeneralWard.at(i);
@@ -84,7 +84,7 @@ void Hospital::HospitalTimeStep(double timestep) {
     }
 
 
-    for (int i = 0; i < hospitalGeneralWard.size(); i++) {
+    for (int i = 0; i < (int)hospitalGeneralWard.size(); i++) {
         string sirResponse  = hospitalGeneralWard[i]->SIRTimeStep(timestep);
         if (sirResponse == "ICUAGENT") {
             Agent *toICU = hospitalGeneralWard.at(i);

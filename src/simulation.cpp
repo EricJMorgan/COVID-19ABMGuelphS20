@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.05
+ * 23/07/20
+ * ver 0.06
  * 
  * This is the class file for the simulation class
  ***************/
@@ -84,16 +84,16 @@ void Simulation::simulateTimeStep(){
     isoCompartment.newlyHospitalized.clear();
 
     // agent sir time step
-    for (int i = 0; i < locationInfo->getLocationListLength(); i++) {
-        vector<Agent*> currentInfected = locationInfo->getLocationAt(i).getInfected();
+    for (int i = 0; i < (int)locationInfo->getLocationListLength(); i++) {
+        vector<Agent*> currentInfected = locationInfo->getLocationAt(i)->getInfected();
         for (int j = 0; j < currentInfected.size(); j++) {
             string sirResponse = currentInfected[j]->SIRTimeStep(timeStep);
             if (sirResponse == "ISOAGENT") {
-                Agent* toIsolate = locationInfo->getLocationAt(i).removeInfectedAgent(j);
+                Agent* toIsolate = locationInfo->getLocationAt(i)->removeInfectedAgent(j);
                 isoCompartment.AddMildlyInfectedAgents(toIsolate);
                 j--;
             } else if (sirResponse == "RECOVERAGENT") {
-                Agent* recoveredAgent = locationInfo->getLocationAt(i).removeInfectedAgent(j);
+                Agent* recoveredAgent = locationInfo->getLocationAt(i)->removeInfectedAgent(j);
                 isoCompartment.AddMildlyInfectedAgents(recoveredAgent);
                 recoveredAgents.push_back(recoveredAgent);
                 j--;

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 20/07/20
- * ver 0.02
+ * 23/07/20
+ * ver 0.03
  * 
  * This is the class file for the isolation compartment class
  ***************/
@@ -32,7 +32,7 @@ void IsolationCompartment::AddMildlyInfectedAgents(Agent *toIsolate) {
 }
 
 void IsolationCompartment::SimulateIsoTimeStep (double timeStep) {
-    for (int i = 0; i < isolated.size(); i++) {
+    for (int i = 0; i < (int)isolated.size(); i++) {
         string sirResponse  = isolated[i]->SIRTimeStep(timeStep);
         if (sirResponse == "HOSPITALAGENT") {
             Agent *recoveredAgent = isolated.at(i);

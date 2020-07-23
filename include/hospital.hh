@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 17/07/20
- * ver 0.03
+ * 23/07/20
+ * ver 0.04
  * 
  * This is the header file for the hospital class
  ***************/
@@ -93,10 +93,10 @@ class Hospital {
     /**
      * HospitalTimeStep
      * 
-     * 
+     * This moves the Agents currently in the hospital through an SIR timestep
+     * and then determines if the agent needs to be moved to a different stage
      */
     void HospitalTimeStep(double timestep);
-
 
     // returns to be read and cleared
     std::vector<Agent *> newlyDeceased;
