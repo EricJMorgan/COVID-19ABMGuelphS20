@@ -114,14 +114,34 @@ void Transportation::InfectAgentsPostMovement(){
 
 int Transportation::agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDay){
     AgentInfo agentInfo = toMove->getAgentInfo();
-    if(agentInfo== MALE0TO4 || agentInfo == FEMALE0TO4) return -1;//For now lets assume babies stay home all day
-    if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){
-        
+    if(agentInfo== MALE0TO4 || agentInfo == FEMALE0TO4) return findIndexToMove(hasResidential);//For now lets assume babies stay home all day
+    if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){//5to9 year olds only go to school and then go home really
+        if(isWeekDay(currDay) && (inTimeRange(timeOfDay, 8, 16))) return findIndexToMove(hasSchool);
+        if(!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 18) && willMove(30)) return findIndexToMove(hasEntertainment);//TODO might change % chance based on income
+        return findIndexToMove(hasResidential);
     }
 
     return -1;
 }
 
+bool Transportation::isWeekDay(DayOfWeek currDay){
+        return 0 <= currDay && currDay <= 4;
+}
+
+int Transportation::findIndexToMove(vector<Location*> toMoveList){//TODO the logic for this and making it more likley to pick data higher up on the list
+
+    return -1;
+}
+
+bool Transportation::willMove(int percentChance){//TODO return true if the random shows into the percentage
+
+    return false;
+}
+
+bool Transportation::inTimeRange(int timeOfDay, int min, int max){
+
+    return false;
+}
 // Agent *Transportation::moveSusceptibleToInfected(int locationIndex, int agentIndex){
 //     if(locationIndex < 0 || locationIndex >= getLocationListLength()) return NULL;
 //     if(agentIndex < 0 || agentIndex >= getLocationAt(locationIndex).getSusceptibleSize()) return NULL;

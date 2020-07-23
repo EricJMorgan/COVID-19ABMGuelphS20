@@ -142,6 +142,15 @@ class Transportation {
 
     void InfectAgentsPostMovement();
 
+    bool isWeekDay(DayOfWeek currDay);
+
+    bool willMove(int percentChance);
+
+    int findIndexToMove(vector<Location*> toMoveList);
+
+    bool inTimeRange(int timeOfDay, int min, int max);
+
+
 };
 
 
