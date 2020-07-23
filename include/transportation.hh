@@ -125,7 +125,7 @@ class Transportation {
     std::vector<Location> hasEntertainment;
     std::vector<Location> hasHealth;
     std::vector<Location> hasPlaceOfWorship;
-    std::vector<Location> isResidential;
+    std::vector<Location> hasResidential;
 
     int randomInRange(int floor, int ceiling);
 

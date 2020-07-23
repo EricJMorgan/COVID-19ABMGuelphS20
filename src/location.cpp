@@ -127,3 +127,11 @@ int Location::getSusceptibleSize(){
 int Location::getInfectedSize(){
     return (int)susceptible.size();
 }
+
+void Location::setLocationIndex(int index){
+    vectorLocation = index;
+}
+
+int Location::getLocationIndex(){
+    return vectorLocation;
+}

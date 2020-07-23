@@ -29,6 +29,26 @@ Transportation::Transportation(Agent **arr, int arrSize){
         return lhs.amountOfLocations < rhs.amountOfLocations;
     });
 
+    //This adds all the locations into lists to make the movement math eaiser
+    Location holder;
+    for(int i = 0; i < getLocationListLength(); i++){
+        getLocationAt(i).setLocationIndex(i);
+        holder = getLocationAt(i);
+        if(holder.getLocationCountAt(GENSTORE)) hasGenStore.push_back(holder);
+        if(holder.getLocationCountAt(TRANSPORT)) hasTransport.push_back(holder);
+        if(holder.getLocationCountAt(SCHOOL)) hasSchool.push_back(holder);
+        if(holder.getLocationCountAt(PARKSANDREC)) hasParksAndRec.push_back(holder);
+        if(holder.getLocationCountAt(SERVICES)) hasServices.push_back(holder);
+        if(holder.getLocationCountAt(ENTERTAINMENT)) hasEntertainment.push_back(holder);
+        if(holder.getLocationCountAt(HEALTH)) hasHealth.push_back(holder);
+        if(holder.getLocationCountAt(PLACEOFWORSHIP)) hasPlaceOfWorship.push_back(holder);
+        if(holder.getLocationCountAt(RESIDENTIAL)) hasResidential.push_back(holder);
+    }
+
+    for(int i = 0; i < getLocationListLength(); i++){
+        cout << getLocationAt(i).getLocationIndex() << endl;
+    }
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(0, getLocationListLength() - 1);

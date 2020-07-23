@@ -254,12 +254,17 @@ class Location : public GeographicalRisk {
      */
     int getInfectedSize();
 
+    void setLocationIndex(int index);
+
+    int getLocationIndex();
+
 
     private:
     int population;
     int pplDensity;
     int avgTimeSpent;
     int avgAgentInteraction;
+    int vectorLocation;
     SIRtotals sirTotalLocation;
     string postalCodeGrouping;
     std::vector<string> postalCodes;
