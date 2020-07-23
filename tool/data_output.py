@@ -17,3 +17,6 @@ def get_X(value):
 
 def get_Y(value):
     return value + 0.1
+
+def get_randomY(value):
+    return value + (value * random.uniform(-0.1,0.1))

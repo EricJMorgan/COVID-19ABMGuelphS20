@@ -13,14 +13,17 @@ import plotly.express as px
 #Import other packages
 from time import sleep
 import pandas as pd
+#import geopandas
 
 #Import other python functions
 import data_output as cpp
 import user_input as uip
 
 #Example to print to real-time graph
-X = cpp.start_X()
+X1 = cpp.start_X()
+X2 = cpp.start_X()
 Y = cpp.start_Y()
+Z = cpp.start_Y()
 
 #Start Dash app
 app = dash.Dash(__name__)
@@ -41,24 +44,23 @@ def header():
                 "COVID-19 Simulation in Guelph",
             ),
         ],
-        className = "one-half column",
         id = "title",
-        style = {"width": "33%", "display": "inline-block"},
-        ),
-        html.Div([
-            html.A(
-                html.Button("Extra", id = "extra"),
-                #insert href here
-            ),
-            html.A(
-                html.Button("Learn More", id = "learn-more"),
-                #insert href here
-            ),
-        ],
         className = "one-half column",
-        id = "menu-buttons",
-        style = {"width": "66%", "display": "inline-block"},
-        )
+        ),
+#        html.Div([
+#            html.A(
+#                html.Button("Extra", id = "extra"),
+#                #insert href here
+#            ),
+#            html.A(
+#                html.Button("Learn More", id = "learn-more"),
+#                #insert href here
+#            ),
+#        ],
+#        className = "one-half column",
+#        id = "menu-buttons",
+#        style = {"width": "66%", "display": "inline-block"},
+#        )
     ],
     id = "header",
     className = "row flex-display",
@@ -69,18 +71,21 @@ def buttons():
         html.Button("Start Simulation", id = "start"),
         html.Button("Pause", id = "pause"),
         html.Button("Reset", id = "reset"),
-    ])
+    ],
+    id = "buttons",
+    className = "mini_container",
+    )
 
 def sideBar():
     return html.Div([
         #GEOGRAPHICAL RISK SECTION
         html.H3(
             "Geographical Risks",
-            className = "geo_risk_label",
+            className = "control_label",
         ),
         html.P(
             "Social Distancing Severity",
-            className = "social_distancing_label",
+            className = "control_label",
         ),
         dcc.Slider(
             id = "social_distancing_slider",
@@ -103,7 +108,7 @@ def sideBar():
         ),
         html.P(
             "Mask Compliance",
-            className = "mask_compliance_label",
+            className = "control_label",
         ),
         dcc.Slider(
             id = "mask_compliance_slider",
@@ -126,7 +131,7 @@ def sideBar():
         ),
         html.P(
             "Maintenance in Hygiene",
-            className = "maint_hygiene_label",
+            className = "control_label",
         ),
         dcc.Slider(
             id = "maint_hygiene_slider",
@@ -150,11 +155,11 @@ def sideBar():
         #SIR INPUTS
         html.H3(
             "Simulation Factors",
-            className = "simulation_factors_label",
+            className = "control_label",
         ),
         html.P(
             "Incubation Period",
-            className = "incubation_label",
+            className = "control_label",
         ),
         dcc.Slider(
             id = "incubation_slider",
@@ -179,8 +184,29 @@ def sideBar():
             className = "dcc_control",
         ),
         html.P(
+            "Recovery Period",
+            className = "control_label",
+        ),
+        dcc.Slider(
+            id = "recovery_period_slider",
+            min = 7,
+            max = 14,
+            value = 7,
+            marks = {
+                7: '7',
+                8: '8',
+                9: '9',
+                10: '10',
+                11: '11',
+                12: '12',
+                13: '13',
+                14: '14',
+            },
+            className = "dcc_control",
+        ),
+        html.P(
             "Time Between Incubation and Hospital",
-            className = "incubation_hospital_label",
+            className = "control_label",
         ),
         dcc.Slider(
             id = "incubation_hospital_slider",
@@ -198,21 +224,68 @@ def sideBar():
             },
             className = "dcc_control",
         ),
+        html.P(
+            "Time Between Hospital and ICU",
+            className = "control_label",
+        ),
+        dcc.Slider(
+            id = "hospital_icu_slider",
+            min = 1,
+            max = 3,
+            value = 2,
+            marks = {
+                1: '1',
+                2: '2',
+                3: '3',
+            },
+            className = "dcc_control",
+        ),
+        html.P(
+            "Time Between ICU and Death",
+            className = "control_label",
+        ),
+        dcc.Slider(
+            id = "icu_death_slider",
+            min = 1,
+            max = 6,
+            value = 5,
+            marks = {
+                1: '1',
+                2: '2',
+                3: '3',
+                4: '4',
+                5: '5',
+                6: '6',
+            },
+            className = "dcc_control",
+        ),
     ],
-    className = "pretty_container four columns",
+    className = "mini_container",
     id = "user-options",
     )
 
-def graph():
+def graph_linear():
     return html.Div([
-        dcc.Graph(id = 'live-graph', animate = True),
+        dcc.Graph(id = 'linear-graph', animate = True),
         dcc.Interval(
-            id = 'graph-update',
+            id = 'linear-update',
             interval = 1000 #update every 1 second
         )
     ],
-    className = "pretty_container",
-    id = "graph",
+    className = "mini_container",
+    id = "graph1",
+    )
+
+def graph_random():
+    return html.Div([
+        dcc.Graph(id = 'random-graph', animate = True),
+        dcc.Interval(
+            id = 'random-update',
+            interval = 1000 #update every 1 second
+        )
+    ],
+    className = "mini_container",
+    id = "graph2",
     )
 
 #Layout of Dash app
@@ -227,34 +300,56 @@ app.layout = html.Div(
             style = {"width": "25%", "display": "inline-block"},
             ),
             html.Div([
-                graph(),
+                graph_linear(),
+                graph_random(),
             ],
-            style = {"width": "50%", "display": "inline-block"},
+            style = {"width": "75%", "display": "inline-block"},
             ),
-        ])
+        ],
+        className = "row flex-display",
+        )
     ]
 )
 
 #Interactive elements of Dash app
-@app.callback(Output('live-graph', 'figure'),
-             [Input('graph-update', 'n_intervals')]
+@app.callback(Output('linear-graph', 'figure'),
+             [Input('linear-update', 'n_intervals')]
 )
-def update_graph_scatter(input_data):
-    global X
+def update_linear_scatter(input_data):
+    global X1
     global Y
-    X.append(cpp.get_X(X[-1]))
-    Y.append(cpp.get_Y(Y[-1]))
-    #Y.append(Y[-1]+Y[-1]*random.uniform(-0.1,0.1))
+    X1.append(cpp.get_X(X1[-1]))
+    Y.append(cpp.get_randomY(Y[-1]))
 
-    data = go.Scatter(
-        x = list(X),
+    data1 = go.Scatter(
+        x = list(X1),
         y = list(Y),
+        name = 'Scatter',
+        mode = 'lines+markers'
+    )
+
+    return {'data':[data1], 'layout': go.Layout(xaxis=dict(range=[min(X1), max(X1)]),
+                                               yaxis=dict(range=[min(Y), max(Y)]))}
+
+#Interactive elements of Dash app
+@app.callback(Output('random-graph', 'figure'),
+             [Input('random-update', 'n_intervals')]
+)
+def update_random_scatter(input_data):
+    global X2
+    global Z
+    X2.append(cpp.get_X(X2[-1]))
+    Z.append(cpp.get_randomY(Z[-1]))
+
+    data2 = go.Scatter(
+        x = list(X2),
+        y = list(Z),
         name='Scatter',
         mode='lines+markers'
     )
 
-    return {'data':[data], 'layout': go.Layout(xaxis=dict(range=[min(X), max(X)]),
-                                               yaxis=dict(range=[min(Y), max(Y)]))}
+    return {'data':[data2], 'layout': go.Layout(xaxis=dict(range=[min(X2), max(X2)]),
+                                               yaxis=dict(range=[min(Z), max(Z)]))}
 
 #Start Dash app
 if __name__ == "__main__":
