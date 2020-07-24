@@ -220,6 +220,8 @@ class Transportation {
      */
     bool willGoToWork(DayOfWeek currDay, int timeOfDay);
 
+    int adultChanceOfMoving(DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark);
+
 
 };
 
