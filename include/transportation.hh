@@ -140,6 +140,7 @@ class Transportation {
      */
     int agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDay);
 
+    //TODO add header comments to this
     void InfectAgentsPostMovement();
 
 
@@ -197,7 +198,7 @@ class Transportation {
      * willGoToSchool
      * 
      * this function looks at the day and time to see if a student will
-     * be at school for a paticular timestep ie 10pm on a thursday they would
+     * be at school for a paticular timestep ie 10am on a thursday they would
      * vs a sunday at 5pm
      * 
      * @param currDay, an enum of the currDay
@@ -205,6 +206,19 @@ class Transportation {
      * @return true if school is open false if not
      */
     bool willGoToSchool(DayOfWeek currDay, int timeOfDay);
+
+    /**
+     * willGoToWork
+     * 
+     * this function looks at the day and time to see if an adult
+     * will be at work for a paticular timestep ie 10am on a thursday they
+     * would be vs a sunday at 7pm
+     * 
+     * @param currDay, an enum of the currDay
+     * @param timeOfDay, the current time
+     * @return true if work is open false if not
+     */
+    bool willGoToWork(DayOfWeek currDay, int timeOfDay);
 
 
 };
