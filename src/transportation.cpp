@@ -85,7 +85,7 @@ Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int a
     return holder;
 }
 
-void Transportation::simulateAgentMovment(){
+int Transportation::simulateAgentMovment(){
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     int amountOfAgents;
     for(int i = 0; i < locationListSize; i++){
@@ -99,16 +99,19 @@ void Transportation::simulateAgentMovment(){
         }
     }
 
-    InfectAgentsPostMovement();
+    return InfectAgentsPostMovement();
 }
 
-void Transportation::InfectAgentsPostMovement(){
+int Transportation::InfectAgentsPostMovement(){
+    int totalNewInfected = 0;
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     for(int i = 0; i < locationListSize; i++){
         // will take care of all infecting
 
-        getLocationAt(i)->infectPeople();
+        totalNewInfected += getLocationAt(i)->infectPeople();
     }
+
+    return totalNewInfected;
 }
 
 

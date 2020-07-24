@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 23/07/20
- * ver 0.05
+ * 24/07/20
+ * ver 0.06
  * 
  * This is the class file for the geographical risk class
  ***************/
@@ -66,16 +66,20 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     chanceOfInfection = (avgSymptomaticCarriers + avgMaskWearerRisk + avgAsymptomaticRisk + avgHygieneRisk) * socialDistancing * locationRiskTotal / totalAvgWeighted ;
 }
 
-void GeographicalRisk::infectPeople() {
+int GeographicalRisk::infectPeople() {
     updateAvgCountsAndRisk();
+    int infectedCount = 0;
 
     for (int i = 0; i < population; i++) {
         double agentInfectionChance = (double) rand()/RAND_MAX;
 
         if (currentAgents[i].DetermineSeverity() == SUSCEPTIBLE && agentInfectionChance < chanceOfInfection) {
             currentAgents[i].AgentInfected();
+            infectedCount++;
         }
     }
+
+    return infectedCount;
 }
 
 int GeographicalRisk::getLocationCountAt(int index){
