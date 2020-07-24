@@ -203,8 +203,8 @@ bool Transportation::willMove(int percentChance){//TODO return true if the rando
 }
 
 bool Transportation::inTimeRange(int timeOfDay, int min, int max){
-
-    return false;
+    if(timeOfDay < 0 || timeOfDay > 24) return false;
+    return timeOfDay >= min && timeOfDay <= max;
 }
 
 bool Transportation::willGoToSchool(DayOfWeek currDay, int timeOfDay){//TODO students might move to multiple schools a day, might need a fix
