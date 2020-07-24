@@ -67,8 +67,6 @@ int Simulation::getPopulation(){
 }
 
 void Simulation::simulateTimeStep(){
-    //TODO add agent movment and infection
-
     // hospital
     guelphHospital.HospitalTimeStep(timeStep);
     deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
@@ -80,7 +78,9 @@ void Simulation::simulateTimeStep(){
     isoCompartment.SimulateIsoTimeStep(timeStep);
     recoveredAgents.insert(recoveredAgents.end(), isoCompartment.newlyRecovered.begin(), isoCompartment.newlyRecovered.end());
     isoCompartment.newlyRecovered.clear();
-    // Hospital insert function @Joyce
+    for (int i = 0; i < (int)isoCompartment.newlyHospitalized.size(); i++) {
+        guelphHospital.increaseHospitalCount(isoCompartment.newlyHospitalized[i]);
+    }
     isoCompartment.newlyHospitalized.clear();
 
     // agent sir time step

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 23/07/20
- * ver 0.03
+ * 24/07/20
+ * ver 0.04
  * 
  * This is the class file for the hospital class
  ***************/
@@ -14,71 +14,78 @@
 Hospital::Hospital() {
     numberPpl = 0;
     icuCount = 0;
-    overflow = false;
+    hospitalOverflow = false;
+    icuOverflow = false;
 }
 
-void Hospital::freeIcuBeds(int freeNum) {
-    if(freeNum <= icuCount) {
-        icuCount = icuCount - freeNum;
-    } else {
-        cout << "ERROR: Number of ICU cases to be freed exceeds current total" << endl;
-        cout << "Will attempt to zero out the number of ICU cases instead" << endl;
-        icuCount = 0;
+void Hospital::freeIcuBeds(int indexToRemove) {
+    if (indexToRemove < 0 || indexToRemove >= (int)hospitalICU.size()) {
+        cout << "Trying to free icu out of bounds index" << endl;
+        return;
     }
+
+    hospitalICU.erase(hospitalICU.begin() + indexToRemove);
+    icuCount--;
     indicateOverflow();
 }
 
-void Hospital::freeHospitalBeds(int freeNum) {
-    if(freeNum <= numberPpl) {
-        numberPpl = numberPpl - freeNum;
-    } else {
-        cout << "ERROR: Number of hospital cases to be freed exceeds current total" << endl;
-        cout << "Will attempt to zero out the number of hospital cases instead" << endl;
-        numberPpl = 0;
+void Hospital::freeHospitalBeds(int indexToRemove) {
+    if (indexToRemove < 0 || indexToRemove >= (int)hospitalGeneralWard.size()) {
+        cout << "Trying to free hospital out of bounds index" << endl;
+        return;
     }
+    
+    hospitalGeneralWard.erase(hospitalGeneralWard.begin() + indexToRemove);
+    numberPpl--;
     indicateOverflow();
 }
 
 void Hospital::indicateOverflow() {
-    if(numberPpl > totalBedCount || icuCount > icuBedCount) {
-        overflow = true;
+    if(numberPpl > totalBedCount) {
+        hospitalOverflow = true;
     } else {
-        overflow = false;
+        hospitalOverflow = false;
+    }
+
+    if(icuCount > icuBedCount) {
+        icuOverflow = true;
+    } else {
+        icuOverflow = false;
     }
 }
 
-//Change this to take agent* as well
-void Hospital::increaseHospitalCount(int numAgents) {
-    if(numAgents > 0) {
-        numberPpl = numberPpl + numAgents;
-        indicateOverflow();
-    } else {
-        cout << "ERROR: Number of agents is negative" << endl;
-        cout << "Will add nothing to the number of hospitalized patients" << endl;
+void Hospital::increaseHospitalCount(Agent* agentToAdd) {
+    if (agentToAdd == NULL) {
+        cout << "Passing NULL to increase hospital" << endl;
+        return;
     }
+
+    hospitalGeneralWard.push_back(agentToAdd);
+    numberPpl++;
+    indicateOverflow();
 }
 
-//Change this to take agent* as well
-void Hospital::increaseIcuCount(int numAgents) {
-    if(numAgents > 0) {
-        icuCount = icuCount + numAgents;
-        indicateOverflow();
-    } else {
-        cout << "ERROR: Number of agents is negative" << endl;
-        cout << "Will add nothing to the number of ICU patients" << endl;
+void Hospital::increaseIcuCount(Agent* agentToAdd) {
+    if (agentToAdd == NULL) {
+        cout << "Passing NULL to increase ICU" << endl;
+        return;
     }
+    
+    hospitalICU.push_back(agentToAdd);
+    icuCount++;
+    indicateOverflow(); 
 }
 
 void Hospital::HospitalTimeStep(double timestep) {
     for (int i = 0; i < (int)hospitalICU.size(); i++) {
         string sirResponse  = hospitalICU[i]->SIRTimeStep(timestep);
         if (sirResponse == "RECOVERAGENT") {
-            Agent *recoveredAgent = hospitalGeneralWard.at(i);
-            hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
+            Agent *recoveredAgent = hospitalICU.at(i);
+            hospitalICU.erase(hospitalICU.begin() + i);
             newlyRecovered.push_back(recoveredAgent);
         } else if (sirResponse == "DECEASEAGENT") {
-            Agent *deceasedAgent = hospitalGeneralWard.at(i);
-            hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
+            Agent *deceasedAgent = hospitalICU.at(i);
+            hospitalICU.erase(hospitalICU.begin() + i);
             newlyDeceased.push_back(deceasedAgent);
         }
     }
