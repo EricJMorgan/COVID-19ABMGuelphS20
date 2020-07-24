@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 23/07/20
- * ver 0.04
+ * 24/07/20
+ * ver 0.05
  * 
  * This is the header file for the hospital class
  ***************/
@@ -58,9 +58,9 @@ class Hospital {
      * This function adds agents to the hospital if they are in need of hospital
      * care
      * 
-     * @param numAgents, this is the number of agents to be emitted to the hospital
+     * @param agentToAdd, this is the agent to be emitted to the hospital
      */
-    void increaseHospitalCount(int numAgents);
+    void increaseHospitalCount(Agent* agentToAdd);
 
     /**
      * increaseIcuCount
@@ -68,9 +68,9 @@ class Hospital {
      * This function adds agents from the hospital to ICU if they are in need of
      * critical care
      * 
-     * @param numAgents, this is the number of agents to be emitted to ICU
+     * @param agentToAdd, this is the agent to be emitted to ICU
      */
-    void increaseIcuCount(int numAgents);
+    void increaseIcuCount(Agent* agentToAdd);
 
     /**
      * getTotalBeds
@@ -107,11 +107,11 @@ class Hospital {
     const int icuBedCount = 22;     //total ICU beds
     int numberPpl;                  //excluding ICU patients
     int icuCount;                   //total ICU patients
-    bool overflow;
+    bool hospitalOverflow; //TODO figure out how to handle overflow
+    bool icuOverflow;
 
-    // TODO ask joice to implement instead of just numbers
-    std::vector<Agent *> hospitalGeneralWard;
-    std::vector<Agent *> hospitalICU;
+    std::vector<Agent *> hospitalGeneralWard; // Agents admitted to general hospital
+    std::vector<Agent *> hospitalICU;         // Agents admitted to ICU
 
     /**
      * indicateOverflow
