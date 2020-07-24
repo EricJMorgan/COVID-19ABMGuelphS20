@@ -61,7 +61,7 @@ class GeographicalRisk {
      * and various total counts, it will then take the succeptible people in the region and 
      * 
      */
-    void infectPeople();
+    int infectPeople();
 
     //int getAmountOfLocations();
 

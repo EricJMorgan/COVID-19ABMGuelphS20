@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.04
+ * 24/07/20
+ * ver 0.05
  * 
  * This is the header file for the transportation class
  ***************/
@@ -108,7 +108,7 @@ class Transportation {
      * When called this method will simulate the movment of the entire population of
      * the given location
      */
-    void simulateAgentMovment();
+    int simulateAgentMovment();
 
     private:
     PostalCodeHash *postalCodes;
@@ -116,7 +116,7 @@ class Transportation {
 
     int randomInRange(int floor, int ceiling);
 
-    void InfectAgentsPostMovement();
+    int InfectAgentsPostMovement();
 
 };
 
