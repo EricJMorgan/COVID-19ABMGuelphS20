@@ -102,7 +102,12 @@ void Simulation::simulateTimeStep(){
     }
     
     // transport agents and infect ppl
-    locationInfo->simulateAgentMovment();
+    int newlyInfected = locationInfo->simulateAgentMovment();
+
+    deceasedTotal = (int)deceasedAgents.size();
+    recoveredTotal = (int)recoveredAgents.size();
+    infectedTotal += newlyInfected;
+    infectedCurrent = infectedTotal - deceasedTotal - recoveredTotal;
 
     stepTime();//increase time at end of day
 }

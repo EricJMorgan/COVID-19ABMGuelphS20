@@ -108,7 +108,7 @@ class Transportation {
      * When called this method will simulate the movment of the entire population of
      * the given location
      */
-    void simulateAgentMovment();
+    int simulateAgentMovment();
 
     private:
     PostalCodeHash *postalCodes;
@@ -116,7 +116,7 @@ class Transportation {
 
     int randomInRange(int floor, int ceiling);
 
-    void InfectAgentsPostMovement();
+    int InfectAgentsPostMovement();
 
 };
 

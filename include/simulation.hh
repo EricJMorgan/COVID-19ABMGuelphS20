@@ -104,6 +104,12 @@ class Simulation {
     int agentCount;
     int population;
 
+    //outputs for Front End graph
+    int infectedCurrent;
+    int infectedTotal;
+    int deceasedTotal;
+    int recoveredTotal;
+
     /**
      * addNewAgent
      * 
