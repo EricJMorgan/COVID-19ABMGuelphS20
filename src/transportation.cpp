@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 23/07/20
- * ver 0.04
+ * 24/07/20
+ * ver 0.05
  * 
  * This is the class file for the transportation class
  ***************/
@@ -131,7 +131,7 @@ int Transportation::agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDa
         //TODO add mroe options to kids
     }
     else if(agentInfo == MALE20TO24 || agentInfo == FEMALE20TO24){
-        if(willGoToSchool(currDay, timeOfDay) && willMove(85)) return findIndexToMove(hasSchool);
+        if(willGoToSchool(currDay, timeOfDay) && willMove(70)) return findIndexToMove(hasSchool);
     }
     else if(agentInfo == MALE25TO29 || agentInfo == FEMALE25TO29){
 
@@ -195,7 +195,7 @@ bool Transportation::inTimeRange(int timeOfDay, int min, int max){
     return false;
 }
 
-bool Transportation::willGoToSchool(DayOfWeek currDay, int timeOfDay){
+bool Transportation::willGoToSchool(DayOfWeek currDay, int timeOfDay){//TODO students might move to multiple schools a day, might need a fix
     return isWeekDay(currDay) && (inTimeRange(timeOfDay, 8, 16));
 }
 // Agent *Transportation::moveSusceptibleToInfected(int locationIndex, int agentIndex){

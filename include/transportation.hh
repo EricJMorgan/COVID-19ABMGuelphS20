@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 23/07/20
- * ver 0.05
+ * 24/07/20
+ * ver 0.06
  * 
  * This is the header file for the transportation class
  ***************/
@@ -142,14 +142,68 @@ class Transportation {
 
     void InfectAgentsPostMovement();
 
+
+    /**
+     * isWeekDay
+     * 
+     * takes in a DayOfWeek enum and checks if it is a weekday
+     * 
+     * @param currDay, the day to check
+     * @return true if is weekday false if not weekday
+     */
     bool isWeekDay(DayOfWeek currDay);
 
+    /**
+     * willMove
+     * 
+     * This is a helper function to take in a % chance
+     * that an agent will move, the higher the percentChance
+     * the more likley to return true
+     * 
+     * @param percentChance, in range 1-100
+     * @return a bool of if the chances came up true or false
+     */
     bool willMove(int percentChance);
 
+
+    /**
+     * findIndexToMove
+     * 
+     * this function will take in any given location list
+     * to find what location the agent will be moving to index wise
+     * The whole idea of this is more agents are more likley to go somewhere
+     * with more locations so this is mroe likley to return a higher number as the
+     * list of locations is sorted lower to higher
+     * 
+     * @param toMoveList, a vector of location pointers of the given type of place the agent will move to
+     * @return the index in the location vector that the agent will move to
+     */
     int findIndexToMove(vector<Location*> toMoveList);
 
+    /**
+     * inTimeRange
+     * 
+     * this function will take the current time and then
+     * the floor and roof of the time range that is acceptable 
+     * 
+     * @param timeOfDay, the current time of day
+     * @param min, the inclusive floor of the range
+     * @param max, the inclusive roof of the range
+     * @return a bool of if it is range
+     */
     bool inTimeRange(int timeOfDay, int min, int max);
 
+    /**
+     * willGoToSchool
+     * 
+     * this function looks at the day and time to see if a student will
+     * be at school for a paticular timestep ie 10pm on a thursday they would
+     * vs a sunday at 5pm
+     * 
+     * @param currDay, an enum of the currDay
+     * @param timeOfDay, the current time
+     * @return true if school is open false if not
+     */
     bool willGoToSchool(DayOfWeek currDay, int timeOfDay);
 
 
