@@ -114,25 +114,66 @@ void Transportation::InfectAgentsPostMovement(){
 
 int Transportation::agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDay){
     AgentInfo agentInfo = toMove->getAgentInfo();
-    if(agentInfo== MALE0TO4 || agentInfo == FEMALE0TO4) return findIndexToMove(hasResidential);//For now lets assume babies stay home all day
-    if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){//5to9 year olds only go to school and then go home really
+    if(agentInfo== MALE0TO4 || agentInfo == FEMALE0TO4);
+    else if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){//5to9 year olds only go to school and then go home really
         if(willGoToSchool(currDay, timeOfDay)) return findIndexToMove(hasSchool);
         if(!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 18) && willMove(30)) return findIndexToMove(hasEntertainment);//TODO might change % chance based on income
-        return findIndexToMove(hasResidential);
     }
-    if(agentInfo == MALE10TO14 || agentInfo == FEMALE10TO14){
+    else if(agentInfo == MALE10TO14 || agentInfo == FEMALE10TO14){
         if(willGoToSchool(currDay, timeOfDay)) return findIndexToMove(hasSchool);
         if(!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 18) && willMove(40)) return findIndexToMove(hasEntertainment);
-        return findIndexToMove(hasResidential);
     }
-    if(agentInfo == MALE15TO19 || agentInfo == FEMALE15TO19){
+    else if(agentInfo == MALE15TO19 || agentInfo == FEMALE15TO19){
         if(willGoToSchool(currDay, timeOfDay) && willMove(85)) return findIndexToMove(hasSchool);
         if(!isWeekDay(currDay) && willMove(40) && inTimeRange(timeOfDay, 9, 18)) return findIndexToMove(hasParksAndRec);
-        if((isWeekDay(currDay) && inTimeRange(timeOfDay, 11,20) && willMove(30)) || (!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 24) && willMove(75))) return findIndexToMove(hasEntertainment);
+        if((isWeekDay(currDay) && inTimeRange(timeOfDay, 11,20) && willMove(30)) || 
+            (!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 24) && willMove(75))) return findIndexToMove(hasEntertainment);
         //TODO add mroe options to kids
     }
+    else if(agentInfo == MALE20TO24 || agentInfo == FEMALE20TO24){
+        if(willGoToSchool(currDay, timeOfDay) && willMove(85)) return findIndexToMove(hasSchool);
+    }
+    else if(agentInfo == MALE25TO29 || agentInfo == FEMALE25TO29){
 
-    return -1;
+    }
+    else if(agentInfo == MALE30TO34 || agentInfo == FEMALE30TO34){
+
+    }
+    else if(agentInfo == MALE35TO39 || agentInfo == FEMALE35TO39){
+
+    }
+    else if(agentInfo == MALE40TO44 || agentInfo == FEMALE40TO44){
+
+    }
+    else if(agentInfo == MALE45TO49 || agentInfo == FEMALE45TO49){
+
+    }
+    else if(agentInfo == MALE50TO54 || agentInfo == FEMALE50TO54){
+
+    }
+    else if(agentInfo == MALE55TO59 || agentInfo == FEMALE55TO59){
+
+    }
+    else if(agentInfo == MALE60TO64 || agentInfo == FEMALE60TO64){
+
+    }
+    else if(agentInfo == MALE65TO69 || agentInfo == FEMALE65TO69){
+
+    }
+    else if(agentInfo == MALE70TO74 || agentInfo == FEMALE70TO74){
+        
+    }
+    else if(agentInfo == MALE75TO79 || agentInfo == FEMALE75TO79){
+
+    }
+    else if(agentInfo == MALE80TO84 || agentInfo == MALE80TO84){
+
+    }
+    else if(agentInfo == MALE85 || agentInfo == FEMALE85){
+
+    }
+
+    return findIndexToMove(hasResidential);//default return
 }
 
 bool Transportation::isWeekDay(DayOfWeek currDay){
