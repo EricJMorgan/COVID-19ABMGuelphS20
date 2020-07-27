@@ -82,5 +82,7 @@
         "ios": "cpp",
         "locale": "cpp",
         "stack": "cpp"
-    }
+    },
+    "python.pythonPath": "venv\\Scripts\\python.exe",
+    "git.ignoreLimitWarning": true
 }
