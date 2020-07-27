@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 14/07/20
- * ver 0.02
+ * 23/07/20
+ * ver 0.03
  * 
  * This is the class file for the SIR class
  ***************/
@@ -32,19 +32,20 @@ SIR::SIR() {
  * 
  * This progresses agents through their various SIR model paths.
  ************************/
-void SIR::SIRTimeStep(double timeStep) {
+string SIR::SIRTimeStep(double timeStep) {
     if (currentSeverity == SUSCEPTIBLE || currentSeverity == RECOVERED || currentSeverity == DECEASED) {
-        return;
+        return "NA";
     }
     
     // incubating stage (infect other ppl?)
     if (isIncubating) {
         incubationPeriod -= timeStep;
 
-        if (incubationPeriod <= 0) {
+        if (incubationPeriod <= 0 && showsSymptoms) {
             QuarantineAgent();
+            return "ISOAGENT";
         }
-        return;
+        return "NA";
     }
     
     // move agents between stages, check stages in order
@@ -52,23 +53,29 @@ void SIR::SIRTimeStep(double timeStep) {
         timeTilHospital -= timeStep;
         if (timeTilHospital == 0) {
             HospitalAgent();
+            return "HOSPITALAGENT";
         }
     } else if (needIcu && timeTilICU > 0) {
         timeTilICU -= timeStep;
         if (timeTilICU == 0) {
             PlaceAgentInICU();
+            return "ICUAGENT";
         }
     } else if (fatalCase && timeTilDeath > 0) {
         timeTilDeath -= timeStep;
         if (timeTilDeath == 0) {
             AgentDeceased();
+            return "DECEASEAGENT";
         }
     } else {
         timeTilRecovery -= timeStep;
         if (timeTilRecovery == 0) {
             RecoverAgent();
+            return "RECOVERAGENT";
         }
     }
+
+    return "NA";
 }
 
 /*************************

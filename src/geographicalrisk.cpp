@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.04
+ * 24/07/20
+ * ver 0.06
  * 
  * This is the class file for the geographical risk class
  ***************/
@@ -20,7 +20,7 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
 
     // calculate averages in compartment during current timestep
     avgSymptomaticCarriers = (double)sirTotalLocation.getShowsSymptoms() / (double)population;
-    avgAsymptomatic = 1 - avgSymptomaticCarriers;
+    avgAsymptomatic = ((double)sirTotalLocation.getInfected() - (double)sirTotalLocation.getShowsSymptoms()) / (double)population;
     avgMaskWearer = (double)sirTotalLocation.getMaskWearer() / (double)population;
     avgHygiene = (double)sirTotalLocation.getHygiene() / (double)population;
 
@@ -66,16 +66,20 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     chanceOfInfection = (avgSymptomaticCarriers + avgMaskWearerRisk + avgAsymptomaticRisk + avgHygieneRisk) * socialDistancing * locationRiskTotal / totalAvgWeighted ;
 }
 
-void GeographicalRisk::infectPeople() {
+int GeographicalRisk::infectPeople() {
     updateAvgCountsAndRisk();
+    int infectedCount = 0;
 
     for (int i = 0; i < population; i++) {
         double agentInfectionChance = (double) rand()/RAND_MAX;
 
         if (currentAgents[i].DetermineSeverity() == SUSCEPTIBLE && agentInfectionChance < chanceOfInfection) {
             currentAgents[i].AgentInfected();
+            infectedCount++;
         }
     }
+
+    return infectedCount;
 }
 
 int GeographicalRisk::getLocationCountAt(int index){

@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 17/07/20
- * ver 0.03
+ * 24/07/20
+ * ver 0.05
  * 
  * This is the header file for the hospital class
  ***************/
@@ -12,6 +12,8 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
+#include "agent.hh"
 
 using namespace std;
 
@@ -23,13 +25,6 @@ using namespace std;
 
 //Declare simulation class
 class Hospital {
-    private:
-    const int totalBedCount = 130;  //excluding ICU beds
-    const int icuBedCount = 22;     //total ICU beds
-    int numberPpl;                  //excluding ICU patients
-    int icuCount;                   //total ICU patients
-    bool overflow;
-
     public:
     /**
      * Hospital
@@ -58,23 +53,14 @@ class Hospital {
     void freeHospitalBeds(int freeNum);
 
     /**
-     * indicateOverflow
-     * 
-     * This function checks if the hospital has exceeded its bed limitations for
-     * either ICU or non-ICU beds; the simulation continues to run even when there
-     * is an overflow
-     */
-    void indicateOverflow();
-
-    /**
      * increaseHospitcalCount
      * 
      * This function adds agents to the hospital if they are in need of hospital
      * care
      * 
-     * @param numAgents, this is the number of agents to be emitted to the hospital
+     * @param agentToAdd, this is the agent to be emitted to the hospital
      */
-    void increaseHospitalCount(int numAgents);
+    void increaseHospitalCount(Agent* agentToAdd);
 
     /**
      * increaseIcuCount
@@ -82,9 +68,9 @@ class Hospital {
      * This function adds agents from the hospital to ICU if they are in need of
      * critical care
      * 
-     * @param numAgents, this is the number of agents to be emitted to ICU
+     * @param agentToAdd, this is the agent to be emitted to ICU
      */
-    void increaseIcuCount(int numAgents);
+    void increaseIcuCount(Agent* agentToAdd);
 
     /**
      * getTotalBeds
@@ -103,6 +89,38 @@ class Hospital {
      * @return the number of agents in ICU cases
      */
     int getIcuBeds();
+
+    /**
+     * HospitalTimeStep
+     * 
+     * This moves the Agents currently in the hospital through an SIR timestep
+     * and then determines if the agent needs to be moved to a different stage
+     */
+    void HospitalTimeStep(double timestep);
+
+    // returns to be read and cleared
+    std::vector<Agent *> newlyDeceased;
+    std::vector<Agent *> newlyRecovered;
+
+    private:
+    const int totalBedCount = 130;  //excluding ICU beds
+    const int icuBedCount = 22;     //total ICU beds
+    int numberPpl;                  //excluding ICU patients
+    int icuCount;                   //total ICU patients
+    bool hospitalOverflow; //TODO figure out how to handle overflow
+    bool icuOverflow;
+
+    std::vector<Agent *> hospitalGeneralWard; // Agents admitted to general hospital
+    std::vector<Agent *> hospitalICU;         // Agents admitted to ICU
+
+    /**
+     * indicateOverflow
+     * 
+     * This function checks if the hospital has exceeded its bed limitations for
+     * either ICU or non-ICU beds; the simulation continues to run even when there
+     * is an overflow
+     */
+    void indicateOverflow();
 };
 
 #endif

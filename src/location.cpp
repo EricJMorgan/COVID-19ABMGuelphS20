@@ -81,7 +81,6 @@ vector<Agent *> Location::getInfected(){
     return infected;
 }
 
-
 bool Location::postalCodeListContainsDup(string newPostalCode){
     return std::find(postalCodes.begin(), postalCodes.end(), newPostalCode) != postalCodes.end();
 }

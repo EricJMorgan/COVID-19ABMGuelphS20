@@ -260,7 +260,6 @@ class Location : public GeographicalRisk {
     int pplDensity;
     int avgTimeSpent;
     int avgAgentInteraction;
-    SIRtotals sirTotalLocation;
     string postalCodeGrouping;
     std::vector<string> postalCodes;
     std::vector<Agent *> susceptible;

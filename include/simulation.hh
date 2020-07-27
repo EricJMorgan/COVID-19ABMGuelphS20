@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.04
+ * 24/07/20
+ * ver 0.06
  * 
  * This is the header file for the simulation class
  ***************/
@@ -15,13 +15,15 @@
 #include <vector>
 #include "SIRtotals.hh"
 #include "transportation.hh"
+#include "agent.hh"
+#include "location.hh"
+#include "hospital.hh"
+#include "isolationcompartment.hh"
 
 using namespace std;
 
 enum DayOfWeek{MON, TUE, WED, THU, FRI, SAT, SUN};
 
-class Agent;
-class Location;
 //Declare simulation class
 class Simulation {
     public:
@@ -81,9 +83,13 @@ class Simulation {
     
     Transportation *locationInfo = NULL;
 
+    std::vector<Agent *> recoveredAgents;
+    std::vector<Agent *> deceasedAgents;
+
     private:
     Agent** simAgents;
-    Location** guelphMap; //map
+    Hospital guelphHospital;
+    IsolationCompartment isoCompartment;
 
     // user inputs
     int timeStep;
@@ -97,6 +103,12 @@ class Simulation {
     bool fluSeason;
     int agentCount;
     int population;
+
+    //outputs for Front End graph
+    int infectedCurrent;
+    int infectedTotal;
+    int deceasedTotal;
+    int recoveredTotal;
 
     /**
      * addNewAgent

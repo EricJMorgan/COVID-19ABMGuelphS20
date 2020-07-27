@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 20/07/20
- * ver 0.03
+ * 23/07/20
+ * ver 0.04
  * 
  * This is the header file for the isolation compartment class
  ***************/
@@ -13,11 +13,9 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "agent.hh"
 
 using namespace std;
-
-//Forward declarations
-class Agent;
 
 //Declare simulation class
 class IsolationCompartment {
@@ -54,6 +52,17 @@ class IsolationCompartment {
      * This function quarantines/isolates agents that have mild symptoms
      */
     void AddMildlyInfectedAgents(Agent *toIsolate);
+
+    /**
+     * SimulateIsoTimeStep
+     * 
+     * This function simulates the time step for the isolation compartment
+     */
+    void SimulateIsoTimeStep(double timeStep);
+
+    // returns to be read and cleared
+    std::vector<Agent *> newlyRecovered;
+    std::vector<Agent *> newlyHospitalized;
 };
 
 #endif

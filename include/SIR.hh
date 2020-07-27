@@ -71,8 +71,9 @@ class SIR {
      * agent has either recovered or passed away from the virus.
      * 
      * @param info, the timestep of the overall simulation in hours
+     * @return string, indicate if any update took place
      */
-    void SIRTimeStep(double timeStep);
+    string SIRTimeStep(double timeStep);
 
     /**
      * DetermineSeverity

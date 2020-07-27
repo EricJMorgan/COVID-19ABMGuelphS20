@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.04
+ * 24/07/20
+ * ver 0.05
  * 
  * This is the header file for the transportation class
  ***************/
@@ -60,9 +60,9 @@ class Transportation {
      * a copy of the object
      * 
      * @param index, the index of the wanted data must be in range 0 <= index < listLength
-     * @return a copy of the location object
+     * @return the location object
      */
-    Location getLocationAt(int index);
+    Location *getLocationAt(int index);
 
     /**
      * moveSusceptibleAgent
@@ -108,15 +108,15 @@ class Transportation {
      * When called this method will simulate the movment of the entire population of
      * the given location
      */
-    void simulateAgentMovment();
-
-
+    int simulateAgentMovment();
 
     private:
     PostalCodeHash *postalCodes;
     std::vector<Location> locationList;
 
     int randomInRange(int floor, int ceiling);
+
+    int InfectAgentsPostMovement();
 
 };
 
