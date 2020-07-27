@@ -75,9 +75,41 @@ class Simulation {
     int getPopulation();
 
     void runSim();
-    void updateOutput();
-    void removeAgentsResolved();
-    void updateSIRGraphic();
+
+    /**
+     * getInfectedCurrent
+     * 
+     * This get the current number of infected agents
+     */
+    int getInfectedCurrent();
+
+    /**
+     * getInfectedTotal
+     * 
+     * This get the current number of infected agents
+     */
+    int getInfectedTotal();
+
+    /**
+     * getDeceasedTotal
+     * 
+     * This get the current number of deceased agents
+     */
+    int getDeceasedTotal();
+
+    /**
+     * getRecoveredTotal
+     * 
+     * This get the current number of recovered agents
+     */
+    int getRecoveredTotal();
+
+    /**
+     * setInputs
+     * 
+     * Takes inputs from front end sends them to the associated classes
+     */
+    //int getRecoveredTotal(ask joyce for inputs after getting works);
     
     SIRtotals totalSimSIRStats;
     
@@ -104,11 +136,11 @@ class Simulation {
     int agentCount;
     int population;
 
-    //outputs for Front End graph
-    int infectedCurrent;
-    int infectedTotal;
-    int deceasedTotal;
-    int recoveredTotal;
+    //outputs for Front End graph (TODO remove hard)
+    int infectedCurrent = 100;
+    int infectedTotal = 200;
+    int deceasedTotal = 50;
+    int recoveredTotal = 50;
 
     /**
      * addNewAgent

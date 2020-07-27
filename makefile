@@ -59,3 +59,6 @@ memtest:
 
 clean:
 	rm $(OBJECTS) $(BINDIR)abmSim
+
+library:
+	$(CC) -shared -o sharedLib.so  $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCodeHash.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o

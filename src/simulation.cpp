@@ -50,8 +50,6 @@ Simulation::Simulation(string fileName) {
     setUpAgents(fileName);
 
     locationInfo = new Transportation(simAgents, population);
-    
-
 }
 
 Simulation::~Simulation(){
@@ -185,4 +183,28 @@ DayOfWeek Simulation::getNextDay(DayOfWeek oldDay){
         default:
             return MON;
     }
+}
+
+int Simulation::getInfectedCurrent() {
+    return infectedCurrent;
+}
+
+int Simulation::getInfectedTotal() {
+    return infectedTotal;
+}
+
+int Simulation::getDeceasedTotal() {
+    return deceasedTotal;
+}
+
+int Simulation::getRecoveredTotal() {
+    return recoveredTotal;
+}
+
+extern "C" {
+    Simulation* Simulation_new(){ return new Simulation("demographicGuelph.csv"); }
+    int getInfectedCurrent(Simulation* sim){ return sim->getInfectedCurrent(); }
+    int getInfectedTotal(Simulation* sim){ return sim->getInfectedTotal(); }
+    int getDeceasedTotal(Simulation* sim){ return sim->getDeceasedTotal(); }
+    int getRecoveredTotal(Simulation* sim){ return sim->getRecoveredTotal(); }
 }
