@@ -62,7 +62,7 @@ class Simulation {
      * 
      * @param index, the index in the internal array must be in range of 0 <= index < population
      */
-    Agent getAgentAt(int index);
+    Agent *getAgentAt(int index);
 
     /**
      * getPopulation

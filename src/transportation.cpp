@@ -10,6 +10,7 @@
 #include "transportation.hh"
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -17,14 +18,14 @@ Transportation::Transportation(Agent **arr, int arrSize){
     postalCodes = new PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
    
     for(int i = 0; i < 7000; i++){
-        if(postalCodes->hashTable[i].getPostalCodeGrouping().compare("") != 0){
+        if(postalCodes->hashTable[i]->getPostalCodeGrouping().compare("") != 0){
             locationList.push_back(postalCodes->hashTable[i]);
         }
     }
 
     //This sorts the location list so that the more locations a postal code grouping has the further up the list they are
-    sort(locationList.begin(), locationList.end(), [](const Location& lhs, const Location& rhs){
-        return lhs.amountOfLocations < rhs.amountOfLocations;
+    sort(locationList.begin(), locationList.end(), [](const Location* lhs, const Location* rhs){
+        return lhs->amountOfLocations < rhs->amountOfLocations;
     });
 
     //This adds all the locations into lists to make the movement math eaiser
@@ -48,7 +49,7 @@ Transportation::Transportation(Agent **arr, int arrSize){
     std::uniform_int_distribution<> distr(0, getLocationListLength() - 1);
 
     for(int i = 0; i < arrSize; i++){
-        locationList.at(distr(gen)).addAgentToSusceptible(arr[i]);
+        locationList.at(distr(gen))->addAgentToSusceptible(arr[i]);
     }
 }
 
@@ -62,7 +63,7 @@ int Transportation::getLocationListLength(){
 
 Location* Transportation::getLocationAt(int index){
     if(index < 0 || index >= getLocationListLength()) return NULL;
-    return &locationList.at(index);
+    return locationList.at(index);
 }
 
 Agent *Transportation::moveSusceptibleAgent(int locationOne, int locationTwo, int agentIndex){
@@ -85,17 +86,17 @@ Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int a
     return holder;
 }
 
-int Transportation::simulateAgentMovment(){
+int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     int amountOfAgents;
     for(int i = 0; i < locationListSize; i++){
         amountOfAgents = getLocationAt(i)->getSusceptibleSize();
         for(int j = 0; j < amountOfAgents; j++){
-            //TODO MOVE SUS AGENTS AROUND
+            moveSusceptibleAgent(i, agentMovingTo(getLocationAt(i)->getSusceptibleAgentAt(j), timeOfDay, currDay), j);
         }
         amountOfAgents = getLocationAt(i)->getInfectedSize();
         for(int j = 0; j < amountOfAgents; j++){
-            //TODO MOVE INFECTED AGENTS AROUND
+            moveInfectedAgent(i, agentMovingTo(getLocationAt(i)->getSusceptibleAgentAt(j), timeOfDay, currDay), j);
         }
     }
 
@@ -115,7 +116,7 @@ int Transportation::InfectAgentsPostMovement(){
 }
 
 
-int Transportation::agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDay){
+int Transportation::agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDay){//TODO no health or Place of worship incluided yet
     AgentInfo agentInfo = toMove->getAgentInfo();
     if(agentInfo== MALE0TO4 || agentInfo == FEMALE0TO4);
     else if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){//5to9 year olds only go to school and then go home really
@@ -192,17 +193,16 @@ int Transportation::agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDa
 }
 
 bool Transportation::isWeekDay(DayOfWeek currDay){
-        return 0 <= currDay && currDay <= 4;
+    return 0 <= currDay && currDay <= 4;
 }
 
 int Transportation::findIndexToMove(vector<Location*> toMoveList){//TODO the logic for this and making it more likley to pick data higher up on the list
-
-    return -1;
+    return (rand() % toMoveList.size());
 }
 
 bool Transportation::willMove(int percentChance){//TODO return true if the random shows into the percentage
 
-    return false;
+    return (1 + (rand() % 100)) <= percentChance;
 }
 
 bool Transportation::inTimeRange(int timeOfDay, int min, int max){

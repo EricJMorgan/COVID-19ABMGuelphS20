@@ -102,7 +102,7 @@ void Simulation::simulateTimeStep(){
     }
     
     // transport agents and infect ppl
-    int newlyInfected = locationInfo->simulateAgentMovment();
+    int newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
 
     deceasedTotal = (int)deceasedAgents.size();
     recoveredTotal = (int)recoveredAgents.size();
@@ -112,13 +112,13 @@ void Simulation::simulateTimeStep(){
     stepTime();//increase time at end of day
 }
 
-Agent Simulation::getAgentAt(int index){
+Agent *Simulation::getAgentAt(int index){
     if(index >= agentCount || index < 0){
         cerr << "ERROR INVALID INDEX" << endl;
-        return Agent(MALE0TO4);
+        return NULL;
     }
 
-    Agent holder = Agent(simAgents[index]->getAgentInfo());
+    Agent *holder = simAgents[index];
     return holder;
 }
 

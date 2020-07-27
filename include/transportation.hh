@@ -114,11 +114,11 @@ class Transportation {
      * When called this method will simulate the movment of the entire population of
      * the given location
      */
-    int simulateAgentMovment();
+    int simulateAgentMovment(int timeOfDay, DayOfWeek currDay);
 
     private:
     PostalCodeHash *postalCodes;
-    std::vector<Location> locationList;
+    std::vector<Location*> locationList;
     std::vector<Location*> hasGenStore;
     std::vector<Location*> hasTransport;
     std::vector<Location*> hasSchool;
@@ -128,6 +128,7 @@ class Transportation {
     std::vector<Location*> hasHealth;
     std::vector<Location*> hasPlaceOfWorship;
     std::vector<Location*> hasResidential;
+
 
     int randomInRange(int floor, int ceiling);
 

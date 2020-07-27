@@ -14,7 +14,7 @@
 class PostalCodeHash{
     //PUBLIC FUNCTIONS
     public:
-    Location *hashTable;
+    Location **hashTable;
 
     /**
      * PostalCodeHash
