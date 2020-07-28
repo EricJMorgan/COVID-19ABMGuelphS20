@@ -47,6 +47,9 @@ PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int has
 }
 
 PostalCodeHash::~PostalCodeHash(){
+    for(int i = 0; i < 7000; i++){//TODO make this dynamic sized with input
+        delete hashTable[i];
+    }
     if(hashTable != NULL){
         delete[] hashTable;
     }

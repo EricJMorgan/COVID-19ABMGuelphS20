@@ -128,6 +128,7 @@ void Simulation::addNewAgent(string personInfo, int amountToAdd){
         Agent* tempAgent = new Agent(AgentInfoMap[personInfo]);
         simAgents[agentCount] = tempAgent;
         agentCount++;
+        tempAgent = NULL;
     }
 }
 
