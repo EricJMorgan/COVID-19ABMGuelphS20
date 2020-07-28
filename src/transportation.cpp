@@ -96,7 +96,6 @@ int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
     for(int i = 0; i < locationListSize; i++){
         for(int j = 0; j < getLocationAt(i)->getSusceptibleSize(); j++){
             cout << j << " " <<  newLocation << " " << i << " " << iterations << endl;
-            if(getLocationAt(i)->getSusceptibleSize() == 0) break;
             if(!getLocationAt(i)->getSusceptibleAgentAt(j)->getHasMoved()){
                 newLocation = agentMovingTo(getLocationAt(i)->getSusceptibleAgentAt(j)->getAgentInfo(), timeOfDay, currDay);
                 moveSusceptibleAgent(i, newLocation, j);
