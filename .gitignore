@@ -31,7 +31,7 @@
 *.out
 *.app
 
-# curr compiled file
+# curr compiled file & folder
 abmSim
 venv
 .vscode/settings.json
