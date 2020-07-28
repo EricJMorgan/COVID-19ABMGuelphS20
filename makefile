@@ -1,6 +1,6 @@
 # COVID-19ABMGuelphS20
-# 07/07/20
-# ver 0.02
+# 28/07/20
+# ver 0.03
 #
 # Makefile for the COVID-19 eABM
 
@@ -59,3 +59,6 @@ memtest:
 
 clean:
 	rm $(OBJECTS) $(BINDIR)abmSim
+
+library:
+	$(CC) -shared -o sharedLib.so  $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCodeHash.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
