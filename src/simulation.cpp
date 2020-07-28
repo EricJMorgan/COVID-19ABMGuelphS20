@@ -207,4 +207,5 @@ extern "C" {
     int getInfectedTotal(Simulation* sim){ return sim->getInfectedTotal(); }
     int getDeceasedTotal(Simulation* sim){ return sim->getDeceasedTotal(); }
     int getRecoveredTotal(Simulation* sim){ return sim->getRecoveredTotal(); }
+    void simulateTimeStep(Simulation* sim){ sim->simulateTimeStep(); }
 }
