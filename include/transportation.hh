@@ -143,7 +143,7 @@ class Transportation {
      * @param currDay, the day of the week
      * @return the index that the agent will move to, -1 if it will stay in place
      */
-    int agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDay);
+    int agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay);
 
     //TODO add header comments to this
     int InfectAgentsPostMovement();

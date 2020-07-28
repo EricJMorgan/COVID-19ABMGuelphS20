@@ -80,11 +80,15 @@ class Agent : public SIR {
      */
     void goHome();
 
+    void setHasMoved(bool newMove);
+    bool getHasMoved();
+
     //To be implemented later
     void quarantineTime();
     void goodHygiene();
     void followWearMask();
     void followSocialDistancing();
+    
 
     bool agentHygiene;
     bool wearingMask;
@@ -99,6 +103,9 @@ class Agent : public SIR {
     bool employment;
     string sector;
     Location* currLocation;
+    bool hasMoved;
+
+    
 
     /**
      * DecideEthnicity

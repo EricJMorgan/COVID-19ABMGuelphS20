@@ -85,7 +85,7 @@ bool Location::postalCodeListContainsDup(string newPostalCode){
     return std::find(postalCodes.begin(), postalCodes.end(), newPostalCode) != postalCodes.end();
 }
 
-void Location::addAgentToSusceptible(Agent *toAdd){
+void Location::addAgentToSusceptible(Agent *toAdd){//Cleared from segault
     if(toAdd == NULL) return;
     susceptible.push_back(toAdd);
 }

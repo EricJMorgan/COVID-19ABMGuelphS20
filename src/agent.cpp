@@ -28,6 +28,14 @@ string Agent::getEthnicity(){
     return ethnicity;
 }
 
+void Agent::setHasMoved(bool newMove){
+    hasMoved = newMove;
+}
+
+bool Agent::getHasMoved(){
+    return hasMoved;
+}
+
 /*************************
  * DecideEducation
  * 

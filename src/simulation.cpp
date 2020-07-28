@@ -49,6 +49,7 @@ Simulation::Simulation(string fileName) {
 
     setUpAgents(fileName);
 
+    //cleared segfault before this
     locationInfo = new Transportation(simAgents, population);
     
 

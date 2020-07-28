@@ -44,13 +44,15 @@ Transportation::Transportation(Agent **arr, int arrSize){
         if(holder->getLocationCountAt(RESIDENTIAL)) hasResidential.push_back(holder);
     }
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distr(0, getLocationListLength() - 1);
-
-    for(int i = 0; i < arrSize; i++){
-        locationList.at(distr(gen))->addAgentToSusceptible(arr[i]);
+    for(int i = 0; i < arrSize; i++){//cleared from segfault
+        locationList.at(rand() % getLocationListLength())->addAgentToSusceptible(arr[i]);
     }
+
+    // for(int i = 0; i < (int)locationList.size(); i++){
+    //     for(int j = 0; j < (int)locationList.at(i)->getSusceptibleSize(); j++){
+    //         cout << locationList.at(i)->getSusceptibleAgentAt(j)->getAgentInfo() << endl;
+    //     }
+    // }
 }
 
 Transportation::~Transportation(){
@@ -72,6 +74,7 @@ Agent *Transportation::moveSusceptibleAgent(int locationOne, int locationTwo, in
     if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne)->getSusceptibleSize()) return NULL;
 
     Agent *holder = getLocationAt(locationOne)->removeSusceptibleAgent(agentIndex);
+    holder->setHasMoved(true);
     getLocationAt(locationTwo)->addAgentToSusceptible(holder);
     return holder;
 }
@@ -88,17 +91,37 @@ Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int a
 
 int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
-    int amountOfAgents;
+    int newLocation;
+    int iterations = 0;
     for(int i = 0; i < locationListSize; i++){
-        amountOfAgents = getLocationAt(i)->getSusceptibleSize();
-        for(int j = 0; j < amountOfAgents; j++){
-            moveSusceptibleAgent(i, agentMovingTo(getLocationAt(i)->getSusceptibleAgentAt(j), timeOfDay, currDay), j);
+        for(int j = 0; j < getLocationAt(i)->getSusceptibleSize(); j++){
+            cout << j << " " <<  newLocation << " " << i << " " << iterations << endl;
+            if(getLocationAt(i)->getSusceptibleSize() == 0) break;
+            if(!getLocationAt(i)->getSusceptibleAgentAt(j)->getHasMoved()){
+                newLocation = agentMovingTo(getLocationAt(i)->getSusceptibleAgentAt(j)->getAgentInfo(), timeOfDay, currDay);
+                moveSusceptibleAgent(i, newLocation, j);
+                if(newLocation != i) j--;
+                iterations++;
+            }
+            if(newLocation == i) iterations++;
         }
-        amountOfAgents = getLocationAt(i)->getInfectedSize();
-        for(int j = 0; j < amountOfAgents; j++){
-            moveInfectedAgent(i, agentMovingTo(getLocationAt(i)->getSusceptibleAgentAt(j), timeOfDay, currDay), j);
+        // amountOfAgents = getLocationAt(i)->getInfectedSize();
+        // for(int j = 0; j < amountOfAgents; j++){
+        //     //moveInfectedAgent(i, agentMovingTo(getLocationAt(i)->getSusceptibleAgentAt(j), timeOfDay, currDay), j);
+        // }
+    }
+
+
+    //int locationListSize;
+    for(int i = 0; i < locationListSize; i++){
+        for(int j = 0; j < getLocationAt(i)->getSusceptibleSize(); j++){
+            getLocationAt(i)->getSusceptibleAgentAt(j)->setHasMoved(false);
+        }
+        for(int j = 0; j < getLocationAt(i)->getInfectedSize(); j++){
+            getLocationAt(i)->getInfectedAgentAt(j)->setHasMoved(false);
         }
     }
+
 
     return InfectAgentsPostMovement();
 }
@@ -116,8 +139,7 @@ int Transportation::InfectAgentsPostMovement(){
 }
 
 
-int Transportation::agentMovingTo(Agent *toMove, int timeOfDay, DayOfWeek currDay){//TODO no health or Place of worship incluided yet
-    AgentInfo agentInfo = toMove->getAgentInfo();
+int Transportation::agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay){//TODO no health or Place of worship incluided yet
     if(agentInfo== MALE0TO4 || agentInfo == FEMALE0TO4);
     else if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){//5to9 year olds only go to school and then go home really
         if(willGoToSchool(currDay, timeOfDay)) return findIndexToMove(hasSchool);
