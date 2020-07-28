@@ -1,6 +1,6 @@
 # COVID-19ABMGuelphS20
-# 07/07/20
-# ver 0.02
+# 28/07/20
+# ver 0.03
 #
 # Makefile for the COVID-19 eABM
 
