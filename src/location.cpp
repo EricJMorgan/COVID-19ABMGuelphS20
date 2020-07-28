@@ -124,7 +124,7 @@ int Location::getSusceptibleSize(){
 }
 
 int Location::getInfectedSize(){
-    return (int)susceptible.size();
+    return (int)infected.size();
 }
 
 void Location::setLocationIndex(int index){

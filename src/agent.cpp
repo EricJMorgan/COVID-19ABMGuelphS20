@@ -13,6 +13,7 @@
 // Constructor
 Agent::Agent(AgentInfo agentInfo) {
     info = agentInfo;
+    hasMoved = false;
     DecideEthnicity();
     DecideMartialStatus();
     DecideHouseholdIncome();
@@ -21,6 +22,7 @@ Agent::Agent(AgentInfo agentInfo) {
 }
 
 AgentInfo Agent::getAgentInfo(){
+    hasMoved = false;
     return info;
 }
 

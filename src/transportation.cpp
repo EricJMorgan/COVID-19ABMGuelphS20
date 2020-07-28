@@ -92,17 +92,13 @@ Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int a
 int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     int newLocation;
-    int iterations = 0;
     for(int i = 0; i < locationListSize; i++){
         for(int j = 0; j < getLocationAt(i)->getSusceptibleSize(); j++){
-            cout << j << " " <<  newLocation << " " << i << " " << iterations << endl;
             if(!getLocationAt(i)->getSusceptibleAgentAt(j)->getHasMoved()){
                 newLocation = agentMovingTo(getLocationAt(i)->getSusceptibleAgentAt(j)->getAgentInfo(), timeOfDay, currDay);
                 moveSusceptibleAgent(i, newLocation, j);
                 if(newLocation != i) j--;
-                iterations++;
             }
-            if(newLocation == i) iterations++;
         }
         // amountOfAgents = getLocationAt(i)->getInfectedSize();
         // for(int j = 0; j < amountOfAgents; j++){
@@ -110,9 +106,10 @@ int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
         // }
     }
 
-
     //int locationListSize;
     for(int i = 0; i < locationListSize; i++){
+        // cout << "err" << endl;
+        // cout << getLocationAt(i)->getSusceptibleSize() << " " << getLocationAt(i)->getInfectedSize() << " " << endl;
         for(int j = 0; j < getLocationAt(i)->getSusceptibleSize(); j++){
             getLocationAt(i)->getSusceptibleAgentAt(j)->setHasMoved(false);
         }
@@ -122,7 +119,8 @@ int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
     }
 
 
-    return InfectAgentsPostMovement();
+    //return InfectAgentsPostMovement();
+    return -1;
 }
 
 int Transportation::InfectAgentsPostMovement(){
