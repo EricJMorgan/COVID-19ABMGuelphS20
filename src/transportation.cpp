@@ -100,16 +100,17 @@ int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
                 if(newLocation != i) j--;
             }
         }
-        // amountOfAgents = getLocationAt(i)->getInfectedSize();
-        // for(int j = 0; j < amountOfAgents; j++){
-        //     //moveInfectedAgent(i, agentMovingTo(getLocationAt(i)->getSusceptibleAgentAt(j), timeOfDay, currDay), j);
-        // }
+        for(int j = 0; j < getLocationAt(i)->getInfectedSize(); j++){
+            if(!getLocationAt(i)->getInfectedAgentAt(j)->getHasMoved()){
+                newLocation = agentMovingTo(getLocationAt(i)->getInfectedAgentAt(j)->getAgentInfo(), timeOfDay, currDay);
+                moveInfectedAgent(i, newLocation, j);
+                if(newLocation != i) j--;
+            }
+        }
     }
 
     //int locationListSize;
     for(int i = 0; i < locationListSize; i++){
-        // cout << "err" << endl;
-        // cout << getLocationAt(i)->getSusceptibleSize() << " " << getLocationAt(i)->getInfectedSize() << " " << endl;
         for(int j = 0; j < getLocationAt(i)->getSusceptibleSize(); j++){
             getLocationAt(i)->getSusceptibleAgentAt(j)->setHasMoved(false);
         }
