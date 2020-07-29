@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 24/07/20
- * ver 0.05
+ * 29/07/20
+ * ver 0.06
  * 
  * This is the class file for the transportation class
  ***************/
@@ -44,15 +44,9 @@ Transportation::Transportation(Agent **arr, int arrSize){
         if(holder->getLocationCountAt(RESIDENTIAL)) hasResidential.push_back(holder);
     }
 
-    for(int i = 0; i < arrSize; i++){//cleared from segfault
+    for(int i = 0; i < arrSize; i++){
         locationList.at(rand() % getLocationListLength())->addAgentToSusceptible(arr[i]);
     }
-
-    // for(int i = 0; i < (int)locationList.size(); i++){
-    //     for(int j = 0; j < (int)locationList.at(i)->getSusceptibleSize(); j++){
-    //         cout << locationList.at(i)->getSusceptibleAgentAt(j)->getAgentInfo() << endl;
-    //     }
-    // }
 }
 
 Transportation::~Transportation(){
@@ -109,7 +103,6 @@ int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
         }
     }
 
-    //int locationListSize;
     for(int i = 0; i < locationListSize; i++){
         for(int j = 0; j < getLocationAt(i)->getSusceptibleSize(); j++){
             getLocationAt(i)->getSusceptibleAgentAt(j)->setHasMoved(false);
@@ -119,7 +112,6 @@ int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
         }
     }
 
-
     //return InfectAgentsPostMovement();
     return -1;
 }
@@ -128,8 +120,6 @@ int Transportation::InfectAgentsPostMovement(){
     int totalNewInfected = 0;
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     for(int i = 0; i < locationListSize; i++){
-        // will take care of all infecting
-
         totalNewInfected += getLocationAt(i)->infectPeople();
     }
 
@@ -246,13 +236,3 @@ int Transportation::adultChanceOfMoving(DayOfWeek currDay, int currTime, int gen
     if(inTimeRange(currTime, 10, 18) && !isWeekDay(currDay) && willMove(goPark)) return findIndexToMove(hasParksAndRec);
     return findIndexToMove(hasResidential);
 }
-
-// Agent *Transportation::moveSusceptibleToInfected(int locationIndex, int agentIndex){
-//     if(locationIndex < 0 || locationIndex >= getLocationListLength()) return NULL;
-//     if(agentIndex < 0 || agentIndex >= getLocationAt(locationIndex).getSusceptibleSize()) return NULL;
-
-//     Agent *holder = locationList.at(locationIndex).removeSusceptibleAgent(agentIndex);
-//     holder->AgentInfected();//TODO not sure if its ok to use SIR class here
-//     locationList.at(locationIndex).addAgentToInfected(holder);
-//     return holder;
-// }

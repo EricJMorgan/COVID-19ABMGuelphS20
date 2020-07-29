@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 28/07/20
- * ver 0.08
+ * 29/07/20
+ * ver 0.09
  * 
  * This is the class file for the simulation class
  ***************/
@@ -49,7 +49,6 @@ Simulation::Simulation(string fileName) {
 
     setUpAgents(fileName);
 
-    //cleared segfault before this
     locationInfo = new Transportation(simAgents, population);
 }
 

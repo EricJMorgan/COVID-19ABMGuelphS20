@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 17/07/20
- * ver 0.08
+ * 29/07/20
+ * ver 0.09
  * 
  * This is the header file for the location class
  ***************/
@@ -254,10 +254,23 @@ class Location : public GeographicalRisk {
      */
     int getInfectedSize();
 
+    /**
+     * setLocationIndex
+     * 
+     * This sets the objects location index
+     * 
+     * @param index, the index of the location in the locationListVector
+     */
     void setLocationIndex(int index);
 
+    /**
+     * getLocationIndex
+     * 
+     * This gets the objects location index
+     * 
+     * @return location of the location in the locationList
+     */
     int getLocationIndex();
-
 
     private:
     int population;

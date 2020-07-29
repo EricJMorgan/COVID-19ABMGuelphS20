@@ -1,11 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 24/07/20
-<<<<<<< HEAD
- * ver 0.06
-=======
- * ver 0.05
->>>>>>> e9d66a4ebef695e2526f8f33f0a25981184c3997
+ * 29/07/20
+ * ver 0.07
  * 
  * This is the header file for the transportation class
  ***************/
@@ -129,7 +125,16 @@ class Transportation {
     std::vector<Location*> hasPlaceOfWorship;
     std::vector<Location*> hasResidential;
 
-
+    /**
+     * randomInRange
+     * 
+     * Takes in the inclusive floor and ceiling
+     * and finds a random number in the range
+     * 
+     * @param floor, the inclusive floor of the range
+     * @param ceiling, the inclusive ceiling of the range
+     * @return the random number generated
+     */
     int randomInRange(int floor, int ceiling);
 
     /**

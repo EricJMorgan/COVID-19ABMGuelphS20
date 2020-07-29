@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.06
+ * 29/07/20
+ * ver 0.07
  * 
  * This is the header file for the agent class
  ***************/
@@ -80,7 +80,22 @@ class Agent : public SIR {
      */
     void goHome();
 
+    /**
+     * setHasMoved
+     * 
+     * This sets the agents hasMoved varible
+     * 
+     * @param newMove, true if the agent has moved this cycle false if they have not
+     */
     void setHasMoved(bool newMove);
+
+    /**
+     * getHasMoved
+     * 
+     * This gets the hasMoved varible for the agent
+     * 
+     * @return if the agent has moved in the current cycle
+     */
     bool getHasMoved();
 
     //To be implemented later
@@ -104,8 +119,6 @@ class Agent : public SIR {
     string sector;
     Location* currLocation;
     bool hasMoved;
-
-    
 
     /**
      * DecideEthnicity

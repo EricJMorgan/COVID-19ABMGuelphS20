@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 28/07/20
- * ver 0.07
+ * 29/07/20
+ * ver 0.08
  * 
  * This is the header file for the simulation class
  ***************/
@@ -21,8 +21,6 @@
 #include "isolationcompartment.hh"
 
 using namespace std;
-
-
 
 //Declare simulation class
 class Simulation {
