@@ -20,6 +20,8 @@ int main(){
     srand((unsigned int)time(NULL));
 
     Simulation sim = Simulation("demographicGuelph.csv");
+    sim.simulateTimeStep();
+    sim.simulateTimeStep();
     // for(int i = 0; i < 131805; i++){
     //     cout << sim.getAgentAt(i).agentToString() << endl;
     // }

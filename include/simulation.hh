@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 28/07/20
- * ver 0.07
+ * 29/07/20
+ * ver 0.08
  * 
  * This is the header file for the simulation class
  ***************/
@@ -21,8 +21,6 @@
 #include "isolationcompartment.hh"
 
 using namespace std;
-
-enum DayOfWeek{MON, TUE, WED, THU, FRI, SAT, SUN};
 
 //Declare simulation class
 class Simulation {
@@ -62,7 +60,7 @@ class Simulation {
      * 
      * @param index, the index in the internal array must be in range of 0 <= index < population
      */
-    Agent getAgentAt(int index);
+    Agent *getAgentAt(int index);
 
     /**
      * getPopulation

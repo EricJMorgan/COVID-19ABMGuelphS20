@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.05
+ * 29/07/20
+ * ver 0.06
  * 
  * This is the class file for the agent class
  ***************/
@@ -13,6 +13,7 @@
 // Constructor
 Agent::Agent(AgentInfo agentInfo) {
     info = agentInfo;
+    hasMoved = false;
     DecideEthnicity();
     DecideMartialStatus();
     DecideHouseholdIncome();
@@ -21,11 +22,20 @@ Agent::Agent(AgentInfo agentInfo) {
 }
 
 AgentInfo Agent::getAgentInfo(){
+    hasMoved = false;
     return info;
 }
 
 string Agent::getEthnicity(){
     return ethnicity;
+}
+
+void Agent::setHasMoved(bool newMove){
+    hasMoved = newMove;
+}
+
+bool Agent::getHasMoved(){
+    return hasMoved;
 }
 
 /*************************

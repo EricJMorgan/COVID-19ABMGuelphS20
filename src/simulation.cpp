@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 28/07/20
- * ver 0.08
+ * 29/07/20
+ * ver 0.09
  * 
  * This is the class file for the simulation class
  ***************/
@@ -100,7 +100,7 @@ void Simulation::simulateTimeStep(){
     }
     
     // transport agents and infect ppl
-    int newlyInfected = locationInfo->simulateAgentMovment();
+    int newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
 
     deceasedTotal = (int)deceasedAgents.size();
     recoveredTotal = (int)recoveredAgents.size();
@@ -110,13 +110,13 @@ void Simulation::simulateTimeStep(){
     stepTime();//increase time at end of day
 }
 
-Agent Simulation::getAgentAt(int index){
+Agent *Simulation::getAgentAt(int index){
     if(index >= agentCount || index < 0){
         cerr << "ERROR INVALID INDEX" << endl;
-        return Agent(MALE0TO4);
+        return NULL;
     }
 
-    Agent holder = Agent(simAgents[index]->getAgentInfo());
+    Agent *holder = simAgents[index];
     return holder;
 }
 
@@ -126,6 +126,7 @@ void Simulation::addNewAgent(string personInfo, int amountToAdd){
         Agent* tempAgent = new Agent(AgentInfoMap[personInfo]);
         simAgents[agentCount] = tempAgent;
         agentCount++;
+        tempAgent = NULL;
     }
 }
 

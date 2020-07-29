@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 24/07/20
- * ver 0.05
+ * 29/07/20
+ * ver 0.07
  * 
  * This is the header file for the transportation class
  ***************/
@@ -19,6 +19,8 @@
 #include "agent.hh"
 
 using namespace std;
+
+enum DayOfWeek{MON, TUE, WED, THU, FRI, SAT, SUN};
 
 //Declare simulation class
 class Transportation {
@@ -108,15 +110,128 @@ class Transportation {
      * When called this method will simulate the movment of the entire population of
      * the given location
      */
-    int simulateAgentMovment();
+    int simulateAgentMovment(int timeOfDay, DayOfWeek currDay);
 
     private:
     PostalCodeHash *postalCodes;
-    std::vector<Location> locationList;
+    std::vector<Location*> locationList;
+    std::vector<Location*> hasGenStore;
+    std::vector<Location*> hasTransport;
+    std::vector<Location*> hasSchool;
+    std::vector<Location*> hasParksAndRec;
+    std::vector<Location*> hasServices;
+    std::vector<Location*> hasEntertainment;
+    std::vector<Location*> hasHealth;
+    std::vector<Location*> hasPlaceOfWorship;
+    std::vector<Location*> hasResidential;
 
+    /**
+     * randomInRange
+     * 
+     * Takes in the inclusive floor and ceiling
+     * and finds a random number in the range
+     * 
+     * @param floor, the inclusive floor of the range
+     * @param ceiling, the inclusive ceiling of the range
+     * @return the random number generated
+     */
     int randomInRange(int floor, int ceiling);
 
+    /**
+     * agentMovingTo
+     * 
+     * This is a helper function that will look at the given data for
+     * an agent and will decide if and where it will move
+     * 
+     * @param toMove, the agent data it will look at to decide if it will move
+     * @param timeOfDay, the current time of day
+     * @param currDay, the day of the week
+     * @return the index that the agent will move to, -1 if it will stay in place
+     */
+    int agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay);
+
+    //TODO add header comments to this
     int InfectAgentsPostMovement();
+
+
+    /**
+     * isWeekDay
+     * 
+     * takes in a DayOfWeek enum and checks if it is a weekday
+     * 
+     * @param currDay, the day to check
+     * @return true if is weekday false if not weekday
+     */
+    bool isWeekDay(DayOfWeek currDay);
+
+    /**
+     * willMove
+     * 
+     * This is a helper function to take in a % chance
+     * that an agent will move, the higher the percentChance
+     * the more likley to return true
+     * 
+     * @param percentChance, in range 1-100
+     * @return a bool of if the chances came up true or false
+     */
+    bool willMove(int percentChance);
+
+
+    /**
+     * findIndexToMove
+     * 
+     * this function will take in any given location list
+     * to find what location the agent will be moving to index wise
+     * The whole idea of this is more agents are more likley to go somewhere
+     * with more locations so this is mroe likley to return a higher number as the
+     * list of locations is sorted lower to higher
+     * 
+     * @param toMoveList, a vector of location pointers of the given type of place the agent will move to
+     * @return the index in the location vector that the agent will move to
+     */
+    int findIndexToMove(vector<Location*> toMoveList);
+
+    /**
+     * inTimeRange
+     * 
+     * this function will take the current time and then
+     * the floor and roof of the time range that is acceptable 
+     * 
+     * @param timeOfDay, the current time of day
+     * @param min, the inclusive floor of the range
+     * @param max, the inclusive roof of the range
+     * @return a bool of if it is range
+     */
+    bool inTimeRange(int timeOfDay, int min, int max);
+
+    /**
+     * willGoToSchool
+     * 
+     * this function looks at the day and time to see if a student will
+     * be at school for a paticular timestep ie 10am on a thursday they would
+     * vs a sunday at 5pm
+     * 
+     * @param currDay, an enum of the currDay
+     * @param timeOfDay, the current time
+     * @return true if school is open false if not
+     */
+    bool willGoToSchool(DayOfWeek currDay, int timeOfDay);
+
+    /**
+     * willGoToWork
+     * 
+     * this function looks at the day and time to see if an adult
+     * will be at work for a paticular timestep ie 10am on a thursday they
+     * would be vs a sunday at 7pm
+     * 
+     * @param currDay, an enum of the currDay
+     * @param timeOfDay, the current time
+     * @return true if work is open false if not
+     */
+    bool willGoToWork(DayOfWeek currDay, int timeOfDay);
+
+    int adultChanceOfMoving(DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark);
+
 
 };
 

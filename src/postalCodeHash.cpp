@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 16/07/20
- * ver 0.06
+ * 29/07/20
+ * ver 0.07
  * 
  * This is the source code for the postalCodeHash object for the COVID-19 eABM
  ***************/
@@ -20,7 +20,10 @@ PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int has
     ifstream toParse;
     string holder;
     string currPostalCode;
-    hashTable = new Location[hashSize];
+    hashTable = new Location*[hashSize];
+    for(int i = 0; i < hashSize; i++){
+        hashTable[i] = new Location();
+    }
 
     toParse = openFile(tsvFile);
     if(toParse.is_open()){
@@ -44,6 +47,9 @@ PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int has
 }
 
 PostalCodeHash::~PostalCodeHash(){
+    for(int i = 0; i < 7000; i++){//TODO make this dynamic sized with input
+        delete hashTable[i];
+    }
     if(hashTable != NULL){
         delete[] hashTable;
     }
@@ -103,20 +109,20 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
         currHashValue = PostalCodeHash::getPostalHash(hashSize, newGroupedPostalCode);
         placed = false;
             while(placed == false){
-            if(hashTable[currHashValue].getPostalCodeGrouping().compare("") == 0){//If the bucket is empty
-                hashTable[currHashValue].setPostalCodeGrouping(newGroupedPostalCode);
-                hashTable[currHashValue].addPostalCodeToList(newPostalCode);
-                if((locationName.compare("residential") == 0 && !hashTable[currHashValue].postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
-                     hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
-                     if(locationName.compare("residential") != 0) hashTable[currHashValue].amountOfLocations++;
+            if(hashTable[currHashValue]->getPostalCodeGrouping().compare("") == 0){//If the bucket is empty
+                hashTable[currHashValue]->setPostalCodeGrouping(newGroupedPostalCode);
+                hashTable[currHashValue]->addPostalCodeToList(newPostalCode);
+                if((locationName.compare("residential") == 0 && !hashTable[currHashValue]->postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
+                     hashTable[currHashValue]->increaseLocationCountAt(locationTypeMap[locationName]);
+                     if(locationName.compare("residential") != 0) hashTable[currHashValue]->amountOfLocations++;
                 }
                 placed = true;
-            }else if(hashTable[currHashValue].getPostalCodeGrouping().compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping
-                if((locationName.compare("residential") == 0 && !hashTable[currHashValue].postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
-                    hashTable[currHashValue].increaseLocationCountAt(locationTypeMap[locationName]);
-                    if(locationName.compare("residential") != 0) hashTable[currHashValue].amountOfLocations++;
+            }else if(hashTable[currHashValue]->getPostalCodeGrouping().compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping
+                if((locationName.compare("residential") == 0 && !hashTable[currHashValue]->postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
+                    hashTable[currHashValue]->increaseLocationCountAt(locationTypeMap[locationName]);
+                    if(locationName.compare("residential") != 0) hashTable[currHashValue]->amountOfLocations++;
                 }
-                hashTable[currHashValue].addPostalCodeToList(newPostalCode);
+                hashTable[currHashValue]->addPostalCodeToList(newPostalCode);
                 placed = true;
             }else{//If occupied by a differnt postal code grouping go to the next one
                 if(currHashValue == hashSize - 1) currHashValue = 0;

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 15/07/20
- * ver 0.04
+ * 29/07/20
+ * ver 0.05
  * 
  * This is the header file for the postalCodeHash object for the COVID-19 eABM
  ***************/
@@ -14,7 +14,7 @@
 class PostalCodeHash{
     //PUBLIC FUNCTIONS
     public:
-    Location *hashTable;
+    Location **hashTable;
 
     /**
      * PostalCodeHash
