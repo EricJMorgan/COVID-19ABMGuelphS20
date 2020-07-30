@@ -20,8 +20,21 @@ int main(){
     srand((unsigned int)time(NULL));
 
     Simulation sim = Simulation("demographicGuelph.csv");
+    for(int i = 0; i < 5; i++){
+        cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
+    }
+    cout << endl;
+    
     sim.simulateTimeStep();
+    for(int i = 0; i < 5; i++){
+        cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
+    }
+    cout << endl;
     sim.simulateTimeStep();
+    for(int i = 0; i < 5; i++){
+        cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
+    }
+    cout << endl;
     // for(int i = 0; i < 131805; i++){
     //     cout << sim.getAgentAt(i).agentToString() << endl;
     // }
