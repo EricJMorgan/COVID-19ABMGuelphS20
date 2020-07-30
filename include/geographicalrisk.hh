@@ -66,11 +66,12 @@ class GeographicalRisk {
     //int getAmountOfLocations();
 
     // attributes shared by location and risk
-    int population;
     double chanceOfInfection;
-    Agent* currentAgents;
     int locationCount[LOCATIONTYPESIZE];
     int amountOfLocations;
+
+    std::vector<Agent *> susceptible;
+    std::vector<Agent *> infected;
 
     private:
 

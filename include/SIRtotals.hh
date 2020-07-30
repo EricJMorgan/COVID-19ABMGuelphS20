@@ -12,6 +12,7 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 #include "agent.hh"
 
 using namespace std;
@@ -22,28 +23,21 @@ class SIRtotals {
     // for general SIR 
     int susceptible;
     int infected;
-    int recovered;
-    int deceased;
 
     // for geographic risk
     int maskWearer;
     int hygiene;
-    int socialDistance;
     int maleCount;
     int showsSymptoms;
 
     public:
     SIRtotals();
-    void updateTotals(int population, Agent* simAgents);
+    void updateTotals(vector<Agent *> susAgents, vector<Agent *> infAgents);
 
     int getSusceptible();
     int getInfected();
-    int getRecovered();
-    int getDeceased();
     int getMaskWearer();
     int getHygiene();
-    int getSocialDistance();
-    int getAvgAgentAge();
     int getMaleCount();
     int getShowsSymptoms();
 };
