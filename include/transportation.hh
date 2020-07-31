@@ -192,6 +192,17 @@ class Transportation {
     int findIndexToMove(vector<Location*> toMoveList);
 
     /**
+     * findResidentialIndex
+     * 
+     * this function will take in a residential location list
+     * to find what location the agent will be moving to index wise.
+     * 
+     * @param toMoveList, a vector of location pointers to residential places
+     * @return the index in the location vector that the agent will move to
+     */
+    int findResidentialIndex(vector<Location*> toMoveList);
+
+    /**
      * inTimeRange
      * 
      * this function will take the current time and then

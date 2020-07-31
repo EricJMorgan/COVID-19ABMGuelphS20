@@ -199,7 +199,7 @@ int Transportation::agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek 
 
     }
 
-    return findIndexToMove(hasResidential);//default return
+    return findResidentialIndex(hasResidential);//default return
 }
 
 bool Transportation::isWeekDay(DayOfWeek currDay){
@@ -207,6 +207,10 @@ bool Transportation::isWeekDay(DayOfWeek currDay){
 }
 
 int Transportation::findIndexToMove(vector<Location*> toMoveList){//TODO the logic for this and making it more likley to pick data higher up on the list
+    return (rand() % toMoveList.size());
+}
+
+int Transportation::findResidentialIndex(vector<Location*> toMoveList){
     return (rand() % toMoveList.size());
 }
 
@@ -234,5 +238,5 @@ int Transportation::adultChanceOfMoving(DayOfWeek currDay, int currTime, int gen
     if(inTimeRange(currTime, 18, 24) && !isWeekDay(currDay) && willMove(goOut)) return findIndexToMove(hasEntertainment);
     if(inTimeRange(currTime, 12,20) && willMove(needServ))return findIndexToMove(hasServices);
     if(inTimeRange(currTime, 10, 18) && !isWeekDay(currDay) && willMove(goPark)) return findIndexToMove(hasParksAndRec);
-    return findIndexToMove(hasResidential);
+    return findResidentialIndex(hasResidential);
 }
