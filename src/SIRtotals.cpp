@@ -18,6 +18,11 @@ SIRtotals::SIRtotals() {
 void SIRtotals::updateTotals(vector<Agent *> susAgents, vector<Agent *> infAgents) {
     susceptible = (int)susAgents.size();
     infected = (int)infAgents.size();
+
+    maskWearer = 0;
+    hygiene = 0;
+    maleCount = 0;
+    showsSymptoms = 0;
     
     for(int i = 0; i < susceptible; i++){
         if (susAgents[i]->wearingMask) {

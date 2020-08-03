@@ -19,13 +19,17 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     sirTotalLocation.updateTotals(susceptible, infected);
     double population = (double)susceptible.size() + (double)infected.size();
 
+    if (population == 0) {
+        return;
+    }
+
     // calculate averages in compartment during current timestep
     avgSymptomaticCarriers = (double)sirTotalLocation.getShowsSymptoms() / population;
     avgAsymptomatic = ((double)sirTotalLocation.getInfected() - (double)sirTotalLocation.getShowsSymptoms()) / population;
     avgMaskWearer = (double)sirTotalLocation.getMaskWearer() / population;
     avgHygiene = (double)sirTotalLocation.getHygiene() / population;
 
-    cout << avgSymptomaticCarriers << " " << avgAsymptomatic << " " << avgMaskWearer << " " << avgHygiene << endl;
+    // cout << avgSymptomaticCarriers << " " << avgAsymptomatic << " " << avgMaskWearer << " " << avgHygiene << endl;
 
     double totalAvgWeighted = avgSymptomaticCarriers + avgAsymptomatic + avgMaskWearer + avgHygiene;
 
@@ -63,12 +67,14 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
         locationRiskTotal += getLocationCountAt(k)*locationRisks[k];
     }
 
-    locationRiskTotal = locationRiskTotal / (double)totalBusiness;
-
-    cout << chanceOfInfection << endl;
+    if (totalBusiness != 0) {
+        locationRiskTotal = locationRiskTotal / (double)totalBusiness;
+    }
 
     // update chance of infection based on all factors
-    chanceOfInfection = (avgSymptomaticCarriers + avgMaskWearerRisk + avgAsymptomaticRisk + avgHygieneRisk) * socialDistancing * locationRiskTotal / totalAvgWeighted ;
+    chanceOfInfection = (avgSymptomaticCarriers + avgMaskWearerRisk + avgAsymptomaticRisk + avgHygieneRisk + locationRiskTotal) * socialDistancing / totalAvgWeighted;
+
+    // cout << chanceOfInfection << endl;
 }
 
 int GeographicalRisk::infectPeople() {
