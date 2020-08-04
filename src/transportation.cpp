@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 29/07/20
- * ver 0.06
+ * 04/08/20
+ * ver 0.07
  * 
  * This is the class file for the transportation class
  ***************/
@@ -198,7 +198,7 @@ int Transportation::agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek 
 
     }
 
-    return findIndexToMove(hasResidential);//default return
+    return findResidentialIndex(hasResidential);//default return
 }
 
 bool Transportation::isWeekDay(DayOfWeek currDay){
@@ -206,6 +206,10 @@ bool Transportation::isWeekDay(DayOfWeek currDay){
 }
 
 int Transportation::findIndexToMove(vector<Location*> toMoveList){//TODO the logic for this and making it more likley to pick data higher up on the list
+    return (monteCarloRandom(toMoveList.size()));
+}
+
+int Transportation::findResidentialIndex(vector<Location*> toMoveList){
     return (rand() % toMoveList.size());
 }
 
@@ -233,5 +237,15 @@ int Transportation::adultChanceOfMoving(DayOfWeek currDay, int currTime, int gen
     if(inTimeRange(currTime, 18, 24) && !isWeekDay(currDay) && willMove(goOut)) return findIndexToMove(hasEntertainment);
     if(inTimeRange(currTime, 12,20) && willMove(needServ))return findIndexToMove(hasServices);
     if(inTimeRange(currTime, 10, 18) && !isWeekDay(currDay) && willMove(goPark)) return findIndexToMove(hasParksAndRec);
-    return findIndexToMove(hasResidential);
+    return findResidentialIndex(hasResidential);
+}
+
+int Transportation::monteCarloRandom(int roof){
+    int r1, r2;
+    while(true){
+        r1 = (int)(rand() % roof);
+        r2 = (int)(rand() % roof);
+
+        if(r2 < r1) return r1;
+    }
 }

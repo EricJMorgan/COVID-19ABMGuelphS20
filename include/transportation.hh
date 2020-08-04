@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 29/07/20
- * ver 0.07
+ * 04/08/20
+ * ver 0.08
  * 
  * This is the header file for the transportation class
  ***************/
@@ -192,6 +192,17 @@ class Transportation {
     int findIndexToMove(vector<Location*> toMoveList);
 
     /**
+     * findResidentialIndex
+     * 
+     * this function will take in a residential location list
+     * to find what location the agent will be moving to index wise.
+     * 
+     * @param toMoveList, a vector of location pointers to residential places
+     * @return the index in the location vector that the agent will move to
+     */
+    int findResidentialIndex(vector<Location*> toMoveList);
+
+    /**
      * inTimeRange
      * 
      * this function will take the current time and then
@@ -230,7 +241,34 @@ class Transportation {
      */
     bool willGoToWork(DayOfWeek currDay, int timeOfDay);
 
+    /**
+     * adultChanceOfMoving
+     * 
+     * this is a helper function for agent moving to
+     * that allows a % chance of each agent moving to a given place given their age
+     * 
+     * @param currrDay, the current day of the week
+     * @param currTime, the current time of the day
+     * @param genWork, the chance of someone going to a genreal store either for work or shopping
+     * @param servWork, the chance of someone going to a service store either for work or shopping
+     * @param goOut, the chance of someone going out for entertainment
+     * @param needServ, the chance of someone needing service
+     * @param goPark, the chance of someone going to parks and rec
+     * @return the index that the agent will be moving to
+     */
     int adultChanceOfMoving(DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark);
+
+    /**
+     * moteCarloRandom
+     * 
+     * this is the monteCarlo random number generation
+     * it is more likley to output a higher number in the range 
+     * of 0 - (roof - 1)
+     * 
+     * @param roof, the max number to generate (exlusive)
+     * @return the random number generated
+     */
+    int monteCarloRandom(int roof);
 
 
 };

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 20/07/20
- * ver 0.07
+ * 30/07/20
+ * ver 0.08
  * 
  * This is the main for the COVID-19 eABM
  ***************/
@@ -10,6 +10,7 @@
 #include <iostream>
 #include <time.h>
 #include "simulation.hh"
+#include <math.h>
 //testing
 #include "postalCodeHash.hh"
 #include "agent.hh"
@@ -18,6 +19,28 @@
 int main(){
 
     srand((unsigned int)time(NULL));
+    
+     Simulation sim = Simulation("demographicGuelph.csv");
+    // for(int i = 0; i < 5; i++){
+    //     cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
+    // }
+    // cout << endl;
+    
+    // for(int i = 0; i < 100; i++){
+    //     sim.simulateTimeStep();
+    // }
+    // for(int i = 0; i < 5; i++){
+    //     cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
+    // }
+    // cout << endl;
+    // sim.simulateTimeStep();
+    // for(int i = 0; i < 5; i++){
+    //     cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
+    // }
+    // cout << endl;
+
+
+
 
     Simulation sim = Simulation("demographicGuelph.csv");
     sim.simulateTimeStep();
