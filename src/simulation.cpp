@@ -15,7 +15,6 @@
 #include <vector>
 #include <boost/algorithm/string.hpp>
 
-// Constructor
 Simulation::Simulation(string fileName) {
     ifstream demographicFile;
     demographicFile.open(fileName, ios::in);

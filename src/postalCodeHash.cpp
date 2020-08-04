@@ -21,7 +21,7 @@ PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int has
     string holder;
     string currPostalCode;
     hashTable = new Location*[hashSize];
-    for(int i = 0; i < hashSize; i++){
+    for(int i = 0; i < hashSize; i++){//fill hashtable with empty objects
         hashTable[i] = new Location();
     }
 
@@ -86,7 +86,7 @@ string PostalCodeHash::getPostalCode(string fullAddress){
         }
     }
 
-    return "unknown";
+    return "unknown";//if any issue comes up in the parsing i just return this
 }
 
 

@@ -146,7 +146,7 @@ int Transportation::agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek 
     }
     else if(agentInfo == MALE20TO24 || agentInfo == FEMALE20TO24){
         if(willGoToSchool(currDay, timeOfDay) && willMove(75)) return findIndexToMove(hasSchool);
-        if(willGoToWork(currDay, timeOfDay) && willMove(15)) return findIndexToMove(hasGenStore);//Yes this is done twice in this statment
+        if(willGoToWork(currDay, timeOfDay) && willMove(15)) return findIndexToMove(hasGenStore);
         if(inTimeRange(timeOfDay, 18, 24) && !isWeekDay(currDay) && willMove(50)) return findIndexToMove(hasEntertainment);
         if(inTimeRange(timeOfDay, 16, 20) && willMove(35)) return findIndexToMove(hasServices);
         if(inTimeRange(timeOfDay, 16, 18) && willMove(20)) return findIndexToMove(hasGenStore);
@@ -205,7 +205,7 @@ bool Transportation::isWeekDay(DayOfWeek currDay){
     return 0 <= currDay && currDay <= 4;
 }
 
-int Transportation::findIndexToMove(vector<Location*> toMoveList){//TODO the logic for this and making it more likley to pick data higher up on the list
+int Transportation::findIndexToMove(vector<Location*> toMoveList){
     return (monteCarloRandom(toMoveList.size()));
 }
 
@@ -213,8 +213,7 @@ int Transportation::findResidentialIndex(vector<Location*> toMoveList){
     return (rand() % toMoveList.size());
 }
 
-bool Transportation::willMove(int percentChance){//TODO return true if the random shows into the percentage
-
+bool Transportation::willMove(int percentChance){
     return (1 + (rand() % 100)) <= percentChance;
 }
 

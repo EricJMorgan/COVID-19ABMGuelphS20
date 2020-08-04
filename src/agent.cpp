@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 29/07/20
- * ver 0.06
+ * 04/08/20
+ * ver 0.07
  * 
  * This is the class file for the agent class
  ***************/
@@ -10,7 +10,6 @@
 #include <iostream>
 #include "agent.hh"
 
-// Constructor
 Agent::Agent(AgentInfo agentInfo) {
     info = agentInfo;
     hasMoved = false;
@@ -38,12 +37,6 @@ bool Agent::getHasMoved(){
     return hasMoved;
 }
 
-/*************************
- * DecideEducation
- * 
- * This function randomly decides an agents educational background income based on demographics
- * of guelph from the Canadian Census of 2017
- ************************/
 void Agent::DecideEducation() {
     if (info < MALE20TO24 || (FEMALE0TO4 <= info && info <= FEMALE15TO19)) {
         education = NA;
@@ -68,12 +61,6 @@ void Agent::DecideEducation() {
     
 }
 
-/*************************
- * DecideHouseholdIncome
- * 
- * This function randomly decides an agents household income based on demographics
- * of guelph from the Canadian Census of 2017
- ************************/
 void Agent::DecideHouseholdIncome() {
     if (info < MALE20TO24 || (FEMALE0TO4 <= info && info <= FEMALE15TO19)) {
         income = HNA;
@@ -111,12 +98,6 @@ void Agent::DecideHouseholdIncome() {
     }
 }
 
-/*************************
- * DecideMartialStatus
- * 
- * This function randomly decides an agents marital status based 
- * on demographics of guelph from the Canadian Census of 2017
- ************************/
 void Agent::DecideMartialStatus() { 
     if (info < 4 || (18 <= info && info <= 21)) {
         maritalStatus = "Single";
@@ -140,12 +121,6 @@ void Agent::DecideMartialStatus() {
     }
 }
 
-/*************************
- * DecideEthnicity
- * 
- * This function randomly decides an agents ethnicity based on 
- * demographics of guelph from the Canadian Census of 2017
- ************************/
 void Agent::DecideEthnicity() {
     double randomNumber = (double) rand()/RAND_MAX;
     
@@ -184,12 +159,6 @@ void Agent::DecideEthnicity() {
 
 }
 
-/*************************
- * DecideMigitationStrategy
- * 
- * This function randomly decides an agents chance of wearing 
- * a face mask and practicing good hygiene
- ************************/
 void Agent::DecideMigitationStrategy() {
     double maskChance = (double) rand()/RAND_MAX;
     double hygieneChance = (double) rand()/RAND_MAX;
@@ -203,7 +172,7 @@ void Agent::DecideMigitationStrategy() {
     }
 }
 
-string Agent::agentToString() {
+string Agent::agentToString() {//just for demo puroposes
     string agentString = "";
 
     agentString.append(AgentInfoMapReverse[info]);

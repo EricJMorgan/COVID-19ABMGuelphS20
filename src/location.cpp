@@ -10,8 +10,6 @@
 #include "location.hh"
 #include <iostream>
 
-
-// Constructor
 Location::Location() {
     postalCodeGrouping = "";
     for(int i = 0; i < LOCATIONTYPESIZE; i++){
@@ -29,7 +27,6 @@ Location::Location(string newPostalCode, int shopData[LOCATIONTYPESIZE]){
     for(int i = 0; i < 9; i++){
         locationCount[i] = shopData[i];
         if(i != 8) amountOfLocations += shopData[i];
-        //if(shopData[i] != 0) isResidential = false;
     }
     population = 0;
     pplDensity = 0;
@@ -48,7 +45,6 @@ string Location::getPostalCodeGrouping(){
 void Location::increaseLocationCountAt(int index){
     if(index < 0 || index > LOCATIONTYPESIZE) return;
     locationCount[index]++;
-    //isResidential = false;
 }
 
 void Location::increaseLocationCountAt(condenseLocationType index){
@@ -68,7 +64,6 @@ string Location::getPostalCodeAt(int index){
     return postalCodes.at(index);
 }
 
-
 int Location::getPopulation(){
     return population;
 }
@@ -85,7 +80,7 @@ bool Location::postalCodeListContainsDup(string newPostalCode){
     return std::find(postalCodes.begin(), postalCodes.end(), newPostalCode) != postalCodes.end();
 }
 
-void Location::addAgentToSusceptible(Agent *toAdd){//Cleared from segault
+void Location::addAgentToSusceptible(Agent *toAdd){
     if(toAdd == NULL) return;
     susceptible.push_back(toAdd);
 }
@@ -95,7 +90,7 @@ void Location::addAgentToInfected(Agent *toAdd){
     infected.push_back(toAdd);
 }
 
-Agent *Location::removeSusceptibleAgent(int index){//TODO stress test these as they could be very inificent
+Agent *Location::removeSusceptibleAgent(int index){
     if(index < 0 || index >= (int)susceptible.size()) return NULL;
     Agent *holder = susceptible.at(index);
     susceptible.erase(susceptible.begin() + index);
