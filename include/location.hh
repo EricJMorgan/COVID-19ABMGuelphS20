@@ -281,8 +281,6 @@ class Location : public GeographicalRisk {
     SIRtotals sirTotalLocation;
     string postalCodeGrouping;
     std::vector<string> postalCodes;
-    std::vector<Agent *> susceptible;
-    std::vector<Agent *> infected;
 };
 
 #endif
