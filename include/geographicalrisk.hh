@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/07/20
- * ver 0.05
+ * 04/08/20
+ * ver 0.06
  * 
  * This is the header file for the geographical risk class
  ***************/
@@ -66,11 +66,12 @@ class GeographicalRisk {
     //int getAmountOfLocations();
 
     // attributes shared by location and risk
-    int population;
     double chanceOfInfection;
-    Agent* currentAgents;
     int locationCount[LOCATIONTYPESIZE];
     int amountOfLocations;
+
+    std::vector<Agent *> susceptible;
+    std::vector<Agent *> infected;
 
     private:
 
@@ -88,7 +89,7 @@ class GeographicalRisk {
     double avgAsymptomatic;
     double avgMaskWearer;
     double avgHygiene;
-    int socialDistancingSeverity = 1; // user input on a scale of 1 to 10, front end slider?
+    int socialDistancingSeverity = 9; // user input on a scale of 1 to 10, front end slider?
     SIRtotals sirTotalLocation;
 };
 

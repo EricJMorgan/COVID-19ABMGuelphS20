@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 29/07/20
- * ver 0.07
+ * 04/08/20
+ * ver 0.08
  * 
  * This is the header file for the agent class
  ***************/
@@ -104,9 +104,8 @@ class Agent : public SIR {
     void followWearMask();
     void followSocialDistancing();
     
-
-    bool agentHygiene;
-    bool wearingMask;
+    bool agentHygiene = false;
+    bool wearingMask = false;
     
     private:
     HouseholdIncome income;

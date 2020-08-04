@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 29/07/20
- * ver 0.09
+ * 04/08/20
+ * ver 0.10
  * 
  * This is the header file for the location class
  ***************/
@@ -281,8 +281,6 @@ class Location : public GeographicalRisk {
     SIRtotals sirTotalLocation;
     string postalCodeGrouping;
     std::vector<string> postalCodes;
-    std::vector<Agent *> susceptible;
-    std::vector<Agent *> infected;
 };
 
 #endif

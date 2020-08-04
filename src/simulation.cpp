@@ -102,6 +102,8 @@ void Simulation::simulateTimeStep(){
     // transport agents and infect ppl
     int newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
 
+    cout << "Newly Infected " << newlyInfected << endl;
+
     deceasedTotal = (int)deceasedAgents.size();
     recoveredTotal = (int)recoveredAgents.size();
     infectedTotal += newlyInfected;

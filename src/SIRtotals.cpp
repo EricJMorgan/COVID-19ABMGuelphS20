@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/07/20
- * ver 0.04
+ * 04/08/20
+ * ver 0.05
  * 
  * This is the class file for the SIR totals class
  ***************/
@@ -15,37 +15,49 @@ SIRtotals::SIRtotals() {
     //
 }
 
-void SIRtotals::updateTotals(int population, Agent* simAgents) {
-    susceptible = 0;
-    infected = 0;
+void SIRtotals::updateTotals(vector<Agent *> susAgents, vector<Agent *> infAgents) {
+    susceptible = (int)susAgents.size();
+    infected = (int)infAgents.size();
+
     maskWearer = 0;
     hygiene = 0;
-    // TODO: James make this static
-    for(int i = 0; i < population; i++){
-        if (simAgents[i].wearingMask) {
+    maleCount = 0;
+    showsSymptoms = 0;
+
+    
+    for(int i = 0; i < susceptible; i++){
+        if (susAgents[i]->wearingMask) {
             maskWearer++;
         }
 
-        if (simAgents[i].agentHygiene) {
+        if (susAgents[i]->agentHygiene) {
             hygiene++;
         }
 
-        if (simAgents[i].getAgentInfo() < 18) {
+        if (susAgents[i]->getAgentInfo() < 18) {
+           maleCount++;
+        }
+    }
+
+    for(int i = 0; i < infected; i++){
+        if (infAgents[i]->wearingMask) {
+            maskWearer++;
+        }
+
+        if (infAgents[i]->agentHygiene) {
+            hygiene++;
+        }
+
+        if (infAgents[i]->getAgentInfo() < 18) {
            maleCount++;
         }
 
-        if (simAgents[i].getSymptoms()) {
+        if (infAgents[i]->getSymptoms()) {
            showsSymptoms++;
         }
-        
-        switch(simAgents[i].DetermineSeverity()){
-            case SUSCEPTIBLE: susceptible++; break;
-            case INFECTED: infected++; break;
-            case RECOVERED: recovered++; break;
-            case DECEASED: deceased++; break;
-            default: break;
-        }
     }
+
+    return;
 }
 
 int SIRtotals::getSusceptible() {
@@ -56,24 +68,12 @@ int SIRtotals::getInfected() {
     return infected;
 }
 
-int SIRtotals::getRecovered() {
-    return recovered;
-}
-
-int SIRtotals::getDeceased() {
-    return deceased;
-}
-
 int SIRtotals::getMaskWearer() {
     return maskWearer;
 }
 
 int SIRtotals::getHygiene() {
     return hygiene;
-}
-
-int SIRtotals::getSocialDistance() {
-    return socialDistance;
 }
 
 int SIRtotals::getMaleCount() {

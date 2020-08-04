@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 24/07/20
- * ver 0.06
+ * 04/08/20
+ * ver 0.07
  * 
  * This is the class file for the geographical risk class
  ***************/
@@ -16,15 +16,21 @@ GeographicalRisk::GeographicalRisk() {
 }
 
 void GeographicalRisk::updateAvgCountsAndRisk() {
-    sirTotalLocation.updateTotals(population, currentAgents);
+    sirTotalLocation.updateTotals(susceptible, infected);
+    double population = (double)susceptible.size() + (double)infected.size();
+
+    if (population == 0) {
+        return;
+    }
 
     // calculate averages in compartment during current timestep
-    avgSymptomaticCarriers = (double)sirTotalLocation.getShowsSymptoms() / (double)population;
-    avgAsymptomatic = ((double)sirTotalLocation.getInfected() - (double)sirTotalLocation.getShowsSymptoms()) / (double)population;
-    avgMaskWearer = (double)sirTotalLocation.getMaskWearer() / (double)population;
-    avgHygiene = (double)sirTotalLocation.getHygiene() / (double)population;
+    
+    avgSymptomaticCarriers = (double)sirTotalLocation.getShowsSymptoms() / population;
+    avgAsymptomatic = ((double)sirTotalLocation.getInfected() - (double)sirTotalLocation.getShowsSymptoms()) / population;
+    avgMaskWearer = (double)sirTotalLocation.getMaskWearer() / population;
+    avgHygiene = (double)sirTotalLocation.getHygiene() / population;
 
-    double totalAvgWeighted = avgSymptomaticCarriers + avgAsymptomatic + avgMaskWearer + avgHygiene;
+    double totalAvgWeighted = (avgSymptomaticCarriers + avgAsymptomatic + avgMaskWearer + avgHygiene) * 100.0;
 
     //symptomatic carries have 100% chance of spreading relatively
     //social distancing of about 6m greatly decreases chances of risk 
@@ -37,7 +43,7 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     double avgAsymptomaticRisk = 0.05 * avgAsymptomatic;
 
     // assume hygiene reduces contact transmission by 20% (need more info)
-    double avgHygieneRisk = 0.8 * avgHygiene;
+    double avgHygieneRisk = 0.2 * avgHygiene;
 
     // assumed increased chances of covid on a scale of 0 - 1.0 based on business(may be changed at a later date)
     // GENSTORE 0.6
@@ -60,21 +66,30 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
         locationRiskTotal += getLocationCountAt(k)*locationRisks[k];
     }
 
-    locationRiskTotal = locationRiskTotal / (double)totalBusiness;
+    if (totalBusiness != 0) {
+        locationRiskTotal = locationRiskTotal / (double)totalBusiness;
+    }
+    
+    // cout << avgSymptomaticCarriers << " " << avgMaskWearerRisk<< " " << avgAsymptomaticRisk << " " << avgHygieneRisk << " " << locationRiskTotal << endl;
 
-    // update chance of infection based on all factors
-    chanceOfInfection = (avgSymptomaticCarriers + avgMaskWearerRisk + avgAsymptomaticRisk + avgHygieneRisk) * socialDistancing * locationRiskTotal / totalAvgWeighted ;
+    // update chance of infection based on all factors, importance of factors
+    chanceOfInfection = (avgSymptomaticCarriers * 0.3 + avgMaskWearerRisk * 0.3 + avgAsymptomaticRisk * 0.05 + avgHygieneRisk * 0.05 + locationRiskTotal * 0.3) * socialDistancing / totalAvgWeighted;
+
+    // cout << chanceOfInfection << endl;
 }
 
 int GeographicalRisk::infectPeople() {
     updateAvgCountsAndRisk();
     int infectedCount = 0;
 
-    for (int i = 0; i < population; i++) {
+    for (int i = 0; i < (int)susceptible.size(); i++) {
         double agentInfectionChance = (double) rand()/RAND_MAX;
 
-        if (currentAgents[i].DetermineSeverity() == SUSCEPTIBLE && agentInfectionChance < chanceOfInfection) {
-            currentAgents[i].AgentInfected();
+        if (agentInfectionChance < chanceOfInfection) {
+            susceptible.at(i)->AgentInfected();
+            infected.push_back(susceptible.at(i));
+            susceptible.erase(susceptible.begin() + i);
+            i--;
             infectedCount++;
         }
     }

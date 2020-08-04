@@ -201,8 +201,6 @@ void Agent::DecideMigitationStrategy() {
     if (hygieneChance < 0.5) {
         agentHygiene = true;
     }
-    
-    
 }
 
 string Agent::agentToString() {

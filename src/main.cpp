@@ -42,6 +42,18 @@ int main(){
 
 
 
+    Simulation sim = Simulation("demographicGuelph.csv");
+    sim.simulateTimeStep();
+    sim.simulateTimeStep();
+    sim.simulateTimeStep();
+    sim.simulateTimeStep();
+    sim.simulateTimeStep();
+    sim.simulateTimeStep();
+    sim.simulateTimeStep();
+    sim.simulateTimeStep();
+    sim.simulateTimeStep();
+    sim.simulateTimeStep();
+    sim.simulateTimeStep();
     // for(int i = 0; i < 131805; i++){
     //     cout << sim.getAgentAt(i).agentToString() << endl;
     // }

@@ -112,8 +112,7 @@ int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
         }
     }
 
-    //return InfectAgentsPostMovement();
-    return -1;
+    return InfectAgentsPostMovement();
 }
 
 int Transportation::InfectAgentsPostMovement(){
