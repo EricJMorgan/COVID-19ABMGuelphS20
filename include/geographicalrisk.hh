@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/07/20
- * ver 0.05
+ * 04/08/20
+ * ver 0.06
  * 
  * This is the header file for the geographical risk class
  ***************/

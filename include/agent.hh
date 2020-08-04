@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 29/07/20
- * ver 0.07
+ * 04/08/20
+ * ver 0.08
  * 
  * This is the header file for the agent class
  ***************/
