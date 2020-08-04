@@ -24,7 +24,8 @@ Simulation::Simulation(string fileName) {
     population = 0;
     currTime = 0;
     hospitalTotal = 0;
-    timeStep = 2;
+    timeStep = 4;
+    timeElapsed = 0;
     currDay = MON;
 
     if(!demographicFile.good()){
@@ -112,7 +113,8 @@ void Simulation::simulateTimeStep(){
     icuCurrent = guelphHospital.getIcuBeds();
     icuTotal = guelphHospital.getTotalICUCount();
 
-    hoursElapsed += 
+    timeElapsed += timeStep;
+    cout << "Time elapsed(hrs): " << timeElapsed << endl;
     cout << "******************************" << endl;
     cout << "Infected current " << infectedCurrent << endl;
     cout << "Infected total " << infectedTotal << endl;

@@ -143,6 +143,7 @@ class Simulation {
     int hospitalTotal;
     int icuCurrent;
     int icuTotal;
+    int timeElapsed;
 
 
     /**
