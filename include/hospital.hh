@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 24/07/20
- * ver 0.05
+ * 04/08/20
+ * ver 0.06
  * 
  * This is the header file for the hospital class
  ***************/
@@ -98,6 +98,13 @@ class Hospital {
      */
     void HospitalTimeStep(double timestep);
 
+     /**
+     * getTotalICUCount
+     * 
+     * This gets the total number of agents ever put in intensive care unit
+     */
+    int getTotalICUCount();
+
     // returns to be read and cleared
     std::vector<Agent *> newlyDeceased;
     std::vector<Agent *> newlyRecovered;
@@ -109,6 +116,7 @@ class Hospital {
     int icuCount;                   //total ICU patients
     bool hospitalOverflow; //TODO figure out how to handle overflow
     bool icuOverflow;
+    int totalICU;
 
     std::vector<Agent *> hospitalGeneralWard; // Agents admitted to general hospital
     std::vector<Agent *> hospitalICU;         // Agents admitted to ICU

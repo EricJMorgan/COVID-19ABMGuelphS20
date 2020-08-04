@@ -1,6 +1,6 @@
 /****************
  * COVID-19ABMGuelphS20
- * 29/07/20
+ * 04/08/20
  * ver 0.09
  * 
  * This is the class file for the simulation class
@@ -23,6 +23,7 @@ Simulation::Simulation(string fileName) {
     int arraySize = 0;
     population = 0;
     currTime = 0;
+    hospitalTotal = 0;
     timeStep = 2;
     currDay = MON;
 
@@ -78,6 +79,7 @@ void Simulation::simulateTimeStep(){
     isoCompartment.newlyRecovered.clear();
     for (int i = 0; i < (int)isoCompartment.newlyHospitalized.size(); i++) {
         guelphHospital.increaseHospitalCount(isoCompartment.newlyHospitalized[i]);
+        hospitalTotal++;
     }
     isoCompartment.newlyHospitalized.clear();
 
@@ -102,12 +104,29 @@ void Simulation::simulateTimeStep(){
     // transport agents and infect ppl
     int newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
 
-    cout << "Newly Infected " << newlyInfected << endl;
-
     deceasedTotal = (int)deceasedAgents.size();
     recoveredTotal = (int)recoveredAgents.size();
     infectedTotal += newlyInfected;
     infectedCurrent = infectedTotal - deceasedTotal - recoveredTotal;
+    hospitalCurrent = guelphHospital.getTotalBeds() + guelphHospital.getIcuBeds();
+    icuCurrent = guelphHospital.getIcuBeds();
+    icuTotal = guelphHospital.getTotalICUCount();
+
+    hoursElapsed += 
+    cout << "******************************" << endl;
+    cout << "Infected current " << infectedCurrent << endl;
+    cout << "Infected total " << infectedTotal << endl;
+    cout << "Deceased total " << deceasedTotal << endl;
+    cout << "Recovered total " << recoveredTotal << endl;
+    
+    cout << "Hospital current " << hospitalCurrent << endl;
+    cout << "Hospital total " << hospitalTotal << endl;
+
+    cout << "ICU current " << icuCurrent << endl;
+    cout << "ICU total " << icuTotal << endl;
+    cout << "******************************" << endl;
+    cout << endl;
+
 
     stepTime();//increase time at end of day
 }

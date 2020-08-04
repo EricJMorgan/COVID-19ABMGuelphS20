@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 29/07/20
- * ver 0.08
+ * 04/08/20
+ * ver 0.09
  * 
  * This is the header file for the simulation class
  ***************/
@@ -134,11 +134,16 @@ class Simulation {
     int agentCount;
     int population;
 
-    //outputs for Front End graph (TODO remove hard)
-    int infectedCurrent = 100;
-    int infectedTotal = 200;
-    int deceasedTotal = 50;
-    int recoveredTotal = 50;
+    //outputs for Front End graph
+    int infectedCurrent;
+    int infectedTotal;
+    int deceasedTotal;
+    int recoveredTotal;
+    int hospitalCurrent;
+    int hospitalTotal;
+    int icuCurrent;
+    int icuTotal;
+
 
     /**
      * addNewAgent

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 24/07/20
- * ver 0.04
+ * 04/08/20
+ * ver 0.05
  * 
  * This is the class file for the hospital class
  ***************/
@@ -14,6 +14,7 @@
 Hospital::Hospital() {
     numberPpl = 0;
     icuCount = 0;
+    totalICU = 0;
     hospitalOverflow = false;
     icuOverflow = false;
 }
@@ -66,6 +67,7 @@ void Hospital::increaseHospitalCount(Agent* agentToAdd) {
 }
 
 void Hospital::increaseIcuCount(Agent* agentToAdd) {
+    cout << "wtf";
     if (agentToAdd == NULL) {
         cout << "Passing NULL to increase ICU" << endl;
         return;
@@ -73,6 +75,7 @@ void Hospital::increaseIcuCount(Agent* agentToAdd) {
     
     hospitalICU.push_back(agentToAdd);
     icuCount++;
+    totalICU++;
     indicateOverflow(); 
 }
 
@@ -111,4 +114,8 @@ int Hospital::getTotalBeds() {
 
 int Hospital::getIcuBeds() {
     return icuCount;
+}
+
+int Hospital::getTotalICUCount() {
+    return totalICU;
 }

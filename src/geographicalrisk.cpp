@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 04/08/20
- * ver 0.07
+ * ver 0.08
  * 
  * This is the class file for the geographical risk class
  ***************/
@@ -73,7 +73,7 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     // cout << avgSymptomaticCarriers << " " << avgMaskWearerRisk<< " " << avgAsymptomaticRisk << " " << avgHygieneRisk << " " << locationRiskTotal << endl;
 
     // update chance of infection based on all factors, importance of factors
-    chanceOfInfection = (avgSymptomaticCarriers * 0.3 + avgMaskWearerRisk * 0.3 + avgAsymptomaticRisk * 0.05 + avgHygieneRisk * 0.05 + locationRiskTotal * 0.3) * socialDistancing / totalAvgWeighted;
+    chanceOfInfection = (avgMaskWearerRisk * 0.3 + avgAsymptomaticRisk * 0.05 + locationRiskTotal * 0.3) * socialDistancing * (avgSymptomaticCarriers * 0.3+ avgHygieneRisk * 0.05) / totalAvgWeighted;
 
     // cout << chanceOfInfection << endl;
 }
