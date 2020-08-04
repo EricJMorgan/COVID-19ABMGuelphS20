@@ -24,14 +24,13 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     }
 
     // calculate averages in compartment during current timestep
+    
     avgSymptomaticCarriers = (double)sirTotalLocation.getShowsSymptoms() / population;
     avgAsymptomatic = ((double)sirTotalLocation.getInfected() - (double)sirTotalLocation.getShowsSymptoms()) / population;
     avgMaskWearer = (double)sirTotalLocation.getMaskWearer() / population;
     avgHygiene = (double)sirTotalLocation.getHygiene() / population;
 
-    // cout << avgSymptomaticCarriers << " " << avgAsymptomatic << " " << avgMaskWearer << " " << avgHygiene << endl;
-
-    double totalAvgWeighted = avgSymptomaticCarriers + avgAsymptomatic + avgMaskWearer + avgHygiene;
+    double totalAvgWeighted = (avgSymptomaticCarriers + avgAsymptomatic + avgMaskWearer + avgHygiene) * 100.0;
 
     //symptomatic carries have 100% chance of spreading relatively
     //social distancing of about 6m greatly decreases chances of risk 
@@ -44,7 +43,7 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     double avgAsymptomaticRisk = 0.05 * avgAsymptomatic;
 
     // assume hygiene reduces contact transmission by 20% (need more info)
-    double avgHygieneRisk = 0.8 * avgHygiene;
+    double avgHygieneRisk = 0.2 * avgHygiene;
 
     // assumed increased chances of covid on a scale of 0 - 1.0 based on business(may be changed at a later date)
     // GENSTORE 0.6
@@ -70,9 +69,11 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     if (totalBusiness != 0) {
         locationRiskTotal = locationRiskTotal / (double)totalBusiness;
     }
+    
+    // cout << avgSymptomaticCarriers << " " << avgMaskWearerRisk<< " " << avgAsymptomaticRisk << " " << avgHygieneRisk << " " << locationRiskTotal << endl;
 
-    // update chance of infection based on all factors
-    chanceOfInfection = (avgSymptomaticCarriers + avgMaskWearerRisk + avgAsymptomaticRisk + avgHygieneRisk + locationRiskTotal) * socialDistancing / totalAvgWeighted;
+    // update chance of infection based on all factors, importance of factors
+    chanceOfInfection = (avgSymptomaticCarriers * 0.3 + avgMaskWearerRisk * 0.3 + avgAsymptomaticRisk * 0.05 + avgHygieneRisk * 0.05 + locationRiskTotal * 0.3) * socialDistancing / totalAvgWeighted;
 
     // cout << chanceOfInfection << endl;
 }
@@ -85,9 +86,10 @@ int GeographicalRisk::infectPeople() {
         double agentInfectionChance = (double) rand()/RAND_MAX;
 
         if (agentInfectionChance < chanceOfInfection) {
-            susceptible[i]->AgentInfected();
-            infected.push_back(susceptible[i]);
+            susceptible.at(i)->AgentInfected();
+            infected.push_back(susceptible.at(i));
             susceptible.erase(susceptible.begin() + i);
+            i--;
             infectedCount++;
         }
     }

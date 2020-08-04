@@ -104,9 +104,8 @@ class Agent : public SIR {
     void followWearMask();
     void followSocialDistancing();
     
-
-    bool agentHygiene;
-    bool wearingMask;
+    bool agentHygiene = false;
+    bool wearingMask = false;
     
     private:
     HouseholdIncome income;

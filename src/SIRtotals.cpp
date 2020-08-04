@@ -23,6 +23,7 @@ void SIRtotals::updateTotals(vector<Agent *> susAgents, vector<Agent *> infAgent
     hygiene = 0;
     maleCount = 0;
     showsSymptoms = 0;
+
     
     for(int i = 0; i < susceptible; i++){
         if (susAgents[i]->wearingMask) {
@@ -35,10 +36,6 @@ void SIRtotals::updateTotals(vector<Agent *> susAgents, vector<Agent *> infAgent
 
         if (susAgents[i]->getAgentInfo() < 18) {
            maleCount++;
-        }
-
-        if (susAgents[i]->getSymptoms()) {
-           showsSymptoms++;
         }
     }
 
@@ -59,6 +56,8 @@ void SIRtotals::updateTotals(vector<Agent *> susAgents, vector<Agent *> infAgent
            showsSymptoms++;
         }
     }
+
+    return;
 }
 
 int SIRtotals::getSusceptible() {
