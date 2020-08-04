@@ -207,7 +207,7 @@ bool Transportation::isWeekDay(DayOfWeek currDay){
 }
 
 int Transportation::findIndexToMove(vector<Location*> toMoveList){//TODO the logic for this and making it more likley to pick data higher up on the list
-    return (rand() % toMoveList.size());
+    return (monteCarloRandom(toMoveList.size()));
 }
 
 int Transportation::findResidentialIndex(vector<Location*> toMoveList){
@@ -239,4 +239,14 @@ int Transportation::adultChanceOfMoving(DayOfWeek currDay, int currTime, int gen
     if(inTimeRange(currTime, 12,20) && willMove(needServ))return findIndexToMove(hasServices);
     if(inTimeRange(currTime, 10, 18) && !isWeekDay(currDay) && willMove(goPark)) return findIndexToMove(hasParksAndRec);
     return findResidentialIndex(hasResidential);
+}
+
+int Transportation::monteCarloRandom(int roof){
+    int r1, r2;
+    while(true){
+        r1 = (int)(rand() % roof);
+        r2 = (int)(rand() % roof);
+
+        if(r2 < r1) return r1;
+    }
 }
