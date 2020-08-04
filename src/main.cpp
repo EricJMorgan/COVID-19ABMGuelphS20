@@ -20,13 +20,15 @@ int main(){
 
     srand((unsigned int)time(NULL));
     
-    // Simulation sim = Simulation("demographicGuelph.csv");
+     Simulation sim = Simulation("demographicGuelph.csv");
     // for(int i = 0; i < 5; i++){
     //     cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
     // }
     // cout << endl;
     
-    // sim.simulateTimeStep();
+    // for(int i = 0; i < 100; i++){
+    //     sim.simulateTimeStep();
+    // }
     // for(int i = 0; i < 5; i++){
     //     cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
     // }

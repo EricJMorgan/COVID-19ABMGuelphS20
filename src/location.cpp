@@ -115,7 +115,7 @@ Agent *Location::getSusceptibleAgentAt(int index){
 }
 
 Agent *Location::getInfectedAgentAt(int index){
-    if(index < 0 || index >= (int)susceptible.size()) return NULL;
+    if(index < 0 || index >= (int)infected.size()) return NULL;
     return infected.at(index);
 }
 
