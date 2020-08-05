@@ -73,7 +73,7 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     // cout << avgSymptomaticCarriers << " " << avgMaskWearerRisk<< " " << avgAsymptomaticRisk << " " << avgHygieneRisk << " " << locationRiskTotal << endl;
 
     // update chance of infection based on all factors, importance of factors
-    chanceOfInfection = (avgMaskWearerRisk * 0.3 + avgAsymptomaticRisk * 0.05 + locationRiskTotal * 0.3) * socialDistancing * (avgSymptomaticCarriers * 0.3+ avgHygieneRisk * 0.05) / totalAvgWeighted;
+    chanceOfInfection = ((avgMaskWearerRisk * 0.3 + avgAsymptomaticRisk * 0.05 + locationRiskTotal * 0.3 + avgHygieneRisk * 0.05) / totalAvgWeighted) * socialDistancing * (avgSymptomaticCarriers);
 
     // cout << chanceOfInfection << endl;
 }

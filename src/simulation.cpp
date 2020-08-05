@@ -116,7 +116,7 @@ void Simulation::simulateTimeStep(){
     icuTotal = guelphHospital.getTotalICUCount();
 
     timeElapsed += timeStep;
-    cout << "Time elapsed(hrs): " << timeElapsed << endl;
+    cout << "Time elapsed: " << timeElapsed << " hours " << (double)timeElapsed/24.0 " days" << endl;
     cout << "******************************" << endl;
     cout << "Infected current " << infectedCurrent << endl;
     cout << "Infected total " << infectedTotal << endl;

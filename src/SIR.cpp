@@ -71,7 +71,6 @@ string SIR::SIRTimeStep(double timeStep) {
         timeTilRecovery -= timeStep;
         if (timeTilRecovery <= 0) {
             RecoverAgent();
-            cout << "recovered" << endl;
             return "RECOVERAGENT";
         }
     }
