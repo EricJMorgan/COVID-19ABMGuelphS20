@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 04/08/20
- * ver 0.07
+ * 05/08/20
+ * ver 1.00
  * 
  * This is the class file for the transportation class
  ***************/
@@ -49,8 +49,6 @@ Transportation::Transportation(Agent **arr, int arrSize){
             locationList.at(rand() % getLocationListLength())->addAgentToInfected(arr[i]);
         } else if (arr[i]->DetermineSeverity() == SUSCEPTIBLE) {
             locationList.at(rand() % getLocationListLength())->addAgentToSusceptible(arr[i]);
-        } else {
-            cout << "something is chopped";
         }
     }
 }

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 04/08/20
- * ver 0.07
+ * 05/08/20
+ * ver 1.00
  * 
  * This is the class file for the location class
  ***************/
@@ -85,20 +85,12 @@ bool Location::postalCodeListContainsDup(string newPostalCode){
     return std::find(postalCodes.begin(), postalCodes.end(), newPostalCode) != postalCodes.end();
 }
 
-void Location::addAgentToSusceptible(Agent *toAdd){//Cleared from segault
-    if (toAdd->DetermineSeverity() != SUSCEPTIBLE) {
-        cout << "trying to add non susceptible agent" << endl;
-        cout << toAdd->DetermineSeverity() << endl;
-    }
+void Location::addAgentToSusceptible(Agent *toAdd){
     if(toAdd == NULL) return;
     susceptible.push_back(toAdd);
 }
 
 void Location::addAgentToInfected(Agent *toAdd){
-    if (toAdd->DetermineSeverity() != INFECTED) {
-        cout << "trying to add non infected agent" << endl;
-        cout << toAdd->DetermineSeverity() << endl;
-    }
     if(toAdd == NULL) return;
     infected.push_back(toAdd);
 }

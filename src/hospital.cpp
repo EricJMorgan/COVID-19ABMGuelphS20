@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 04/08/20
- * ver 0.05
+ * 05/08/20
+ * ver 1.00
  * 
  * This is the class file for the hospital class
  ***************/
