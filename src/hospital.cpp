@@ -86,13 +86,14 @@ void Hospital::HospitalTimeStep(double timestep) {
             Agent *recoveredAgent = hospitalICU.at(i);
             hospitalICU.erase(hospitalICU.begin() + i);
             newlyRecovered.push_back(recoveredAgent);
+            icuCount--;
         } else if (sirResponse == "DECEASEAGENT") {
             Agent *deceasedAgent = hospitalICU.at(i);
             hospitalICU.erase(hospitalICU.begin() + i);
             newlyDeceased.push_back(deceasedAgent);
+            icuCount--;
         }
     }
-
 
     for (int i = 0; i < (int)hospitalGeneralWard.size(); i++) {
         string sirResponse  = hospitalGeneralWard[i]->SIRTimeStep(timestep);
@@ -100,10 +101,13 @@ void Hospital::HospitalTimeStep(double timestep) {
             Agent *toICU = hospitalGeneralWard.at(i);
             hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
             hospitalICU.push_back(toICU);
+            icuCount++;
+            totalICU++;
         } else if (sirResponse == "RECOVERAGENT") {
             Agent *recoveredAgent = hospitalGeneralWard.at(i);
             hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
             newlyRecovered.push_back(recoveredAgent);
+            numberPpl--;
         }
     }
 }

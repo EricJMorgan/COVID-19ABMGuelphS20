@@ -129,10 +129,10 @@ class Simulation {
     int socialDistancingSeverity;
     bool socialDistancing;
     int timeQuarantined;
-    int initiallyInfected;
     bool fluSeason;
     int agentCount;
     int population;
+    double sirTimeStep;
 
     //outputs for Front End graph
     int infectedCurrent;
@@ -144,6 +144,9 @@ class Simulation {
     int icuCurrent;
     int icuTotal;
     int timeElapsed;
+
+    double initiallyInfectedChance;
+    int initiallyInfected;
 
 
     /**

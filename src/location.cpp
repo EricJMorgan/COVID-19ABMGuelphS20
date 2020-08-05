@@ -86,11 +86,19 @@ bool Location::postalCodeListContainsDup(string newPostalCode){
 }
 
 void Location::addAgentToSusceptible(Agent *toAdd){//Cleared from segault
+    if (toAdd->DetermineSeverity() != SUSCEPTIBLE) {
+        cout << "trying to add non susceptible agent" << endl;
+        cout << toAdd->DetermineSeverity() << endl;
+    }
     if(toAdd == NULL) return;
     susceptible.push_back(toAdd);
 }
 
 void Location::addAgentToInfected(Agent *toAdd){
+    if (toAdd->DetermineSeverity() != INFECTED) {
+        cout << "trying to add non infected agent" << endl;
+        cout << toAdd->DetermineSeverity() << endl;
+    }
     if(toAdd == NULL) return;
     infected.push_back(toAdd);
 }

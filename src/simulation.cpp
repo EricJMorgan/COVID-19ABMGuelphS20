@@ -25,8 +25,11 @@ Simulation::Simulation(string fileName) {
     currTime = 0;
     hospitalTotal = 0;
     timeStep = 4;
+    sirTimeStep = (double)timeStep / 24.0;
     timeElapsed = 0;
     currDay = MON;
+    initiallyInfectedChance = 0.001;
+    initiallyInfected = 0;
 
     if(!demographicFile.good()){
         cout << "Error invalid file" << endl;
@@ -68,14 +71,14 @@ int Simulation::getPopulation(){
 
 void Simulation::simulateTimeStep(){
     // hospital
-    guelphHospital.HospitalTimeStep(timeStep);
+    guelphHospital.HospitalTimeStep(sirTimeStep);
     deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
     guelphHospital.newlyDeceased.clear();
     recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());
     guelphHospital.newlyRecovered.clear();
 
     // isolation compartment
-    isoCompartment.SimulateIsoTimeStep(timeStep);
+    isoCompartment.SimulateIsoTimeStep(sirTimeStep);
     recoveredAgents.insert(recoveredAgents.end(), isoCompartment.newlyRecovered.begin(), isoCompartment.newlyRecovered.end());
     isoCompartment.newlyRecovered.clear();
     for (int i = 0; i < (int)isoCompartment.newlyHospitalized.size(); i++) {
@@ -86,9 +89,8 @@ void Simulation::simulateTimeStep(){
 
     // agent sir time step
     for (int i = 0; i < (int)locationInfo->getLocationListLength(); i++) {
-        vector<Agent*> currentInfected = locationInfo->getLocationAt(i)->getInfected();
-        for (int j = 0; j < (int)currentInfected.size(); j++) {
-            string sirResponse = currentInfected[j]->SIRTimeStep(timeStep);
+        for (int j = 0; j < (int)locationInfo->getLocationAt(i)->getInfected().size(); j++) {
+            string sirResponse = locationInfo->getLocationAt(i)->getInfected()[j]->SIRTimeStep(sirTimeStep);
             if (sirResponse == "ISOAGENT") {
                 Agent* toIsolate = locationInfo->getLocationAt(i)->removeInfectedAgent(j);
                 isoCompartment.AddMildlyInfectedAgents(toIsolate);
@@ -148,6 +150,13 @@ void Simulation::addNewAgent(string personInfo, int amountToAdd){
     for(int i = 0; i < amountToAdd; i++){
         Agent* tempAgent = new Agent(AgentInfoMap[personInfo]);
         simAgents[agentCount] = tempAgent;
+        double chanceInfected  = (double) rand()/RAND_MAX;
+        if (chanceInfected < initiallyInfectedChance) {
+            tempAgent->AgentInfected();
+            initiallyInfected++;
+        }
+        infectedCurrent = initiallyInfected;
+        infectedTotal = initiallyInfected;
         agentCount++;
         tempAgent = NULL;
     }

@@ -45,7 +45,13 @@ Transportation::Transportation(Agent **arr, int arrSize){
     }
 
     for(int i = 0; i < arrSize; i++){
-        locationList.at(rand() % getLocationListLength())->addAgentToSusceptible(arr[i]);
+        if (arr[i]->DetermineSeverity() == INFECTED) {
+            locationList.at(rand() % getLocationListLength())->addAgentToInfected(arr[i]);
+        } else if (arr[i]->DetermineSeverity() == SUSCEPTIBLE) {
+            locationList.at(rand() % getLocationListLength())->addAgentToSusceptible(arr[i]);
+        } else {
+            cout << "something is chopped";
+        }
     }
 }
 
