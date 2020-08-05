@@ -13,6 +13,7 @@
 // Constructor
 SIR::SIR() {
     currentSeverity = SUSCEPTIBLE;
+    quarantineCases = 0.6;
 }
 
 // leave these to check all references
@@ -41,7 +42,9 @@ string SIR::SIRTimeStep(double timeStep) {
     if (isIncubating) {
         incubationPeriod -= timeStep;
 
-        if (incubationPeriod <= 0 && showsSymptoms) {
+        double quarantineChance = (double) rand()/RAND_MAX;
+
+        if (incubationPeriod <= 0 && showsSymptoms && quarantineCases < quarantineChance) {
             QuarantineAgent();
             return "ISOAGENT";
         }

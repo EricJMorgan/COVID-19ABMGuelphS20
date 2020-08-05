@@ -119,6 +119,7 @@ void Simulation::simulateTimeStep(){
     double daysTotal = (double)timeElapsed/24.0;
     cout << "Time elapsed: " << timeElapsed << " hours, " << daysTotal <<  " days" << endl;
     cout << "******************************" << endl;
+    cout << "New cases " <<  newlyInfected << endl;
     cout << "Infected current " << infectedCurrent << endl;
     cout << "Infected total " << infectedTotal << endl;
     cout << "Deceased total " << deceasedTotal << endl;

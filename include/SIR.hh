@@ -97,6 +97,8 @@ class SIR {
     bool needIcu;
     bool isIncubating;
 
+    double quarantineCases;
+
     // time periods of various cases, user inputs
     double incubationPeriod; // time take to incubate virus
     double timeTilHospital; // time taken to get admitted to hospital after incubation, assuming hospital case
