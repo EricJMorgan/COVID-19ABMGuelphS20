@@ -93,7 +93,7 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
         needIcu = true;
         needHospital = true;
         fatalCase = true;
-        timeTilHospital = 7;
+        timeTilHospital = 5;
         timeTilICU = 3;
         timeTilDeath = 5;
       // if the case is not fatal decide path to recovery
@@ -107,7 +107,7 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
             showsSymptoms = false;
             needHospital = false;
             needIcu = false;
-            timeTilRecovery = 14;
+            timeTilRecovery = 7;
           // case requires hospitilzation
         } else if (randomNumber >= 0.45 && randomNumber <= 0.65) {
             showsSymptoms = true;
@@ -120,7 +120,7 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
             if (icuNeeded < 0.2) {
                 needIcu = true;
                 timeTilICU = 3;
-                timeTilRecovery = 26;
+                timeTilRecovery = 20;
               // case requires general ward hospital
             } else {
                 needIcu = false;
@@ -131,7 +131,7 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
             showsSymptoms = true;
             needHospital = false;
             needIcu = false;
-            timeTilRecovery = 14;
+            timeTilRecovery = 7;
         }
     }
 }
