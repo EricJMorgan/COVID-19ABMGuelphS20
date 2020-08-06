@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 14/07/20
- * ver 0.03
+ * 05/08/20
+ * ver 1.00
  * 
  * This is the header file for the SIR class
  ***************/
@@ -96,6 +96,8 @@ class SIR {
     bool needHospital;
     bool needIcu;
     bool isIncubating;
+
+    double quarantineCases;
 
     // time periods of various cases, user inputs
     double incubationPeriod; // time take to incubate virus

@@ -20,79 +20,11 @@ int main(){
 
     srand((unsigned int)time(NULL));
     Simulation sim = Simulation("demographicGuelph.csv");
-    cout << sim.locationInfo->getLocationListLength() << endl;
-    // for (int i = 0; i < sim.locationInfo->getLocationListLength(); i++)
-    // {
-    //     //cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
-    // }
-    
-
-    // sim.simulateTimeStep();
-    // for (int i = 0; i < sim.locationInfo->getLocationListLength(); i++)
-    // {
-    //     //cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
-    // }
-    
-    for (int i = sim.locationInfo->getLocationListLength() - 5; i < sim.locationInfo->getLocationListLength(); i++)
-    {
-        cout << sim.locationInfo->getLocationAt(i)->getPostalCodeGrouping() << endl;
-    }
-
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // for (int i = sim.locationInfo->getLocationListLength() - 5; i < sim.locationInfo->getLocationListLength(); i++)
-    // {
-    //     cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
-    // }
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-    // for (int i = sim.locationInfo->getLocationListLength() - 5; i < sim.locationInfo->getLocationListLength(); i++)
-    // {
-    //     cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
-    // }
-    // sim.simulateTimeStep();
-    // sim.simulateTimeStep();
-
-    // // for (int i = 0; i < 5; i++)
-    // // {
-    // //     cout << sim.locationInfo->getLocationAt(i)->getSusceptibleSize() << endl;
-    // // }
-
-    for (int i = 0; i < sim.locationInfo->getLocationListLength(); i++){
-        for(int j = 0; j < 9; j++){
-            cout << sim.locationInfo->getLocationAt(i)->locationCount[j] << " ";
-        }
-        cout << endl;
+    int index = 0;
+    while (index < 100) {
+        sim.simulateTimeStep();
     }
     
-
     // for(int i = 0; i < 131805; i++){
     //     cout << sim.getAgentAt(i).agentToString() << endl;
     // }

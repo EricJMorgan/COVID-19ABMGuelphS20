@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 04/08/20
- * ver 0.07
+ * 05/08/20
+ * ver 1.00
  * 
  * This is the class file for the geographical risk class
  ***************/
@@ -12,7 +12,7 @@
 
 // Constructor
 GeographicalRisk::GeographicalRisk() {
-    //
+    socialDistancingSeverity = 8;
 }
 
 void GeographicalRisk::updateAvgCountsAndRisk() {
@@ -29,8 +29,6 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     avgAsymptomatic = ((double)sirTotalLocation.getInfected() - (double)sirTotalLocation.getShowsSymptoms()) / population;
     avgMaskWearer = (double)sirTotalLocation.getMaskWearer() / population;
     avgHygiene = (double)sirTotalLocation.getHygiene() / population;
-
-    double totalAvgWeighted = (avgSymptomaticCarriers + avgAsymptomatic + avgMaskWearer + avgHygiene) * 100.0;
 
     //symptomatic carries have 100% chance of spreading relatively
     //social distancing of about 6m greatly decreases chances of risk 
@@ -69,13 +67,12 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     if (totalBusiness != 0) {
         locationRiskTotal = locationRiskTotal / (double)totalBusiness;
     }
-    
-    // cout << avgSymptomaticCarriers << " " << avgMaskWearerRisk<< " " << avgAsymptomaticRisk << " " << avgHygieneRisk << " " << locationRiskTotal << endl;
+
+    // weight location based migitation by importance 70% mask, 20% location risk, 10% hygiene
+    double weightedMigitation = avgMaskWearerRisk * 0.7 + avgHygieneRisk * 0.1 + locationRiskTotal * 0.2;
 
     // update chance of infection based on all factors, importance of factors
-    chanceOfInfection = (avgSymptomaticCarriers * 0.3 + avgMaskWearerRisk * 0.3 + avgAsymptomaticRisk * 0.05 + avgHygieneRisk * 0.05 + locationRiskTotal * 0.3) * socialDistancing / totalAvgWeighted;
-
-    // cout << chanceOfInfection << endl;
+    chanceOfInfection = weightedMigitation * socialDistancing * (avgSymptomaticCarriers + avgAsymptomaticRisk);
 }
 
 int GeographicalRisk::infectPeople() {

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 24/07/20
- * ver 0.04
+ * 05/08/20
+ * ver 1.00
  * 
  * This is the class file for the hospital class
  ***************/
@@ -14,6 +14,7 @@
 Hospital::Hospital() {
     numberPpl = 0;
     icuCount = 0;
+    totalICU = 0;
     hospitalOverflow = false;
     icuOverflow = false;
 }
@@ -73,6 +74,7 @@ void Hospital::increaseIcuCount(Agent* agentToAdd) {
     
     hospitalICU.push_back(agentToAdd);
     icuCount++;
+    totalICU++;
     indicateOverflow(); 
 }
 
@@ -83,13 +85,14 @@ void Hospital::HospitalTimeStep(double timestep) {
             Agent *recoveredAgent = hospitalICU.at(i);
             hospitalICU.erase(hospitalICU.begin() + i);
             newlyRecovered.push_back(recoveredAgent);
+            icuCount--;
         } else if (sirResponse == "DECEASEAGENT") {
             Agent *deceasedAgent = hospitalICU.at(i);
             hospitalICU.erase(hospitalICU.begin() + i);
             newlyDeceased.push_back(deceasedAgent);
+            icuCount--;
         }
     }
-
 
     for (int i = 0; i < (int)hospitalGeneralWard.size(); i++) {
         string sirResponse  = hospitalGeneralWard[i]->SIRTimeStep(timestep);
@@ -97,10 +100,13 @@ void Hospital::HospitalTimeStep(double timestep) {
             Agent *toICU = hospitalGeneralWard.at(i);
             hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
             hospitalICU.push_back(toICU);
+            icuCount++;
+            totalICU++;
         } else if (sirResponse == "RECOVERAGENT") {
             Agent *recoveredAgent = hospitalGeneralWard.at(i);
             hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
             newlyRecovered.push_back(recoveredAgent);
+            numberPpl--;
         }
     }
 }
@@ -111,4 +117,8 @@ int Hospital::getTotalBeds() {
 
 int Hospital::getIcuBeds() {
     return icuCount;
+}
+
+int Hospital::getTotalICUCount() {
+    return totalICU;
 }

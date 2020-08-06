@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 23/07/20
- * ver 0.03
+ * 05/08/20
+ * ver 1.00
  * 
  * This is the class file for the SIR class
  ***************/
@@ -13,6 +13,7 @@
 // Constructor
 SIR::SIR() {
     currentSeverity = SUSCEPTIBLE;
+    quarantineCases = 0.6;
 }
 
 // leave these to check all references
@@ -41,7 +42,9 @@ string SIR::SIRTimeStep(double timeStep) {
     if (isIncubating) {
         incubationPeriod -= timeStep;
 
-        if (incubationPeriod <= 0 && showsSymptoms) {
+        double quarantineChance = (double) rand()/RAND_MAX;
+
+        if (incubationPeriod <= 0 && showsSymptoms && quarantineCases < quarantineChance) {
             QuarantineAgent();
             return "ISOAGENT";
         }
@@ -51,25 +54,25 @@ string SIR::SIRTimeStep(double timeStep) {
     // move agents between stages, check stages in order
     if (needHospital && timeTilHospital > 0) {
         timeTilHospital -= timeStep;
-        if (timeTilHospital == 0) {
+        if (timeTilHospital <= 0) {
             HospitalAgent();
             return "HOSPITALAGENT";
         }
     } else if (needIcu && timeTilICU > 0) {
         timeTilICU -= timeStep;
-        if (timeTilICU == 0) {
+        if (timeTilICU <= 0) {
             PlaceAgentInICU();
             return "ICUAGENT";
         }
     } else if (fatalCase && timeTilDeath > 0) {
         timeTilDeath -= timeStep;
-        if (timeTilDeath == 0) {
+        if (timeTilDeath <= 0) {
             AgentDeceased();
             return "DECEASEAGENT";
         }
     } else {
         timeTilRecovery -= timeStep;
-        if (timeTilRecovery == 0) {
+        if (timeTilRecovery <= 0) {
             RecoverAgent();
             return "RECOVERAGENT";
         }

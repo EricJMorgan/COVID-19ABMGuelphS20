@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 04/08/20
- * ver 0.06
+ * 05/08/20
+ * ver 1.00
  * 
  * This is the header file for the geographical risk class
  ***************/
@@ -89,7 +89,7 @@ class GeographicalRisk {
     double avgAsymptomatic;
     double avgMaskWearer;
     double avgHygiene;
-    int socialDistancingSeverity = 9; // user input on a scale of 1 to 10, front end slider?
+    int socialDistancingSeverity;
     SIRtotals sirTotalLocation;
 };
 
