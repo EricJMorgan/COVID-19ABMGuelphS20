@@ -67,7 +67,6 @@ void Hospital::increaseHospitalCount(Agent* agentToAdd) {
 }
 
 void Hospital::increaseIcuCount(Agent* agentToAdd) {
-    cout << "wtf";
     if (agentToAdd == NULL) {
         cout << "Passing NULL to increase ICU" << endl;
         return;
