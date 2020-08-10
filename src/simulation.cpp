@@ -17,6 +17,7 @@
 
 // Constructor
 Simulation::Simulation(string fileName) {
+    std::cout << "test plzzz" << std::endl;
     ifstream demographicFile;
     demographicFile.open(fileName, ios::in);
     string line;
@@ -70,6 +71,7 @@ int Simulation::getPopulation(){
 }
 
 void Simulation::simulateTimeStep(){
+    std::cout << "plz come in here" << std::endl;
     // hospital
     guelphHospital.HospitalTimeStep(sirTimeStep);
     deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
@@ -236,11 +238,18 @@ int Simulation::getRecoveredTotal() {
     return recoveredTotal;
 }
 
-extern "C" {
-    Simulation* Simulation_new(){ return new Simulation("demographicGuelph.csv"); }
-    int getInfectedCurrent(Simulation* sim){ return sim->getInfectedCurrent(); }
-    int getInfectedTotal(Simulation* sim){ return sim->getInfectedTotal(); }
-    int getDeceasedTotal(Simulation* sim){ return sim->getDeceasedTotal(); }
-    int getRecoveredTotal(Simulation* sim){ return sim->getRecoveredTotal(); }
-    void simulateTimeStep(Simulation* sim){ sim->simulateTimeStep(); }
+int Simulation::getHospitalTotal() {
+    return hospitalTotal;
+}
+
+int Simulation::getHospitalCurrent() {
+    return hospitalCurrent;
+}
+
+int Simulation::getICUtotal() {
+    return icuTotal;
+}
+
+int Simulation::getICUCurrent() {
+    return icuTotal;
 }

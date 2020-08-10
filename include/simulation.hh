@@ -103,6 +103,34 @@ class Simulation {
     int getRecoveredTotal();
 
     /**
+     * getHospitalTotal
+     * 
+     * This get the current number of total agents ever hospitilized
+     */
+    int getHospitalTotal();
+
+    /**
+     * getHospitalCurrent
+     * 
+     * This get the current number of current hospital agents
+     */
+    int getHospitalCurrent();
+
+    /**
+     * getICUtotal
+     * 
+     * This get the current number of total ICU agents
+     */
+    int getICUtotal();
+
+    /**
+     * getICUCurrent
+     * 
+     * This get the current number of current ICU agents
+     */
+    int getICUCurrent();
+
+    /**
      * setInputs
      * 
      * Takes inputs from front end sends them to the associated classes
@@ -135,10 +163,10 @@ class Simulation {
     double sirTimeStep;
 
     //outputs for Front End graph
-    int infectedCurrent;
-    int infectedTotal;
-    int deceasedTotal;
-    int recoveredTotal;
+    int infectedCurrent = 100;
+    int infectedTotal = 100;
+    int deceasedTotal = 50;
+    int recoveredTotal = 50;
     int hospitalCurrent;
     int hospitalTotal;
     int icuCurrent;
@@ -187,5 +215,19 @@ class Simulation {
     DayOfWeek getNextDay(DayOfWeek currDay);
 };
 
+
+//for python binding
+extern "C" {
+    Simulation* Simulation_new(){ return new Simulation("demographicGuelph.csv"); }
+    void simTimeStep(Simulation* sim){ sim->simulateTimeStep(); }
+    int infectedCurrent(Simulation* sim){ return sim->getInfectedCurrent(); }
+    int infectedTotal(Simulation* sim){ return sim->getInfectedTotal(); }
+    int deceasedTotal(Simulation* sim){ return sim->getDeceasedTotal(); }
+    int recoveredTotal(Simulation* sim){ return sim->getRecoveredTotal(); }
+    int hospitalTotal(Simulation* sim){ return sim->getHospitalTotal(); }
+    int hospitalCurrent(Simulation* sim){ return sim->getHospitalCurrent(); }
+    int ICUtotal(Simulation* sim){ return sim->getICUtotal(); }
+    int ICUCurrent(Simulation* sim){ return sim->getICUCurrent(); }
+}
 
 #endif
