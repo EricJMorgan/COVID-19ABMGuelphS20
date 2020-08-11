@@ -17,7 +17,6 @@
 
 // Constructor
 Simulation::Simulation(string fileName) {
-    std::cout << "test plzzz" << std::endl;
     ifstream demographicFile;
     demographicFile.open(fileName, ios::in);
     string line;
@@ -71,7 +70,6 @@ int Simulation::getPopulation(){
 }
 
 void Simulation::simulateTimeStep(){
-    std::cout << "plz come in here" << std::endl;
     // hospital
     guelphHospital.HospitalTimeStep(sirTimeStep);
     deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
