@@ -68,5 +68,61 @@ class Simulation(object):
     def ICUCurrent(self):
         return lib.ICUCurrent(self.obj)
 
+    def setSocialDistanceServerity(self, val):
+        lib.socialDistanceServeritySetter(self.obj, val)
+
+    def setmaskCompliance(self, val):
+        lib.maskComplianceSetter(self.obj, val)
+
+    def setHygieneMaintainence(self, val):
+        lib.hygieneMaintainenceSetter(self.obj, val)
+
+    def setGenStoreRisk(self, val):
+        lib.genStoreRiskSetter(self.obj, val)
+
+    def setTransportRisk(self, val):
+        lib.transportRiskSetter(self.obj, val)
+
+    def setSchoolRisk(self, val):
+        lib.schoolRiskSetter(self.obj, val)
+
+    def setParkRisk(self, val):
+        lib.parkRiskSetter(self.obj, val)
+
+    def setEntertainmentRisk(self, val):
+        lib.entertainmentRiskSetter(self.obj, val)
+
+    def setHealthPlaceRisk(self, val):
+        lib.healthPlaceRiskSetter(self.obj, val)
+
+    def setPlaceOfWorshipRisk(self, val):
+        lib.placeOfWorshipRiskSetter(self.obj, val)
+
+    def setResidentialRisk(self, val):
+        lib.residentialRiskSetter(self.obj, val)
+
+    def setIncubationPeriod(self, val):
+        lib.incubationPeriodSetter(self.obj, val)
+
+    def setTimeIncubHospital(self, val):
+        lib.timeIncubHospitalSetter(self.obj, val)
+
+    def setTimeHospitalICU(self, val):
+        lib.timeHospitalICUSetter(self.obj, val)
+
+    def setTimeICUDeath(self, val):
+        lib.timeICUDeathSetter(self.obj, val)
+
+    def setTimeRecoveryNoHospital(self, val):
+        lib.timeRecoveryNoHospitalSetter(self.obj, val)
+
+    def setRecoveryPeriodHospital(self, val):
+        lib.recoveryPeriodHospitalSetter(self.obj, val)
+        
+    def setTimeRecoveryICU(self, val):
+        lib.timeRecoveryICUSetter(self.obj, val)
+    
+    
+
 sim = Simulation()
 sim.timeStep()
