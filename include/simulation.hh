@@ -92,6 +92,8 @@ class Simulation {
      * getDeceasedTotal
      * 
      * This get the current number of deceased agents
+     * 
+     * @return number of total deceased agents
      */
     int getDeceasedTotal();
 
@@ -99,6 +101,8 @@ class Simulation {
      * getRecoveredTotal
      * 
      * This get the current number of recovered agents
+     * 
+     * @return number of total recovered agents
      */
     int getRecoveredTotal();
 
@@ -106,6 +110,8 @@ class Simulation {
      * getHospitalTotal
      * 
      * This get the current number of total agents ever hospitilized
+     * 
+     * @return number of total hospitalized agents
      */
     int getHospitalTotal();
 
@@ -113,6 +119,8 @@ class Simulation {
      * getHospitalCurrent
      * 
      * This get the current number of current hospital agents
+     * 
+     * @return number of current hospitalized agents
      */
     int getHospitalCurrent();
 
@@ -120,6 +128,8 @@ class Simulation {
      * getICUtotal
      * 
      * This get the current number of total ICU agents
+     * 
+     * @return number of total ICU agents
      */
     int getICUtotal();
 
@@ -127,6 +137,8 @@ class Simulation {
      * getICUCurrent
      * 
      * This get the current number of current ICU agents
+     * 
+     * @return number of current ICU agents
      */
     int getICUCurrent();
 
@@ -135,7 +147,7 @@ class Simulation {
      * 
      * Takes inputs from front end sends them to the associated classes
      */
-    //int getRecoveredTotal(ask joyce for inputs after getting works);
+    // void setInputs();
     
     SIRtotals totalSimSIRStats;
     
@@ -148,25 +160,47 @@ class Simulation {
     Agent** simAgents;
     Hospital guelphHospital;
     IsolationCompartment isoCompartment;
-
-    // user inputs
     int timeStep;
     int currTime;
     DayOfWeek currDay;
-    int incubationPeriod;
-    int socialDistancingSeverity;
-    bool socialDistancing;
     int timeQuarantined;
-    bool fluSeason;
     int agentCount;
     int population;
     double sirTimeStep;
 
+
+    // user inputs
+    // location risks
+    int socialDistancingSeverity;
+    double maskCompliance;
+    double hygieneMaintainence;
+
+    // location
+    double genStoreRisk;
+    double transportRisk;
+    double schoolRisk;
+    double parkRisk;
+    double serviceRisk;
+    double entertainmentRisk;
+    double healthPlaceRisk;
+    double placeOfWorshipRisk;
+    double residentialRisl;
+
+    //sim factors
+    int incubationPeriod;
+    int timeIncubHospital;
+    int timeHospitalICU;
+    int timeICUDeath;
+    int timeRecoveryNoHospital;
+    int recoveryPeriodHospital;
+    int timeRecoveryICU;
+
+
     //outputs for Front End graph
-    int infectedCurrent = 100;
-    int infectedTotal = 100;
-    int deceasedTotal = 50;
-    int recoveredTotal = 50;
+    int infectedCurrent;
+    int infectedTotal;
+    int deceasedTotal;
+    int recoveredTotal;
     int hospitalCurrent;
     int hospitalTotal;
     int icuCurrent;
