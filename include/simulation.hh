@@ -325,20 +325,20 @@ class Simulation {
 
     // user inputs
     // geographical risks
-    int socialDistancingSeverity = 9;
-    double maskCompliance = 0.5;
-    double hygieneMaintainence = 0.5;
+    int socialDistancingSeverity;
+    double maskCompliance;
+    double hygieneMaintainence;
 
     // location risks
-    double genStoreRisk = 0.9;
-    double transportRisk = 0.9;
-    double schoolRisk = 0.9;
-    double parkRisk = 0.9;
-    double serviceRisk = 0.9;
-    double entertainmentRisk = 0.9;
-    double healthPlaceRisk = 0.9;
-    double placeOfWorshipRisk = 0.9;
-    double residentialRisk = 0.9;
+    double genStoreRisk;
+    double transportRisk;
+    double schoolRisk;
+    double parkRisk;
+    double serviceRisk;
+    double entertainmentRisk;
+    double healthPlaceRisk;
+    double placeOfWorshipRisk;
+    double residentialRisk;
 
     //outputs for Front End graph
     int infectedCurrent;
@@ -394,37 +394,36 @@ class Simulation {
 
 
 //for python binding
-extern "C" {
-    Simulation* Simulation_new(){ return new Simulation("demographicGuelph.csv"); }
-    void simTimeStep(Simulation* sim){ sim->simulateTimeStep(); }
-    int infectedCurrent(Simulation* sim){ return sim->getInfectedCurrent(); }
-    int infectedTotal(Simulation* sim){ return sim->getInfectedTotal(); }
-    int deceasedTotal(Simulation* sim){ return sim->getDeceasedTotal(); }
-    int recoveredTotal(Simulation* sim){ return sim->getRecoveredTotal(); }
-    int hospitalTotal(Simulation* sim){ return sim->getHospitalTotal(); }
-    int hospitalCurrent(Simulation* sim){ return sim->getHospitalCurrent(); }
-    int ICUtotal(Simulation* sim){ return sim->getICUtotal(); }
-    int ICUCurrent(Simulation* sim){ return sim->getICUCurrent(); }
-    void socialDistanceServeritySetter(Simulation* sim, int val){sim->setSocialDistancingSeverity(val);}
-    void maskComplianceSetter(Simulation* sim, double val){sim->setMaskCompliance(val);}
-    void hygieneMaintainenceSetter(Simulation* sim, double val){sim->setHygieneMaintainence(val);}
-    void genStoreRiskSetter(Simulation* sim, double val){sim->setGenStoreRisk(val);}
-    void transportRiskSetter(Simulation* sim, double val){sim->setTransportRisk(val);}
-    void schoolRiskSetter(Simulation* sim, double val){sim->setSchoolRisk(val);}
-    void parkRiskSetter(Simulation* sim, double val){sim->setParkRisk(val);}
-    void serviceRiskSetter(Simulation* sim, double val){sim->setServiceRisk(val);}
-    void entertainmentRiskSetter(Simulation* sim, double val){sim->setEntertainmentRisk(val);}
-    void healthPlaceRiskSetter(Simulation* sim, double val){sim->setHealthPlaceRisk(val);}
-    void placeOfWorshipRiskSetter(Simulation* sim, double val){sim->setPlaceOfWorshipRisk(val);}
-    void residentialRiskSetter(Simulation* sim, double val){sim->setResidentialRisk(val);}
-    void incubationPeriodSetter(Simulation* sim, int val){sim->setIncubationPeriod(val);}
-    void timeIncubHospitalSetter(Simulation* sim, int val){sim->setTimeIncubHospital(val);}
-    void timeHospitalICUSetter(Simulation* sim, int val){sim->setTimeHospitalICU(val);}
-    void timeICUDeathSetter(Simulation* sim, int val){sim->setTimeICUDeath(val);}
-    void timeRecoveryNoHospitalSetter(Simulation* sim, int val){sim->setTimeRecoveryNoHospital(val);}
-    void recoveryPeriodHospitalSetter(Simulation* sim, int val){sim->setRecoveryPeriodHospital(val);}
-    void timeRecoveryICUSetter(Simulation* sim, int val){sim->setTimeRecoveryICU(val);}
-
-}
+// extern "C" {
+//     Simulation* Simulation_new(){ return new Simulation("demographicGuelph.csv"); }
+//     void simTimeStep(Simulation* sim){ sim->simulateTimeStep(); }
+//     int infectedCurrent(Simulation* sim){ return sim->getInfectedCurrent(); }
+//     int infectedTotal(Simulation* sim){ return sim->getInfectedTotal(); }
+//     int deceasedTotal(Simulation* sim){ return sim->getDeceasedTotal(); }
+//     int recoveredTotal(Simulation* sim){ return sim->getRecoveredTotal(); }
+//     int hospitalTotal(Simulation* sim){ return sim->getHospitalTotal(); }
+//     int hospitalCurrent(Simulation* sim){ return sim->getHospitalCurrent(); }
+//     int ICUtotal(Simulation* sim){ return sim->getICUtotal(); }
+//     int ICUCurrent(Simulation* sim){ return sim->getICUCurrent(); }
+//     void socialDistanceServeritySetter(Simulation* sim, int val){sim->setSocialDistancingSeverity(val);}
+//     void maskComplianceSetter(Simulation* sim, double val){sim->setMaskCompliance(val);}
+//     void hygieneMaintainenceSetter(Simulation* sim, double val){sim->setHygieneMaintainence(val);}
+//     void genStoreRiskSetter(Simulation* sim, double val){sim->setGenStoreRisk(val);}
+//     void transportRiskSetter(Simulation* sim, double val){sim->setTransportRisk(val);}
+//     void schoolRiskSetter(Simulation* sim, double val){sim->setSchoolRisk(val);}
+//     void parkRiskSetter(Simulation* sim, double val){sim->setParkRisk(val);}
+//     void serviceRiskSetter(Simulation* sim, double val){sim->setServiceRisk(val);}
+//     void entertainmentRiskSetter(Simulation* sim, double val){sim->setEntertainmentRisk(val);}
+//     void healthPlaceRiskSetter(Simulation* sim, double val){sim->setHealthPlaceRisk(val);}
+//     void placeOfWorshipRiskSetter(Simulation* sim, double val){sim->setPlaceOfWorshipRisk(val);}
+//     void residentialRiskSetter(Simulation* sim, double val){sim->setResidentialRisk(val);}
+//     void incubationPeriodSetter(Simulation* sim, int val){sim->setIncubationPeriod(val);}
+//     void timeIncubHospitalSetter(Simulation* sim, int val){sim->setTimeIncubHospital(val);}
+//     void timeHospitalICUSetter(Simulation* sim, int val){sim->setTimeHospitalICU(val);}
+//     void timeICUDeathSetter(Simulation* sim, int val){sim->setTimeICUDeath(val);}
+//     void timeRecoveryNoHospitalSetter(Simulation* sim, int val){sim->setTimeRecoveryNoHospital(val);}
+//     void recoveryPeriodHospitalSetter(Simulation* sim, int val){sim->setRecoveryPeriodHospital(val);}
+//     void timeRecoveryICUSetter(Simulation* sim, int val){sim->setTimeRecoveryICU(val);}
+// }
 
 #endif

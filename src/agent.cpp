@@ -194,11 +194,11 @@ void Agent::DecideMigitationStrategy(double maskCompliance, double hygieneMainta
     double maskChance = (double) rand()/RAND_MAX;
     double hygieneChance = (double) rand()/RAND_MAX;
 
-    if (maskChance <maskCompliance) {
+    if (maskChance > maskCompliance) {
         wearingMask = true;
     }
 
-    if (hygieneChance < hygieneMaintain) {
+    if (hygieneChance > hygieneMaintain) {
         agentHygiene = true;
     }
 }

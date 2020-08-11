@@ -55,7 +55,6 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     // RESIDENTIAL 0.5
 
     double locationRiskTotal = 0.0;
-    // double locationRisks[9] = {0.6, 0.8, 0.9, 0.2, 0.2, 0.8, 0.9, 0.8, 0.5};
     int totalBusiness = 0;
 
     // loop through various business and add to risk
