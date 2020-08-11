@@ -52,3 +52,4 @@ class Simulation(object):
 
 sim = Simulation()
 sim.timeStep()
+sim.set
