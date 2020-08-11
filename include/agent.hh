@@ -50,7 +50,7 @@ class Agent : public SIR {
      * 
      * @param agentInfo, the enum of the gender/Age based on the AgentInfo enum
      */
-    Agent(AgentInfo agentInfo);
+    Agent(AgentInfo agentInfo, double maskCompliance, double hygieneMaintainence);
 
     /**
      * goGrocery
@@ -156,8 +156,10 @@ class Agent : public SIR {
      * 
      * Decides the agents chance of wearing a mask and following appropriate hygiene
      * 
+     * @param maskCompliance, chance of wearing a mask
+     * @param hygieneMaintain, chance of maintaining good hygiene
      */
-    void DecideMigitationStrategy();
+    void DecideMigitationStrategy(double maskCompliance, double hygieneMaintain);
 };
 
 #endif

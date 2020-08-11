@@ -14,12 +14,16 @@
 
 using namespace std;
 
-Transportation::Transportation(Agent **arr, int arrSize){
+Transportation::Transportation(Agent **arr, int arrSize, int socialDistancingSeverity, double associatedLocRisks[]){
     postalCodes = new PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
    
     for(int i = 0; i < 7000; i++){
         if(postalCodes->hashTable[i]->getPostalCodeGrouping().compare("") != 0){
             locationList.push_back(postalCodes->hashTable[i]);
+            postalCodes->hashTable[i]->socialDistancingSeverity = socialDistancingSeverity;
+            for (int j = 0; j < 9; j++) {
+                postalCodes->hashTable[i]->locationRisks[j] = associatedLocRisks[j];
+            }
         }
     }
 

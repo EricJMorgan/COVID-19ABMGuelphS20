@@ -11,14 +11,14 @@
 #include "agent.hh"
 
 // Constructor
-Agent::Agent(AgentInfo agentInfo) {
+Agent::Agent(AgentInfo agentInfo, double maskCompliance, double hygieneMaintainence) {
     info = agentInfo;
     hasMoved = false;
     DecideEthnicity();
     DecideMartialStatus();
     DecideHouseholdIncome();
     DecideEducation();
-    DecideMigitationStrategy();
+    DecideMigitationStrategy(maskCompliance, hygieneMaintainence);
 }
 
 AgentInfo Agent::getAgentInfo(){
@@ -190,15 +190,15 @@ void Agent::DecideEthnicity() {
  * This function randomly decides an agents chance of wearing 
  * a face mask and practicing good hygiene
  ************************/
-void Agent::DecideMigitationStrategy() {
+void Agent::DecideMigitationStrategy(double maskCompliance, double hygieneMaintain) {
     double maskChance = (double) rand()/RAND_MAX;
     double hygieneChance = (double) rand()/RAND_MAX;
 
-    if (maskChance < 0.5) {
+    if (maskChance <maskCompliance) {
         wearingMask = true;
     }
 
-    if (hygieneChance < 0.5) {
+    if (hygieneChance < hygieneMaintain) {
         agentHygiene = true;
     }
 }

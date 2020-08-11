@@ -11,9 +11,6 @@
 #include <time.h>
 #include "simulation.hh"
 #include <math.h>
-//testing
-#include "postalCodeHash.hh"
-#include "agent.hh"
 
 
 int main(){
@@ -21,6 +18,8 @@ int main(){
     srand((unsigned int)time(NULL));
     Simulation sim = Simulation("demographicGuelph.csv");
     int index = 0;
+
+    cout << "lol";
     while (index < 100) {
         sim.simulateTimeStep();
     }

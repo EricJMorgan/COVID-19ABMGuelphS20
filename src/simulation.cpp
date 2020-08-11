@@ -36,6 +36,7 @@ Simulation::Simulation(string fileName) {
         return;
     }
 
+
     getline(demographicFile, line);
     vector<string> csvValues;
     split(csvValues, line, boost::is_any_of(","));
@@ -52,9 +53,20 @@ Simulation::Simulation(string fileName) {
 
     population = arraySize;
 
+    double locationRisk[9];
+    // locationRisk[0] = genStoreRisk;
+    locationRisk[1] = transportRisk;
+    locationRisk[2] = schoolRisk;
+    locationRisk[3] = parkRisk;
+    locationRisk[4] = serviceRisk;
+    locationRisk[5] = entertainmentRisk;
+    locationRisk[6] = healthPlaceRisk;
+    locationRisk[7] = placeOfWorshipRisk;
+    locationRisk[8] = residentialRisk;
+
     setUpAgents(fileName);
 
-    locationInfo = new Transportation(simAgents, population);
+    locationInfo = new Transportation(simAgents, population, socialDistancingSeverity, locationRisk);
 }
 
 Simulation::~Simulation(){
@@ -150,7 +162,7 @@ Agent *Simulation::getAgentAt(int index){
 /********************Private functions***************************************/
 void Simulation::addNewAgent(string personInfo, int amountToAdd){
     for(int i = 0; i < amountToAdd; i++){
-        Agent* tempAgent = new Agent(AgentInfoMap[personInfo]);
+        Agent* tempAgent = new Agent(AgentInfoMap[personInfo], maskCompliance, hygieneMaintainence);
         simAgents[agentCount] = tempAgent;
         double chanceInfected  = (double) rand()/RAND_MAX;
         if (chanceInfected < initiallyInfectedChance) {

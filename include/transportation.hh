@@ -34,8 +34,10 @@ class Transportation {
      * 
      * @param **arr, and array of agent pointers
      * @param arrSize, the size of the array
+     * @param socialDistancingSeverity, the amount of socialdistancing agents will do in each location
+     * @param associatedLocRisks, the amount of risk associated with each business type
      */
-    Transportation(Agent **arr, int arrSize);
+    Transportation(Agent **arr, int arrSize, int socialDistancingSeverity, double* associatedLocRisks);
 
     /**
      * ~Transportation

@@ -168,32 +168,22 @@ class Simulation {
     int population;
     double sirTimeStep;
 
-
     // user inputs
     // geographical risks
-    int socialDistancingSeverity;
-    double maskCompliance;
-    double hygieneMaintainence;
+    int socialDistancingSeverity = 9;
+    double maskCompliance = 0.5;
+    double hygieneMaintainence = 0.5;
 
     // location risks
-    double genStoreRisk;
-    double transportRisk;
-    double schoolRisk;
-    double parkRisk;
-    double serviceRisk;
-    double entertainmentRisk;
-    double healthPlaceRisk;
-    double placeOfWorshipRisk;
-    double residentialRisk;
-
-    //sim factors
-    int incubationPeriod;
-    int timeIncubHospital;
-    int timeHospitalICU;
-    int timeICUDeath;
-    int timeRecoveryNoHospital;
-    int recoveryPeriodHospital;
-    int timeRecoveryICU;
+    double genStoreRisk = 0.9;
+    double transportRisk = 0.9;
+    double schoolRisk = 0.9;
+    double parkRisk = 0.9;
+    double serviceRisk = 0.9;
+    double entertainmentRisk = 0.9;
+    double healthPlaceRisk = 0.9;
+    double placeOfWorshipRisk = 0.9;
+    double residentialRisk = 0.9;
 
     //outputs for Front End graph
     int infectedCurrent;
@@ -208,7 +198,6 @@ class Simulation {
 
     double initiallyInfectedChance;
     int initiallyInfected;
-
 
     /**
      * addNewAgent

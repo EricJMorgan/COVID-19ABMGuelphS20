@@ -69,6 +69,8 @@ class GeographicalRisk {
     double chanceOfInfection;
     int locationCount[LOCATIONTYPESIZE];
     int amountOfLocations;
+    int socialDistancingSeverity;
+    double locationRisks[9];
 
     std::vector<Agent *> susceptible;
     std::vector<Agent *> infected;
@@ -89,7 +91,6 @@ class GeographicalRisk {
     double avgAsymptomatic;
     double avgMaskWearer;
     double avgHygiene;
-    int socialDistancingSeverity;
     SIRtotals sirTotalLocation;
 };
 
