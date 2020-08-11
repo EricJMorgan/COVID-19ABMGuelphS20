@@ -81,8 +81,9 @@
         "iomanip": "cpp",
         "ios": "cpp",
         "locale": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "strstream": "cpp"
     },
-    "python.pythonPath": "venv\\Scripts\\python.exe",
+    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.8/bin/python3",
     "git.ignoreLimitWarning": true
 }

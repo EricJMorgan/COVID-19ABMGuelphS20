@@ -236,11 +236,18 @@ int Simulation::getRecoveredTotal() {
     return recoveredTotal;
 }
 
-extern "C" {
-    Simulation* Simulation_new(){ return new Simulation("demographicGuelph.csv"); }
-    int getInfectedCurrent(Simulation* sim){ return sim->getInfectedCurrent(); }
-    int getInfectedTotal(Simulation* sim){ return sim->getInfectedTotal(); }
-    int getDeceasedTotal(Simulation* sim){ return sim->getDeceasedTotal(); }
-    int getRecoveredTotal(Simulation* sim){ return sim->getRecoveredTotal(); }
-    void simulateTimeStep(Simulation* sim){ sim->simulateTimeStep(); }
+int Simulation::getHospitalTotal() {
+    return hospitalTotal;
+}
+
+int Simulation::getHospitalCurrent() {
+    return hospitalCurrent;
+}
+
+int Simulation::getICUtotal() {
+    return icuTotal;
+}
+
+int Simulation::getICUCurrent() {
+    return icuTotal;
 }

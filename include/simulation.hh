@@ -92,6 +92,8 @@ class Simulation {
      * getDeceasedTotal
      * 
      * This get the current number of deceased agents
+     * 
+     * @return number of total deceased agents
      */
     int getDeceasedTotal();
 
@@ -99,15 +101,53 @@ class Simulation {
      * getRecoveredTotal
      * 
      * This get the current number of recovered agents
+     * 
+     * @return number of total recovered agents
      */
     int getRecoveredTotal();
+
+    /**
+     * getHospitalTotal
+     * 
+     * This get the current number of total agents ever hospitilized
+     * 
+     * @return number of total hospitalized agents
+     */
+    int getHospitalTotal();
+
+    /**
+     * getHospitalCurrent
+     * 
+     * This get the current number of current hospital agents
+     * 
+     * @return number of current hospitalized agents
+     */
+    int getHospitalCurrent();
+
+    /**
+     * getICUtotal
+     * 
+     * This get the current number of total ICU agents
+     * 
+     * @return number of total ICU agents
+     */
+    int getICUtotal();
+
+    /**
+     * getICUCurrent
+     * 
+     * This get the current number of current ICU agents
+     * 
+     * @return number of current ICU agents
+     */
+    int getICUCurrent();
 
     /**
      * setInputs
      * 
      * Takes inputs from front end sends them to the associated classes
      */
-    //int getRecoveredTotal(ask joyce for inputs after getting works);
+    // void setInputs();
     
     SIRtotals totalSimSIRStats;
     
@@ -120,19 +160,40 @@ class Simulation {
     Agent** simAgents;
     Hospital guelphHospital;
     IsolationCompartment isoCompartment;
-
-    // user inputs
     int timeStep;
     int currTime;
     DayOfWeek currDay;
-    int incubationPeriod;
-    int socialDistancingSeverity;
-    bool socialDistancing;
     int timeQuarantined;
-    bool fluSeason;
     int agentCount;
     int population;
     double sirTimeStep;
+
+
+    // user inputs
+    // geographical risks
+    int socialDistancingSeverity;
+    double maskCompliance;
+    double hygieneMaintainence;
+
+    // location risks
+    double genStoreRisk;
+    double transportRisk;
+    double schoolRisk;
+    double parkRisk;
+    double serviceRisk;
+    double entertainmentRisk;
+    double healthPlaceRisk;
+    double placeOfWorshipRisk;
+    double residentialRisk;
+
+    //sim factors
+    int incubationPeriod;
+    int timeIncubHospital;
+    int timeHospitalICU;
+    int timeICUDeath;
+    int timeRecoveryNoHospital;
+    int recoveryPeriodHospital;
+    int timeRecoveryICU;
 
     //outputs for Front End graph
     int infectedCurrent;
@@ -187,5 +248,19 @@ class Simulation {
     DayOfWeek getNextDay(DayOfWeek currDay);
 };
 
+
+//for python binding
+extern "C" {
+    Simulation* Simulation_new(){ return new Simulation("demographicGuelph.csv"); }
+    void simTimeStep(Simulation* sim){ sim->simulateTimeStep(); }
+    int infectedCurrent(Simulation* sim){ return sim->getInfectedCurrent(); }
+    int infectedTotal(Simulation* sim){ return sim->getInfectedTotal(); }
+    int deceasedTotal(Simulation* sim){ return sim->getDeceasedTotal(); }
+    int recoveredTotal(Simulation* sim){ return sim->getRecoveredTotal(); }
+    int hospitalTotal(Simulation* sim){ return sim->getHospitalTotal(); }
+    int hospitalCurrent(Simulation* sim){ return sim->getHospitalCurrent(); }
+    int ICUtotal(Simulation* sim){ return sim->getICUtotal(); }
+    int ICUCurrent(Simulation* sim){ return sim->getICUCurrent(); }
+}
 
 #endif
