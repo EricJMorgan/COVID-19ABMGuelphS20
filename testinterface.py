@@ -15,6 +15,24 @@ ffi.cdef('''
     int hospitalCurrent(Simulation* sim);
     int ICUtotal(Simulation* sim);
     int ICUCurrent(Simulation* sim);
+    void socialDistanceServerity(Simulation* sim, int val);
+    void maskCompliance(Simulation* sim, double val);
+    void hygieneMaintainence(Simulation* sim, double val);
+    void genStoreRisk(Simulation* sim, double val);
+    void transportRisk(Simulation* sim, double val);
+    void schoolRisk(Simulation* sim, double val);
+    void parkRisk(Simulation* sim, double val);
+    void entertainmentRisk(Simulation* sim, double val);
+    void healthPlaceRisk(Simulation* sim, double val);
+    void placeOfWorshipRisk(Simulation* sim, double val);
+    void residentialRisk(Simulation* sim, double val);
+    void incubationPeriod(Simulation* sim, int val);
+    void timeIncubHospital(Simulation* sim, int val);
+    void timeHospitalICU(Simulation* sim, int val);
+    void timeICUDeath(Simulation* sim, int val);
+    void timeRecoveryNoHospital(Simulation* sim, int val);
+    void recoveryPeriodHospital(Simulation* sim, int val);
+    void timeRecoveryICU(Simulation* sim, int val);
 ''')
 
 lib = ffi.dlopen('./libProject.so')
