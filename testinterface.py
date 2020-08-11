@@ -68,58 +68,58 @@ class Simulation(object):
     def ICUCurrent(self):
         return lib.ICUCurrent(self.obj)
 
-    def setSocialDistanceServerity
+    def setSocialDistanceServerity(self, val)
         lib.socialDistanceServeritySetter(self.obj, val)
 
-    def setmaskCompliance
+    def setmaskCompliance(self, val)
         lib.maskComplianceSetter(self.obj, val)
 
-    def setHygieneMaintainence
+    def setHygieneMaintainence(self, val)
         lib.hygieneMaintainenceSetter(self.obj, val)
 
-    def setGenStoreRisk
+    def setGenStoreRisk(self, val)
         lib.genStoreRiskSetter(self.obj, val)
 
-    def setTransportRisk
+    def setTransportRisk(self, val)
         lib.transportRiskSetter(self.obj, val)
 
-    def setSchoolRisk
+    def setSchoolRisk(self, val)
         lib.schoolRiskSetter(self.obj, val)
 
-    def setParkRisk
+    def setParkRisk(self, val)
         lib.parkRiskSetter(self.obj, val)
 
-    def setEntertainmentRisk
+    def setEntertainmentRisk(self, val)
         lib.entertainmentRiskSetter(self.obj, val)
 
-    def setHealthPlaceRisk
+    def setHealthPlaceRisk(self, val)
         lib.healthPlaceRiskSetter(self.obj, val)
 
-    def setPlaceOfWorshipRisk
+    def setPlaceOfWorshipRisk(self, val)
         lib.placeOfWorshipRiskSetter(self.obj, val)
 
-    def setResidentialRisk
+    def setResidentialRisk(self, val)
         lib.residentialRiskSetter(self.obj, val)
 
-    def setIncubationPeriod
+    def setIncubationPeriod(self, val)
         lib.incubationPeriodSetter(self.obj, int val)
 
-    def setTimeIncubHospital
+    def setTimeIncubHospital(self, val)
         lib.timeIncubHospitalSetter(self.obj, int val)
 
-    def setTimeHospitalICU
+    def setTimeHospitalICU(self, val)
         lib.timeHospitalICUSetter(self.obj, int val)
 
-    def setTimeICUDeath
+    def setTimeICUDeath(self, val)
         lib.timeICUDeathSetter(self.obj, int val)
 
-    def setTimeRecoveryNoHospital
+    def setTimeRecoveryNoHospital(self, val)
         lib.timeRecoveryNoHospitalSetter(self.obj, val)
 
-    def setRecoveryPeriodHospital
+    def setRecoveryPeriodHospital(self, val)
         lib.recoveryPeriodHospitalSetter(self.obj, val)
         
-    def setTimeRecoveryICU
+    def setTimeRecoveryICU(self, val)
         lib.timeRecoveryICUSetter(self.obj, val)
     
     
