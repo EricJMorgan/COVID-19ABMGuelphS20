@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 05/08/20
- * ver 1.00
+ * ver 1.01
  * 
  * This is the class file for the simulation class
  ***************/
@@ -145,6 +145,69 @@ Agent *Simulation::getAgentAt(int index){
 
     Agent *holder = simAgents[index];
     return holder;
+}
+
+//user input setters
+void Simulation::setSocialDistancingSeverity(int val){
+    socialDistancingSeverity = val;
+}
+void Simulation::setMaskCompliance(double val){
+    maskCompliance = val;
+}
+void Simulation::setHygieneMaintainence(double val){
+    hygieneMaintainence = val;
+}
+
+//location risks
+void Simulation::setGenStoreRisk(double val){
+    genStoreRisk = val;
+}
+void Simulation::setTransportRisk(double val){
+    transportRisk = val;
+}
+void Simulation::setSchoolRisk(double val){
+    schoolRisk = val;
+}
+void Simulation::setParkRisk(double val){
+    parkRisk = val;
+}
+void Simulation::setServiceRisk(double val){
+    serviceRisk = val;
+}
+void Simulation::setEntertainmentRisk(double val){
+    entertainmentRisk = val;
+}
+void Simulation::setHealthPlaceRisk(double val){
+    healthPlaceRisk = val;
+}
+void Simulation::setPlaceOfWorshipRisk(double val){
+    placeOfWorshipRisk = val;
+}
+void Simulation::setResidentialRisk(double val){
+    residentialRisk = val;
+}
+
+//sim factors
+void Simulation::setIncubationPeriod(int val){
+    incubationPeriod = val;
+}
+void Simulation::setTimeIncubHospital(int val){
+    timeIncubHospital = val;
+}
+void Simulation::setTimeHospitalICU(int val){
+    timeHospitalICU = val;
+}
+void Simulation::setTimeICUDeath(int val){
+    timeICUDeath = val;
+}
+void Simulation::setTimeRecoveryNoHospital(int val){
+    timeRecoveryNoHospital = val;
+}
+void Simulation::setRecoveryPeriodHospital(int val){
+    recoveryPeriodHospital = val;
+}
+void Simulation::setTimeRecoveryICU(int val){
+    timeRecoveryICU = val;
 }
 
 /********************Private functions***************************************/

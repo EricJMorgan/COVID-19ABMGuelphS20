@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 05/08/20
- * ver 1.00
+ * ver 1.01
  * 
  * This is the header file for the simulation class
  ***************/
@@ -148,6 +148,31 @@ class Simulation {
      * Takes inputs from front end sends them to the associated classes
      */
     // void setInputs();
+
+    //user input setters
+    void setSocialDistancingSeverity(int val);
+    void setMaskCompliance(double val);
+    void setHygieneMaintainence(double val);
+
+    //location risks
+    void setGenStoreRisk(double val);
+    void setTransportRisk(double val);
+    void setSchoolRisk(double val);
+    void setParkRisk(double val);
+    void setServiceRisk(double val);
+    void setEntertainmentRisk(double val);
+    void setHealthPlaceRisk(double val);
+    void setPlaceOfWorshipRisk(double val);
+    void setResidentialRisk(double val);
+
+    //sim factors
+    void setIncubationPeriod(int val);
+    void setTimeIncubHospital(int val);
+    void setTimeHospitalICU(int val);
+    void setTimeICUDeath(int val);
+    void setTimeRecoveryNoHospital(int val);
+    void setRecoveryPeriodHospital(int val);
+    void setTimeRecoveryICU(int val);
     
     SIRtotals totalSimSIRStats;
     
