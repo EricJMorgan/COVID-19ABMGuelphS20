@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 05/08/20
- * ver 1.00
+ * ver 1.01
  * 
  * This is the header file for the simulation class
  ***************/
@@ -148,6 +148,161 @@ class Simulation {
      * Takes inputs from front end sends them to the associated classes
      */
     // void setInputs();
+
+    //user input setters
+    /**
+     * setSocialDistancingSeverity
+     * 
+     * setter for SocialDistancingSeverity
+     * @param val, the value to set
+     */
+    void setSocialDistancingSeverity(int val);
+
+    /**
+     * setMaskCompliance
+     * 
+     * setter for MaskCompliance
+     * @param val, the value to set
+     */
+    void setMaskCompliance(double val);
+
+    /**
+     * setHygieneMaintainence
+     * 
+     * setter for HygieneMaintainence
+     * @param val, the value to set
+     */
+    void setHygieneMaintainence(double val);
+
+    //location risks
+    /**
+     * setGenStoreRisk
+     * 
+     * setter for GenStoreRisk
+     * @param val, the value to set
+     */
+    void setGenStoreRisk(double val);
+
+    /**
+     * setTransportRisk
+     * 
+     * setter for TransportRisk
+     * @param val, the value to set
+     */
+    void setTransportRisk(double val);
+
+    /**
+     * setSchoolRisk
+     * 
+     * setter for SchoolRisk
+     * @param val, the value to set
+     */
+    void setSchoolRisk(double val);
+
+    /**
+     * setParkRisk
+     * 
+     * setter for ParkRisk
+     * @param val, the value to set
+     */
+    void setParkRisk(double val);
+
+    /**
+     * setServiceRisk
+     * 
+     * setter for ServiceRisk
+     * @param val, the value to set
+     */
+    void setServiceRisk(double val);
+
+    /**
+     * setEntertainmentRisk
+     * 
+     * setter for EntertainmentRisk
+     * @param val, the value to set
+     */
+    void setEntertainmentRisk(double val);
+
+    /**
+     * setHealthPlaceRisk
+     * 
+     * setter for HealthPlaceRisk
+     * @param val, the value to set
+     */
+    void setHealthPlaceRisk(double val);
+
+    /**
+     * setPlaceOfWorshipRisk
+     * 
+     * setter for PlaceOfWorshipRisk
+     * @param val, the value to set
+     */
+    void setPlaceOfWorshipRisk(double val);
+
+    /**
+     * setResidentialRisk
+     * 
+     * setter for ResidentialRisk
+     * @param val, the value to set
+     */
+    void setResidentialRisk(double val);
+
+    //sim factors
+    /**
+     * setIncubationPeriod
+     * 
+     * setter for IncubationPeriod
+     * @param val, the value to set
+     */
+    void setIncubationPeriod(int val);
+
+    /**
+     * setTimeIncubHospital
+     * 
+     * setter for TimeIncubHospital
+     * @param val, the value to set
+     */
+    void setTimeIncubHospital(int val);
+
+    /**
+     * setTimeHospitalICU
+     * 
+     * setter for TimeHospitalICU
+     * @param val, the value to set
+     */
+    void setTimeHospitalICU(int val);
+
+    /**
+     * setTimeICUDeath
+     * 
+     * setter for TimeICUDeath
+     * @param val, the value to set
+     */
+    void setTimeICUDeath(int val);
+
+    /**
+     * setTimeRecoveryNoHospital
+     * 
+     * setter for TimeRecoveryNoHospital
+     * @param val, the value to set
+     */
+    void setTimeRecoveryNoHospital(int val);
+
+    /**
+     * setRecoveryPeriodHospital
+     * 
+     * setter for RecoveryPeriodHospital
+     * @param val, the value to set
+     */
+    void setRecoveryPeriodHospital(int val);
+
+    /**
+     * setTimeRecoveryICU
+     * 
+     * setter for TimeRecoveryICU
+     * @param val, the value to set
+     */
+    void setTimeRecoveryICU(int val);
     
     SIRtotals totalSimSIRStats;
     
@@ -261,6 +416,26 @@ extern "C" {
     int hospitalCurrent(Simulation* sim){ return sim->getHospitalCurrent(); }
     int ICUtotal(Simulation* sim){ return sim->getICUtotal(); }
     int ICUCurrent(Simulation* sim){ return sim->getICUCurrent(); }
+    void socialDistanceServeritySetter(Simulation* sim, int val){sim->setSocialDistancingSeverity(val);}
+    void maskComplianceSetter(Simulation* sim, double val){sim->setMaskCompliance(val);}
+    void hygieneMaintainenceSetter(Simulation* sim, double val){sim->setHygieneMaintainence(val);}
+    void genStoreRiskSetter(Simulation* sim, double val){sim->setGenStoreRisk(val);}
+    void transportRiskSetter(Simulation* sim, double val){sim->setTransportRisk(val);}
+    void schoolRiskSetter(Simulation* sim, double val){sim->setSchoolRisk(val);}
+    void parkRiskSetter(Simulation* sim, double val){sim->setParkRisk(val);}
+    void serviceRiskSetter(Simulation* sim, double val){sim->setServiceRisk(val);}
+    void entertainmentRiskSetter(Simulation* sim, double val){sim->setEntertainmentRisk(val);}
+    void healthPlaceRiskSetter(Simulation* sim, double val){sim->setHealthPlaceRisk(val);}
+    void placeOfWorshipRiskSetter(Simulation* sim, double val){sim->setPlaceOfWorshipRisk(val);}
+    void residentialRiskSetter(Simulation* sim, double val){sim->setResidentialRisk(val);}
+    void incubationPeriodSetter(Simulation* sim, int val){sim->setIncubationPeriod(val);}
+    void timeIncubHospitalSetter(Simulation* sim, int val){sim->setTimeIncubHospital(val);}
+    void timeHospitalICUSetter(Simulation* sim, int val){sim->setTimeHospitalICU(val);}
+    void timeICUDeathSetter(Simulation* sim, int val){sim->setTimeICUDeath(val);}
+    void timeRecoveryNoHospitalSetter(Simulation* sim, int val){sim->setTimeRecoveryNoHospital(val);}
+    void recoveryPeriodHospitalSetter(Simulation* sim, int val){sim->setRecoveryPeriodHospital(val);}
+    void timeRecoveryICUSetter(Simulation* sim, int val){sim->setTimeRecoveryICU(val);}
+
 }
 
 #endif
