@@ -150,28 +150,158 @@ class Simulation {
     // void setInputs();
 
     //user input setters
+    /**
+     * setSocialDistancingSeverity
+     * 
+     * setter for SocialDistancingSeverity
+     * @param val, the value to set
+     */
     void setSocialDistancingSeverity(int val);
+
+    /**
+     * setMaskCompliance
+     * 
+     * setter for MaskCompliance
+     * @param val, the value to set
+     */
     void setMaskCompliance(double val);
+
+    /**
+     * setHygieneMaintainence
+     * 
+     * setter for HygieneMaintainence
+     * @param val, the value to set
+     */
     void setHygieneMaintainence(double val);
 
     //location risks
+    /**
+     * setGenStoreRisk
+     * 
+     * setter for GenStoreRisk
+     * @param val, the value to set
+     */
     void setGenStoreRisk(double val);
+
+    /**
+     * setTransportRisk
+     * 
+     * setter for TransportRisk
+     * @param val, the value to set
+     */
     void setTransportRisk(double val);
+
+    /**
+     * setSchoolRisk
+     * 
+     * setter for SchoolRisk
+     * @param val, the value to set
+     */
     void setSchoolRisk(double val);
+
+    /**
+     * setParkRisk
+     * 
+     * setter for ParkRisk
+     * @param val, the value to set
+     */
     void setParkRisk(double val);
+
+    /**
+     * setServiceRisk
+     * 
+     * setter for ServiceRisk
+     * @param val, the value to set
+     */
     void setServiceRisk(double val);
+
+    /**
+     * setEntertainmentRisk
+     * 
+     * setter for EntertainmentRisk
+     * @param val, the value to set
+     */
     void setEntertainmentRisk(double val);
+
+    /**
+     * setHealthPlaceRisk
+     * 
+     * setter for HealthPlaceRisk
+     * @param val, the value to set
+     */
     void setHealthPlaceRisk(double val);
+
+    /**
+     * setPlaceOfWorshipRisk
+     * 
+     * setter for PlaceOfWorshipRisk
+     * @param val, the value to set
+     */
     void setPlaceOfWorshipRisk(double val);
+
+    /**
+     * setResidentialRisk
+     * 
+     * setter for ResidentialRisk
+     * @param val, the value to set
+     */
     void setResidentialRisk(double val);
 
     //sim factors
+    /**
+     * setIncubationPeriod
+     * 
+     * setter for IncubationPeriod
+     * @param val, the value to set
+     */
     void setIncubationPeriod(int val);
+
+    /**
+     * setTimeIncubHospital
+     * 
+     * setter for TimeIncubHospital
+     * @param val, the value to set
+     */
     void setTimeIncubHospital(int val);
+
+    /**
+     * setTimeHospitalICU
+     * 
+     * setter for TimeHospitalICU
+     * @param val, the value to set
+     */
     void setTimeHospitalICU(int val);
+
+    /**
+     * setTimeICUDeath
+     * 
+     * setter for TimeICUDeath
+     * @param val, the value to set
+     */
     void setTimeICUDeath(int val);
+
+    /**
+     * setTimeRecoveryNoHospital
+     * 
+     * setter for TimeRecoveryNoHospital
+     * @param val, the value to set
+     */
     void setTimeRecoveryNoHospital(int val);
+
+    /**
+     * setRecoveryPeriodHospital
+     * 
+     * setter for RecoveryPeriodHospital
+     * @param val, the value to set
+     */
     void setRecoveryPeriodHospital(int val);
+
+    /**
+     * setTimeRecoveryICU
+     * 
+     * setter for TimeRecoveryICU
+     * @param val, the value to set
+     */
     void setTimeRecoveryICU(int val);
     
     SIRtotals totalSimSIRStats;
