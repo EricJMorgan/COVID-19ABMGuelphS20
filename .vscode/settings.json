@@ -84,6 +84,6 @@
         "stack": "cpp",
         "strstream": "cpp"
     },
-    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.8/bin/python3",
+    "python.pythonPath": "/sbin/python",
     "git.ignoreLimitWarning": true
 }
