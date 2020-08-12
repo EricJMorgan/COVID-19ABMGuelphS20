@@ -84,6 +84,6 @@
         "stack": "cpp",
         "strstream": "cpp"
     },
-    "python.pythonPath": "C:\\Users\\Noxx\\anaconda3\\python.exe",
+    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.8/bin/python3",
     "git.ignoreLimitWarning": true
 }

@@ -35,8 +35,7 @@ ffi.cdef('''
     void timeRecoveryICUSetter(Simulation* sim, int val);
 ''')
 
-#lib = ffi.dlopen('./libProject.so')
-lib = ffi.dlopen('libProject.dll')
+lib = ffi.dlopen('./libProject.so')
 
 class Simulation(object):
     def __init__(self):
@@ -101,29 +100,25 @@ class Simulation(object):
 
     def setResidentialRisk(self, val):
         lib.residentialRiskSetter(self.obj, val)
-
-    def setIncubationPeriod(self, val):
-        lib.incubationPeriodSetter(self.obj, val)
-
-    def setTimeIncubHospital(self, val):
-        lib.timeIncubHospitalSetter(self.obj, val)
-
-    def setTimeHospitalICU(self, val):
-        lib.timeHospitalICUSetter(self.obj, val)
-
-    def setTimeICUDeath(self, val):
-        lib.timeICUDeathSetter(self.obj, val)
-
-    def setTimeRecoveryNoHospital(self, val):
-        lib.timeRecoveryNoHospitalSetter(self.obj, val)
-
-    def setRecoveryPeriodHospital(self, val):
-        lib.recoveryPeriodHospitalSetter(self.obj, val)
-        
-    def setTimeRecoveryICU(self, val):
-        lib.timeRecoveryICUSetter(self.obj, val)
     
     
-
+#make object
 sim = Simulation()
+#set everything
+
+#loop sim timestep
+
 sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()s
