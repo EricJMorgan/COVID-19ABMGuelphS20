@@ -35,7 +35,8 @@ ffi.cdef('''
     void timeRecoveryICUSetter(Simulation* sim, int val);
 ''')
 
-lib = ffi.dlopen('./libProject.so')
+#lib = ffi.dlopen('./libProject.so')
+lib = ffi.dlopen('libProject.dll')
 
 class Simulation(object):
     def __init__(self):

@@ -71,5 +71,5 @@ library:
 	g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/geographicalrisk.cpp
 	g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/hospital.cpp
 	g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/isolationcompartment.cpp
-	g++ -shared -o libProject.so agent.o simulation.o location.o postalCodeHash.o SIR.o SIRtotals.o transportation.o geographicalrisk.o hospital.o isolationcompartment.o
-	rm agent.o simulation.o location.o postalCodeHash.o SIR.o SIRtotals.o transportation.o geographicalrisk.o hospital.o isolationcompartment.o
+	g++ -shared -o libProject.dll agent.o simulation.o location.o postalCodeHash.o SIR.o SIRtotals.o transportation.o geographicalrisk.o hospital.o isolationcompartment.o
+	del agent.o simulation.o location.o postalCodeHash.o SIR.o SIRtotals.o transportation.o geographicalrisk.o hospital.o isolationcompartment.o
