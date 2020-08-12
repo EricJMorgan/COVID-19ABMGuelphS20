@@ -160,30 +160,39 @@ void Simulation::setHygieneMaintainence(double val){
 
 //location risks
 void Simulation::setGenStoreRisk(double val){
+    cout << val << endl;
     genStoreRisk = val;
 }
 void Simulation::setTransportRisk(double val){
+    cout << val << endl;
     transportRisk = val;
 }
 void Simulation::setSchoolRisk(double val){
+    cout << val << endl;
     schoolRisk = val;
 }
 void Simulation::setParkRisk(double val){
+    cout << val << endl;
     parkRisk = val;
 }
 void Simulation::setServiceRisk(double val){
+    cout << val << endl;
     serviceRisk = val;
 }
 void Simulation::setEntertainmentRisk(double val){
+    cout << val << endl;
     entertainmentRisk = val;
 }
 void Simulation::setHealthPlaceRisk(double val){
+    cout << val << endl;
     healthPlaceRisk = val;
 }
 void Simulation::setPlaceOfWorshipRisk(double val){
+    cout << val << endl;
     placeOfWorshipRisk = val;
 }
 void Simulation::setResidentialRisk(double val){
+    cout << val << endl;
     residentialRisk = val;
 }
 
