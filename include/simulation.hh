@@ -322,7 +322,7 @@ class Simulation {
     int agentCount;
     int population;
     double sirTimeStep;
-
+    double locationRisk[9];
 
     // user inputs
     // geographical risks

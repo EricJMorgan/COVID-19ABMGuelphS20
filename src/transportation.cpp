@@ -253,3 +253,12 @@ int Transportation::monteCarloRandom(int roof){
         if(r2 < r1) return r1;
     }
 }
+
+void Transportation::updateLocationRisks(int socialDistancingSeverity, double associatedLocRisks[]) {
+    for(int i = 0; i < getLocationListLength(); i++){
+        getLocationAt(i)->socialDistancingSeverity = socialDistancingSeverity;
+        for (int j = 0; j < 9; j++) {
+            getLocationAt(i)->locationRisks[j] = associatedLocRisks[j];
+        }
+    }
+}

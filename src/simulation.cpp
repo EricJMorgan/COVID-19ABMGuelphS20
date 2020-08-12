@@ -160,31 +160,31 @@ void Simulation::setHygieneMaintainence(double val){
 
 //location risks
 void Simulation::setGenStoreRisk(double val){
-    genStoreRisk = val;
+    locationRisk[0] = val;
 }
 void Simulation::setTransportRisk(double val){
-    transportRisk = val;
+    locationRisk[1] = val;
 }
 void Simulation::setSchoolRisk(double val){
-    schoolRisk = val;
+    locationRisk[2] = val;
 }
 void Simulation::setParkRisk(double val){
-    parkRisk = val;
+    locationRisk[3] = val;
 }
 void Simulation::setServiceRisk(double val){
-    serviceRisk = val;
+    locationRisk[4] = val;
 }
 void Simulation::setEntertainmentRisk(double val){
-    entertainmentRisk = val;
+    locationRisk[5] = val;
 }
 void Simulation::setHealthPlaceRisk(double val){
-    healthPlaceRisk = val;
+    locationRisk[6] = val;
 }
 void Simulation::setPlaceOfWorshipRisk(double val){
-    placeOfWorshipRisk = val;
+    locationRisk[7] = val;
 }
 void Simulation::setResidentialRisk(double val){
-    residentialRisk = val;
+    locationRisk[8] = val;
 }
 
 //sim factors
