@@ -20,6 +20,7 @@ from plotly.tools import mpl_to_plotly
 time1 = element.start_time()
 time2 = element.start_time()
 time3 = element.start_time()
+time4 = element.start_time()
 infectedC = element.start_value(5)
 infectedT = element.start_value(5)
 deceasedT = element.start_value(1)
@@ -37,12 +38,29 @@ icuT = element.start_value(1)
 
 app = dash.Dash(external_stylesheets=[dbc.themes.FLATLY])
 
+infectedGraph = element.graph_linear('infectedGraph', 1000, 'Infected Cases Over Time')
+idrGraph = element.graph_linear('idrGraph', 1000, 'Infected, Deceased and Recovered Over Time')
+
+infectedGraph = dbc.Card([
+    dbc.CardBody([
+        html.Div([infectedGraph]),
+        #html.Div([idrGraph]),
+    ],
+    id="i_tab")
+])
+
+graphTabs = dbc.Tabs([
+    dbc.Tab(infectedGraph, label="Infected Graphs", tab_id="i_tab")
+],
+id="graph_tabs",
+)
+
 app.layout = html.Div([
     element.navigator,
     dbc.Row(dbc.Col(html.Div(element.buttons))),
     dbc.Row([
         dbc.Col(html.Div(element.tabs), width=4),
-        dbc.Col(html.Div(element.graph_linear('graph', 1000, 'Infected Cases Over Time')), width=8),
+        dbc.Col(html.Div(graphTabs), width=8),
     ]),
 ])
 
@@ -68,8 +86,12 @@ for i in range(len(list_elements)):
     def update_output_SD(value):
         return '{}'.format(value)
 
+list_graphs  = ['infectedGraph',]
+lint_inputs  = ['time1', 'time2', 'time3', 'time4']
+list_outputs = ['']
+
 #Interactive elements of Dash app
-@app.callback(Output('graph', 'figure'),
+@app.callback(Output('infectedGraph', 'figure'),
              [Input('linear-update', 'n_intervals')]
 )
 def update_linear_scatter(input_data):
