@@ -246,63 +246,6 @@ class Simulation {
      * @param val, the value to set
      */
     void setResidentialRisk(double val);
-
-    //sim factors
-    /**
-     * setIncubationPeriod
-     * 
-     * setter for IncubationPeriod
-     * @param val, the value to set
-     */
-    void setIncubationPeriod(int val);
-
-    /**
-     * setTimeIncubHospital
-     * 
-     * setter for TimeIncubHospital
-     * @param val, the value to set
-     */
-    void setTimeIncubHospital(int val);
-
-    /**
-     * setTimeHospitalICU
-     * 
-     * setter for TimeHospitalICU
-     * @param val, the value to set
-     */
-    void setTimeHospitalICU(int val);
-
-    /**
-     * setTimeICUDeath
-     * 
-     * setter for TimeICUDeath
-     * @param val, the value to set
-     */
-    void setTimeICUDeath(int val);
-
-    /**
-     * setTimeRecoveryNoHospital
-     * 
-     * setter for TimeRecoveryNoHospital
-     * @param val, the value to set
-     */
-    void setTimeRecoveryNoHospital(int val);
-
-    /**
-     * setRecoveryPeriodHospital
-     * 
-     * setter for RecoveryPeriodHospital
-     * @param val, the value to set
-     */
-    void setRecoveryPeriodHospital(int val);
-
-    /**
-     * setTimeRecoveryICU
-     * 
-     * setter for TimeRecoveryICU
-     * @param val, the value to set
-     */
-    void setTimeRecoveryICU(int val);
     
     SIRtotals totalSimSIRStats;
     
@@ -340,15 +283,6 @@ class Simulation {
     double healthPlaceRisk;
     double placeOfWorshipRisk;
     double residentialRisk;
-
-    //sim factors
-    int incubationPeriod;
-    int timeIncubHospital;
-    int timeHospitalICU;
-    int timeICUDeath;
-    int timeRecoveryNoHospital;
-    int recoveryPeriodHospital;
-    int timeRecoveryICU;
 
     //outputs for Front End graph
     int infectedCurrent;
@@ -428,13 +362,6 @@ extern "C" {
     void healthPlaceRiskSetter(Simulation* sim, double val){sim->setHealthPlaceRisk(val);}
     void placeOfWorshipRiskSetter(Simulation* sim, double val){sim->setPlaceOfWorshipRisk(val);}
     void residentialRiskSetter(Simulation* sim, double val){sim->setResidentialRisk(val);}
-    void incubationPeriodSetter(Simulation* sim, int val){sim->setIncubationPeriod(val);}
-    void timeIncubHospitalSetter(Simulation* sim, int val){sim->setTimeIncubHospital(val);}
-    void timeHospitalICUSetter(Simulation* sim, int val){sim->setTimeHospitalICU(val);}
-    void timeICUDeathSetter(Simulation* sim, int val){sim->setTimeICUDeath(val);}
-    void timeRecoveryNoHospitalSetter(Simulation* sim, int val){sim->setTimeRecoveryNoHospital(val);}
-    void recoveryPeriodHospitalSetter(Simulation* sim, int val){sim->setRecoveryPeriodHospital(val);}
-    void timeRecoveryICUSetter(Simulation* sim, int val){sim->setTimeRecoveryICU(val);}
 
 }
 

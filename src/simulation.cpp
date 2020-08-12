@@ -187,29 +187,6 @@ void Simulation::setResidentialRisk(double val){
     residentialRisk = val;
 }
 
-//sim factors
-void Simulation::setIncubationPeriod(int val){
-    incubationPeriod = val;
-}
-void Simulation::setTimeIncubHospital(int val){
-    timeIncubHospital = val;
-}
-void Simulation::setTimeHospitalICU(int val){
-    timeHospitalICU = val;
-}
-void Simulation::setTimeICUDeath(int val){
-    timeICUDeath = val;
-}
-void Simulation::setTimeRecoveryNoHospital(int val){
-    timeRecoveryNoHospital = val;
-}
-void Simulation::setRecoveryPeriodHospital(int val){
-    recoveryPeriodHospital = val;
-}
-void Simulation::setTimeRecoveryICU(int val){
-    timeRecoveryICU = val;
-}
-
 /********************Private functions***************************************/
 void Simulation::addNewAgent(string personInfo, int amountToAdd){
     for(int i = 0; i < amountToAdd; i++){

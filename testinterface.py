@@ -35,7 +35,7 @@ ffi.cdef('''
     void timeRecoveryICUSetter(Simulation* sim, int val);
 ''')
 
-lib = ffi.dlopen('libProject.so')
+lib = ffi.dlopen('./libProject.so')
 
 class Simulation(object):
     def __init__(self):
@@ -100,29 +100,37 @@ class Simulation(object):
 
     def setResidentialRisk(self, val):
         lib.residentialRiskSetter(self.obj, val)
-
-    def setIncubationPeriod(self, val):
-        lib.incubationPeriodSetter(self.obj, val)
-
-    def setTimeIncubHospital(self, val):
-        lib.timeIncubHospitalSetter(self.obj, val)
-
-    def setTimeHospitalICU(self, val):
-        lib.timeHospitalICUSetter(self.obj, val)
-
-    def setTimeICUDeath(self, val):
-        lib.timeICUDeathSetter(self.obj, val)
-
-    def setTimeRecoveryNoHospital(self, val):
-        lib.timeRecoveryNoHospitalSetter(self.obj, val)
-
-    def setRecoveryPeriodHospital(self, val):
-        lib.recoveryPeriodHospitalSetter(self.obj, val)
-        
-    def setTimeRecoveryICU(self, val):
-        lib.timeRecoveryICUSetter(self.obj, val)
     
     
-
+#make object
 sim = Simulation()
+#set everything
+sim.setSocialDistanceServerity(9)
+sim.setmaskCompliance(0.0)
+sim.setHygieneMaintainence(0.5)
+
+sim.setGenStoreRisk(0.6)
+sim.setTransportRisk(0.7)
+sim.setSchoolRisk(0.8)
+sim.setParkRisk(0.4)
+sim.setEntertainmentRisk(0.7)
+sim.setHealthPlaceRisk(0.8)
+sim.setPlaceOfWorshipRisk(0.7)
+sim.setResidentialRisk(0.5)
+#loop sim timestep
+
 sim.timeStep()
+print(sim.infectedCurrent())
+# sim.timeStep()
+# sim.timeStep()
+# sim.timeStep()
+# sim.timeStep()
+# sim.timeStep()
+# sim.timeStep()
+# sim.timeStep()
+# sim.timeStep()
+# sim.timeStep()
+# sim.timeStep()
+# sim.timeStep()
+# sim.timeStep()
+# sim.timeStep()
