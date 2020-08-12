@@ -124,21 +124,18 @@ def graph_linear(id_tag, step, title_graph):
         )
     ])
 
-def start_X():
+def start_time():
     X = deque()
     X.append(1)
     return X
 
-def start_Y():
+def start_value(initial):
     Y = deque()
-    Y.append(1)
+    Y.append(initial)
     return Y
 
-def get_X(value):
+def next_timestep(value):
     return value + 1
-
-def get_Y(value):
-    return value + 0.1
 
 def get_randomY(value):
     return value + (value * random.uniform(-0.1,0.1)) + 1

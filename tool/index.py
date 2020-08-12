@@ -16,11 +16,22 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 from plotly.tools import mpl_to_plotly
 
-#Example to print to real-time graph
-X1 = element.start_X()
-X2 = element.start_X()
-Y = element.start_Y()
-Z = element.start_Y()
+#Things to print to real-time graph
+time1 = element.start_time()
+time2 = element.start_time()
+time3 = element.start_time()
+infectedC = element.start_value(5)
+infectedT = element.start_value(5)
+deceasedT = element.start_value(1)
+recoveredT = element.start_value(1)
+hospitalC = element.start_value(1)
+hospitalT = element.start_value(1)
+icuC = element.start_value(1)
+icuT = element.start_value(1)
+
+############################################################
+
+
 
 ############################################################
 
@@ -62,20 +73,18 @@ for i in range(len(list_elements)):
              [Input('linear-update', 'n_intervals')]
 )
 def update_linear_scatter(input_data):
-    global X1
-    global Y
-    X1.append(element.get_X(X1[-1]))
-    Y.append(element.get_randomY(Y[-1]))
+    time1.append(element.next_timestep(time1[-1]))
+    infectedC.append(element.get_randomY(infectedC[-1]))
 
     data1 = go.Scatter(
-        x = list(X1),
-        y = list(Y),
+        x = list(time1),
+        y = list(infectedC),
         name = 'Scatter',
         mode = 'lines+markers'
     )
 
-    return {'data':[data1], 'layout': go.Layout(xaxis=dict(range=[min(X1), max(X1)]),
-                                                yaxis=dict(range=[min(Y), max(Y)]))}
+    return {'data':[data1], 'layout': go.Layout(xaxis=dict(range=[min(time1), max(time1)]),
+                                                yaxis=dict(range=[min(infectedC), max(infectedC)]))}
 
 
 if __name__ == "__main__":
