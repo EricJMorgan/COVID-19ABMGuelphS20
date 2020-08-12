@@ -104,6 +104,11 @@ class Simulation(object):
     
 #make object
 sim = Simulation()
+sim.infectedCurrent()
+sim.infectedTotal()
+
+sim.timeStep()
+
 #set everything
 sim.setSocialDistanceServerity(9)
 sim.setmaskCompliance(0.0)
