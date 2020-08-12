@@ -35,13 +35,11 @@ app.layout = html.Div([
     ]),
 ])
 
-# we use a callback to toggle the collapse on small screens
 def toggle_navbar_collapse(n, is_open):
     if n:
         return not is_open
     return is_open
 
-# the same function (toggle_navbar_collapse) is used in all three callbacks
 app.callback(
     Output("navbar-collapse", "is_open"),
     [Input("navbar-toggler", "n_clicks")],
