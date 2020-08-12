@@ -74,17 +74,102 @@ app.callback(
     [Input("navbar-toggler", "n_clicks")],
     [State("navbar-collapse", "is_open")],
 )(toggle_navbar_collapse)
-
+##################################################
 list_elements = ['Q_slider', 'SD_slider', 'MC_slider', 'HM_slider', 'gs_slider',
                 't_slider', 'sch_slider', 'pnr_slider', 'serv_slider',
                 'ent_slider', 'health_slider', 'poworship_slider', 'res_slider',]
 
-for i in range(len(list_elements)):
-    @app.callback(
-        Output(list_elements[i]+'_value', 'children'),
-        [Input(list_elements[i], 'value')])
-    def update_output_SD(value):
-        return '{}'.format(value)
+@app.callback(
+    Output(list_elements[0]+'_value', 'children'),
+    [Input(list_elements[0], 'value')])
+def update_output_Q(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[1]+'_value', 'children'),
+    [Input(list_elements[1], 'value')])
+def update_output_SD(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[2]+'_value', 'children'),
+    [Input(list_elements[2], 'value')])
+def update_output_MC(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[3]+'_value', 'children'),
+    [Input(list_elements[3], 'value')])
+def update_output_HM(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[4]+'_value', 'children'),
+    [Input(list_elements[4], 'value')])
+def update_output_gs(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[5]+'_value', 'children'),
+    [Input(list_elements[5], 'value')])
+def update_output_t(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[6]+'_value', 'children'),
+    [Input(list_elements[6], 'value')])
+def update_output_sch(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[7]+'_value', 'children'),
+    [Input(list_elements[7], 'value')])
+def update_output_pnr(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[8]+'_value', 'children'),
+    [Input(list_elements[8], 'value')])
+def update_output_serv(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[9]+'_value', 'children'),
+    [Input(list_elements[9], 'value')])
+def update_output_ent(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[10]+'_value', 'children'),
+    [Input(list_elements[10], 'value')])
+def update_output_health(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[11]+'_value', 'children'),
+    [Input(list_elements[11], 'value')])
+def update_output_poworship(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[12]+'_value', 'children'),
+    [Input(list_elements[12], 'value')])
+def update_output_res(value):
+    #RETURN VALUE
+    return '{}'.format(value)
+###########################################################
 
 list_graphs  = ['infectedGraph',]
 lint_inputs  = ['time1', 'time2', 'time3', 'time4']
