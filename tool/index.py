@@ -5,6 +5,7 @@ import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
 import element
 import os
+import math
 
 #Import plotly packages
 import plotly
@@ -16,11 +17,8 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 from plotly.tools import mpl_to_plotly
 
-#Things to print to real-time graph
-time1 = element.start_time()
-time2 = element.start_time()
-time3 = element.start_time()
-time4 = element.start_time()
+#Initialize times and values
+time = element.start_time()
 infectedC = element.start_value(5)
 infectedT = element.start_value(5)
 deceasedT = element.start_value(1)
@@ -38,21 +36,34 @@ icuT = element.start_value(1)
 
 app = dash.Dash(external_stylesheets=[dbc.themes.FLATLY])
 
-infectedGraph = element.graph_linear('infectedGraph', 1000, 'Infected Cases Over Time')
-idrGraph = element.graph_linear('idrGraph', 1000, 'Infected, Deceased and Recovered Over Time')
+infectedGraph = element.graph_linear('infectedGraph', 1000, 1)
+idrGraph = element.graph_linear('idrGraph', 1000, 2)
+hospitalGraph = element.graph_linear('hospitalGraph', 1000, 3)
+icuGraph = element.graph_linear('icuGraph', 1000, 4)
+
 
 infectedGraph = dbc.Card([
     dbc.CardBody([
         html.Div([infectedGraph]),
-        #html.Div([idrGraph]),
+        html.Div([idrGraph]),
     ],
     id="i_tab")
 ])
 
+hospitalGraph = dbc.Card([
+    dbc.CardBody([
+        html.Div([hospitalGraph]),
+        html.Div([icuGraph]),
+    ],
+    id="h_tab")
+])
+
 graphTabs = dbc.Tabs([
-    dbc.Tab(infectedGraph, label="Infected Graphs", tab_id="i_tab")
+    dbc.Tab(infectedGraph, label="COVID-19 Cases", tab_id="i_tab"),
+    dbc.Tab(hospitalGraph, label="Hospital & ICU Cases", tab_id="h_tab"),
 ],
 id="graph_tabs",
+active_tab="i_tab",
 )
 
 app.layout = html.Div([
@@ -74,6 +85,7 @@ app.callback(
     [Input("navbar-toggler", "n_clicks")],
     [State("navbar-collapse", "is_open")],
 )(toggle_navbar_collapse)
+
 ##################################################
 list_elements = ['Q_slider', 'SD_slider', 'MC_slider', 'HM_slider', 'gs_slider',
                 't_slider', 'sch_slider', 'pnr_slider', 'serv_slider',
@@ -171,28 +183,142 @@ def update_output_res(value):
     return '{}'.format(value)
 ###########################################################
 
-list_graphs  = ['infectedGraph',]
-lint_inputs  = ['time1', 'time2', 'time3', 'time4']
-list_outputs = ['']
+list_graphs  = ['infectedGraph', 'idrGraph', 'hospitalGraph', 'icuGraph']
+list_outputs = [infectedC, infectedT, deceasedT, recoveredT, hospitalC, hospitalT, icuC, icuT]
 
-#Interactive elements of Dash app
+#Infected Graph
 @app.callback(Output('infectedGraph', 'figure'),
-             [Input('linear-update', 'n_intervals')]
+             [Input('linear-update1', 'n_intervals')]
 )
-def update_linear_scatter(input_data):
-    time1.append(element.next_timestep(time1[-1]))
-    infectedC.append(element.get_randomY(infectedC[-1]))
+def update_infectedGraph(input_data):
+    time.append(element.next_timestep(time[-1]))
+    list_outputs[0].append(element.get_randomY(list_outputs[0][-1]))
+    list_outputs[1].append(element.get_randomY(list_outputs[1][-1]))
+    converted_time = [val/24 for val in time]
+    converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Scatter(
-        x = list(time1),
-        y = list(infectedC),
-        name = 'Scatter',
-        mode = 'lines+markers'
+    data1 = go.Bar(
+        x = list(converted_time),
+        y = list(list_outputs[0]),
+        name = 'Daily Infected Cases',
+        marker_color = '#F5CB5C',
     )
 
-    return {'data':[data1], 'layout': go.Layout(xaxis=dict(range=[min(time1), max(time1)]),
-                                                yaxis=dict(range=[min(infectedC), max(infectedC)]))}
+    data2 = go.Scatter(
+        x = list(converted_time),
+        y = list(list_outputs[1]),
+        name = 'Total Infected Cases',
+        mode = 'lines+markers',
+        marker_color = '#F71735',
+    )
 
+    return {'data':[data1,data2], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
+                                                yaxis=dict(range=[0, int(math.ceil(max(list_outputs[1])/10.0)*10)], title='Number of Cases', side='left'),
+                                                title='Infected Cases Over Time',
+                                                showlegend=True,
+                                                )}
+
+#I-D-R Graph
+@app.callback(Output('idrGraph', 'figure'),
+             [Input('linear-update2', 'n_intervals')]
+)
+def update_idrGraph(input_data):
+    list_outputs[2].append(element.get_randomY(list_outputs[2][-1]))
+    list_outputs[3].append(element.get_randomY(list_outputs[3][-1]))
+    converted_time = [val/24 for val in time]
+    converted_time = [round(val,2) for val in converted_time]
+
+    data1 = go.Scatter(
+        x = list(converted_time),
+        y = list(list_outputs[1]),
+        name = 'Total Infected Cases',
+        mode = 'lines+markers',
+        marker_color = '#F71735',
+    )
+
+    data2 = go.Scatter(
+        x = list(converted_time),
+        y = list(list_outputs[2]),
+        name = 'Total Deceased Cases',
+        mode = 'lines+markers',
+        marker_color = '#242423',
+    )
+
+    data3 = go.Scatter(
+        x = list(converted_time),
+        y = list(list_outputs[3]),
+        name = 'Total Recovered Cases',
+        mode = 'lines+markers',
+        marker_color = '#00A8E8',
+    )
+
+    return {'data':[data1,data2, data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
+                                                yaxis=dict(range=[0, int(math.ceil(max(list_outputs[1])/10.0)*10)], title='Number of Cases', side='left'),
+                                                title='Infected, Deceased and Recovered Cases Over Time',
+                                                showlegend=True,
+                                                )}
+
+#Hospital Graph
+@app.callback(Output('hospitalGraph', 'figure'),
+             [Input('linear-update3', 'n_intervals')]
+)
+def update_hospital(input_data):
+    list_outputs[4].append(element.get_randomY(list_outputs[4][-1]))
+    list_outputs[5].append(element.get_randomY(list_outputs[5][-1]))
+    converted_time = [val/24 for val in time]
+    converted_time = [round(val,2) for val in converted_time]
+
+    data1 = go.Bar(
+        x = list(converted_time),
+        y = list(list_outputs[4]),
+        name = 'Daily Hospitalized Cases',
+        marker_color = '#F3DC68',
+    )
+
+    data2 = go.Scatter(
+        x = list(converted_time),
+        y = list(list_outputs[5]),
+        name = 'Total Hospitalized Cases',
+        mode = 'lines+markers',
+        marker_color = '#D6B50D',
+    )
+
+    return {'data':[data1,data2], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
+                                                yaxis=dict(range=[0, int(math.ceil(max(list_outputs[5])/10.0)*10)], title='Number of Cases', side='left'),
+                                                title='Hospitalized Cases Over Time',
+                                                showlegend=True,
+                                                )}
+
+#ICU Graph
+@app.callback(Output('icuGraph', 'figure'),
+             [Input('linear-update4', 'n_intervals')]
+)
+def update_icu(input_data):
+    list_outputs[6].append(element.get_randomY(list_outputs[6][-1]))
+    list_outputs[7].append(element.get_randomY(list_outputs[7][-1]))
+    converted_time = [val/24 for val in time]
+    converted_time = [round(val,2) for val in converted_time]
+
+    data1 = go.Bar(
+        x = list(converted_time),
+        y = list(list_outputs[6]),
+        name = 'Daily ICU Cases',
+        marker_color = '#7D1128',
+    )
+
+    data2 = go.Scatter(
+        x = list(converted_time),
+        y = list(list_outputs[7]),
+        name = 'Total ICU Cases',
+        mode = 'lines+markers',
+        marker_color = '#3C0919',
+    )
+
+    return {'data':[data1,data2], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
+                                                yaxis=dict(range=[0, int(math.ceil(max(list_outputs[7])/10.0)*10)], title='Number of Cases', side='left'),
+                                                title='ICU Cases Over Time',
+                                                showlegend=True,
+                                                )}
 
 if __name__ == "__main__":
     app.run_server(debug=True, use_reloader=True)

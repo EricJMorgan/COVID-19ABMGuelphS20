@@ -112,21 +112,20 @@ active_tab="geo_tab",
 import random
 from collections import deque
 
-def graph_linear(id_tag, step, title_graph):
+def graph_linear(id_tag, step, num):
     return html.Div([
-        dbc.Row([html.H4(title_graph),], justify="center"),
         dcc.Graph(id = id_tag,
             animate = True,
         ),
         dcc.Interval(
-            id = 'linear-update',
+            id = 'linear-update'+str(num),
             interval = step #update every predetermined interval
         )
     ])
 
 def start_time():
     X = deque()
-    X.append(1)
+    X.append(0)
     return X
 
 def start_value(initial):
@@ -135,7 +134,7 @@ def start_value(initial):
     return Y
 
 def next_timestep(value):
-    return value + 1
+    return value + 4
 
 def get_randomY(value):
     return value + (value * random.uniform(-0.1,0.1)) + 1
