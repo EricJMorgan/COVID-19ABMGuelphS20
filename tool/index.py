@@ -392,10 +392,11 @@ def update_hospital(input_data):
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Bar(
+    data1 = go.Scatter(
         x = list(converted_time),
         y = list(list_outputs[4]),
         name = 'Current Hospitalized Cases',
+        mode = 'lines+markers',
         marker_color = '#F3DC68',
     )
 
@@ -423,10 +424,11 @@ def update_icu(input_data):
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Bar(
+    data1 = go.Scatter(
         x = list(converted_time),
         y = list(list_outputs[6]),
         name = 'Current ICU Cases',
+        mode = 'lines+markers',
         marker_color = '#7D1128',
     )
 
