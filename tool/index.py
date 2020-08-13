@@ -17,20 +17,120 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 from plotly.tools import mpl_to_plotly
 
-#Initialize times and values
-time = element.start_time()
-infectedC = element.start_value(5)
-infectedT = element.start_value(5)
-deceasedT = element.start_value(1)
-recoveredT = element.start_value(1)
-hospitalC = element.start_value(1)
-hospitalT = element.start_value(1)
-icuC = element.start_value(1)
-icuT = element.start_value(1)
-
 ############################################################
 
+import cffi
 
+ffi = cffi.FFI()
+ffi.cdef('''
+    typedef struct _Simulation Simulation;
+    Simulation* Simulation_new();
+    void simTimeStep(Simulation* sim);
+    int infectedCurrent(Simulation* sim);
+    int infectedTotal(Simulation* sim);
+    int deceasedTotal(Simulation* sim);
+    int recoveredTotal(Simulation* sim);
+    int hospitalTotal(Simulation* sim);
+    int hospitalCurrent(Simulation* sim);
+    int ICUtotal(Simulation* sim);
+    int ICUCurrent(Simulation* sim);
+    void socialDistanceServeritySetter(Simulation* sim, int val);
+    void maskComplianceSetter(Simulation* sim, double val);
+    void hygieneMaintainenceSetter(Simulation* sim, double val);
+    void genStoreRiskSetter(Simulation* sim, double val);
+    void transportRiskSetter(Simulation* sim, double val);
+    void schoolRiskSetter(Simulation* sim, double val);
+    void parkRiskSetter(Simulation* sim, double val);
+    void entertainmentRiskSetter(Simulation* sim, double val);
+    void healthPlaceRiskSetter(Simulation* sim, double val);
+    void placeOfWorshipRiskSetter(Simulation* sim, double val);
+    void residentialRiskSetter(Simulation* sim, double val);
+    void incubationPeriodSetter(Simulation* sim, int val);
+    void timeIncubHospitalSetter(Simulation* sim, int val);
+    void timeHospitalICUSetter(Simulation* sim, int val);
+    void timeICUDeathSetter(Simulation* sim, int val);
+    void timeRecoveryNoHospitalSetter(Simulation* sim, int val);
+    void recoveryPeriodHospitalSetter(Simulation* sim, int val);
+    void timeRecoveryICUSetter(Simulation* sim, int val);
+''')
+
+lib = ffi.dlopen('./libProject.so') #This must be changed(???)
+
+class Simulation(object):
+    def __init__(self):
+        self.obj = lib.Simulation_new()
+
+    def timeStep(self):
+        lib.simTimeStep(self.obj)
+
+    def infectedCurrent(self):
+        return lib.infectedCurrent(self.obj)
+
+    def infectedTotal(self):
+        return lib.infectedTotal(self.obj)
+
+    def deceasedTotal(self):
+        return lib.deceasedTotal(self.obj)
+
+    def recoveredTotal(self):
+        return lib.recoveredTotal(self.obj)
+        
+    def hospitalTotal(self):
+        return lib.hospitalTotal(self.obj)
+
+    def hospitalCurrent(self):
+        return lib.hospitalCurrent(self.obj)
+    
+    def ICUtotal(self):
+        return lib.ICUtotal(self.obj)
+
+    def ICUCurrent(self):
+        return lib.ICUCurrent(self.obj)
+
+    def setSocialDistanceServerity(self, val):
+        lib.socialDistanceServeritySetter(self.obj, val)
+
+    def setmaskCompliance(self, val):
+        lib.maskComplianceSetter(self.obj, val)
+
+    def setHygieneMaintainence(self, val):
+        lib.hygieneMaintainenceSetter(self.obj, val)
+
+    def setGenStoreRisk(self, val):
+        lib.genStoreRiskSetter(self.obj, val)
+
+    def setTransportRisk(self, val):
+        lib.transportRiskSetter(self.obj, val)
+
+    def setSchoolRisk(self, val):
+        lib.schoolRiskSetter(self.obj, val)
+
+    def setParkRisk(self, val):
+        lib.parkRiskSetter(self.obj, val)
+
+    def setEntertainmentRisk(self, val):
+        lib.entertainmentRiskSetter(self.obj, val)
+
+    def setHealthPlaceRisk(self, val):
+        lib.healthPlaceRiskSetter(self.obj, val)
+
+    def setPlaceOfWorshipRisk(self, val):
+        lib.placeOfWorshipRiskSetter(self.obj, val)
+
+    def setResidentialRisk(self, val):
+        lib.residentialRiskSetter(self.obj, val)
+
+#Initialize times and values
+sim = Simulation()
+time = element.start_time()
+infectedC = sim.infectedCurrent()
+infectedT = sim.infectedTotal()
+deceasedT = sim.deceasedTotal()
+recoveredT = sim.recoveredTotal()
+hospitalC = sim.hospitalCurrent()
+hospitalT = sim.hospitalTotal()
+icuC = sim.ICUCurrent()
+icuT = sim.ICUtotal()
 
 ############################################################
 
@@ -102,49 +202,49 @@ def update_output_Q(value):
     Output(list_elements[1]+'_value', 'children'),
     [Input(list_elements[1], 'value')])
 def update_output_SD(value):
-    #RETURN VALUE
+    sim.setSocialDistanceServerity(value)
     return '{}'.format(value)
 
 @app.callback(
     Output(list_elements[2]+'_value', 'children'),
     [Input(list_elements[2], 'value')])
 def update_output_MC(value):
-    #RETURN VALUE
+    sim.setmaskCompliance(value)
     return '{}'.format(value)
 
 @app.callback(
     Output(list_elements[3]+'_value', 'children'),
     [Input(list_elements[3], 'value')])
 def update_output_HM(value):
-    #RETURN VALUE
+    sim.setHygieneMaintainence(value)
     return '{}'.format(value)
 
 @app.callback(
     Output(list_elements[4]+'_value', 'children'),
     [Input(list_elements[4], 'value')])
 def update_output_gs(value):
-    #RETURN VALUE
+    sim.setGenStoreRisk(value)
     return '{}'.format(value)
 
 @app.callback(
     Output(list_elements[5]+'_value', 'children'),
     [Input(list_elements[5], 'value')])
 def update_output_t(value):
-    #RETURN VALUE
+    sim.setTransportRisk(value)
     return '{}'.format(value)
 
 @app.callback(
     Output(list_elements[6]+'_value', 'children'),
     [Input(list_elements[6], 'value')])
 def update_output_sch(value):
-    #RETURN VALUE
+    sim.setSchoolRisk(value)
     return '{}'.format(value)
 
 @app.callback(
     Output(list_elements[7]+'_value', 'children'),
     [Input(list_elements[7], 'value')])
 def update_output_pnr(value):
-    #RETURN VALUE
+    sim.setParkRisk(value)
     return '{}'.format(value)
 
 @app.callback(
@@ -158,28 +258,28 @@ def update_output_serv(value):
     Output(list_elements[9]+'_value', 'children'),
     [Input(list_elements[9], 'value')])
 def update_output_ent(value):
-    #RETURN VALUE
+    sim.setEntertainmentRisk(value)
     return '{}'.format(value)
 
 @app.callback(
     Output(list_elements[10]+'_value', 'children'),
     [Input(list_elements[10], 'value')])
 def update_output_health(value):
-    #RETURN VALUE
+    sim.setEntertainmentRisk(value)
     return '{}'.format(value)
 
 @app.callback(
     Output(list_elements[11]+'_value', 'children'),
     [Input(list_elements[11], 'value')])
 def update_output_poworship(value):
-    #RETURN VALUE
+    sim.setPlaceOfWorshipRisk(value)
     return '{}'.format(value)
 
 @app.callback(
     Output(list_elements[12]+'_value', 'children'),
     [Input(list_elements[12], 'value')])
 def update_output_res(value):
-    #RETURN VALUE
+    sim.setResidentialRisk(value)
     return '{}'.format(value)
 ###########################################################
 
@@ -192,8 +292,8 @@ list_outputs = [infectedC, infectedT, deceasedT, recoveredT, hospitalC, hospital
 )
 def update_infectedGraph(input_data):
     time.append(element.next_timestep(time[-1]))
-    list_outputs[0].append(element.get_randomY(list_outputs[0][-1]))
-    list_outputs[1].append(element.get_randomY(list_outputs[1][-1]))
+    list_outputs[0].append(sim.infectedCurrent())
+    list_outputs[1].append(sim.infectedTotal())
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
@@ -223,8 +323,8 @@ def update_infectedGraph(input_data):
              [Input('linear-update2', 'n_intervals')]
 )
 def update_idrGraph(input_data):
-    list_outputs[2].append(element.get_randomY(list_outputs[2][-1]))
-    list_outputs[3].append(element.get_randomY(list_outputs[3][-1]))
+    list_outputs[2].append(sim.deceasedTotal())
+    list_outputs[3].append(sim.recoveredTotal())
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
@@ -263,8 +363,8 @@ def update_idrGraph(input_data):
              [Input('linear-update3', 'n_intervals')]
 )
 def update_hospital(input_data):
-    list_outputs[4].append(element.get_randomY(list_outputs[4][-1]))
-    list_outputs[5].append(element.get_randomY(list_outputs[5][-1]))
+    list_outputs[4].append(sim.hospitalCurrent())
+    list_outputs[5].append(sim.hospitalTotal())
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
@@ -294,8 +394,8 @@ def update_hospital(input_data):
              [Input('linear-update4', 'n_intervals')]
 )
 def update_icu(input_data):
-    list_outputs[6].append(element.get_randomY(list_outputs[6][-1]))
-    list_outputs[7].append(element.get_randomY(list_outputs[7][-1]))
+    list_outputs[6].append(sim.ICUCurrent())
+    list_outputs[7].append(sim.ICUtotal())
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
@@ -319,6 +419,15 @@ def update_icu(input_data):
                                                 title='ICU Cases Over Time',
                                                 showlegend=True,
                                                 )}
+dbc.Button("Play", outline=True, color="primary", className="mr-1"),
+@app.callback(Output('', 'children'),
+             [Input('simulationStart', 'n_clicks')]
+)
+def on_button_click(n):
+    if n is None:
+        return
+    else:
+        while(1): sim.timeStep()
 
 if __name__ == "__main__":
     app.run_server(debug=True, use_reloader=True)

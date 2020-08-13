@@ -33,8 +33,8 @@ navigator = dbc.Navbar(
 #########################################################################################################################################
 #Button Container
 buttons = html.Div([
-    dbc.Button("Play", outline=True, color="primary", className="mr-1"),
-    dbc.Button("Reset", outline=True, color="secondary", className="mr-1"),
+    dbc.Button("Play", outline=True, color="primary", className="mr-1", id="simulationStart"),
+    #dbc.Button("Reset", outline=True, color="secondary", className="mr-1"),
 ]
 )
 #########################################################################################################################################
