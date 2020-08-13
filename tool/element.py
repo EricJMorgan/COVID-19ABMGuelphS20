@@ -53,7 +53,7 @@ def make_slider(label, id_tag, slider_value, minimum, maximum, step_value, start
 
 #Geographical Risk Sliders (4)
 quarantine = make_slider("Quarantine", "Q_slider", "Q_slider_value", 0, 100, 1, 75)
-social_distance = make_slider("Social Distancing Severity", "SD_slider", "SD_slider_value", 0, 100, 1, 50)
+social_distance = make_slider("Social Distancing Severity", "SD_slider", "SD_slider_value", 0, 10, 1, 5)
 mask_compliance = make_slider("Mask Compliance", "MC_slider", "MC_slider_value", 0, 100, 1, 75)
 hygiene_maint = make_slider("Hygiene Maintenance", "HM_slider", "HM_slider_value", 0, 100, 1, 60)
 

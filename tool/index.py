@@ -13,7 +13,7 @@ import plotly.graph_objs as go
 import plotly.express as px
 
 import pandas as pd
-import geopandas as gpd
+# import geopandas as gpd
 import matplotlib.pyplot as plt
 from plotly.tools import mpl_to_plotly
 
@@ -26,6 +26,7 @@ ffi.cdef('''
     typedef struct _Simulation Simulation;
     Simulation* Simulation_new();
     void simTimeStep(Simulation* sim);
+    int newlyInfected(Simulation* sim);
     int infectedCurrent(Simulation* sim);
     int infectedTotal(Simulation* sim);
     int deceasedTotal(Simulation* sim);
@@ -45,16 +46,10 @@ ffi.cdef('''
     void healthPlaceRiskSetter(Simulation* sim, double val);
     void placeOfWorshipRiskSetter(Simulation* sim, double val);
     void residentialRiskSetter(Simulation* sim, double val);
-    void incubationPeriodSetter(Simulation* sim, int val);
-    void timeIncubHospitalSetter(Simulation* sim, int val);
-    void timeHospitalICUSetter(Simulation* sim, int val);
-    void timeICUDeathSetter(Simulation* sim, int val);
-    void timeRecoveryNoHospitalSetter(Simulation* sim, int val);
-    void recoveryPeriodHospitalSetter(Simulation* sim, int val);
-    void timeRecoveryICUSetter(Simulation* sim, int val);
+    void quarantineSeverity(Simulation* sim, double val);
 ''')
 
-lib = ffi.dlopen('./libProject.so') #This must be changed(???)
+lib = ffi.dlopen('./libProject.so')
 
 class Simulation(object):
     def __init__(self):
@@ -62,6 +57,9 @@ class Simulation(object):
 
     def timeStep(self):
         lib.simTimeStep(self.obj)
+    
+    def newlyInfected(self):
+        return lib.newlyInfected(self.obj)
 
     def infectedCurrent(self):
         return lib.infectedCurrent(self.obj)
@@ -119,11 +117,15 @@ class Simulation(object):
 
     def setResidentialRisk(self, val):
         lib.residentialRiskSetter(self.obj, val)
+    
+    def quarantineSeverity(self, val):
+        lib.quarantineSeverity(self.obj, val)
 
 #Initialize times and values
 sim = Simulation()
 time = element.start_time()
 infectedC = sim.infectedCurrent()
+infectedN = sim.newlyInfected()
 infectedT = sim.infectedTotal()
 deceasedT = sim.deceasedTotal()
 recoveredT = sim.recoveredTotal()
@@ -195,7 +197,7 @@ list_elements = ['Q_slider', 'SD_slider', 'MC_slider', 'HM_slider', 'gs_slider',
     Output(list_elements[0]+'_value', 'children'),
     [Input(list_elements[0], 'value')])
 def update_output_Q(value):
-    #RETURN VALUE
+    sim.quarantineSeverity(value/100)
     return '{}'.format(value)
 
 @app.callback(
@@ -209,14 +211,14 @@ def update_output_SD(value):
     Output(list_elements[2]+'_value', 'children'),
     [Input(list_elements[2], 'value')])
 def update_output_MC(value):
-    sim.setmaskCompliance(value)
+    sim.setmaskCompliance(value/100)
     return '{}'.format(value)
 
 @app.callback(
     Output(list_elements[3]+'_value', 'children'),
     [Input(list_elements[3], 'value')])
 def update_output_HM(value):
-    sim.setHygieneMaintainence(value)
+    sim.setHygieneMaintainence(value/100)
     return '{}'.format(value)
 
 @app.callback(
@@ -281,10 +283,23 @@ def update_output_poworship(value):
 def update_output_res(value):
     sim.setResidentialRisk(value)
     return '{}'.format(value)
+
+# sim.setSocialDistanceServerity(9)
+# sim.setmaskCompliance(0.5)
+# sim.setHygieneMaintainence(0.5)
+
+# sim.setGenStoreRisk(0.6)
+# sim.setTransportRisk(0.7)
+# sim.setSchoolRisk(0.8)
+# sim.setParkRisk(0.4)
+# sim.setEntertainmentRisk(0.7)
+# sim.setHealthPlaceRisk(0.8)
+# sim.setPlaceOfWorshipRisk(0.7)
+# sim.setResidentialRisk(0.5)
 ###########################################################
 
 list_graphs  = ['infectedGraph', 'idrGraph', 'hospitalGraph', 'icuGraph']
-list_outputs = [infectedC, infectedT, deceasedT, recoveredT, hospitalC, hospitalT, icuC, icuT]
+list_outputs = [[infectedC], [infectedT], [deceasedT], [recoveredT], [hospitalC], [hospitalT], [icuC], [icuT], [infectedN]]
 
 #Infected Graph
 @app.callback(Output('infectedGraph', 'figure'),
@@ -294,13 +309,15 @@ def update_infectedGraph(input_data):
     time.append(element.next_timestep(time[-1]))
     list_outputs[0].append(sim.infectedCurrent())
     list_outputs[1].append(sim.infectedTotal())
+    list_outputs[8].append(sim.newlyInfected())
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Bar(
+    data1 = go.Scatter(
         x = list(converted_time),
         y = list(list_outputs[0]),
         name = 'Daily Infected Cases',
+        mode = 'lines+markers',
         marker_color = '#F5CB5C',
     )
 
@@ -312,7 +329,14 @@ def update_infectedGraph(input_data):
         marker_color = '#F71735',
     )
 
-    return {'data':[data1,data2], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
+    data3 = go.Bar(
+        x = list(converted_time),
+        y = list(list_outputs[8]),
+        name = 'Newly Infected Cases',
+        marker_color = '#00FF00',
+    )
+
+    return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
                                                 yaxis=dict(range=[0, int(math.ceil(max(list_outputs[1])/10.0)*10)], title='Number of Cases', side='left'),
                                                 title='Infected Cases Over Time',
                                                 showlegend=True,
@@ -419,14 +443,14 @@ def update_icu(input_data):
                                                 title='ICU Cases Over Time',
                                                 showlegend=True,
                                                 )}
-dbc.Button("Play", outline=True, color="primary", className="mr-1"),
-@app.callback(Output('', 'children'),
+@app.callback(Output('simulationStart', 'children'),
              [Input('simulationStart', 'n_clicks')]
 )
 def on_button_click(n):
     if n is None:
         return
     else:
+        print("test")
         while(1): sim.timeStep()
 
 if __name__ == "__main__":

@@ -83,6 +83,15 @@ class SIR {
      */
     SIRSeverity DetermineSeverity();
 
+    /**
+     * setQuarantineCases
+     * 
+     * Set chance of agent being quaratined
+     * 
+     * @param, value to set chance of quarantine
+     */
+    void setQuarantineCases(double val);
+
     AgentInfo info;
     bool getSymptoms();
 

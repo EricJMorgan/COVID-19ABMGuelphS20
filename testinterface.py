@@ -93,6 +93,7 @@ class Simulation(object):
 
     def setResidentialRisk(self, val):
         lib.residentialRiskSetter(self.obj, val)
+        
 sim = Simulation()
 
 #set everything
@@ -110,17 +111,5 @@ sim.setPlaceOfWorshipRisk(0.7)
 sim.setResidentialRisk(0.5)
 #loop sim timestep
 
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
-sim.timeStep()
+while (1):
+    sim.timeStep()
