@@ -45,7 +45,7 @@ string SIR::SIRTimeStep(double timeStep) {
         double quarantineChance = (double) rand()/RAND_MAX;
 
         if (incubationPeriod <= 0 && showsSymptoms && quarantineCases > quarantineChance) {
-            QuarantineAgent();
+            // QuarantineAgent();
             return "ISOAGENT";
         }
         return "NA";

@@ -27,6 +27,8 @@ Simulation::Simulation(string fileName) {
     icuCurrent = 0;
     icuTotal = 0;
     timeStep = 4;
+    recoveredTotal = 0;
+    deceasedTotal = 0;
     sirTimeStep = (double)timeStep / 24.0;
     timeElapsed = 0;
     currDay = MON;
@@ -76,13 +78,16 @@ void Simulation::simulateTimeStep(){
     // hospital
     guelphHospital.HospitalTimeStep(sirTimeStep);
     deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
+    deceasedTotal += (int)guelphHospital.newlyDeceased.size();
     guelphHospital.newlyDeceased.clear();
+    recoveredTotal += (int)guelphHospital.newlyRecovered.size();
     recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());
     guelphHospital.newlyRecovered.clear();
 
     // isolation compartment
     isoCompartment.SimulateIsoTimeStep(sirTimeStep);
     recoveredAgents.insert(recoveredAgents.end(), isoCompartment.newlyRecovered.begin(), isoCompartment.newlyRecovered.end());
+    recoveredTotal += (int)isoCompartment.newlyRecovered.size();
     isoCompartment.newlyRecovered.clear();
     for (int i = 0; i < (int)isoCompartment.newlyHospitalized.size(); i++) {
         guelphHospital.increaseHospitalCount(isoCompartment.newlyHospitalized[i]);
@@ -100,6 +105,7 @@ void Simulation::simulateTimeStep(){
                 j--;
             } else if (sirResponse == "RECOVERAGENT") {
                 Agent* recoveredAgent = locationInfo->getLocationAt(i)->removeInfectedAgent(j);
+                recoveredTotal++;
                 isoCompartment.AddMildlyInfectedAgents(recoveredAgent);
                 recoveredAgents.push_back(recoveredAgent);
                 j--;
@@ -109,9 +115,10 @@ void Simulation::simulateTimeStep(){
     
     // transport agents and infect ppl
     newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
-
-    deceasedTotal = (int)deceasedAgents.size();
-    recoveredTotal = (int)recoveredAgents.size();
+    cout << (int)recoveredAgents.size() << endl;
+    cout << (int)deceasedAgents.size() << endl;
+    // deceasedTotal = (int)deceasedAgents.size();
+    // recoveredTotal = (int)recoveredAgents.size();
     infectedTotal += newlyInfected;
     infectedCurrent = infectedTotal - deceasedTotal - recoveredTotal;
     hospitalCurrent = guelphHospital.getTotalBeds() + guelphHospital.getIcuBeds();

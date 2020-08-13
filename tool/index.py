@@ -283,19 +283,6 @@ def update_output_poworship(value):
 def update_output_res(value):
     sim.setResidentialRisk(value)
     return '{}'.format(value)
-
-# sim.setSocialDistanceServerity(9)
-# sim.setmaskCompliance(0.5)
-# sim.setHygieneMaintainence(0.5)
-
-# sim.setGenStoreRisk(0.6)
-# sim.setTransportRisk(0.7)
-# sim.setSchoolRisk(0.8)
-# sim.setParkRisk(0.4)
-# sim.setEntertainmentRisk(0.7)
-# sim.setHealthPlaceRisk(0.8)
-# sim.setPlaceOfWorshipRisk(0.7)
-# sim.setResidentialRisk(0.5)
 ###########################################################
 
 list_graphs  = ['infectedGraph', 'idrGraph', 'hospitalGraph', 'icuGraph']
@@ -392,10 +379,11 @@ def update_hospital(input_data):
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Bar(
+    data1 = go.Scatter(
         x = list(converted_time),
         y = list(list_outputs[4]),
         name = 'Daily Hospitalized Cases',
+        mode = 'lines+markers',
         marker_color = '#F3DC68',
     )
 
@@ -423,10 +411,11 @@ def update_icu(input_data):
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Bar(
+    data1 = go.Scatter(
         x = list(converted_time),
         y = list(list_outputs[6]),
-        name = 'Daily ICU Cases',
+        name = 'Current ICU Cases',
+        mode = 'lines+markers',
         marker_color = '#7D1128',
     )
 
