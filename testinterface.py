@@ -26,13 +26,6 @@ ffi.cdef('''
     void healthPlaceRiskSetter(Simulation* sim, double val);
     void placeOfWorshipRiskSetter(Simulation* sim, double val);
     void residentialRiskSetter(Simulation* sim, double val);
-    void incubationPeriodSetter(Simulation* sim, int val);
-    void timeIncubHospitalSetter(Simulation* sim, int val);
-    void timeHospitalICUSetter(Simulation* sim, int val);
-    void timeICUDeathSetter(Simulation* sim, int val);
-    void timeRecoveryNoHospitalSetter(Simulation* sim, int val);
-    void recoveryPeriodHospitalSetter(Simulation* sim, int val);
-    void timeRecoveryICUSetter(Simulation* sim, int val);
 ''')
 
 lib = ffi.dlopen('./libProject.so')
@@ -101,28 +94,38 @@ class Simulation(object):
     def setResidentialRisk(self, val):
         lib.residentialRiskSetter(self.obj, val)
 
-    def setIncubationPeriod(self, val):
-        lib.incubationPeriodSetter(self.obj, val)
-
-    def setTimeIncubHospital(self, val):
-        lib.timeIncubHospitalSetter(self.obj, val)
-
-    def setTimeHospitalICU(self, val):
-        lib.timeHospitalICUSetter(self.obj, val)
-
-    def setTimeICUDeath(self, val):
-        lib.timeICUDeathSetter(self.obj, val)
-
-    def setTimeRecoveryNoHospital(self, val):
-        lib.timeRecoveryNoHospitalSetter(self.obj, val)
-
-    def setRecoveryPeriodHospital(self, val):
-        lib.recoveryPeriodHospitalSetter(self.obj, val)
-        
-    def setTimeRecoveryICU(self, val):
-        lib.timeRecoveryICUSetter(self.obj, val)
-    
-    
-
 sim = Simulation()
+sim.infectedCurrent()
+sim.infectedTotal()
+
+sim.timeStep()
+
+#set everything
+sim.setSocialDistanceServerity(9)
+sim.setmaskCompliance(0.5)
+sim.setHygieneMaintainence(0.5)
+
+sim.setGenStoreRisk(0.6)
+sim.setTransportRisk(0.7)
+sim.setSchoolRisk(0.8)
+sim.setParkRisk(0.4)
+sim.setEntertainmentRisk(0.7)
+sim.setHealthPlaceRisk(0.8)
+sim.setPlaceOfWorshipRisk(0.7)
+sim.setResidentialRisk(0.5)
+#loop sim timestep
+
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
+sim.timeStep()
 sim.timeStep()

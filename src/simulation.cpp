@@ -30,6 +30,7 @@ Simulation::Simulation(string fileName) {
     currDay = MON;
     initiallyInfectedChance = 0.001;
     initiallyInfected = 0;
+    socialDistancingSeverity = 0;
 
     if(!demographicFile.good()){
         cout << "Error invalid file" << endl;
@@ -150,65 +151,59 @@ Agent *Simulation::getAgentAt(int index){
 //user input setters
 void Simulation::setSocialDistancingSeverity(int val){
     socialDistancingSeverity = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setMaskCompliance(double val){
     maskCompliance = val;
+    for (int i = 0; i < agentCount; i++) {
+        simAgents[i]->DecideMigitationStrategy(maskCompliance, hygieneMaintainence);
+    }
 }
 void Simulation::setHygieneMaintainence(double val){
     hygieneMaintainence = val;
+    for (int i = 0; i < agentCount; i++) {
+        simAgents[i]->DecideMigitationStrategy(maskCompliance, hygieneMaintainence);
+    }
 }
 
 //location risks
 void Simulation::setGenStoreRisk(double val){
     locationRisk[0] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setTransportRisk(double val){
     locationRisk[1] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setSchoolRisk(double val){
     locationRisk[2] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setParkRisk(double val){
     locationRisk[3] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setServiceRisk(double val){
     locationRisk[4] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setEntertainmentRisk(double val){
     locationRisk[5] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setHealthPlaceRisk(double val){
     locationRisk[6] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setPlaceOfWorshipRisk(double val){
     locationRisk[7] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setResidentialRisk(double val){
     locationRisk[8] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 
-//sim factors
-void Simulation::setIncubationPeriod(int val){
-    incubationPeriod = val;
-}
-void Simulation::setTimeIncubHospital(int val){
-    timeIncubHospital = val;
-}
-void Simulation::setTimeHospitalICU(int val){
-    timeHospitalICU = val;
-}
-void Simulation::setTimeICUDeath(int val){
-    timeICUDeath = val;
-}
-void Simulation::setTimeRecoveryNoHospital(int val){
-    timeRecoveryNoHospital = val;
-}
-void Simulation::setRecoveryPeriodHospital(int val){
-    recoveryPeriodHospital = val;
-}
-void Simulation::setTimeRecoveryICU(int val){
-    timeRecoveryICU = val;
-}
 
 /********************Private functions***************************************/
 void Simulation::addNewAgent(string personInfo, int amountToAdd){
