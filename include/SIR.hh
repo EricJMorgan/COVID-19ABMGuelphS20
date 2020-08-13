@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 05/08/20
- * ver 1.00
+ * 13/08/20
+ * ver 1.01
  * 
  * This is the header file for the SIR class
  ***************/
