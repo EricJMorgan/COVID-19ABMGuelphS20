@@ -316,7 +316,7 @@ def update_infectedGraph(input_data):
     data1 = go.Scatter(
         x = list(converted_time),
         y = list(list_outputs[0]),
-        name = 'Daily Infected Cases',
+        name = 'Current Infected Cases',
         mode = 'lines+markers',
         marker_color = '#F5CB5C',
     )
@@ -395,7 +395,7 @@ def update_hospital(input_data):
     data1 = go.Bar(
         x = list(converted_time),
         y = list(list_outputs[4]),
-        name = 'Daily Hospitalized Cases',
+        name = 'Current Hospitalized Cases',
         marker_color = '#F3DC68',
     )
 
@@ -426,7 +426,7 @@ def update_icu(input_data):
     data1 = go.Bar(
         x = list(converted_time),
         y = list(list_outputs[6]),
-        name = 'Daily ICU Cases',
+        name = 'Current ICU Cases',
         marker_color = '#7D1128',
     )
 
