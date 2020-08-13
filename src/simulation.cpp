@@ -88,7 +88,6 @@ void Simulation::simulateTimeStep(){
     isoCompartment.newlyRecovered.clear();
     for (int i = 0; i < (int)isoCompartment.newlyHospitalized.size(); i++) {
         guelphHospital.increaseHospitalCount(isoCompartment.newlyHospitalized[i]);
-        hospitalTotal++;
     }
     isoCompartment.newlyHospitalized.clear();
 
@@ -106,6 +105,10 @@ void Simulation::simulateTimeStep(){
                 isoCompartment.AddMildlyInfectedAgents(recoveredAgent);
                 recoveredAgents.push_back(recoveredAgent);
                 j--;
+            } else if (sirResponse == "HOSPITALAGENT") {
+                Agent* hospitalAgent = locationInfo->getLocationAt(i)->removeInfectedAgent(j);
+                guelphHospital.increaseHospitalCount(hospitalAgent);
+                j--;
             }
         }
     }
@@ -117,7 +120,8 @@ void Simulation::simulateTimeStep(){
     recoveredTotal = (int)recoveredAgents.size();
     infectedTotal += newlyInfected;
     infectedCurrent = infectedTotal - deceasedTotal - recoveredTotal;
-    hospitalCurrent = guelphHospital.getTotalBeds() + guelphHospital.getIcuBeds();
+    hospitalCurrent = guelphHospital.getTotalBeds();
+    hospitalTotal = guelphHospital.getTotalHospitalCount();
     icuCurrent = guelphHospital.getIcuBeds();
     icuTotal = guelphHospital.getTotalICUCount();
 
