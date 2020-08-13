@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 05/08/20
- * ver 1.01
+ * 13/08/20
+ * ver 1.02
  * 
  * This is the class file for the simulation class
  ***************/
@@ -24,6 +24,8 @@ Simulation::Simulation(string fileName) {
     population = 0;
     currTime = 0;
     hospitalTotal = 0;
+    icuCurrent = 0;
+    icuTotal = 0;
     timeStep = 4;
     sirTimeStep = (double)timeStep / 24.0;
     timeElapsed = 0;
@@ -106,7 +108,7 @@ void Simulation::simulateTimeStep(){
     }
     
     // transport agents and infect ppl
-    int newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
+    newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
 
     deceasedTotal = (int)deceasedAgents.size();
     recoveredTotal = (int)recoveredAgents.size();
@@ -153,12 +155,20 @@ void Simulation::setSocialDistancingSeverity(int val){
     socialDistancingSeverity = val;
     locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
+
 void Simulation::setMaskCompliance(double val){
     maskCompliance = val;
     for (int i = 0; i < agentCount; i++) {
         simAgents[i]->DecideMigitationStrategy(maskCompliance, hygieneMaintainence);
     }
 }
+
+void Simulation::setQuarantineSeverity(double val) {
+    for (int i = 0; i < agentCount; i++) {
+        simAgents[i]->setQuarantineCases(val);
+    }
+}
+
 void Simulation::setHygieneMaintainence(double val){
     hygieneMaintainence = val;
     for (int i = 0; i < agentCount; i++) {
@@ -307,5 +317,9 @@ int Simulation::getICUtotal() {
 }
 
 int Simulation::getICUCurrent() {
-    return icuTotal;
+    return icuCurrent;
+}
+
+int Simulation::getNewlyInfected() {
+    return newlyInfected;
 }
