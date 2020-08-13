@@ -304,6 +304,10 @@ list_graphs  = ['infectedGraph', 'idrGraph', 'hospitalGraph', 'icuGraph']
 list_outputs = [[infectedC], [infectedT], [deceasedT], [recoveredT], [hospitalC], [hospitalT], [icuC], [icuT], [infectedN]]
 limitHospital = [totalBedCount]
 limitICU = [icuBedCount]
+graph1 = False
+graph2 = False
+graph3 = False
+graph4 = False
 
 #Infected Graph
 @app.callback(Output('infectedGraph', 'figure'),
@@ -339,6 +343,8 @@ def update_infectedGraph(input_data):
         name = 'Newly Infected Cases',
         marker_color = '#76B041',
     )
+
+    graph1 = True
 
     return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
                                                 yaxis=dict(range=[0, int(math.ceil(max(list_outputs[1])/100.0)*100)], title='Number of Cases', side='left'),
@@ -379,6 +385,8 @@ def update_idrGraph(input_data):
         mode = 'lines+markers',
         marker_color = '#00A8E8',
     )
+
+    graph2 = True
 
     return {'data':[data1,data2, data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
                                                 yaxis=dict(range=[0, int(math.ceil(max(list_outputs[1])/100.0)*100)], title='Number of Cases', side='left'),
@@ -421,6 +429,8 @@ def update_hospital(input_data):
         marker_color = '#11151C',
     )
 
+    graph3 = True
+
     return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
                                                 yaxis=dict(range=[0, int(math.ceil(max(list_outputs[5])/100.0)*100)], title='Number of Cases', side='left'),
                                                 title='Hospitalized Cases Over Time',
@@ -462,6 +472,8 @@ def update_icu(input_data):
         marker_color = '#11151C',
     )
 
+    graph4 = True
+
     return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
                                                 yaxis=dict(range=[0, int(math.ceil(max(list_outputs[7])/100.0)*100)], title='Number of Cases', side='left'),
                                                 title='ICU Cases Over Time',
@@ -475,7 +487,12 @@ def on_button_click(n):
         return
     else:
         print("test")
-        while(1): sim.timeStep()
+        while (graph1 & graph2 & graph3 & graph4):
+            sim.timeStep()
+            graph1 = False
+            graph2 = False
+            graph3 = False
+            graph4 = False
 
 if __name__ == "__main__":
     app.run_server(debug=True, use_reloader=True)
