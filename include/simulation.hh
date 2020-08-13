@@ -265,24 +265,13 @@ class Simulation {
     int agentCount;
     int population;
     double sirTimeStep;
-
+    double locationRisk[9];
 
     // user inputs
     // geographical risks
     int socialDistancingSeverity;
     double maskCompliance;
     double hygieneMaintainence;
-
-    // location risks
-    double genStoreRisk;
-    double transportRisk;
-    double schoolRisk;
-    double parkRisk;
-    double serviceRisk;
-    double entertainmentRisk;
-    double healthPlaceRisk;
-    double placeOfWorshipRisk;
-    double residentialRisk;
 
     //outputs for Front End graph
     int infectedCurrent;

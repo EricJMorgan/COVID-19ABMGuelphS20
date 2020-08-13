@@ -98,6 +98,14 @@ class Agent : public SIR {
      */
     bool getHasMoved();
 
+    /**
+     * DecideMigitationStrategy
+     * 
+     * Decides the agents chance of wearing a mask and following appropriate hygiene
+     * @param maskWearing, chance 
+     */
+    void DecideMigitationStrategy(double maskWearing, double hygieneMaintain);
+
     //To be implemented later
     void quarantineTime();
     void goodHygiene();
@@ -150,14 +158,6 @@ class Agent : public SIR {
      * collected from the canadian census
      */
     void DecideEducation();
-
-    /**
-     * DecideMigitationStrategy
-     * 
-     * Decides the agents chance of wearing a mask and following appropriate hygiene
-     * 
-     */
-    void DecideMigitationStrategy();
 };
 
 #endif
