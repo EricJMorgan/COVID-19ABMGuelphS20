@@ -42,11 +42,13 @@ string SIR::SIRTimeStep(double timeStep) {
     if (isIncubating) {
         incubationPeriod -= timeStep;
 
-        double quarantineChance = (double) rand()/RAND_MAX;
-
-        if (incubationPeriod <= 0 && showsSymptoms && quarantineCases > quarantineChance) {
-            QuarantineAgent();
-            return "ISOAGENT";
+        if (incubationPeriod <= 0 ) {
+            isIncubating = false;
+            double quarantineChance = (double) rand()/RAND_MAX;
+            if (showsSymptoms && quarantineCases > quarantineChance) {
+                QuarantineAgent();
+                return "ISOAGENT";
+            }
         }
         return "NA";
     }
@@ -181,7 +183,6 @@ void SIR::HospitalAgent() {
 
 void SIR::QuarantineAgent() {
     currentSeverity = ISOLATED;
-    isIncubating = false;
 }
 
 void SIR::PlaceAgentInICU() {
