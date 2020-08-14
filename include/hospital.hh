@@ -105,6 +105,13 @@ class Hospital {
      */
     int getTotalICUCount();
 
+    /**
+     * getTotalHospitalCount
+     * 
+     * This gets the total number of agents ever put in the hospital
+     */
+    int getTotalHospitalCount();
+
     // returns to be read and cleared
     std::vector<Agent *> newlyDeceased;
     std::vector<Agent *> newlyRecovered;
@@ -117,6 +124,7 @@ class Hospital {
     bool hospitalOverflow; //TODO figure out how to handle overflow
     bool icuOverflow;
     int totalICU;
+    int totalHospital;
 
     std::vector<Agent *> hospitalGeneralWard; // Agents admitted to general hospital
     std::vector<Agent *> hospitalICU;         // Agents admitted to ICU

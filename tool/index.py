@@ -285,19 +285,6 @@ def update_output_poworship(value):
 def update_output_res(value):
     sim.setResidentialRisk(value)
     return '{}'.format(value)
-
-# sim.setSocialDistanceServerity(9)
-# sim.setmaskCompliance(0.5)
-# sim.setHygieneMaintainence(0.5)
-
-# sim.setGenStoreRisk(0.6)
-# sim.setTransportRisk(0.7)
-# sim.setSchoolRisk(0.8)
-# sim.setParkRisk(0.4)
-# sim.setEntertainmentRisk(0.7)
-# sim.setHealthPlaceRisk(0.8)
-# sim.setPlaceOfWorshipRisk(0.7)
-# sim.setResidentialRisk(0.5)
 ###########################################################
 
 list_graphs  = ['infectedGraph', 'idrGraph', 'hospitalGraph', 'icuGraph']
