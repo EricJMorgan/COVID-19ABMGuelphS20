@@ -344,6 +344,7 @@ def update_infectedGraph(input_data):
         marker_color = '#76B041',
     )
 
+    global graph1
     graph1 = True
 
     return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
@@ -386,6 +387,7 @@ def update_idrGraph(input_data):
         marker_color = '#00A8E8',
     )
 
+    global graph2
     graph2 = True
 
     return {'data':[data1,data2, data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
@@ -429,6 +431,7 @@ def update_hospital(input_data):
         marker_color = '#11151C',
     )
 
+    global graph3
     graph3 = True
 
     return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
@@ -472,6 +475,7 @@ def update_icu(input_data):
         marker_color = '#11151C',
     )
 
+    global graph4
     graph4 = True
 
     return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
@@ -483,6 +487,11 @@ def update_icu(input_data):
              [Input('simulationStart', 'n_clicks')]
 )
 def on_button_click(n):
+    global graph1
+    global graph2
+    global graph3
+    global graph4
+
     if n is None:
         return
     else:
