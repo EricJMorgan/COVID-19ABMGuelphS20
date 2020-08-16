@@ -483,6 +483,8 @@ def update_icu(input_data):
                                                 title='ICU Cases Over Time',
                                                 showlegend=True,
                                                 )}
+
+#Button Callback
 @app.callback(Output('simulationStart', 'children'),
              [Input('simulationStart', 'n_clicks')]
 )
