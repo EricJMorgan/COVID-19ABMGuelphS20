@@ -13,7 +13,9 @@ CFLAGS = -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0
 
 OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)location.o $(BINDIR)postalCodeHash.o $(BINDIR)SIR.o $(BINDIR)SIRtotals.o $(BINDIR)transportation.o $(BINDIR)geographicalrisk.o $(BINDIR)hospital.o $(BINDIR)isolationcompartment.o
 
-all: $(BINDIR)abmSim
+all: library
+
+CObjects: $(BINDIR)abmSim
 
 $(BINDIR)abmSim: $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@
@@ -61,6 +63,7 @@ clean:
 	rm $(OBJECTS) $(BINDIR)abmSim
 
 library:
+	@echo "creating .so file"
 	g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/agent.cpp
 	g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/simulation.cpp
 	g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/location.cpp
@@ -73,3 +76,4 @@ library:
 	g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/isolationcompartment.cpp
 	g++ -shared -o libProject.so agent.o simulation.o location.o postalCodeHash.o SIR.o SIRtotals.o transportation.o geographicalrisk.o hospital.o isolationcompartment.o
 	rm agent.o simulation.o location.o postalCodeHash.o SIR.o SIRtotals.o transportation.o geographicalrisk.o hospital.o isolationcompartment.o
+	@echo ".so created"
