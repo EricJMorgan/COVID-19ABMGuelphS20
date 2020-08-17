@@ -1,0 +1,110 @@
+\hypertarget{classSIR}{}\doxysection{S\+IR Class Reference}
+\label{classSIR}\index{SIR@{SIR}}
+Inheritance diagram for S\+IR\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSIR}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSIR_a9f528e63a705960dd2acecbd17fe9a7a}{S\+IR}} ()
+\item 
+void \mbox{\hyperlink{classSIR_a4112f8603889169a2faffc5c2f00fafd}{Agent\+Infected}} ()
+\item 
+string \mbox{\hyperlink{classSIR_aebff4296b7b84d486e57972e25180e7c}{S\+I\+R\+Time\+Step}} (double time\+Step)
+\item 
+S\+I\+R\+Severity \mbox{\hyperlink{classSIR_ae2ef49f084530cf6abfe85a5117e67df}{Determine\+Severity}} ()
+\item 
+void \mbox{\hyperlink{classSIR_a13711c865ce52ff1a1d002a3af32df18}{set\+Quarantine\+Cases}} (double val)
+\item 
+bool \mbox{\hyperlink{classSIR_ac3dd16a663d2d7074ada8007b99da903}{get\+Symptoms}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSIR_a5399f1b229cc15f9517e40d2b4b0af8d}\label{classSIR_a5399f1b229cc15f9517e40d2b4b0af8d}} 
+Agent\+Info {\bfseries info}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSIR_a9f528e63a705960dd2acecbd17fe9a7a}\label{classSIR_a9f528e63a705960dd2acecbd17fe9a7a}} 
+\index{SIR@{SIR}!SIR@{SIR}}
+\index{SIR@{SIR}!SIR@{SIR}}
+\doxysubsubsection{\texorpdfstring{SIR()}{SIR()}}
+{\footnotesize\ttfamily S\+I\+R\+::\+S\+IR (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classSIR}{S\+IR}}
+
+This is the constructor for the agent class, it sets the current severity to susceptible 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSIR_a4112f8603889169a2faffc5c2f00fafd}\label{classSIR_a4112f8603889169a2faffc5c2f00fafd}} 
+\index{SIR@{SIR}!AgentInfected@{AgentInfected}}
+\index{AgentInfected@{AgentInfected}!SIR@{SIR}}
+\doxysubsubsection{\texorpdfstring{AgentInfected()}{AgentInfected()}}
+{\footnotesize\ttfamily void S\+I\+R\+::\+Agent\+Infected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Agent\+Infected
+
+This infects an \mbox{\hyperlink{classAgent}{Agent}} with the C\+O\+V\+I\+D19 virus. The function decides the severity of the case and whether the case will be fatal or not. \mbox{\Hypertarget{classSIR_ae2ef49f084530cf6abfe85a5117e67df}\label{classSIR_ae2ef49f084530cf6abfe85a5117e67df}} 
+\index{SIR@{SIR}!DetermineSeverity@{DetermineSeverity}}
+\index{DetermineSeverity@{DetermineSeverity}!SIR@{SIR}}
+\doxysubsubsection{\texorpdfstring{DetermineSeverity()}{DetermineSeverity()}}
+{\footnotesize\ttfamily S\+I\+R\+Severity S\+I\+R\+::\+Determine\+Severity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Determine\+Severity
+
+Function returns the current severity stage of the \mbox{\hyperlink{classSIR}{S\+IR}} case. \mbox{\Hypertarget{classSIR_ac3dd16a663d2d7074ada8007b99da903}\label{classSIR_ac3dd16a663d2d7074ada8007b99da903}} 
+\index{SIR@{SIR}!getSymptoms@{getSymptoms}}
+\index{getSymptoms@{getSymptoms}!SIR@{SIR}}
+\doxysubsubsection{\texorpdfstring{getSymptoms()}{getSymptoms()}}
+{\footnotesize\ttfamily bool S\+I\+R\+::get\+Symptoms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Symptoms
+
+This returns if the agent is showing any symptoms based on the \mbox{\hyperlink{classSIR}{S\+IR}} model
+
+\begin{DoxyReturn}{Returns}
+, true if showing symptoms false if not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSIR_a13711c865ce52ff1a1d002a3af32df18}\label{classSIR_a13711c865ce52ff1a1d002a3af32df18}} 
+\index{SIR@{SIR}!setQuarantineCases@{setQuarantineCases}}
+\index{setQuarantineCases@{setQuarantineCases}!SIR@{SIR}}
+\doxysubsubsection{\texorpdfstring{setQuarantineCases()}{setQuarantineCases()}}
+{\footnotesize\ttfamily void S\+I\+R\+::set\+Quarantine\+Cases (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Quarantine\+Cases
+
+Set chance of agent being quaratined
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & to set chance of quarantine \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSIR_aebff4296b7b84d486e57972e25180e7c}\label{classSIR_aebff4296b7b84d486e57972e25180e7c}} 
+\index{SIR@{SIR}!SIRTimeStep@{SIRTimeStep}}
+\index{SIRTimeStep@{SIRTimeStep}!SIR@{SIR}}
+\doxysubsubsection{\texorpdfstring{SIRTimeStep()}{SIRTimeStep()}}
+{\footnotesize\ttfamily string S\+I\+R\+::\+S\+I\+R\+Time\+Step (\begin{DoxyParamCaption}\item[{double}]{time\+Step }\end{DoxyParamCaption})}
+
+S\+I\+R\+Time\+Step
+
+This progresses agents through their various \mbox{\hyperlink{classSIR}{S\+IR}} model paths. An agent can be in any of the severity stages. As time progresses the function decides what happens to the agent with C\+O\+V\+I\+D-\/19 next, until the agent has either recovered or passed away from the virus.
+
+
+\begin{DoxyParams}{Parameters}
+{\em info,the} & timestep of the overall simulation in hours \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string, indicate if any update took place 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/S\+I\+R.\+hh\end{DoxyCompactItemize}

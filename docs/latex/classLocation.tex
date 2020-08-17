@@ -1,0 +1,411 @@
+\hypertarget{classLocation}{}\doxysection{Location Class Reference}
+\label{classLocation}\index{Location@{Location}}
+Inheritance diagram for Location\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLocation}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLocation_a87790c14997fd8cdd12080c78c9794bb}{Location}} ()
+\item 
+\mbox{\hyperlink{classLocation_a2316614afb1033f356e1db5eac42d0cb}{Location}} (string postal\+Code, int shop\+Data\mbox{[}L\+O\+C\+A\+T\+I\+O\+N\+T\+Y\+P\+E\+S\+I\+ZE\mbox{]})
+\item 
+int \mbox{\hyperlink{classLocation_a68fb60a2d28839b7e4371909cd58ac78}{get\+Population}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ \mbox{\hyperlink{classLocation_a24bc76e214dc89986e0e5f896a37c786}{get\+Susceptible}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ \mbox{\hyperlink{classLocation_a43aacd5c3df07140784500499e287d4a}{get\+Infected}} ()
+\item 
+void \mbox{\hyperlink{classLocation_a4ca90c158cbf4cbd7fb9fa0a437e7e30}{set\+Postal\+Code\+Grouping}} (string new\+Postal\+Code\+Grouping)
+\item 
+string \mbox{\hyperlink{classLocation_a7ba318a948f76d2c0550cb5d6e0a2be1}{get\+Postal\+Code\+Grouping}} ()
+\item 
+void \mbox{\hyperlink{classLocation_accc1138ca6f65515e42d566a3cf413c0}{increase\+Location\+Count\+At}} (int index)
+\item 
+void \mbox{\hyperlink{classLocation_af74dea0db76d574c24940a23fb27e87a}{increase\+Location\+Count\+At}} (condense\+Location\+Type index)
+\item 
+void \mbox{\hyperlink{classLocation_a890da6049265872252b10a5d80b5b301}{add\+Postal\+Code\+To\+List}} (string postal\+Code)
+\item 
+int \mbox{\hyperlink{classLocation_ac3df12d32756a69f3e3318978195b64a}{get\+Postal\+Code\+List\+Length}} ()
+\item 
+string \mbox{\hyperlink{classLocation_a4c7c341c261bbe26ddbd015eaec573b7}{get\+Postal\+Code\+At}} (int index)
+\item 
+bool \mbox{\hyperlink{classLocation_ab27023937ce62df3ffa6969c40abe88a}{postal\+Code\+List\+Contains\+Dup}} (string new\+Postal\+Code)
+\item 
+void \mbox{\hyperlink{classLocation_ab79900609ee9490bfc9368fadf615155}{add\+Agent\+To\+Susceptible}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$to\+Add)
+\item 
+void \mbox{\hyperlink{classLocation_a529e6775e9e2a119b2b897b82c1f192e}{add\+Agent\+To\+Infected}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$to\+Add)
+\item 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classLocation_ad4bf95fa1fe79b631c9bb763ab4aabf1}{remove\+Susceptible\+Agent}} (int index)
+\item 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classLocation_af57428be72263323c2f9fb7c159c8192}{remove\+Infected\+Agent}} (int index)
+\item 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classLocation_a30a605835389fd44b9fab34f58f3c93b}{get\+Susceptible\+Agent\+At}} (int index)
+\item 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classLocation_ab9aa9394ce8be7e86845aabb986acd3d}{get\+Infected\+Agent\+At}} (int index)
+\item 
+int \mbox{\hyperlink{classLocation_a26833feda6a318903d0525eb6f0d0d8c}{get\+Susceptible\+Size}} ()
+\item 
+int \mbox{\hyperlink{classLocation_a95912db9b35b07156e208f944f217683}{get\+Infected\+Size}} ()
+\item 
+void \mbox{\hyperlink{classLocation_aafda98f003581208553a40032673bf08}{set\+Location\+Index}} (int index)
+\item 
+int \mbox{\hyperlink{classLocation_aae6e478c66f5d4ffe78d976e76d8f191}{get\+Location\+Index}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLocation_a87790c14997fd8cdd12080c78c9794bb}\label{classLocation_a87790c14997fd8cdd12080c78c9794bb}} 
+\index{Location@{Location}!Location@{Location}}
+\index{Location@{Location}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{Location()}{Location()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Location\+::\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classLocation}{Location}}
+
+This is the defual constructor for the location obect \mbox{\Hypertarget{classLocation_a2316614afb1033f356e1db5eac42d0cb}\label{classLocation_a2316614afb1033f356e1db5eac42d0cb}} 
+\index{Location@{Location}!Location@{Location}}
+\index{Location@{Location}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{Location()}{Location()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Location\+::\+Location (\begin{DoxyParamCaption}\item[{string}]{postal\+Code,  }\item[{int}]{shop\+Data\mbox{[}\+L\+O\+C\+A\+T\+I\+O\+N\+T\+Y\+P\+E\+S\+I\+Z\+E\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classLocation}{Location}}
+
+This is the constructor for the location object that takes in data
+
+
+\begin{DoxyParams}{Parameters}
+{\em postal\+Code,a} & string of the postal\+Code \\
+\hline
+{\em shop\+Data,an} & array of size 9 of ints that holds each type of shop based on the enum condense\+Location\+Type \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLocation_a529e6775e9e2a119b2b897b82c1f192e}\label{classLocation_a529e6775e9e2a119b2b897b82c1f192e}} 
+\index{Location@{Location}!addAgentToInfected@{addAgentToInfected}}
+\index{addAgentToInfected@{addAgentToInfected}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{addAgentToInfected()}{addAgentToInfected()}}
+{\footnotesize\ttfamily void Location\+::add\+Agent\+To\+Infected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{to\+Add }\end{DoxyParamCaption})}
+
+add\+Agent\+To\+Infected
+
+This takes in an agent pointer and adds it to the locations infected vector
+
+
+\begin{DoxyParams}{Parameters}
+{\em to\+Add,the} & agent pointer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLocation_ab79900609ee9490bfc9368fadf615155}\label{classLocation_ab79900609ee9490bfc9368fadf615155}} 
+\index{Location@{Location}!addAgentToSusceptible@{addAgentToSusceptible}}
+\index{addAgentToSusceptible@{addAgentToSusceptible}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{addAgentToSusceptible()}{addAgentToSusceptible()}}
+{\footnotesize\ttfamily void Location\+::add\+Agent\+To\+Susceptible (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{to\+Add }\end{DoxyParamCaption})}
+
+add\+Agent\+To\+Susceptible
+
+This takes in an agent pointer and adds it to the locations susceptible vector
+
+
+\begin{DoxyParams}{Parameters}
+{\em to\+Add,the} & agent pointer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLocation_a890da6049265872252b10a5d80b5b301}\label{classLocation_a890da6049265872252b10a5d80b5b301}} 
+\index{Location@{Location}!addPostalCodeToList@{addPostalCodeToList}}
+\index{addPostalCodeToList@{addPostalCodeToList}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{addPostalCodeToList()}{addPostalCodeToList()}}
+{\footnotesize\ttfamily void Location\+::add\+Postal\+Code\+To\+List (\begin{DoxyParamCaption}\item[{string}]{postal\+Code }\end{DoxyParamCaption})}
+
+add\+Postal\+Code\+To\+List
+
+This function adds a full postal code to the location groupings list of postal\+Codes. It will not add dup postal\+Codes
+
+
+\begin{DoxyParams}{Parameters}
+{\em postal\+Code,the} & postal code to add to the list \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLocation_a43aacd5c3df07140784500499e287d4a}\label{classLocation_a43aacd5c3df07140784500499e287d4a}} 
+\index{Location@{Location}!getInfected@{getInfected}}
+\index{getInfected@{getInfected}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{getInfected()}{getInfected()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classAgent}{Agent}} $\ast$$>$ Location\+::get\+Infected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Infected
+
+This function gets the array of Infected agents in the location
+
+\begin{DoxyReturn}{Returns}
+the array of Infected agents in the location 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_ab9aa9394ce8be7e86845aabb986acd3d}\label{classLocation_ab9aa9394ce8be7e86845aabb986acd3d}} 
+\index{Location@{Location}!getInfectedAgentAt@{getInfectedAgentAt}}
+\index{getInfectedAgentAt@{getInfectedAgentAt}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{getInfectedAgentAt()}{getInfectedAgentAt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}}$\ast$ Location\+::get\+Infected\+Agent\+At (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+get\+Infected\+Agent\+At
+
+This takes in an index and returns the agent at the wanted index from the infected vector
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,the} & index to get the agent from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the agent 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_a95912db9b35b07156e208f944f217683}\label{classLocation_a95912db9b35b07156e208f944f217683}} 
+\index{Location@{Location}!getInfectedSize@{getInfectedSize}}
+\index{getInfectedSize@{getInfectedSize}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{getInfectedSize()}{getInfectedSize()}}
+{\footnotesize\ttfamily int Location\+::get\+Infected\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Infected\+Size
+
+This returns the size of the infected vector
+
+\begin{DoxyReturn}{Returns}
+size of infected vector 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_aae6e478c66f5d4ffe78d976e76d8f191}\label{classLocation_aae6e478c66f5d4ffe78d976e76d8f191}} 
+\index{Location@{Location}!getLocationIndex@{getLocationIndex}}
+\index{getLocationIndex@{getLocationIndex}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{getLocationIndex()}{getLocationIndex()}}
+{\footnotesize\ttfamily int Location\+::get\+Location\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Location\+Index
+
+This gets the objects location index
+
+\begin{DoxyReturn}{Returns}
+location of the location in the location\+List 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_a68fb60a2d28839b7e4371909cd58ac78}\label{classLocation_a68fb60a2d28839b7e4371909cd58ac78}} 
+\index{Location@{Location}!getPopulation@{getPopulation}}
+\index{getPopulation@{getPopulation}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{getPopulation()}{getPopulation()}}
+{\footnotesize\ttfamily int Location\+::get\+Population (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Population
+
+This function gets the population of the location
+
+\begin{DoxyReturn}{Returns}
+the amount of agents in a given location 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_a4c7c341c261bbe26ddbd015eaec573b7}\label{classLocation_a4c7c341c261bbe26ddbd015eaec573b7}} 
+\index{Location@{Location}!getPostalCodeAt@{getPostalCodeAt}}
+\index{getPostalCodeAt@{getPostalCodeAt}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{getPostalCodeAt()}{getPostalCodeAt()}}
+{\footnotesize\ttfamily string Location\+::get\+Postal\+Code\+At (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+get\+Postal\+Code\+At
+
+This gets the postal code in the vector at a specified location
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,must} & be in range of the list length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the string of the postal code at the index 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_a7ba318a948f76d2c0550cb5d6e0a2be1}\label{classLocation_a7ba318a948f76d2c0550cb5d6e0a2be1}} 
+\index{Location@{Location}!getPostalCodeGrouping@{getPostalCodeGrouping}}
+\index{getPostalCodeGrouping@{getPostalCodeGrouping}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{getPostalCodeGrouping()}{getPostalCodeGrouping()}}
+{\footnotesize\ttfamily string Location\+::get\+Postal\+Code\+Grouping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Postal\+Code\+Grouping
+
+This function gets the locations postal code grouping
+
+\begin{DoxyReturn}{Returns}
+a string of the postal code grouping 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_ac3df12d32756a69f3e3318978195b64a}\label{classLocation_ac3df12d32756a69f3e3318978195b64a}} 
+\index{Location@{Location}!getPostalCodeListLength@{getPostalCodeListLength}}
+\index{getPostalCodeListLength@{getPostalCodeListLength}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{getPostalCodeListLength()}{getPostalCodeListLength()}}
+{\footnotesize\ttfamily int Location\+::get\+Postal\+Code\+List\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Postal\+Code\+List\+Length
+
+This gets the length of the vector of the postal codes int a postal code grouping
+
+\begin{DoxyReturn}{Returns}
+a int of the size of the vector of postal\+Codes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_a24bc76e214dc89986e0e5f896a37c786}\label{classLocation_a24bc76e214dc89986e0e5f896a37c786}} 
+\index{Location@{Location}!getSusceptible@{getSusceptible}}
+\index{getSusceptible@{getSusceptible}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{getSusceptible()}{getSusceptible()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classAgent}{Agent}} $\ast$$>$ Location\+::get\+Susceptible (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Susceptible
+
+This function gets the array of susceptible agents in the location
+
+\begin{DoxyReturn}{Returns}
+the array of Suseptible agents in the location 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_a30a605835389fd44b9fab34f58f3c93b}\label{classLocation_a30a605835389fd44b9fab34f58f3c93b}} 
+\index{Location@{Location}!getSusceptibleAgentAt@{getSusceptibleAgentAt}}
+\index{getSusceptibleAgentAt@{getSusceptibleAgentAt}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{getSusceptibleAgentAt()}{getSusceptibleAgentAt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}}$\ast$ Location\+::get\+Susceptible\+Agent\+At (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+get\+Susceptible\+Agent\+At
+
+This takes in an index and returns the agent at the wanted index from the sus vector
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,the} & index to get the agent from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the agent 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_a26833feda6a318903d0525eb6f0d0d8c}\label{classLocation_a26833feda6a318903d0525eb6f0d0d8c}} 
+\index{Location@{Location}!getSusceptibleSize@{getSusceptibleSize}}
+\index{getSusceptibleSize@{getSusceptibleSize}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{getSusceptibleSize()}{getSusceptibleSize()}}
+{\footnotesize\ttfamily int Location\+::get\+Susceptible\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Susceptible\+Size
+
+This returns the size of the Susceptible vector
+
+\begin{DoxyReturn}{Returns}
+size of sus vector 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_af74dea0db76d574c24940a23fb27e87a}\label{classLocation_af74dea0db76d574c24940a23fb27e87a}} 
+\index{Location@{Location}!increaseLocationCountAt@{increaseLocationCountAt}}
+\index{increaseLocationCountAt@{increaseLocationCountAt}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{increaseLocationCountAt()}{increaseLocationCountAt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Location\+::increase\+Location\+Count\+At (\begin{DoxyParamCaption}\item[{condense\+Location\+Type}]{index }\end{DoxyParamCaption})}
+
+increase\+Location\+Count\+At
+
+This function will take a index of the wanted location index in the location\+Count array and increment it by one
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,must} & be in range 0 $<$= index $<$ L\+O\+C\+A\+T\+I\+O\+N\+T\+Y\+P\+E\+S\+I\+ZE \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLocation_accc1138ca6f65515e42d566a3cf413c0}\label{classLocation_accc1138ca6f65515e42d566a3cf413c0}} 
+\index{Location@{Location}!increaseLocationCountAt@{increaseLocationCountAt}}
+\index{increaseLocationCountAt@{increaseLocationCountAt}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{increaseLocationCountAt()}{increaseLocationCountAt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Location\+::increase\+Location\+Count\+At (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+increase\+Location\+Count\+At
+
+This function will take a index of the wanted location index in the location\+Count array and increment it by one
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,must} & be in range 0 $<$= index $<$ L\+O\+C\+A\+T\+I\+O\+N\+T\+Y\+P\+E\+S\+I\+ZE \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLocation_ab27023937ce62df3ffa6969c40abe88a}\label{classLocation_ab27023937ce62df3ffa6969c40abe88a}} 
+\index{Location@{Location}!postalCodeListContainsDup@{postalCodeListContainsDup}}
+\index{postalCodeListContainsDup@{postalCodeListContainsDup}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{postalCodeListContainsDup()}{postalCodeListContainsDup()}}
+{\footnotesize\ttfamily bool Location\+::postal\+Code\+List\+Contains\+Dup (\begin{DoxyParamCaption}\item[{string}]{new\+Postal\+Code }\end{DoxyParamCaption})}
+
+postal\+Code\+List\+Contains\+Dup
+
+T\+His is a helper function that makes sure there is no dups in the vector of postal codes before adding it into the list
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Postal\+Code,the} & postal code to check if it has a dup \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a bool true if it contains a dup false if it dosent 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_af57428be72263323c2f9fb7c159c8192}\label{classLocation_af57428be72263323c2f9fb7c159c8192}} 
+\index{Location@{Location}!removeInfectedAgent@{removeInfectedAgent}}
+\index{removeInfectedAgent@{removeInfectedAgent}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{removeInfectedAgent()}{removeInfectedAgent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}}$\ast$ Location\+::remove\+Infected\+Agent (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+remove\+Infected\+Agent
+
+This takes in an index and removes an agent at the wanted index from the infected vector and returns its pointer
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,the} & index to remove from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer to the removed agent 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_ad4bf95fa1fe79b631c9bb763ab4aabf1}\label{classLocation_ad4bf95fa1fe79b631c9bb763ab4aabf1}} 
+\index{Location@{Location}!removeSusceptibleAgent@{removeSusceptibleAgent}}
+\index{removeSusceptibleAgent@{removeSusceptibleAgent}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{removeSusceptibleAgent()}{removeSusceptibleAgent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}}$\ast$ Location\+::remove\+Susceptible\+Agent (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+remove\+Susceptible\+Agent
+
+This takes in an index and removes an agent at the the wanted index from the susceptible vector and returns its pointer
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,the} & index to remove from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer to the removed agent 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocation_aafda98f003581208553a40032673bf08}\label{classLocation_aafda98f003581208553a40032673bf08}} 
+\index{Location@{Location}!setLocationIndex@{setLocationIndex}}
+\index{setLocationIndex@{setLocationIndex}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{setLocationIndex()}{setLocationIndex()}}
+{\footnotesize\ttfamily void Location\+::set\+Location\+Index (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+set\+Location\+Index
+
+This sets the objects location index
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,the} & index of the location in the location\+List\+Vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLocation_a4ca90c158cbf4cbd7fb9fa0a437e7e30}\label{classLocation_a4ca90c158cbf4cbd7fb9fa0a437e7e30}} 
+\index{Location@{Location}!setPostalCodeGrouping@{setPostalCodeGrouping}}
+\index{setPostalCodeGrouping@{setPostalCodeGrouping}!Location@{Location}}
+\doxysubsubsection{\texorpdfstring{setPostalCodeGrouping()}{setPostalCodeGrouping()}}
+{\footnotesize\ttfamily void Location\+::set\+Postal\+Code\+Grouping (\begin{DoxyParamCaption}\item[{string}]{new\+Postal\+Code\+Grouping }\end{DoxyParamCaption})}
+
+set\+Postal\+Code\+Grouping
+
+This function sets a locations grouping string. For now this can be changed multiple times but in the future it should change to only be able to change once
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Postal\+Code\+Grouping,this} & is the first 5 chars of the postalcode ie N1G 7J \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/location.\+hh\end{DoxyCompactItemize}
