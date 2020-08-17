@@ -63,6 +63,7 @@ clean:
 	rm $(OBJECTS) $(BINDIR)abmSim
 
 library:
+	@clear
 	@echo "creating .so file [------------]"
 	@g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/agent.cpp
 	@clear
