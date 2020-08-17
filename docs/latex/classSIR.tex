@@ -19,8 +19,7 @@ S\+I\+R\+Severity \mbox{\hyperlink{classSIR_ae2ef49f084530cf6abfe85a5117e67df}{D
 \item 
 void \mbox{\hyperlink{classSIR_a13711c865ce52ff1a1d002a3af32df18}{set\+Quarantine\+Cases}} (double val)
 \item 
-\mbox{\Hypertarget{classSIR_ac3dd16a663d2d7074ada8007b99da903}\label{classSIR_ac3dd16a663d2d7074ada8007b99da903}} 
-bool {\bfseries get\+Symptoms} ()
+bool \mbox{\hyperlink{classSIR_ac3dd16a663d2d7074ada8007b99da903}{get\+Symptoms}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -58,7 +57,20 @@ This infects an \mbox{\hyperlink{classAgent}{Agent}} with the C\+O\+V\+I\+D19 vi
 
 Determine\+Severity
 
-Function returns the current severity stage of the \mbox{\hyperlink{classSIR}{S\+IR}} case. \mbox{\Hypertarget{classSIR_a13711c865ce52ff1a1d002a3af32df18}\label{classSIR_a13711c865ce52ff1a1d002a3af32df18}} 
+Function returns the current severity stage of the \mbox{\hyperlink{classSIR}{S\+IR}} case. \mbox{\Hypertarget{classSIR_ac3dd16a663d2d7074ada8007b99da903}\label{classSIR_ac3dd16a663d2d7074ada8007b99da903}} 
+\index{SIR@{SIR}!getSymptoms@{getSymptoms}}
+\index{getSymptoms@{getSymptoms}!SIR@{SIR}}
+\doxysubsubsection{\texorpdfstring{getSymptoms()}{getSymptoms()}}
+{\footnotesize\ttfamily bool S\+I\+R\+::get\+Symptoms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Symptoms
+
+This returns if the agent is showing any symptoms based on the \mbox{\hyperlink{classSIR}{S\+IR}} model
+
+\begin{DoxyReturn}{Returns}
+, true if showing symptoms false if not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSIR_a13711c865ce52ff1a1d002a3af32df18}\label{classSIR_a13711c865ce52ff1a1d002a3af32df18}} 
 \index{SIR@{SIR}!setQuarantineCases@{setQuarantineCases}}
 \index{setQuarantineCases@{setQuarantineCases}!SIR@{SIR}}
 \doxysubsubsection{\texorpdfstring{setQuarantineCases()}{setQuarantineCases()}}

@@ -5,5 +5,6 @@ var searchData=
   ['addmildlyinfectedagents_2',['AddMildlyInfectedAgents',['../classIsolationCompartment.html#a8d2a49825021ba18b42b1284953373e5',1,'IsolationCompartment']]],
   ['addpostalcodetolist_3',['addPostalCodeToList',['../classLocation.html#a890da6049265872252b10a5d80b5b301',1,'Location']]],
   ['agent_4',['Agent',['../classAgent.html',1,'Agent'],['../classAgent.html#a7feda19a98cfbcebf23f2f8392c3855a',1,'Agent::Agent()']]],
-  ['agentinfected_5',['AgentInfected',['../classSIR.html#a4112f8603889169a2faffc5c2f00fafd',1,'SIR']]]
+  ['agentinfected_5',['AgentInfected',['../classSIR.html#a4112f8603889169a2faffc5c2f00fafd',1,'SIR']]],
+  ['agenttostring_6',['agentToString',['../classAgent.html#acb4dde21fb3540095b354cb4a504855f',1,'Agent']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['geographicalrisk_92',['GeographicalRisk',['../classGeographicalRisk.html',1,'']]]
+  ['geographicalrisk_101',['GeographicalRisk',['../classGeographicalRisk.html',1,'']]]
 ];

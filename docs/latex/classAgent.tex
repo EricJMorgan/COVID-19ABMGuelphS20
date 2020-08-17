@@ -9,14 +9,11 @@ Inheritance diagram for Agent\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classAgent_a7f2dc6212132f837a520735d5ca7a886}\label{classAgent_a7f2dc6212132f837a520735d5ca7a886}} 
-Agent\+Info {\bfseries get\+Agent\+Info} ()
+Agent\+Info \mbox{\hyperlink{classAgent_a7f2dc6212132f837a520735d5ca7a886}{get\+Agent\+Info}} ()
 \item 
-\mbox{\Hypertarget{classAgent_abbaf219fef54f2e435771103a01e1f63}\label{classAgent_abbaf219fef54f2e435771103a01e1f63}} 
-string {\bfseries get\+Ethnicity} ()
+string \mbox{\hyperlink{classAgent_abbaf219fef54f2e435771103a01e1f63}{get\+Ethnicity}} ()
 \item 
-\mbox{\Hypertarget{classAgent_acb4dde21fb3540095b354cb4a504855f}\label{classAgent_acb4dde21fb3540095b354cb4a504855f}} 
-string {\bfseries agent\+To\+String} ()
+string \mbox{\hyperlink{classAgent_acb4dde21fb3540095b354cb4a504855f}{agent\+To\+String}} ()
 \item 
 \mbox{\hyperlink{classAgent_a7feda19a98cfbcebf23f2f8392c3855a}{Agent}} (Agent\+Info agent\+Info)
 \item 
@@ -76,6 +73,19 @@ This is the constructor for the agent class it takes in the the gender/age enum 
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classAgent_acb4dde21fb3540095b354cb4a504855f}\label{classAgent_acb4dde21fb3540095b354cb4a504855f}} 
+\index{Agent@{Agent}!agentToString@{agentToString}}
+\index{agentToString@{agentToString}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{agentToString()}{agentToString()}}
+{\footnotesize\ttfamily string Agent\+::agent\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+agetn\+To\+String
+
+converts the agents info to a string for demo and bugtesting pourpses
+
+\begin{DoxyReturn}{Returns}
+a string of the agents data 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classAgent_acb590bc0d2e5bd172eebf5d6c7663881}\label{classAgent_acb590bc0d2e5bd172eebf5d6c7663881}} 
 \index{Agent@{Agent}!DecideMigitationStrategy@{DecideMigitationStrategy}}
 \index{DecideMigitationStrategy@{DecideMigitationStrategy}!Agent@{Agent}}
@@ -89,6 +99,32 @@ Decides the agents chance of wearing a mask and following appropriate hygiene
 {\em mask\+Wearing,chance} & \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classAgent_a7f2dc6212132f837a520735d5ca7a886}\label{classAgent_a7f2dc6212132f837a520735d5ca7a886}} 
+\index{Agent@{Agent}!getAgentInfo@{getAgentInfo}}
+\index{getAgentInfo@{getAgentInfo}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{getAgentInfo()}{getAgentInfo()}}
+{\footnotesize\ttfamily Agent\+Info Agent\+::get\+Agent\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Agent\+Info
+
+getter for the agents information
+
+\begin{DoxyReturn}{Returns}
+a Agent\+Info enum indicating the agents info 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAgent_abbaf219fef54f2e435771103a01e1f63}\label{classAgent_abbaf219fef54f2e435771103a01e1f63}} 
+\index{Agent@{Agent}!getEthnicity@{getEthnicity}}
+\index{getEthnicity@{getEthnicity}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{getEthnicity()}{getEthnicity()}}
+{\footnotesize\ttfamily string Agent\+::get\+Ethnicity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Ethnicity
+
+getter for thea gents ethnicity
+
+\begin{DoxyReturn}{Returns}
+a string of the agents ethnicity 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classAgent_a3a4c1dcdaf0b2f05acc81fbccbfc8ad1}\label{classAgent_a3a4c1dcdaf0b2f05acc81fbccbfc8ad1}} 
 \index{Agent@{Agent}!getHasMoved@{getHasMoved}}
 \index{getHasMoved@{getHasMoved}!Agent@{Agent}}
