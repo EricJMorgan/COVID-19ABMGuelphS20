@@ -72,6 +72,13 @@ class Simulation {
      */
     int getPopulation();
 
+    /**
+     * runSim
+     * 
+     * This function is called to indefinitly run the sim
+     * currently it is not used all too much as the front end calls
+     * simulate time step over and over
+     */
     void runSim();
 
     /**

@@ -159,7 +159,14 @@ class Transportation {
      */
     int agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay);
 
-    //TODO add header comments to this
+    /**
+     * InfectAgentsPostMovement
+     * 
+     * After movment happens infects people at
+     * each location in the simulation
+     * 
+     * @return a int of the amount of the newly infected
+     */
     int InfectAgentsPostMovement();
 
 
@@ -279,8 +286,6 @@ class Transportation {
      */
     int monteCarloRandom(int roof);
 
-
 };
-
 
 #endif
