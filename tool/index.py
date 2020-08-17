@@ -484,13 +484,13 @@ def on_button_click(n):
     if n is None:
         return
     else:
-        print("test")
-        while (graph1 & graph2 & graph3 & graph4):
-            sim.timeStep()
-            graph1 = False
-            graph2 = False
-            graph3 = False
-            graph4 = False
+        while (1) :
+            if (graph1 & graph2 & graph3 & graph4):
+                sim.timeStep()
+                graph1 = False
+                graph2 = False
+                graph3 = False
+                graph4 = False
 
 if __name__ == "__main__":
     app.run_server(debug=True, use_reloader=True)
