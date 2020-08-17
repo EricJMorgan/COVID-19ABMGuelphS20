@@ -93,6 +93,15 @@ class SIR {
     void setQuarantineCases(double val);
 
     AgentInfo info;
+
+    /**
+     * getSymptoms
+     * 
+     * This returns if the agent is showing any symptoms
+     * based on the SIR model
+     * 
+     * @return, true if showing symptoms false if not
+     */
     bool getSymptoms();
 
     private:
