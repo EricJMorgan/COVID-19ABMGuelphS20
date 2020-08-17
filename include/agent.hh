@@ -37,10 +37,33 @@ class Location;
 //Declare simulation class
 class Agent : public SIR {
     public:
-    AgentInfo getAgentInfo();
-    string getEthnicity();
-    string agentToString();
 
+    /**
+     * getAgentInfo
+     * 
+     * getter for the agents information
+     * 
+     * @return a AgentInfo enum indicating the agents info
+     */
+    AgentInfo getAgentInfo();
+
+    /**
+     * getEthnicity
+     * 
+     * getter for thea gents ethnicity
+     * 
+     * @return a string of the agents ethnicity
+     */
+    string getEthnicity();
+
+    /**
+     * agetnToString
+     * 
+     * converts the agents info to a string for demo and bugtesting pourpses
+     * 
+     * @return a string of the agents data
+     */
+    string agentToString();
 
     /**
      * Agent

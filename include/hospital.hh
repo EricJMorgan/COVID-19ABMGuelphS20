@@ -17,12 +17,6 @@
 
 using namespace std;
 
-//22 intensive care
-//62 surgery
-//8 Paediatrics/children
-//68 medicine
-//22 obsterics/childbirth
-
 //Declare simulation class
 class Hospital {
     public:
