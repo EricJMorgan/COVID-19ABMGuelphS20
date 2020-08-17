@@ -1,0 +1,75 @@
+\hypertarget{classPostalCodeHash}{}\doxysection{Postal\+Code\+Hash Class Reference}
+\label{classPostalCodeHash}\index{PostalCodeHash@{PostalCodeHash}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPostalCodeHash_ac0b7cf50758813a334e8a44d42013b39}{Postal\+Code\+Hash}} (string tsv\+File, string even\+More\+Locations, int hash\+Size)
+\item 
+\mbox{\hyperlink{classPostalCodeHash_a447e126f86f62316dcf1fb50686a3e92}{$\sim$\+Postal\+Code\+Hash}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classPostalCodeHash_adfe6e418abed1fe2586e8e4dc7b0b987}{get\+Postal\+Hash}} (int hash\+Size, string postal\+T\+S\+V\+To\+Hash)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPostalCodeHash_afb28c1e2ace5dd161ee395d28f771482}\label{classPostalCodeHash_afb28c1e2ace5dd161ee395d28f771482}} 
+\mbox{\hyperlink{classLocation}{Location}} $\ast$$\ast$ {\bfseries hash\+Table}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPostalCodeHash_ac0b7cf50758813a334e8a44d42013b39}\label{classPostalCodeHash_ac0b7cf50758813a334e8a44d42013b39}} 
+\index{PostalCodeHash@{PostalCodeHash}!PostalCodeHash@{PostalCodeHash}}
+\index{PostalCodeHash@{PostalCodeHash}!PostalCodeHash@{PostalCodeHash}}
+\doxysubsubsection{\texorpdfstring{PostalCodeHash()}{PostalCodeHash()}}
+{\footnotesize\ttfamily Postal\+Code\+Hash\+::\+Postal\+Code\+Hash (\begin{DoxyParamCaption}\item[{string}]{tsv\+File,  }\item[{string}]{even\+More\+Locations,  }\item[{int}]{hash\+Size }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classPostalCodeHash}{Postal\+Code\+Hash}}
+
+This is the constructor for the postalcode hash object, it takes in 2 file names representing the google places api printout and a list of postal codes each on a new line and the wanted hash\+Size N\+O\+TE\+: hash\+Size will soon be automated but for now it is manual
+
+
+\begin{DoxyParams}{Parameters}
+{\em tsv\+File,the} & string of the google places A\+PI print out, M\+U\+ST H\+A\+VE P\+O\+S\+T\+AL C\+O\+DE IN F\+O\+R\+M\+AT of ON,L\+NL N\+LN, \\
+\hline
+{\em even\+More\+Locations,the} & string of the full postalcode file \\
+\hline
+{\em hash\+Size,the} & size of the wanted hashtable \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPostalCodeHash_a447e126f86f62316dcf1fb50686a3e92}\label{classPostalCodeHash_a447e126f86f62316dcf1fb50686a3e92}} 
+\index{PostalCodeHash@{PostalCodeHash}!````~PostalCodeHash@{$\sim$PostalCodeHash}}
+\index{````~PostalCodeHash@{$\sim$PostalCodeHash}!PostalCodeHash@{PostalCodeHash}}
+\doxysubsubsection{\texorpdfstring{$\sim$PostalCodeHash()}{~PostalCodeHash()}}
+{\footnotesize\ttfamily Postal\+Code\+Hash\+::$\sim$\+Postal\+Code\+Hash (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+$\sim$\+Postal\+Code\+Hash
+
+This is the deconstructor of the postal\+Code\+Hash object 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPostalCodeHash_adfe6e418abed1fe2586e8e4dc7b0b987}\label{classPostalCodeHash_adfe6e418abed1fe2586e8e4dc7b0b987}} 
+\index{PostalCodeHash@{PostalCodeHash}!getPostalHash@{getPostalHash}}
+\index{getPostalHash@{getPostalHash}!PostalCodeHash@{PostalCodeHash}}
+\doxysubsubsection{\texorpdfstring{getPostalHash()}{getPostalHash()}}
+{\footnotesize\ttfamily static int Postal\+Code\+Hash\+::get\+Postal\+Hash (\begin{DoxyParamCaption}\item[{int}]{hash\+Size,  }\item[{string}]{postal\+T\+S\+V\+To\+Hash }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+get\+Posta\+L\+Hash
+
+this function will return the hash value of a given postal code
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Size,an} & int of the size of the hash table \\
+\hline
+{\em postal\+T\+S\+V\+To\+Hash,the} & string of the postal\+Code \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/postal\+Code\+Hash.\+hh\end{DoxyCompactItemize}

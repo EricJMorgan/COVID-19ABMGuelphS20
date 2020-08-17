@@ -1,0 +1,163 @@
+\hypertarget{classHospital}{}\doxysection{Hospital Class Reference}
+\label{classHospital}\index{Hospital@{Hospital}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHospital_a130b3a6c6e3dd35443437e1f5144b1ac}{Hospital}} ()
+\item 
+void \mbox{\hyperlink{classHospital_a15b51bf788bff2754807e8141a3ae361}{free\+Icu\+Beds}} (int free\+Num)
+\item 
+void \mbox{\hyperlink{classHospital_a0b8fc6d181884796fe841b24e15fb9a9}{free\+Hospital\+Beds}} (int free\+Num)
+\item 
+void \mbox{\hyperlink{classHospital_a863bd849cc4ad3c6331d230730dd7b2e}{increase\+Hospital\+Count}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$agent\+To\+Add)
+\item 
+void \mbox{\hyperlink{classHospital_ae356bda7b5206c9e4cf3105d7e0a5d13}{increase\+Icu\+Count}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$agent\+To\+Add)
+\item 
+int \mbox{\hyperlink{classHospital_a22c5ca2c7a6d517b25a6f4ed39035a69}{get\+Total\+Beds}} ()
+\item 
+int \mbox{\hyperlink{classHospital_a4559e118caead2bbf4218c08aade8f21}{get\+Icu\+Beds}} ()
+\item 
+void \mbox{\hyperlink{classHospital_a876ed8a40189eb6fc2c9cbb9e02b6a49}{Hospital\+Time\+Step}} (double timestep)
+\item 
+int \mbox{\hyperlink{classHospital_a73eaac97a804d58b7566fb94fb6867f3}{get\+Total\+I\+C\+U\+Count}} ()
+\item 
+int \mbox{\hyperlink{classHospital_aaa58195b56bae7940db9d9f170b00d06}{get\+Total\+Hospital\+Count}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHospital_aac340259bbf0b64b70f84589d8616945}\label{classHospital_aac340259bbf0b64b70f84589d8616945}} 
+std\+::vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ {\bfseries newly\+Deceased}
+\item 
+\mbox{\Hypertarget{classHospital_ac606027d972c0d3f3b7a335c86ababe4}\label{classHospital_ac606027d972c0d3f3b7a335c86ababe4}} 
+std\+::vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ {\bfseries newly\+Recovered}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHospital_a130b3a6c6e3dd35443437e1f5144b1ac}\label{classHospital_a130b3a6c6e3dd35443437e1f5144b1ac}} 
+\index{Hospital@{Hospital}!Hospital@{Hospital}}
+\index{Hospital@{Hospital}!Hospital@{Hospital}}
+\doxysubsubsection{\texorpdfstring{Hospital()}{Hospital()}}
+{\footnotesize\ttfamily Hospital\+::\+Hospital (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classHospital}{Hospital}}
+
+This is the default constructor for the hospital object 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHospital_a0b8fc6d181884796fe841b24e15fb9a9}\label{classHospital_a0b8fc6d181884796fe841b24e15fb9a9}} 
+\index{Hospital@{Hospital}!freeHospitalBeds@{freeHospitalBeds}}
+\index{freeHospitalBeds@{freeHospitalBeds}!Hospital@{Hospital}}
+\doxysubsubsection{\texorpdfstring{freeHospitalBeds()}{freeHospitalBeds()}}
+{\footnotesize\ttfamily void Hospital\+::free\+Hospital\+Beds (\begin{DoxyParamCaption}\item[{int}]{free\+Num }\end{DoxyParamCaption})}
+
+free\+Hospital\+Beds
+
+This function frees up hospital beds (excluding I\+CU beds) upon patient\textquotesingle{}s recovery or death
+
+
+\begin{DoxyParams}{Parameters}
+{\em free\+Num,this} & is the number of beds to be freed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHospital_a15b51bf788bff2754807e8141a3ae361}\label{classHospital_a15b51bf788bff2754807e8141a3ae361}} 
+\index{Hospital@{Hospital}!freeIcuBeds@{freeIcuBeds}}
+\index{freeIcuBeds@{freeIcuBeds}!Hospital@{Hospital}}
+\doxysubsubsection{\texorpdfstring{freeIcuBeds()}{freeIcuBeds()}}
+{\footnotesize\ttfamily void Hospital\+::free\+Icu\+Beds (\begin{DoxyParamCaption}\item[{int}]{free\+Num }\end{DoxyParamCaption})}
+
+free\+Icu\+Beds
+
+This function frees up I\+CU beds upon patient\textquotesingle{}s recovery or death
+
+
+\begin{DoxyParams}{Parameters}
+{\em free\+Num,this} & is the number of beds to be freed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHospital_a4559e118caead2bbf4218c08aade8f21}\label{classHospital_a4559e118caead2bbf4218c08aade8f21}} 
+\index{Hospital@{Hospital}!getIcuBeds@{getIcuBeds}}
+\index{getIcuBeds@{getIcuBeds}!Hospital@{Hospital}}
+\doxysubsubsection{\texorpdfstring{getIcuBeds()}{getIcuBeds()}}
+{\footnotesize\ttfamily int Hospital\+::get\+Icu\+Beds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Icu\+Beds
+
+This function returns the number of agents in I\+CU care
+
+\begin{DoxyReturn}{Returns}
+the number of agents in I\+CU cases 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classHospital_a22c5ca2c7a6d517b25a6f4ed39035a69}\label{classHospital_a22c5ca2c7a6d517b25a6f4ed39035a69}} 
+\index{Hospital@{Hospital}!getTotalBeds@{getTotalBeds}}
+\index{getTotalBeds@{getTotalBeds}!Hospital@{Hospital}}
+\doxysubsubsection{\texorpdfstring{getTotalBeds()}{getTotalBeds()}}
+{\footnotesize\ttfamily int Hospital\+::get\+Total\+Beds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Total\+Beds
+
+This function returns the number of agents using hospital beds
+
+\begin{DoxyReturn}{Returns}
+the number of agents in hospital care, excluding I\+CU cases 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classHospital_aaa58195b56bae7940db9d9f170b00d06}\label{classHospital_aaa58195b56bae7940db9d9f170b00d06}} 
+\index{Hospital@{Hospital}!getTotalHospitalCount@{getTotalHospitalCount}}
+\index{getTotalHospitalCount@{getTotalHospitalCount}!Hospital@{Hospital}}
+\doxysubsubsection{\texorpdfstring{getTotalHospitalCount()}{getTotalHospitalCount()}}
+{\footnotesize\ttfamily int Hospital\+::get\+Total\+Hospital\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Total\+Hospital\+Count
+
+This gets the total number of agents ever put in the hospital \mbox{\Hypertarget{classHospital_a73eaac97a804d58b7566fb94fb6867f3}\label{classHospital_a73eaac97a804d58b7566fb94fb6867f3}} 
+\index{Hospital@{Hospital}!getTotalICUCount@{getTotalICUCount}}
+\index{getTotalICUCount@{getTotalICUCount}!Hospital@{Hospital}}
+\doxysubsubsection{\texorpdfstring{getTotalICUCount()}{getTotalICUCount()}}
+{\footnotesize\ttfamily int Hospital\+::get\+Total\+I\+C\+U\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Total\+I\+C\+U\+Count
+
+This gets the total number of agents ever put in intensive care unit \mbox{\Hypertarget{classHospital_a876ed8a40189eb6fc2c9cbb9e02b6a49}\label{classHospital_a876ed8a40189eb6fc2c9cbb9e02b6a49}} 
+\index{Hospital@{Hospital}!HospitalTimeStep@{HospitalTimeStep}}
+\index{HospitalTimeStep@{HospitalTimeStep}!Hospital@{Hospital}}
+\doxysubsubsection{\texorpdfstring{HospitalTimeStep()}{HospitalTimeStep()}}
+{\footnotesize\ttfamily void Hospital\+::\+Hospital\+Time\+Step (\begin{DoxyParamCaption}\item[{double}]{timestep }\end{DoxyParamCaption})}
+
+Hospital\+Time\+Step
+
+This moves the Agents currently in the hospital through an \mbox{\hyperlink{classSIR}{S\+IR}} timestep and then determines if the agent needs to be moved to a different stage \mbox{\Hypertarget{classHospital_a863bd849cc4ad3c6331d230730dd7b2e}\label{classHospital_a863bd849cc4ad3c6331d230730dd7b2e}} 
+\index{Hospital@{Hospital}!increaseHospitalCount@{increaseHospitalCount}}
+\index{increaseHospitalCount@{increaseHospitalCount}!Hospital@{Hospital}}
+\doxysubsubsection{\texorpdfstring{increaseHospitalCount()}{increaseHospitalCount()}}
+{\footnotesize\ttfamily void Hospital\+::increase\+Hospital\+Count (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{agent\+To\+Add }\end{DoxyParamCaption})}
+
+increase\+Hospitcal\+Count
+
+This function adds agents to the hospital if they are in need of hospital care
+
+
+\begin{DoxyParams}{Parameters}
+{\em agent\+To\+Add,this} & is the agent to be emitted to the hospital \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classHospital_ae356bda7b5206c9e4cf3105d7e0a5d13}\label{classHospital_ae356bda7b5206c9e4cf3105d7e0a5d13}} 
+\index{Hospital@{Hospital}!increaseIcuCount@{increaseIcuCount}}
+\index{increaseIcuCount@{increaseIcuCount}!Hospital@{Hospital}}
+\doxysubsubsection{\texorpdfstring{increaseIcuCount()}{increaseIcuCount()}}
+{\footnotesize\ttfamily void Hospital\+::increase\+Icu\+Count (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{agent\+To\+Add }\end{DoxyParamCaption})}
+
+increase\+Icu\+Count
+
+This function adds agents from the hospital to I\+CU if they are in need of critical care
+
+
+\begin{DoxyParams}{Parameters}
+{\em agent\+To\+Add,this} & is the agent to be emitted to I\+CU \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/hospital.\+hh\end{DoxyCompactItemize}

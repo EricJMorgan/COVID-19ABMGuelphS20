@@ -1,0 +1,80 @@
+\hypertarget{classIsolationCompartment}{}\doxysection{Isolation\+Compartment Class Reference}
+\label{classIsolationCompartment}\index{IsolationCompartment@{IsolationCompartment}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classIsolationCompartment_a37c438243f4522d67a793d756ad41d41}{Isolation\+Compartment}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ \mbox{\hyperlink{classIsolationCompartment_ad9eaffce5f9ffb9cfcf1b37d79f8ef54}{isolated\+Agents}} ()
+\item 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classIsolationCompartment_a2dd04d1934078b4b1ab3b98beb2c1fae}{Release\+Recovered\+Agents}} (int index)
+\item 
+void \mbox{\hyperlink{classIsolationCompartment_a8d2a49825021ba18b42b1284953373e5}{Add\+Mildly\+Infected\+Agents}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$to\+Isolate)
+\item 
+void \mbox{\hyperlink{classIsolationCompartment_ab15a96d8333825c44bda24d8fc858ef3}{Simulate\+Iso\+Time\+Step}} (double time\+Step)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classIsolationCompartment_a0a32b99a65ff2595bca09a5f7d7d09b8}\label{classIsolationCompartment_a0a32b99a65ff2595bca09a5f7d7d09b8}} 
+std\+::vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ {\bfseries newly\+Recovered}
+\item 
+\mbox{\Hypertarget{classIsolationCompartment_ae18cf078c3255c3dcbd3140aec07d1a1}\label{classIsolationCompartment_ae18cf078c3255c3dcbd3140aec07d1a1}} 
+std\+::vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ {\bfseries newly\+Hospitalized}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIsolationCompartment_a37c438243f4522d67a793d756ad41d41}\label{classIsolationCompartment_a37c438243f4522d67a793d756ad41d41}} 
+\index{IsolationCompartment@{IsolationCompartment}!IsolationCompartment@{IsolationCompartment}}
+\index{IsolationCompartment@{IsolationCompartment}!IsolationCompartment@{IsolationCompartment}}
+\doxysubsubsection{\texorpdfstring{IsolationCompartment()}{IsolationCompartment()}}
+{\footnotesize\ttfamily Isolation\+Compartment\+::\+Isolation\+Compartment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classIsolationCompartment}{Isolation\+Compartment}}
+
+This is the default constructor for the isolation object 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classIsolationCompartment_a8d2a49825021ba18b42b1284953373e5}\label{classIsolationCompartment_a8d2a49825021ba18b42b1284953373e5}} 
+\index{IsolationCompartment@{IsolationCompartment}!AddMildlyInfectedAgents@{AddMildlyInfectedAgents}}
+\index{AddMildlyInfectedAgents@{AddMildlyInfectedAgents}!IsolationCompartment@{IsolationCompartment}}
+\doxysubsubsection{\texorpdfstring{AddMildlyInfectedAgents()}{AddMildlyInfectedAgents()}}
+{\footnotesize\ttfamily void Isolation\+Compartment\+::\+Add\+Mildly\+Infected\+Agents (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{to\+Isolate }\end{DoxyParamCaption})}
+
+Add\+Mildly\+Infected\+Agents
+
+This function quarantines/isolates agents that have mild symptoms \mbox{\Hypertarget{classIsolationCompartment_ad9eaffce5f9ffb9cfcf1b37d79f8ef54}\label{classIsolationCompartment_ad9eaffce5f9ffb9cfcf1b37d79f8ef54}} 
+\index{IsolationCompartment@{IsolationCompartment}!isolatedAgents@{isolatedAgents}}
+\index{isolatedAgents@{isolatedAgents}!IsolationCompartment@{IsolationCompartment}}
+\doxysubsubsection{\texorpdfstring{isolatedAgents()}{isolatedAgents()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classAgent}{Agent}} $\ast$$>$ Isolation\+Compartment\+::isolated\+Agents (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+isolated\+Agents
+
+This function gets the array of agents to be isolated
+
+\begin{DoxyReturn}{Returns}
+the array of agents to be isolated from the simulation 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIsolationCompartment_a2dd04d1934078b4b1ab3b98beb2c1fae}\label{classIsolationCompartment_a2dd04d1934078b4b1ab3b98beb2c1fae}} 
+\index{IsolationCompartment@{IsolationCompartment}!ReleaseRecoveredAgents@{ReleaseRecoveredAgents}}
+\index{ReleaseRecoveredAgents@{ReleaseRecoveredAgents}!IsolationCompartment@{IsolationCompartment}}
+\doxysubsubsection{\texorpdfstring{ReleaseRecoveredAgents()}{ReleaseRecoveredAgents()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}}$\ast$ Isolation\+Compartment\+::\+Release\+Recovered\+Agents (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+Release\+Recovered\+Agents
+
+This function releases agents when they have recovered \mbox{\Hypertarget{classIsolationCompartment_ab15a96d8333825c44bda24d8fc858ef3}\label{classIsolationCompartment_ab15a96d8333825c44bda24d8fc858ef3}} 
+\index{IsolationCompartment@{IsolationCompartment}!SimulateIsoTimeStep@{SimulateIsoTimeStep}}
+\index{SimulateIsoTimeStep@{SimulateIsoTimeStep}!IsolationCompartment@{IsolationCompartment}}
+\doxysubsubsection{\texorpdfstring{SimulateIsoTimeStep()}{SimulateIsoTimeStep()}}
+{\footnotesize\ttfamily void Isolation\+Compartment\+::\+Simulate\+Iso\+Time\+Step (\begin{DoxyParamCaption}\item[{double}]{time\+Step }\end{DoxyParamCaption})}
+
+Simulate\+Iso\+Time\+Step
+
+This function simulates the time step for the isolation compartment 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/isolationcompartment.\+hh\end{DoxyCompactItemize}

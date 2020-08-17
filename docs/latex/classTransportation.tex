@@ -1,0 +1,177 @@
+\hypertarget{classTransportation}{}\doxysection{Transportation Class Reference}
+\label{classTransportation}\index{Transportation@{Transportation}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTransportation_a34a2fb8b765b88b6f1da7829df859c50}{Transportation}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$$\ast$arr, int arr\+Size)
+\item 
+\mbox{\hyperlink{classTransportation_ae63d1b7fa5006d357228196b6b81684d}{$\sim$\+Transportation}} ()
+\item 
+int \mbox{\hyperlink{classTransportation_a231b4e20ae63b7180442f7bb6697e350}{get\+Location\+List\+Length}} ()
+\item 
+\mbox{\hyperlink{classLocation}{Location}} $\ast$ \mbox{\hyperlink{classTransportation_aa17f3228a52e4f803ac5fa0b25417f04}{get\+Location\+At}} (int index)
+\item 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classTransportation_a66fa5b00273dd30dfdd18b93f266a01a}{move\+Susceptible\+Agent}} (int location\+One, int location\+Two, int agent\+Index)
+\item 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classTransportation_a1531529d84dbfaacf1fb20c02fd33b8a}{move\+Infected\+Agent}} (int location\+One, int location\+Two, int agent\+Index)
+\item 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classTransportation_abf231157a852aaa85affda6ac73fcdb0}{move\+Susceptible\+To\+Infected}} (int location\+Index, int agent\+Index)
+\item 
+int \mbox{\hyperlink{classTransportation_abf5324a5b9e426d4b82a1045073af722}{simulate\+Agent\+Movment}} (int time\+Of\+Day, Day\+Of\+Week curr\+Day)
+\item 
+void \mbox{\hyperlink{classTransportation_a3266b12534c2483e7a364fecd6ae7d0b}{update\+Location\+Risks}} (int social\+Distancing\+Severity, double associated\+Loc\+Risks\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTransportation_a34a2fb8b765b88b6f1da7829df859c50}\label{classTransportation_a34a2fb8b765b88b6f1da7829df859c50}} 
+\index{Transportation@{Transportation}!Transportation@{Transportation}}
+\index{Transportation@{Transportation}!Transportation@{Transportation}}
+\doxysubsubsection{\texorpdfstring{Transportation()}{Transportation()}}
+{\footnotesize\ttfamily Transportation\+::\+Transportation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$$\ast$}]{arr,  }\item[{int}]{arr\+Size }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classTransportation}{Transportation}}
+
+This is the constructor for the \mbox{\hyperlink{classTransportation}{Transportation}} class it takes in an array of agent pointers and the size of said array
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$arr,and} & array of agent pointers \\
+\hline
+{\em arr\+Size,the} & size of the array \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classTransportation_ae63d1b7fa5006d357228196b6b81684d}\label{classTransportation_ae63d1b7fa5006d357228196b6b81684d}} 
+\index{Transportation@{Transportation}!````~Transportation@{$\sim$Transportation}}
+\index{````~Transportation@{$\sim$Transportation}!Transportation@{Transportation}}
+\doxysubsubsection{\texorpdfstring{$\sim$Transportation()}{~Transportation()}}
+{\footnotesize\ttfamily Transportation\+::$\sim$\+Transportation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+$\sim$\+Transportation
+
+This is the de-\/constructor for the class 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTransportation_aa17f3228a52e4f803ac5fa0b25417f04}\label{classTransportation_aa17f3228a52e4f803ac5fa0b25417f04}} 
+\index{Transportation@{Transportation}!getLocationAt@{getLocationAt}}
+\index{getLocationAt@{getLocationAt}!Transportation@{Transportation}}
+\doxysubsubsection{\texorpdfstring{getLocationAt()}{getLocationAt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLocation}{Location}}$\ast$ Transportation\+::get\+Location\+At (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+get\+Location\+At
+
+This gets the location data from a given index due to the location never changing it only returns a copy of the object
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,the} & index of the wanted data must be in range 0 $<$= index $<$ list\+Length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the location object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTransportation_a231b4e20ae63b7180442f7bb6697e350}\label{classTransportation_a231b4e20ae63b7180442f7bb6697e350}} 
+\index{Transportation@{Transportation}!getLocationListLength@{getLocationListLength}}
+\index{getLocationListLength@{getLocationListLength}!Transportation@{Transportation}}
+\doxysubsubsection{\texorpdfstring{getLocationListLength()}{getLocationListLength()}}
+{\footnotesize\ttfamily int Transportation\+::get\+Location\+List\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Location\+List\+Length
+
+This gets the length of the location list that is generated what the object is made
+
+\begin{DoxyReturn}{Returns}
+the length of the internal List 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTransportation_a1531529d84dbfaacf1fb20c02fd33b8a}\label{classTransportation_a1531529d84dbfaacf1fb20c02fd33b8a}} 
+\index{Transportation@{Transportation}!moveInfectedAgent@{moveInfectedAgent}}
+\index{moveInfectedAgent@{moveInfectedAgent}!Transportation@{Transportation}}
+\doxysubsubsection{\texorpdfstring{moveInfectedAgent()}{moveInfectedAgent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}}$\ast$ Transportation\+::move\+Infected\+Agent (\begin{DoxyParamCaption}\item[{int}]{location\+One,  }\item[{int}]{location\+Two,  }\item[{int}]{agent\+Index }\end{DoxyParamCaption})}
+
+move\+Infected\+Agent
+
+This will move a infected agent from one location to another by removing it from one vector into another based on the given index
+
+
+\begin{DoxyParams}{Parameters}
+{\em location\+One,the} & locations index from which to remove the infected agent \\
+\hline
+{\em location\+Two,the} & locations index from which to add the infected agent \\
+\hline
+{\em agent\+Index,the} & agents index from location ones infected vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer to the moved agent, N\+U\+LL if error occured 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTransportation_a66fa5b00273dd30dfdd18b93f266a01a}\label{classTransportation_a66fa5b00273dd30dfdd18b93f266a01a}} 
+\index{Transportation@{Transportation}!moveSusceptibleAgent@{moveSusceptibleAgent}}
+\index{moveSusceptibleAgent@{moveSusceptibleAgent}!Transportation@{Transportation}}
+\doxysubsubsection{\texorpdfstring{moveSusceptibleAgent()}{moveSusceptibleAgent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}}$\ast$ Transportation\+::move\+Susceptible\+Agent (\begin{DoxyParamCaption}\item[{int}]{location\+One,  }\item[{int}]{location\+Two,  }\item[{int}]{agent\+Index }\end{DoxyParamCaption})}
+
+move\+Susceptible\+Agent
+
+This will move a susceptible agent from one location to another by removing it from one vector into another based on the given index
+
+
+\begin{DoxyParams}{Parameters}
+{\em location\+One,the} & locations index from which to remove the sus agent \\
+\hline
+{\em location\+Two,the} & locations index from which to add the sus agent \\
+\hline
+{\em agent\+Index,the} & agents index from location ones susceptible vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer to the moved agent, N\+U\+LL if error occured 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTransportation_abf231157a852aaa85affda6ac73fcdb0}\label{classTransportation_abf231157a852aaa85affda6ac73fcdb0}} 
+\index{Transportation@{Transportation}!moveSusceptibleToInfected@{moveSusceptibleToInfected}}
+\index{moveSusceptibleToInfected@{moveSusceptibleToInfected}!Transportation@{Transportation}}
+\doxysubsubsection{\texorpdfstring{moveSusceptibleToInfected()}{moveSusceptibleToInfected()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}}$\ast$ Transportation\+::move\+Susceptible\+To\+Infected (\begin{DoxyParamCaption}\item[{int}]{location\+Index,  }\item[{int}]{agent\+Index }\end{DoxyParamCaption})}
+
+move\+Susceptible\+To\+Infected
+
+This will move a susceptible agent to infected in a given location and will update the agents internal \mbox{\hyperlink{classSIR}{S\+IR}} data
+
+
+\begin{DoxyParams}{Parameters}
+{\em location\+Index,the} & index of the wanted location to shift the agent \\
+\hline
+{\em agent\+Index,the} & index of the agent from the locations sus vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the shifted agent, N\+U\+LL if error occurs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTransportation_abf5324a5b9e426d4b82a1045073af722}\label{classTransportation_abf5324a5b9e426d4b82a1045073af722}} 
+\index{Transportation@{Transportation}!simulateAgentMovment@{simulateAgentMovment}}
+\index{simulateAgentMovment@{simulateAgentMovment}!Transportation@{Transportation}}
+\doxysubsubsection{\texorpdfstring{simulateAgentMovment()}{simulateAgentMovment()}}
+{\footnotesize\ttfamily int Transportation\+::simulate\+Agent\+Movment (\begin{DoxyParamCaption}\item[{int}]{time\+Of\+Day,  }\item[{Day\+Of\+Week}]{curr\+Day }\end{DoxyParamCaption})}
+
+simulate\+Agent\+Movment
+
+When called this method will simulate the movment of the entire population of the given location \mbox{\Hypertarget{classTransportation_a3266b12534c2483e7a364fecd6ae7d0b}\label{classTransportation_a3266b12534c2483e7a364fecd6ae7d0b}} 
+\index{Transportation@{Transportation}!updateLocationRisks@{updateLocationRisks}}
+\index{updateLocationRisks@{updateLocationRisks}!Transportation@{Transportation}}
+\doxysubsubsection{\texorpdfstring{updateLocationRisks()}{updateLocationRisks()}}
+{\footnotesize\ttfamily void Transportation\+::update\+Location\+Risks (\begin{DoxyParamCaption}\item[{int}]{social\+Distancing\+Severity,  }\item[{double}]{associated\+Loc\+Risks\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+update\+Location\+Risks
+
+When called this method will update coronavirus risk factors 
+\begin{DoxyParams}{Parameters}
+{\em social\+Distancing\+Severity,amount} & of social distancing \\
+\hline
+{\em associated\+Loc\+Risks,coronavirus} & risk dependant on type of business \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/transportation.\+hh\end{DoxyCompactItemize}

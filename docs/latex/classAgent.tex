@@ -1,0 +1,156 @@
+\hypertarget{classAgent}{}\doxysection{Agent Class Reference}
+\label{classAgent}\index{Agent@{Agent}}
+Inheritance diagram for Agent\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classAgent}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAgent_a7f2dc6212132f837a520735d5ca7a886}\label{classAgent_a7f2dc6212132f837a520735d5ca7a886}} 
+Agent\+Info {\bfseries get\+Agent\+Info} ()
+\item 
+\mbox{\Hypertarget{classAgent_abbaf219fef54f2e435771103a01e1f63}\label{classAgent_abbaf219fef54f2e435771103a01e1f63}} 
+string {\bfseries get\+Ethnicity} ()
+\item 
+\mbox{\Hypertarget{classAgent_acb4dde21fb3540095b354cb4a504855f}\label{classAgent_acb4dde21fb3540095b354cb4a504855f}} 
+string {\bfseries agent\+To\+String} ()
+\item 
+\mbox{\hyperlink{classAgent_a7feda19a98cfbcebf23f2f8392c3855a}{Agent}} (Agent\+Info agent\+Info)
+\item 
+void \mbox{\hyperlink{classAgent_a736dfb8076e68a14833be41a80a6d011}{go\+Grocery}} ()
+\item 
+void \mbox{\hyperlink{classAgent_aa6248524a83bfad555861fe1c909951c}{go\+Work}} ()
+\item 
+void \mbox{\hyperlink{classAgent_af34ff570fd3a182401fca4e8ac15582b}{go\+School}} ()
+\item 
+void \mbox{\hyperlink{classAgent_a619a3e6ce61959c8d594e21c19504bfe}{go\+Home}} ()
+\item 
+void \mbox{\hyperlink{classAgent_a2bda6a2160e8ae78f9a16a913ef82cd6}{set\+Has\+Moved}} (bool new\+Move)
+\item 
+bool \mbox{\hyperlink{classAgent_a3a4c1dcdaf0b2f05acc81fbccbfc8ad1}{get\+Has\+Moved}} ()
+\item 
+void \mbox{\hyperlink{classAgent_acb590bc0d2e5bd172eebf5d6c7663881}{Decide\+Migitation\+Strategy}} (double mask\+Wearing, double hygiene\+Maintain)
+\item 
+\mbox{\Hypertarget{classAgent_a424e7f072ccb32c268bd741537a2890e}\label{classAgent_a424e7f072ccb32c268bd741537a2890e}} 
+void {\bfseries quarantine\+Time} ()
+\item 
+\mbox{\Hypertarget{classAgent_aaa099583bb50da47ec7c5a48a3af6be8}\label{classAgent_aaa099583bb50da47ec7c5a48a3af6be8}} 
+void {\bfseries good\+Hygiene} ()
+\item 
+\mbox{\Hypertarget{classAgent_af70f64fdbfb3ba7f7187cec0c57a0b92}\label{classAgent_af70f64fdbfb3ba7f7187cec0c57a0b92}} 
+void {\bfseries follow\+Wear\+Mask} ()
+\item 
+\mbox{\Hypertarget{classAgent_a57f7e3dbbc3556282eff0b2c720b3675}\label{classAgent_a57f7e3dbbc3556282eff0b2c720b3675}} 
+void {\bfseries follow\+Social\+Distancing} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAgent_a0aafa6072d411ca4b06c94439ce8710d}\label{classAgent_a0aafa6072d411ca4b06c94439ce8710d}} 
+bool {\bfseries agent\+Hygiene} = false
+\item 
+\mbox{\Hypertarget{classAgent_a015de8f5133287f56c45932a50d4d396}\label{classAgent_a015de8f5133287f56c45932a50d4d396}} 
+bool {\bfseries wearing\+Mask} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classAgent_a7feda19a98cfbcebf23f2f8392c3855a}\label{classAgent_a7feda19a98cfbcebf23f2f8392c3855a}} 
+\index{Agent@{Agent}!Agent@{Agent}}
+\index{Agent@{Agent}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{Agent()}{Agent()}}
+{\footnotesize\ttfamily Agent\+::\+Agent (\begin{DoxyParamCaption}\item[{Agent\+Info}]{agent\+Info }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classAgent}{Agent}}
+
+This is the constructor for the agent class it takes in the the gender/age enum and gives it a race, income, education, and marital status
+
+
+\begin{DoxyParams}{Parameters}
+{\em agent\+Info,the} & enum of the gender/\+Age based on the Agent\+Info enum \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classAgent_acb590bc0d2e5bd172eebf5d6c7663881}\label{classAgent_acb590bc0d2e5bd172eebf5d6c7663881}} 
+\index{Agent@{Agent}!DecideMigitationStrategy@{DecideMigitationStrategy}}
+\index{DecideMigitationStrategy@{DecideMigitationStrategy}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{DecideMigitationStrategy()}{DecideMigitationStrategy()}}
+{\footnotesize\ttfamily void Agent\+::\+Decide\+Migitation\+Strategy (\begin{DoxyParamCaption}\item[{double}]{mask\+Wearing,  }\item[{double}]{hygiene\+Maintain }\end{DoxyParamCaption})}
+
+Decide\+Migitation\+Strategy
+
+Decides the agents chance of wearing a mask and following appropriate hygiene 
+\begin{DoxyParams}{Parameters}
+{\em mask\+Wearing,chance} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classAgent_a3a4c1dcdaf0b2f05acc81fbccbfc8ad1}\label{classAgent_a3a4c1dcdaf0b2f05acc81fbccbfc8ad1}} 
+\index{Agent@{Agent}!getHasMoved@{getHasMoved}}
+\index{getHasMoved@{getHasMoved}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{getHasMoved()}{getHasMoved()}}
+{\footnotesize\ttfamily bool Agent\+::get\+Has\+Moved (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Has\+Moved
+
+This gets the has\+Moved varible for the agent
+
+\begin{DoxyReturn}{Returns}
+if the agent has moved in the current cycle 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAgent_a736dfb8076e68a14833be41a80a6d011}\label{classAgent_a736dfb8076e68a14833be41a80a6d011}} 
+\index{Agent@{Agent}!goGrocery@{goGrocery}}
+\index{goGrocery@{goGrocery}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{goGrocery()}{goGrocery()}}
+{\footnotesize\ttfamily void Agent\+::go\+Grocery (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+go\+Grocery
+
+This tells the specific agent to go to the closest grocery store \mbox{\Hypertarget{classAgent_a619a3e6ce61959c8d594e21c19504bfe}\label{classAgent_a619a3e6ce61959c8d594e21c19504bfe}} 
+\index{Agent@{Agent}!goHome@{goHome}}
+\index{goHome@{goHome}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{goHome()}{goHome()}}
+{\footnotesize\ttfamily void Agent\+::go\+Home (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+go\+Home
+
+This tells the agent to go to its house \mbox{\Hypertarget{classAgent_af34ff570fd3a182401fca4e8ac15582b}\label{classAgent_af34ff570fd3a182401fca4e8ac15582b}} 
+\index{Agent@{Agent}!goSchool@{goSchool}}
+\index{goSchool@{goSchool}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{goSchool()}{goSchool()}}
+{\footnotesize\ttfamily void Agent\+::go\+School (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+go\+School
+
+This tells the agent to go to school \mbox{\Hypertarget{classAgent_aa6248524a83bfad555861fe1c909951c}\label{classAgent_aa6248524a83bfad555861fe1c909951c}} 
+\index{Agent@{Agent}!goWork@{goWork}}
+\index{goWork@{goWork}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{goWork()}{goWork()}}
+{\footnotesize\ttfamily void Agent\+::go\+Work (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+go\+Work
+
+This tells the agent to go to its job so its not a freeloading hippie \mbox{\Hypertarget{classAgent_a2bda6a2160e8ae78f9a16a913ef82cd6}\label{classAgent_a2bda6a2160e8ae78f9a16a913ef82cd6}} 
+\index{Agent@{Agent}!setHasMoved@{setHasMoved}}
+\index{setHasMoved@{setHasMoved}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{setHasMoved()}{setHasMoved()}}
+{\footnotesize\ttfamily void Agent\+::set\+Has\+Moved (\begin{DoxyParamCaption}\item[{bool}]{new\+Move }\end{DoxyParamCaption})}
+
+set\+Has\+Moved
+
+This sets the agents has\+Moved varible
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Move,true} & if the agent has moved this cycle false if they have not \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/agent.\+hh\end{DoxyCompactItemize}

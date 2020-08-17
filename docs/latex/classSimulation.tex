@@ -1,0 +1,425 @@
+\hypertarget{classSimulation}{}\doxysection{Simulation Class Reference}
+\label{classSimulation}\index{Simulation@{Simulation}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSimulation_a53d48bca44f48ce382eab7a0c953be8c}{Simulation}} (string file\+Name)
+\item 
+\mbox{\hyperlink{classSimulation_a80fad3f57dfaf195a36f7bc49bc88279}{$\sim$\+Simulation}} ()
+\item 
+void \mbox{\hyperlink{classSimulation_ac0c4767ce36a14d9a9a12c18b8ec0c56}{simulate\+Time\+Step}} ()
+\item 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classSimulation_a50e51ac08c6f7e77294e9b75310c7087}{get\+Agent\+At}} (int index)
+\item 
+int \mbox{\hyperlink{classSimulation_ab97ddad2edb5ae9b25bde6b48c8d80b7}{get\+Population}} ()
+\item 
+\mbox{\Hypertarget{classSimulation_a160cc2777bed908ce2351c650e264684}\label{classSimulation_a160cc2777bed908ce2351c650e264684}} 
+void {\bfseries run\+Sim} ()
+\item 
+int \mbox{\hyperlink{classSimulation_a8876778208091d95a1b809b1a87a5c29}{get\+Infected\+Current}} ()
+\item 
+int \mbox{\hyperlink{classSimulation_ae63ce57f5eb3722bdea45d512715c0c5}{get\+Infected\+Total}} ()
+\item 
+int \mbox{\hyperlink{classSimulation_a87c471eb39ce2afbee6134152ed19e1b}{get\+Deceased\+Total}} ()
+\item 
+int \mbox{\hyperlink{classSimulation_aa00dfacdd04299768f20941c738643e1}{get\+Recovered\+Total}} ()
+\item 
+int \mbox{\hyperlink{classSimulation_ad4bc8f7a8ed04abd78ffb63874d5af96}{get\+Hospital\+Total}} ()
+\item 
+int \mbox{\hyperlink{classSimulation_adea99de5eae61a75da5a2b850d39b25a}{get\+Hospital\+Current}} ()
+\item 
+int \mbox{\hyperlink{classSimulation_a1b1220678a096669c774498c9371223c}{get\+I\+C\+Utotal}} ()
+\item 
+int \mbox{\hyperlink{classSimulation_a0684e64e7d58842ddbbf400015137bde}{get\+I\+C\+U\+Current}} ()
+\item 
+int \mbox{\hyperlink{classSimulation_ae1e8d42bdde33085d53d78d206d88067}{get\+Newly\+Infected}} ()
+\item 
+void \mbox{\hyperlink{classSimulation_af9713dac627a2a6d499d2a8e337ba936}{set\+Social\+Distancing\+Severity}} (int val)
+\item 
+void \mbox{\hyperlink{classSimulation_a6090c5320b041432d6feb1ab325b912a}{set\+Mask\+Compliance}} (double val)
+\item 
+void \mbox{\hyperlink{classSimulation_ab0db2fcca52cd78c1e342daf5efc13e7}{set\+Hygiene\+Maintainence}} (double val)
+\item 
+void \mbox{\hyperlink{classSimulation_af353bee45dfb62b87095011c169b8bce}{set\+Gen\+Store\+Risk}} (double val)
+\item 
+void \mbox{\hyperlink{classSimulation_a3e46299660560d9db105c8fa109b34bd}{set\+Transport\+Risk}} (double val)
+\item 
+void \mbox{\hyperlink{classSimulation_a0343ed2fb7460641bd29c119962fd596}{set\+School\+Risk}} (double val)
+\item 
+void \mbox{\hyperlink{classSimulation_ab9b7b299daa83b6eee5e89533c28aeba}{set\+Park\+Risk}} (double val)
+\item 
+void \mbox{\hyperlink{classSimulation_aa5dfcc8e5a8cca0fa45316269cf5c371}{set\+Service\+Risk}} (double val)
+\item 
+void \mbox{\hyperlink{classSimulation_a1ed6052edba21326a2aa6c77e87453db}{set\+Entertainment\+Risk}} (double val)
+\item 
+void \mbox{\hyperlink{classSimulation_a439b71947e239e631a307675dae260a0}{set\+Health\+Place\+Risk}} (double val)
+\item 
+void \mbox{\hyperlink{classSimulation_a234fc53a4ab615c46a647e71e71555ab}{set\+Place\+Of\+Worship\+Risk}} (double val)
+\item 
+void \mbox{\hyperlink{classSimulation_a3e3826068c2e06e27314e598baa011da}{set\+Residential\+Risk}} (double val)
+\item 
+void \mbox{\hyperlink{classSimulation_a68c8b3d188009895d3dc85202dcf6c13}{set\+Quarantine\+Severity}} (double val)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSimulation_aa34c8ad61f9054f06a3d130dda5984bf}\label{classSimulation_aa34c8ad61f9054f06a3d130dda5984bf}} 
+\mbox{\hyperlink{classSIRtotals}{S\+I\+Rtotals}} {\bfseries total\+Sim\+S\+I\+R\+Stats}
+\item 
+\mbox{\Hypertarget{classSimulation_ad20c0f1dc8033e0b3351f2e4ec463495}\label{classSimulation_ad20c0f1dc8033e0b3351f2e4ec463495}} 
+\mbox{\hyperlink{classTransportation}{Transportation}} $\ast$ {\bfseries location\+Info} = N\+U\+LL
+\item 
+\mbox{\Hypertarget{classSimulation_a886daa3abbad3657c6ec9c4cdd5be123}\label{classSimulation_a886daa3abbad3657c6ec9c4cdd5be123}} 
+std\+::vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ {\bfseries recovered\+Agents}
+\item 
+\mbox{\Hypertarget{classSimulation_ab9dcad709db6f5378b9b54279c0d6a02}\label{classSimulation_ab9dcad709db6f5378b9b54279c0d6a02}} 
+std\+::vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ {\bfseries deceased\+Agents}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSimulation_a53d48bca44f48ce382eab7a0c953be8c}\label{classSimulation_a53d48bca44f48ce382eab7a0c953be8c}} 
+\index{Simulation@{Simulation}!Simulation@{Simulation}}
+\index{Simulation@{Simulation}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{Simulation()}{Simulation()}}
+{\footnotesize\ttfamily Simulation\+::\+Simulation (\begin{DoxyParamCaption}\item[{string}]{file\+Name }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classSimulation}{Simulation}}
+
+This is the constructor for the simulation class it takes in a file name of the csv file of the demographic data and creates all the needed data to start the simulation
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name,the} & file name of the census data \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_a80fad3f57dfaf195a36f7bc49bc88279}\label{classSimulation_a80fad3f57dfaf195a36f7bc49bc88279}} 
+\index{Simulation@{Simulation}!````~Simulation@{$\sim$Simulation}}
+\index{````~Simulation@{$\sim$Simulation}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{$\sim$Simulation()}{~Simulation()}}
+{\footnotesize\ttfamily Simulation\+::$\sim$\+Simulation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+$\sim$\+Simulation
+
+This is the deconstructor for the simlation class 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSimulation_a50e51ac08c6f7e77294e9b75310c7087}\label{classSimulation_a50e51ac08c6f7e77294e9b75310c7087}} 
+\index{Simulation@{Simulation}!getAgentAt@{getAgentAt}}
+\index{getAgentAt@{getAgentAt}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{getAgentAt()}{getAgentAt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}}$\ast$ Simulation\+::get\+Agent\+At (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+get\+Agent\+At
+
+This function gets a specific agent from the internal data for what ever reason. It returns a copy of the agent instead of the original pointer
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,the} & index in the internal array must be in range of 0 $<$= index $<$ population \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_a87c471eb39ce2afbee6134152ed19e1b}\label{classSimulation_a87c471eb39ce2afbee6134152ed19e1b}} 
+\index{Simulation@{Simulation}!getDeceasedTotal@{getDeceasedTotal}}
+\index{getDeceasedTotal@{getDeceasedTotal}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{getDeceasedTotal()}{getDeceasedTotal()}}
+{\footnotesize\ttfamily int Simulation\+::get\+Deceased\+Total (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Deceased\+Total
+
+This get the current number of deceased agents
+
+\begin{DoxyReturn}{Returns}
+number of total deceased agents 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSimulation_adea99de5eae61a75da5a2b850d39b25a}\label{classSimulation_adea99de5eae61a75da5a2b850d39b25a}} 
+\index{Simulation@{Simulation}!getHospitalCurrent@{getHospitalCurrent}}
+\index{getHospitalCurrent@{getHospitalCurrent}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{getHospitalCurrent()}{getHospitalCurrent()}}
+{\footnotesize\ttfamily int Simulation\+::get\+Hospital\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Hospital\+Current
+
+This get the current number of current hospital agents
+
+\begin{DoxyReturn}{Returns}
+number of current hospitalized agents 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSimulation_ad4bc8f7a8ed04abd78ffb63874d5af96}\label{classSimulation_ad4bc8f7a8ed04abd78ffb63874d5af96}} 
+\index{Simulation@{Simulation}!getHospitalTotal@{getHospitalTotal}}
+\index{getHospitalTotal@{getHospitalTotal}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{getHospitalTotal()}{getHospitalTotal()}}
+{\footnotesize\ttfamily int Simulation\+::get\+Hospital\+Total (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Hospital\+Total
+
+This get the current number of total agents ever hospitilized
+
+\begin{DoxyReturn}{Returns}
+number of total hospitalized agents 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSimulation_a0684e64e7d58842ddbbf400015137bde}\label{classSimulation_a0684e64e7d58842ddbbf400015137bde}} 
+\index{Simulation@{Simulation}!getICUCurrent@{getICUCurrent}}
+\index{getICUCurrent@{getICUCurrent}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{getICUCurrent()}{getICUCurrent()}}
+{\footnotesize\ttfamily int Simulation\+::get\+I\+C\+U\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+I\+C\+U\+Current
+
+This get the current number of current I\+CU agents
+
+\begin{DoxyReturn}{Returns}
+number of current I\+CU agents 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSimulation_a1b1220678a096669c774498c9371223c}\label{classSimulation_a1b1220678a096669c774498c9371223c}} 
+\index{Simulation@{Simulation}!getICUtotal@{getICUtotal}}
+\index{getICUtotal@{getICUtotal}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{getICUtotal()}{getICUtotal()}}
+{\footnotesize\ttfamily int Simulation\+::get\+I\+C\+Utotal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+I\+C\+Utotal
+
+This get the current number of total I\+CU agents
+
+\begin{DoxyReturn}{Returns}
+number of total I\+CU agents 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSimulation_a8876778208091d95a1b809b1a87a5c29}\label{classSimulation_a8876778208091d95a1b809b1a87a5c29}} 
+\index{Simulation@{Simulation}!getInfectedCurrent@{getInfectedCurrent}}
+\index{getInfectedCurrent@{getInfectedCurrent}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{getInfectedCurrent()}{getInfectedCurrent()}}
+{\footnotesize\ttfamily int Simulation\+::get\+Infected\+Current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Infected\+Current
+
+This get the current number of infected agents \mbox{\Hypertarget{classSimulation_ae63ce57f5eb3722bdea45d512715c0c5}\label{classSimulation_ae63ce57f5eb3722bdea45d512715c0c5}} 
+\index{Simulation@{Simulation}!getInfectedTotal@{getInfectedTotal}}
+\index{getInfectedTotal@{getInfectedTotal}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{getInfectedTotal()}{getInfectedTotal()}}
+{\footnotesize\ttfamily int Simulation\+::get\+Infected\+Total (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Infected\+Total
+
+This get the current number of infected agents \mbox{\Hypertarget{classSimulation_ae1e8d42bdde33085d53d78d206d88067}\label{classSimulation_ae1e8d42bdde33085d53d78d206d88067}} 
+\index{Simulation@{Simulation}!getNewlyInfected@{getNewlyInfected}}
+\index{getNewlyInfected@{getNewlyInfected}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{getNewlyInfected()}{getNewlyInfected()}}
+{\footnotesize\ttfamily int Simulation\+::get\+Newly\+Infected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Newly\+Infected
+
+This get the newly infected agents during timestep
+
+\begin{DoxyReturn}{Returns}
+number of newly infected agents 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSimulation_ab97ddad2edb5ae9b25bde6b48c8d80b7}\label{classSimulation_ab97ddad2edb5ae9b25bde6b48c8d80b7}} 
+\index{Simulation@{Simulation}!getPopulation@{getPopulation}}
+\index{getPopulation@{getPopulation}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{getPopulation()}{getPopulation()}}
+{\footnotesize\ttfamily int Simulation\+::get\+Population (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Population
+
+This gets the population of the simulation based on the amount of agents in the simulation
+
+\begin{DoxyReturn}{Returns}
+the amount of agents in the internal array 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSimulation_aa00dfacdd04299768f20941c738643e1}\label{classSimulation_aa00dfacdd04299768f20941c738643e1}} 
+\index{Simulation@{Simulation}!getRecoveredTotal@{getRecoveredTotal}}
+\index{getRecoveredTotal@{getRecoveredTotal}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{getRecoveredTotal()}{getRecoveredTotal()}}
+{\footnotesize\ttfamily int Simulation\+::get\+Recovered\+Total (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Recovered\+Total
+
+This get the current number of recovered agents
+
+\begin{DoxyReturn}{Returns}
+number of total recovered agents 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSimulation_a1ed6052edba21326a2aa6c77e87453db}\label{classSimulation_a1ed6052edba21326a2aa6c77e87453db}} 
+\index{Simulation@{Simulation}!setEntertainmentRisk@{setEntertainmentRisk}}
+\index{setEntertainmentRisk@{setEntertainmentRisk}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setEntertainmentRisk()}{setEntertainmentRisk()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Entertainment\+Risk (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Entertainment\+Risk
+
+setter for Entertainment\+Risk 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_af353bee45dfb62b87095011c169b8bce}\label{classSimulation_af353bee45dfb62b87095011c169b8bce}} 
+\index{Simulation@{Simulation}!setGenStoreRisk@{setGenStoreRisk}}
+\index{setGenStoreRisk@{setGenStoreRisk}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setGenStoreRisk()}{setGenStoreRisk()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Gen\+Store\+Risk (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Gen\+Store\+Risk
+
+setter for Gen\+Store\+Risk 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_a439b71947e239e631a307675dae260a0}\label{classSimulation_a439b71947e239e631a307675dae260a0}} 
+\index{Simulation@{Simulation}!setHealthPlaceRisk@{setHealthPlaceRisk}}
+\index{setHealthPlaceRisk@{setHealthPlaceRisk}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setHealthPlaceRisk()}{setHealthPlaceRisk()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Health\+Place\+Risk (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Health\+Place\+Risk
+
+setter for Health\+Place\+Risk 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_ab0db2fcca52cd78c1e342daf5efc13e7}\label{classSimulation_ab0db2fcca52cd78c1e342daf5efc13e7}} 
+\index{Simulation@{Simulation}!setHygieneMaintainence@{setHygieneMaintainence}}
+\index{setHygieneMaintainence@{setHygieneMaintainence}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setHygieneMaintainence()}{setHygieneMaintainence()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Hygiene\+Maintainence (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Hygiene\+Maintainence
+
+setter for Hygiene\+Maintainence 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_a6090c5320b041432d6feb1ab325b912a}\label{classSimulation_a6090c5320b041432d6feb1ab325b912a}} 
+\index{Simulation@{Simulation}!setMaskCompliance@{setMaskCompliance}}
+\index{setMaskCompliance@{setMaskCompliance}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setMaskCompliance()}{setMaskCompliance()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Mask\+Compliance (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Mask\+Compliance
+
+setter for Mask\+Compliance 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_ab9b7b299daa83b6eee5e89533c28aeba}\label{classSimulation_ab9b7b299daa83b6eee5e89533c28aeba}} 
+\index{Simulation@{Simulation}!setParkRisk@{setParkRisk}}
+\index{setParkRisk@{setParkRisk}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setParkRisk()}{setParkRisk()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Park\+Risk (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Park\+Risk
+
+setter for Park\+Risk 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_a234fc53a4ab615c46a647e71e71555ab}\label{classSimulation_a234fc53a4ab615c46a647e71e71555ab}} 
+\index{Simulation@{Simulation}!setPlaceOfWorshipRisk@{setPlaceOfWorshipRisk}}
+\index{setPlaceOfWorshipRisk@{setPlaceOfWorshipRisk}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setPlaceOfWorshipRisk()}{setPlaceOfWorshipRisk()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Place\+Of\+Worship\+Risk (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Place\+Of\+Worship\+Risk
+
+setter for Place\+Of\+Worship\+Risk 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_a68c8b3d188009895d3dc85202dcf6c13}\label{classSimulation_a68c8b3d188009895d3dc85202dcf6c13}} 
+\index{Simulation@{Simulation}!setQuarantineSeverity@{setQuarantineSeverity}}
+\index{setQuarantineSeverity@{setQuarantineSeverity}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setQuarantineSeverity()}{setQuarantineSeverity()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Quarantine\+Severity (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Quarantine\+Severity
+
+setter for Quarantine severity (odds of quarantine symptomatic cases) 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_a3e3826068c2e06e27314e598baa011da}\label{classSimulation_a3e3826068c2e06e27314e598baa011da}} 
+\index{Simulation@{Simulation}!setResidentialRisk@{setResidentialRisk}}
+\index{setResidentialRisk@{setResidentialRisk}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setResidentialRisk()}{setResidentialRisk()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Residential\+Risk (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Residential\+Risk
+
+setter for Residential\+Risk 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_a0343ed2fb7460641bd29c119962fd596}\label{classSimulation_a0343ed2fb7460641bd29c119962fd596}} 
+\index{Simulation@{Simulation}!setSchoolRisk@{setSchoolRisk}}
+\index{setSchoolRisk@{setSchoolRisk}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setSchoolRisk()}{setSchoolRisk()}}
+{\footnotesize\ttfamily void Simulation\+::set\+School\+Risk (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+School\+Risk
+
+setter for School\+Risk 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_aa5dfcc8e5a8cca0fa45316269cf5c371}\label{classSimulation_aa5dfcc8e5a8cca0fa45316269cf5c371}} 
+\index{Simulation@{Simulation}!setServiceRisk@{setServiceRisk}}
+\index{setServiceRisk@{setServiceRisk}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setServiceRisk()}{setServiceRisk()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Service\+Risk (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Service\+Risk
+
+setter for Service\+Risk 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_af9713dac627a2a6d499d2a8e337ba936}\label{classSimulation_af9713dac627a2a6d499d2a8e337ba936}} 
+\index{Simulation@{Simulation}!setSocialDistancingSeverity@{setSocialDistancingSeverity}}
+\index{setSocialDistancingSeverity@{setSocialDistancingSeverity}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setSocialDistancingSeverity()}{setSocialDistancingSeverity()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Social\+Distancing\+Severity (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})}
+
+set\+Inputs
+
+Takes inputs from front end sends them to the associated classes set\+Social\+Distancing\+Severity
+
+setter for Social\+Distancing\+Severity 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_a3e46299660560d9db105c8fa109b34bd}\label{classSimulation_a3e46299660560d9db105c8fa109b34bd}} 
+\index{Simulation@{Simulation}!setTransportRisk@{setTransportRisk}}
+\index{setTransportRisk@{setTransportRisk}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{setTransportRisk()}{setTransportRisk()}}
+{\footnotesize\ttfamily void Simulation\+::set\+Transport\+Risk (\begin{DoxyParamCaption}\item[{double}]{val }\end{DoxyParamCaption})}
+
+set\+Transport\+Risk
+
+setter for Transport\+Risk 
+\begin{DoxyParams}{Parameters}
+{\em val,the} & value to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSimulation_ac0c4767ce36a14d9a9a12c18b8ec0c56}\label{classSimulation_ac0c4767ce36a14d9a9a12c18b8ec0c56}} 
+\index{Simulation@{Simulation}!simulateTimeStep@{simulateTimeStep}}
+\index{simulateTimeStep@{simulateTimeStep}!Simulation@{Simulation}}
+\doxysubsubsection{\texorpdfstring{simulateTimeStep()}{simulateTimeStep()}}
+{\footnotesize\ttfamily void Simulation\+::simulate\+Time\+Step (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+simulate\+Time\+Step
+
+when called this will simulate one time step in the simulation it will do everything for agent movement, infection spread, and time and date. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/simulation.\+hh\end{DoxyCompactItemize}

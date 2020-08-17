@@ -1,0 +1,106 @@
+\hypertarget{classGeographicalRisk}{}\doxysection{Geographical\+Risk Class Reference}
+\label{classGeographicalRisk}\index{GeographicalRisk@{GeographicalRisk}}
+Inheritance diagram for Geographical\+Risk\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classGeographicalRisk}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGeographicalRisk_a7a75f22f62d8779d2ac8fe39374291cd}{Geographical\+Risk}} ()
+\item 
+int \mbox{\hyperlink{classGeographicalRisk_abf05d649fe87cd9c3a3413c7acb1cb9b}{get\+Location\+Count\+At}} (int index)
+\item 
+int \mbox{\hyperlink{classGeographicalRisk_afb57a79f07ff324fb7da2c338d2baa18}{get\+Location\+Count\+At}} (condense\+Location\+Type index)
+\item 
+int \mbox{\hyperlink{classGeographicalRisk_ae06caada541446e2ca3ba20221ab7c48}{infect\+People}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classGeographicalRisk_adf5fc6c5abf7f1b70dd26f0d8dff763c}\label{classGeographicalRisk_adf5fc6c5abf7f1b70dd26f0d8dff763c}} 
+double {\bfseries chance\+Of\+Infection}
+\item 
+\mbox{\Hypertarget{classGeographicalRisk_a4724666675ff6139c305a7bba3b86d1f}\label{classGeographicalRisk_a4724666675ff6139c305a7bba3b86d1f}} 
+int {\bfseries location\+Count} \mbox{[}L\+O\+C\+A\+T\+I\+O\+N\+T\+Y\+P\+E\+S\+I\+ZE\mbox{]}
+\item 
+\mbox{\Hypertarget{classGeographicalRisk_ae2ed8b04f3bd44cf9bd6b5c6e18360c1}\label{classGeographicalRisk_ae2ed8b04f3bd44cf9bd6b5c6e18360c1}} 
+int {\bfseries amount\+Of\+Locations}
+\item 
+\mbox{\Hypertarget{classGeographicalRisk_adb4ba8d47b9a492ba2d83a7fed0a8833}\label{classGeographicalRisk_adb4ba8d47b9a492ba2d83a7fed0a8833}} 
+int {\bfseries social\+Distancing\+Severity}
+\item 
+\mbox{\Hypertarget{classGeographicalRisk_a1b946b35a7edd5a3d5db8d3ae4e44254}\label{classGeographicalRisk_a1b946b35a7edd5a3d5db8d3ae4e44254}} 
+double {\bfseries location\+Risks} \mbox{[}9\mbox{]}
+\item 
+\mbox{\Hypertarget{classGeographicalRisk_a69399183fbd0f7c391d9ad666f4c3863}\label{classGeographicalRisk_a69399183fbd0f7c391d9ad666f4c3863}} 
+std\+::vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ {\bfseries susceptible}
+\item 
+\mbox{\Hypertarget{classGeographicalRisk_a53e7b4d7e9b4b2246cf204f788bb71e7}\label{classGeographicalRisk_a53e7b4d7e9b4b2246cf204f788bb71e7}} 
+std\+::vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ {\bfseries infected}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classGeographicalRisk_a7a75f22f62d8779d2ac8fe39374291cd}\label{classGeographicalRisk_a7a75f22f62d8779d2ac8fe39374291cd}} 
+\index{GeographicalRisk@{GeographicalRisk}!GeographicalRisk@{GeographicalRisk}}
+\index{GeographicalRisk@{GeographicalRisk}!GeographicalRisk@{GeographicalRisk}}
+\doxysubsubsection{\texorpdfstring{GeographicalRisk()}{GeographicalRisk()}}
+{\footnotesize\ttfamily Geographical\+Risk\+::\+Geographical\+Risk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{classGeographicalRisk}{Geographical\+Risk}}
+
+This is the default constructor for the Geographical risk class 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classGeographicalRisk_afb57a79f07ff324fb7da2c338d2baa18}\label{classGeographicalRisk_afb57a79f07ff324fb7da2c338d2baa18}} 
+\index{GeographicalRisk@{GeographicalRisk}!getLocationCountAt@{getLocationCountAt}}
+\index{getLocationCountAt@{getLocationCountAt}!GeographicalRisk@{GeographicalRisk}}
+\doxysubsubsection{\texorpdfstring{getLocationCountAt()}{getLocationCountAt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int Geographical\+Risk\+::get\+Location\+Count\+At (\begin{DoxyParamCaption}\item[{condense\+Location\+Type}]{index }\end{DoxyParamCaption})}
+
+get\+Location\+Count\+At
+
+This function will take in a index and return how many of the specified location index
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,must} & be in range 0 $<$= index $<$= 8. Refer to condense\+Location\+Type enum for which index you want \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a int of the amount of the specified shops in a location 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classGeographicalRisk_abf05d649fe87cd9c3a3413c7acb1cb9b}\label{classGeographicalRisk_abf05d649fe87cd9c3a3413c7acb1cb9b}} 
+\index{GeographicalRisk@{GeographicalRisk}!getLocationCountAt@{getLocationCountAt}}
+\index{getLocationCountAt@{getLocationCountAt}!GeographicalRisk@{GeographicalRisk}}
+\doxysubsubsection{\texorpdfstring{getLocationCountAt()}{getLocationCountAt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int Geographical\+Risk\+::get\+Location\+Count\+At (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+get\+Location\+Count\+At
+
+This function will take in a index and return how many of the specified location index
+
+
+\begin{DoxyParams}{Parameters}
+{\em index,must} & be in range 0 $<$= index $<$= 8. Refer to condense\+Location\+Type enum for which index you want \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a int of the amount of the specified shops in a location 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classGeographicalRisk_ae06caada541446e2ca3ba20221ab7c48}\label{classGeographicalRisk_ae06caada541446e2ca3ba20221ab7c48}} 
+\index{GeographicalRisk@{GeographicalRisk}!infectPeople@{infectPeople}}
+\index{infectPeople@{infectPeople}!GeographicalRisk@{GeographicalRisk}}
+\doxysubsubsection{\texorpdfstring{infectPeople()}{infectPeople()}}
+{\footnotesize\ttfamily int Geographical\+Risk\+::infect\+People (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+get\+Location\+Count\+At
+
+This function will call the private function update\+Avg\+Counts\+And\+Risk and update the risk for the region and various total counts, it will then take the succeptible people in the region and 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/geographicalrisk.\+hh\end{DoxyCompactItemize}
