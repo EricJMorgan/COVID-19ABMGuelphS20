@@ -112,6 +112,15 @@ class Transportation {
      */
     int simulateAgentMovment(int timeOfDay, DayOfWeek currDay);
 
+    /**
+     * updateLocationRisks
+     * 
+     * When called this method will update coronavirus risk factors
+     * @param socialDistancingSeverity, amount of social distancing
+     * @param associatedLocRisks, coronavirus risk dependant on type of business
+     */
+    void updateLocationRisks(int socialDistancingSeverity, double associatedLocRisks[]);
+
     private:
     PostalCodeHash *postalCodes;
     std::vector<Location*> locationList;

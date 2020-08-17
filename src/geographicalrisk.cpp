@@ -32,7 +32,7 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
 
     //symptomatic carries have 100% chance of spreading relatively
     //social distancing of about 6m greatly decreases chances of risk 
-    double socialDistancing = (10.0 - (double)socialDistancingSeverity) / 10.0;
+    double socialDistancing = (10.0 - (double)socialDistancingSeverity) / 100.0;
 
     // mask cuts risk by 65%, therefore 45% overall risk transmission
     double avgMaskWearerRisk = 0.45 * avgMaskWearer;
@@ -55,7 +55,6 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     // RESIDENTIAL 0.5
 
     double locationRiskTotal = 0.0;
-    double locationRisks[9] = {0.6, 0.8, 0.9, 0.2, 0.2, 0.8, 0.9, 0.8, 0.5};
     int totalBusiness = 0;
 
     // loop through various business and add to risk

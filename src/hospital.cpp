@@ -15,6 +15,7 @@ Hospital::Hospital() {
     numberPpl = 0;
     icuCount = 0;
     totalICU = 0;
+    totalHospital = 0;
     hospitalOverflow = false;
     icuOverflow = false;
 }
@@ -63,6 +64,7 @@ void Hospital::increaseHospitalCount(Agent* agentToAdd) {
 
     hospitalGeneralWard.push_back(agentToAdd);
     numberPpl++;
+    totalHospital++;
     indicateOverflow();
 }
 
@@ -102,6 +104,7 @@ void Hospital::HospitalTimeStep(double timestep) {
             hospitalICU.push_back(toICU);
             icuCount++;
             totalICU++;
+            numberPpl--;
         } else if (sirResponse == "RECOVERAGENT") {
             Agent *recoveredAgent = hospitalGeneralWard.at(i);
             hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
@@ -121,4 +124,8 @@ int Hospital::getIcuBeds() {
 
 int Hospital::getTotalICUCount() {
     return totalICU;
+}
+
+int Hospital::getTotalHospitalCount() {
+    return totalHospital;
 }

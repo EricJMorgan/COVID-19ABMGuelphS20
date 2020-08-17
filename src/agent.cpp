@@ -14,11 +14,13 @@
 Agent::Agent(AgentInfo agentInfo) {
     info = agentInfo;
     hasMoved = false;
+    wearingMask = false;
+    agentHygiene = false;
+
     DecideEthnicity();
     DecideMartialStatus();
     DecideHouseholdIncome();
     DecideEducation();
-    DecideMigitationStrategy();
 }
 
 AgentInfo Agent::getAgentInfo(){
@@ -190,15 +192,15 @@ void Agent::DecideEthnicity() {
  * This function randomly decides an agents chance of wearing 
  * a face mask and practicing good hygiene
  ************************/
-void Agent::DecideMigitationStrategy() {
+void Agent::DecideMigitationStrategy(double maskWearing, double hygieneMaintain) {
     double maskChance = (double) rand()/RAND_MAX;
     double hygieneChance = (double) rand()/RAND_MAX;
 
-    if (maskChance < 0.5) {
+    if (maskChance > maskWearing) {
         wearingMask = true;
     }
 
-    if (hygieneChance < 0.5) {
+    if (hygieneChance > hygieneMaintain) {
         agentHygiene = true;
     }
 }

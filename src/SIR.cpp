@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 05/08/20
- * ver 1.00
+ * 13/08/20
+ * ver 1.01
  * 
  * This is the class file for the SIR class
  ***************/
@@ -13,7 +13,7 @@
 // Constructor
 SIR::SIR() {
     currentSeverity = SUSCEPTIBLE;
-    quarantineCases = 0.6;
+    quarantineCases = 0.0;
 }
 
 // leave these to check all references
@@ -42,11 +42,13 @@ string SIR::SIRTimeStep(double timeStep) {
     if (isIncubating) {
         incubationPeriod -= timeStep;
 
-        double quarantineChance = (double) rand()/RAND_MAX;
-
-        if (incubationPeriod <= 0 && showsSymptoms && quarantineCases < quarantineChance) {
-            QuarantineAgent();
-            return "ISOAGENT";
+        if (incubationPeriod <= 0 ) {
+            isIncubating = false;
+            double quarantineChance = (double) rand()/RAND_MAX;
+            if (showsSymptoms && quarantineCases > quarantineChance) {
+                QuarantineAgent();
+                return "ISOAGENT";
+            }
         }
         return "NA";
     }
@@ -144,7 +146,7 @@ void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
 void SIR::AgentInfected() {
     currentSeverity = INFECTED;
     isIncubating = true;
-    incubationPeriod = rand()%7 + rand()%7 + 1;
+    incubationPeriod = rand()%4 + rand()%4 + 1;
 
     double randomDeathSentence = (double) rand()/RAND_MAX;
 
@@ -181,7 +183,6 @@ void SIR::HospitalAgent() {
 
 void SIR::QuarantineAgent() {
     currentSeverity = ISOLATED;
-    isIncubating = false;
 }
 
 void SIR::PlaceAgentInICU() {
@@ -195,6 +196,7 @@ void SIR::RecoverAgent() {
 } 
 
 void SIR::AgentDeceased() {
+    needIcu = false;
     currentSeverity = DECEASED;
 } 
 
@@ -209,4 +211,8 @@ SIRSeverity SIR::DetermineSeverity() {
 
 bool SIR::getSymptoms() {
     return showsSymptoms;
+}
+
+void SIR::setQuarantineCases(double val) {
+    quarantineCases = val;
 }

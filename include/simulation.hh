@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 05/08/20
- * ver 1.01
+ * 13/08/20
+ * ver 1.02
  * 
  * This is the header file for the simulation class
  ***************/
@@ -143,6 +143,15 @@ class Simulation {
     int getICUCurrent();
 
     /**
+     * getNewlyInfected
+     * 
+     * This get the newly infected agents during timestep
+     * 
+     * @return number of newly infected agents
+     */
+    int getNewlyInfected();
+
+    /**
      * setInputs
      * 
      * Takes inputs from front end sends them to the associated classes
@@ -247,62 +256,13 @@ class Simulation {
      */
     void setResidentialRisk(double val);
 
-    //sim factors
     /**
-     * setIncubationPeriod
+     * setQuarantineSeverity
      * 
-     * setter for IncubationPeriod
+     * setter for Quarantine severity (odds of quarantine symptomatic cases)
      * @param val, the value to set
      */
-    void setIncubationPeriod(int val);
-
-    /**
-     * setTimeIncubHospital
-     * 
-     * setter for TimeIncubHospital
-     * @param val, the value to set
-     */
-    void setTimeIncubHospital(int val);
-
-    /**
-     * setTimeHospitalICU
-     * 
-     * setter for TimeHospitalICU
-     * @param val, the value to set
-     */
-    void setTimeHospitalICU(int val);
-
-    /**
-     * setTimeICUDeath
-     * 
-     * setter for TimeICUDeath
-     * @param val, the value to set
-     */
-    void setTimeICUDeath(int val);
-
-    /**
-     * setTimeRecoveryNoHospital
-     * 
-     * setter for TimeRecoveryNoHospital
-     * @param val, the value to set
-     */
-    void setTimeRecoveryNoHospital(int val);
-
-    /**
-     * setRecoveryPeriodHospital
-     * 
-     * setter for RecoveryPeriodHospital
-     * @param val, the value to set
-     */
-    void setRecoveryPeriodHospital(int val);
-
-    /**
-     * setTimeRecoveryICU
-     * 
-     * setter for TimeRecoveryICU
-     * @param val, the value to set
-     */
-    void setTimeRecoveryICU(int val);
+    void setQuarantineSeverity(double val);
     
     SIRtotals totalSimSIRStats;
     
@@ -321,34 +281,15 @@ class Simulation {
     int timeQuarantined;
     int agentCount;
     int population;
+    int newlyInfected;
     double sirTimeStep;
-
+    double locationRisk[9];
 
     // user inputs
     // geographical risks
     int socialDistancingSeverity;
     double maskCompliance;
     double hygieneMaintainence;
-
-    // location risks
-    double genStoreRisk;
-    double transportRisk;
-    double schoolRisk;
-    double parkRisk;
-    double serviceRisk;
-    double entertainmentRisk;
-    double healthPlaceRisk;
-    double placeOfWorshipRisk;
-    double residentialRisk;
-
-    //sim factors
-    int incubationPeriod;
-    int timeIncubHospital;
-    int timeHospitalICU;
-    int timeICUDeath;
-    int timeRecoveryNoHospital;
-    int recoveryPeriodHospital;
-    int timeRecoveryICU;
 
     //outputs for Front End graph
     int infectedCurrent;
@@ -408,6 +349,7 @@ class Simulation {
 extern "C" {
     Simulation* Simulation_new(){ return new Simulation("demographicGuelph.csv"); }
     void simTimeStep(Simulation* sim){ sim->simulateTimeStep(); }
+    int newlyInfected(Simulation* sim) { return sim->getNewlyInfected(); }
     int infectedCurrent(Simulation* sim){ return sim->getInfectedCurrent(); }
     int infectedTotal(Simulation* sim){ return sim->getInfectedTotal(); }
     int deceasedTotal(Simulation* sim){ return sim->getDeceasedTotal(); }
@@ -428,14 +370,7 @@ extern "C" {
     void healthPlaceRiskSetter(Simulation* sim, double val){sim->setHealthPlaceRisk(val);}
     void placeOfWorshipRiskSetter(Simulation* sim, double val){sim->setPlaceOfWorshipRisk(val);}
     void residentialRiskSetter(Simulation* sim, double val){sim->setResidentialRisk(val);}
-    void incubationPeriodSetter(Simulation* sim, int val){sim->setIncubationPeriod(val);}
-    void timeIncubHospitalSetter(Simulation* sim, int val){sim->setTimeIncubHospital(val);}
-    void timeHospitalICUSetter(Simulation* sim, int val){sim->setTimeHospitalICU(val);}
-    void timeICUDeathSetter(Simulation* sim, int val){sim->setTimeICUDeath(val);}
-    void timeRecoveryNoHospitalSetter(Simulation* sim, int val){sim->setTimeRecoveryNoHospital(val);}
-    void recoveryPeriodHospitalSetter(Simulation* sim, int val){sim->setRecoveryPeriodHospital(val);}
-    void timeRecoveryICUSetter(Simulation* sim, int val){sim->setTimeRecoveryICU(val);}
-
+    void quarantineSeverity(Simulation* sim, double val) {sim->setQuarantineSeverity(val);}
 }
 
 #endif

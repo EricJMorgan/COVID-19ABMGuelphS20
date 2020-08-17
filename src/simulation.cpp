@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 05/08/20
- * ver 1.01
+ * 13/08/20
+ * ver 1.02
  * 
  * This is the class file for the simulation class
  ***************/
@@ -24,12 +24,17 @@ Simulation::Simulation(string fileName) {
     population = 0;
     currTime = 0;
     hospitalTotal = 0;
+    icuCurrent = 0;
+    icuTotal = 0;
     timeStep = 4;
+    recoveredTotal = 0;
+    deceasedTotal = 0;
     sirTimeStep = (double)timeStep / 24.0;
     timeElapsed = 0;
     currDay = MON;
     initiallyInfectedChance = 0.001;
     initiallyInfected = 0;
+    socialDistancingSeverity = 0;
 
     if(!demographicFile.good()){
         cout << "Error invalid file" << endl;
@@ -83,7 +88,6 @@ void Simulation::simulateTimeStep(){
     isoCompartment.newlyRecovered.clear();
     for (int i = 0; i < (int)isoCompartment.newlyHospitalized.size(); i++) {
         guelphHospital.increaseHospitalCount(isoCompartment.newlyHospitalized[i]);
-        hospitalTotal++;
     }
     isoCompartment.newlyHospitalized.clear();
 
@@ -97,21 +101,27 @@ void Simulation::simulateTimeStep(){
                 j--;
             } else if (sirResponse == "RECOVERAGENT") {
                 Agent* recoveredAgent = locationInfo->getLocationAt(i)->removeInfectedAgent(j);
+                recoveredTotal++;
                 isoCompartment.AddMildlyInfectedAgents(recoveredAgent);
                 recoveredAgents.push_back(recoveredAgent);
+                j--;
+            } else if (sirResponse == "HOSPITALAGENT") {
+                Agent* hospitalAgent = locationInfo->getLocationAt(i)->removeInfectedAgent(j);
+                guelphHospital.increaseHospitalCount(hospitalAgent);
                 j--;
             }
         }
     }
     
     // transport agents and infect ppl
-    int newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
+    newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
 
     deceasedTotal = (int)deceasedAgents.size();
     recoveredTotal = (int)recoveredAgents.size();
     infectedTotal += newlyInfected;
     infectedCurrent = infectedTotal - deceasedTotal - recoveredTotal;
-    hospitalCurrent = guelphHospital.getTotalBeds() + guelphHospital.getIcuBeds();
+    hospitalCurrent = guelphHospital.getTotalBeds();
+    hospitalTotal = guelphHospital.getTotalHospitalCount();
     icuCurrent = guelphHospital.getIcuBeds();
     icuTotal = guelphHospital.getTotalICUCount();
 
@@ -150,65 +160,67 @@ Agent *Simulation::getAgentAt(int index){
 //user input setters
 void Simulation::setSocialDistancingSeverity(int val){
     socialDistancingSeverity = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
+
 void Simulation::setMaskCompliance(double val){
     maskCompliance = val;
+    for (int i = 0; i < agentCount; i++) {
+        simAgents[i]->DecideMigitationStrategy(maskCompliance, hygieneMaintainence);
+    }
 }
+
+void Simulation::setQuarantineSeverity(double val) {
+    for (int i = 0; i < agentCount; i++) {
+        simAgents[i]->setQuarantineCases(val);
+    }
+}
+
 void Simulation::setHygieneMaintainence(double val){
     hygieneMaintainence = val;
+    for (int i = 0; i < agentCount; i++) {
+        simAgents[i]->DecideMigitationStrategy(maskCompliance, hygieneMaintainence);
+    }
 }
 
 //location risks
 void Simulation::setGenStoreRisk(double val){
-    genStoreRisk = val;
+    locationRisk[0] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setTransportRisk(double val){
-    transportRisk = val;
+    locationRisk[1] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setSchoolRisk(double val){
-    schoolRisk = val;
+    locationRisk[2] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setParkRisk(double val){
-    parkRisk = val;
+    locationRisk[3] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setServiceRisk(double val){
-    serviceRisk = val;
+    locationRisk[4] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setEntertainmentRisk(double val){
-    entertainmentRisk = val;
+    locationRisk[5] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setHealthPlaceRisk(double val){
-    healthPlaceRisk = val;
+    locationRisk[6] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setPlaceOfWorshipRisk(double val){
-    placeOfWorshipRisk = val;
+    locationRisk[7] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 void Simulation::setResidentialRisk(double val){
-    residentialRisk = val;
+    locationRisk[8] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
 
-//sim factors
-void Simulation::setIncubationPeriod(int val){
-    incubationPeriod = val;
-}
-void Simulation::setTimeIncubHospital(int val){
-    timeIncubHospital = val;
-}
-void Simulation::setTimeHospitalICU(int val){
-    timeHospitalICU = val;
-}
-void Simulation::setTimeICUDeath(int val){
-    timeICUDeath = val;
-}
-void Simulation::setTimeRecoveryNoHospital(int val){
-    timeRecoveryNoHospital = val;
-}
-void Simulation::setRecoveryPeriodHospital(int val){
-    recoveryPeriodHospital = val;
-}
-void Simulation::setTimeRecoveryICU(int val){
-    timeRecoveryICU = val;
-}
 
 /********************Private functions***************************************/
 void Simulation::addNewAgent(string personInfo, int amountToAdd){
@@ -312,5 +324,9 @@ int Simulation::getICUtotal() {
 }
 
 int Simulation::getICUCurrent() {
-    return icuTotal;
+    return icuCurrent;
+}
+
+int Simulation::getNewlyInfected() {
+    return newlyInfected;
 }
