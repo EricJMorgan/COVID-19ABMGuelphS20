@@ -29,15 +29,15 @@ static int \mbox{\hyperlink{classPostalCodeHash_adfe6e418abed1fe2586e8e4dc7b0b98
 
 \mbox{\hyperlink{classPostalCodeHash}{Postal\+Code\+Hash}}
 
-This is the constructor for the postalcode hash object, it takes in 2 file names representing the google places api printout and a list of postal codes each on a new line and the wanted hash\+Size N\+O\+TE\+: hash\+Size will soon be automated but for now it is manual
+This is the constructor for the postalcode hash object it takes in 2 file names representing the google places api printout and a list of postal codes each on a new line and the wanted hash\+Size N\+O\+TE\+: hash\+Size will soon be automated but for now it is manual
 
 
 \begin{DoxyParams}{Parameters}
-{\em tsv\+File,the} & string of the google places A\+PI print out, M\+U\+ST H\+A\+VE P\+O\+S\+T\+AL C\+O\+DE IN F\+O\+R\+M\+AT of ON,L\+NL N\+LN, \\
+{\em tsv\+File} & the string of the google places A\+PI print out M\+U\+ST H\+A\+VE P\+O\+S\+T\+AL C\+O\+DE IN F\+O\+R\+M\+AT of ON,L\+NL N\+LN \\
 \hline
-{\em even\+More\+Locations,the} & string of the full postalcode file \\
+{\em even\+More\+Locations} & the string of the full postalcode file \\
 \hline
-{\em hash\+Size,the} & size of the wanted hashtable \\
+{\em hash\+Size} & the size of the wanted hashtable \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classPostalCodeHash_a447e126f86f62316dcf1fb50686a3e92}\label{classPostalCodeHash_a447e126f86f62316dcf1fb50686a3e92}} 
@@ -63,9 +63,9 @@ this function will return the hash value of a given postal code
 
 
 \begin{DoxyParams}{Parameters}
-{\em hash\+Size,an} & int of the size of the hash table \\
+{\em hash\+Size} & an int of the size of the hash table \\
 \hline
-{\em postal\+T\+S\+V\+To\+Hash,the} & string of the postal\+Code \\
+{\em postal\+T\+S\+V\+To\+Hash} & the string of the postal\+Code \\
 \hline
 \end{DoxyParams}
 

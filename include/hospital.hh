@@ -32,7 +32,7 @@ class Hospital {
      * 
      * This function frees up ICU beds upon patient's recovery or death
      * 
-     * @param freeNum, this is the number of beds to be freed
+     * @param freeNum this is the number of beds to be freed
      */
     void freeIcuBeds(int freeNum);
 
@@ -42,7 +42,7 @@ class Hospital {
      * This function frees up hospital beds (excluding ICU beds) upon patient's
      * recovery or death
      * 
-     * @param freeNum, this is the number of beds to be freed
+     * @param freeNum this is the number of beds to be freed
      */
     void freeHospitalBeds(int freeNum);
 
@@ -52,7 +52,7 @@ class Hospital {
      * This function adds agents to the hospital if they are in need of hospital
      * care
      * 
-     * @param agentToAdd, this is the agent to be emitted to the hospital
+     * @param agentToAdd this is the agent to be emitted to the hospital
      */
     void increaseHospitalCount(Agent* agentToAdd);
 
@@ -62,7 +62,7 @@ class Hospital {
      * This function adds agents from the hospital to ICU if they are in need of
      * critical care
      * 
-     * @param agentToAdd, this is the agent to be emitted to ICU
+     * @param agentToAdd this is the agent to be emitted to ICU
      */
     void increaseIcuCount(Agent* agentToAdd);
 
@@ -71,7 +71,7 @@ class Hospital {
      * 
      * This function returns the number of agents using hospital beds
      * 
-     * @return the number of agents in hospital care, excluding ICU cases
+     * @return the number of agents in hospital care excluding ICU cases
      */
     int getTotalBeds();
 

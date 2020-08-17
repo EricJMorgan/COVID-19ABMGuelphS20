@@ -79,9 +79,9 @@ This is the constructor for the location object that takes in data
 
 
 \begin{DoxyParams}{Parameters}
-{\em postal\+Code,a} & string of the postal\+Code \\
+{\em postal\+Code} & a string of the postal\+Code \\
 \hline
-{\em shop\+Data,an} & array of size 9 of ints that holds each type of shop based on the enum condense\+Location\+Type \\
+{\em shop\+Data} & an array of size 9 of ints that holds each type of shop based on the enum condense\+Location\+Type \\
 \hline
 \end{DoxyParams}
 
@@ -99,7 +99,7 @@ This takes in an agent pointer and adds it to the locations infected vector
 
 
 \begin{DoxyParams}{Parameters}
-{\em to\+Add,the} & agent pointer \\
+{\em to\+Add} & the agent pointer \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classLocation_ab79900609ee9490bfc9368fadf615155}\label{classLocation_ab79900609ee9490bfc9368fadf615155}} 
@@ -114,7 +114,7 @@ This takes in an agent pointer and adds it to the locations susceptible vector
 
 
 \begin{DoxyParams}{Parameters}
-{\em to\+Add,the} & agent pointer \\
+{\em to\+Add} & the agent pointer \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classLocation_a890da6049265872252b10a5d80b5b301}\label{classLocation_a890da6049265872252b10a5d80b5b301}} 
@@ -129,7 +129,7 @@ This function adds a full postal code to the location groupings list of postal\+
 
 
 \begin{DoxyParams}{Parameters}
-{\em postal\+Code,the} & postal code to add to the list \\
+{\em postal\+Code} & the postal code to add to the list \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classLocation_a43aacd5c3df07140784500499e287d4a}\label{classLocation_a43aacd5c3df07140784500499e287d4a}} 
@@ -157,7 +157,7 @@ This takes in an index and returns the agent at the wanted index from the infect
 
 
 \begin{DoxyParams}{Parameters}
-{\em index,the} & index to get the agent from \\
+{\em index} & the index to get the agent from \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -214,7 +214,7 @@ This gets the postal code in the vector at a specified location
 
 
 \begin{DoxyParams}{Parameters}
-{\em index,must} & be in range of the list length \\
+{\em index} & must be in range of the list length \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -271,7 +271,7 @@ This takes in an index and returns the agent at the wanted index from the sus ve
 
 
 \begin{DoxyParams}{Parameters}
-{\em index,the} & index to get the agent from \\
+{\em index} & the index to get the agent from \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -302,7 +302,7 @@ This function will take a index of the wanted location index in the location\+Co
 
 
 \begin{DoxyParams}{Parameters}
-{\em index,must} & be in range 0 $<$= index $<$ L\+O\+C\+A\+T\+I\+O\+N\+T\+Y\+P\+E\+S\+I\+ZE \\
+{\em index} & must be in range 0 $<$= index $<$ L\+O\+C\+A\+T\+I\+O\+N\+T\+Y\+P\+E\+S\+I\+ZE \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classLocation_accc1138ca6f65515e42d566a3cf413c0}\label{classLocation_accc1138ca6f65515e42d566a3cf413c0}} 
@@ -317,7 +317,7 @@ This function will take a index of the wanted location index in the location\+Co
 
 
 \begin{DoxyParams}{Parameters}
-{\em index,must} & be in range 0 $<$= index $<$ L\+O\+C\+A\+T\+I\+O\+N\+T\+Y\+P\+E\+S\+I\+ZE \\
+{\em index} & must be in range 0 $<$= index $<$ L\+O\+C\+A\+T\+I\+O\+N\+T\+Y\+P\+E\+S\+I\+ZE \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classLocation_ab27023937ce62df3ffa6969c40abe88a}\label{classLocation_ab27023937ce62df3ffa6969c40abe88a}} 
@@ -332,7 +332,7 @@ T\+His is a helper function that makes sure there is no dups in the vector of po
 
 
 \begin{DoxyParams}{Parameters}
-{\em new\+Postal\+Code,the} & postal code to check if it has a dup \\
+{\em new\+Postal\+Code} & the postal code to check if it has a dup \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -350,7 +350,7 @@ This takes in an index and removes an agent at the wanted index from the infecte
 
 
 \begin{DoxyParams}{Parameters}
-{\em index,the} & index to remove from \\
+{\em index} & the index to remove from \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -368,7 +368,7 @@ This takes in an index and removes an agent at the the wanted index from the sus
 
 
 \begin{DoxyParams}{Parameters}
-{\em index,the} & index to remove from \\
+{\em index} & the index to remove from \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -386,7 +386,7 @@ This sets the objects location index
 
 
 \begin{DoxyParams}{Parameters}
-{\em index,the} & index of the location in the location\+List\+Vector \\
+{\em index} & the index of the location in the location\+List\+Vector \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classLocation_a4ca90c158cbf4cbd7fb9fa0a437e7e30}\label{classLocation_a4ca90c158cbf4cbd7fb9fa0a437e7e30}} 
@@ -401,7 +401,7 @@ This function sets a locations grouping string. For now this can be changed mult
 
 
 \begin{DoxyParams}{Parameters}
-{\em new\+Postal\+Code\+Grouping,this} & is the first 5 chars of the postalcode ie N1G 7J \\
+{\em new\+Postal\+Code\+Grouping} & this is the first 5 chars of the postalcode ie N1G 7J \\
 \hline
 \end{DoxyParams}
 

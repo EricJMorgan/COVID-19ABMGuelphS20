@@ -144,7 +144,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This function frees up hospital beds (excluding ICU beds) upon patient's recovery or death</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">freeNum,this</td><td>is the number of beds to be freed </td></tr>
+    <tr><td class="paramname">freeNum</td><td>this is the number of beds to be freed </td></tr>
   </table>
   </dd>
 </dl>
@@ -170,7 +170,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This function frees up ICU beds upon patient's recovery or death</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">freeNum,this</td><td>is the number of beds to be freed </td></tr>
+    <tr><td class="paramname">freeNum</td><td>this is the number of beds to be freed </td></tr>
   </table>
   </dd>
 </dl>
@@ -213,7 +213,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 </div><div class="memdoc">
 <p>getTotalBeds</p>
 <p>This function returns the number of agents using hospital beds</p>
-<dl class="section return"><dt>Returns</dt><dd>the number of agents in hospital care, excluding ICU cases </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the number of agents in hospital care excluding ICU cases </dd></dl>
 
 </div>
 </div>
@@ -294,7 +294,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This function adds agents to the hospital if they are in need of hospital care</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">agentToAdd,this</td><td>is the agent to be emitted to the hospital </td></tr>
+    <tr><td class="paramname">agentToAdd</td><td>this is the agent to be emitted to the hospital </td></tr>
   </table>
   </dd>
 </dl>
@@ -320,7 +320,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This function adds agents from the hospital to ICU if they are in need of critical care</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">agentToAdd,this</td><td>is the agent to be emitted to ICU </td></tr>
+    <tr><td class="paramname">agentToAdd</td><td>this is the agent to be emitted to ICU </td></tr>
   </table>
   </dd>
 </dl>

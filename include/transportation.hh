@@ -32,8 +32,8 @@ class Transportation {
      * it takes in an array of agent pointers and the size of said array
      * 
      * 
-     * @param **arr, and array of agent pointers
-     * @param arrSize, the size of the array
+     * @param **arr and array of agent pointers
+     * @param arrSize the size of the array
      */
     Transportation(Agent **arr, int arrSize);
 
@@ -61,7 +61,7 @@ class Transportation {
      * due to the location never changing it only returns
      * a copy of the object
      * 
-     * @param index, the index of the wanted data must be in range 0 <= index < listLength
+     * @param index the index of the wanted data must be in range 0 <= index < listLength
      * @return the location object
      */
     Location *getLocationAt(int index);
@@ -72,10 +72,10 @@ class Transportation {
      * This will move a susceptible agent from one location to another
      * by removing it from one vector into another based on the given index
      * 
-     * @param locationOne, the locations index from which to remove the sus agent
-     * @param locationTwo, the locations index from which to add the sus agent
-     * @param agentIndex, the agents index from location ones susceptible vector
-     * @return the pointer to the moved agent, NULL if error occured
+     * @param locationOne the locations index from which to remove the sus agent
+     * @param locationTwo the locations index from which to add the sus agent
+     * @param agentIndex the agents index from location ones susceptible vector
+     * @return the pointer to the moved agent NULL if error occured
      */
     Agent *moveSusceptibleAgent(int locationOne, int locationTwo, int agentIndex);
 
@@ -85,10 +85,10 @@ class Transportation {
      * This will move a infected agent from one location to another
      * by removing it from one vector into another based on the given index
      * 
-     * @param locationOne, the locations index from which to remove the infected agent
-     * @param locationTwo, the locations index from which to add the infected agent
-     * @param agentIndex, the agents index from location ones infected vector
-     * @return the pointer to the moved agent, NULL if error occured
+     * @param locationOne the locations index from which to remove the infected agent
+     * @param locationTwo the locations index from which to add the infected agent
+     * @param agentIndex the agents index from location ones infected vector
+     * @return the pointer to the moved agent NULL if error occured
      */
     Agent *moveInfectedAgent(int locationOne, int locationTwo, int agentIndex);
 
@@ -98,9 +98,9 @@ class Transportation {
      * This will move a susceptible agent to infected in a given location
      * and will update the agents internal SIR data
      * 
-     * @param locationIndex, the index of the wanted location to shift the agent
-     * @param agentIndex, the index of the agent from the locations sus vector
-     * @return a pointer to the shifted agent, NULL if error occurs
+     * @param locationIndex the index of the wanted location to shift the agent
+     * @param agentIndex the index of the agent from the locations sus vector
+     * @return a pointer to the shifted agent NULL if error occurs
      */
     Agent *moveSusceptibleToInfected(int locationIndex, int agentIndex);
 
@@ -116,8 +116,8 @@ class Transportation {
      * updateLocationRisks
      * 
      * When called this method will update coronavirus risk factors
-     * @param socialDistancingSeverity, amount of social distancing
-     * @param associatedLocRisks, coronavirus risk dependant on type of business
+     * @param socialDistancingSeverity amount of social distancing
+     * @param associatedLocRisks coronavirus risk dependant on type of business
      */
     void updateLocationRisks(int socialDistancingSeverity, double associatedLocRisks[]);
 
@@ -140,8 +140,8 @@ class Transportation {
      * Takes in the inclusive floor and ceiling
      * and finds a random number in the range
      * 
-     * @param floor, the inclusive floor of the range
-     * @param ceiling, the inclusive ceiling of the range
+     * @param floor the inclusive floor of the range
+     * @param ceiling the inclusive ceiling of the range
      * @return the random number generated
      */
     int randomInRange(int floor, int ceiling);
@@ -152,10 +152,10 @@ class Transportation {
      * This is a helper function that will look at the given data for
      * an agent and will decide if and where it will move
      * 
-     * @param toMove, the agent data it will look at to decide if it will move
-     * @param timeOfDay, the current time of day
-     * @param currDay, the day of the week
-     * @return the index that the agent will move to, -1 if it will stay in place
+     * @param toMove the agent data it will look at to decide if it will move
+     * @param timeOfDay the current time of day
+     * @param currDay the day of the week
+     * @return the index that the agent will move to -1 if it will stay in place
      */
     int agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay);
 
@@ -175,7 +175,7 @@ class Transportation {
      * 
      * takes in a DayOfWeek enum and checks if it is a weekday
      * 
-     * @param currDay, the day to check
+     * @param currDay the day to check
      * @return true if is weekday false if not weekday
      */
     bool isWeekDay(DayOfWeek currDay);
@@ -184,10 +184,10 @@ class Transportation {
      * willMove
      * 
      * This is a helper function to take in a % chance
-     * that an agent will move, the higher the percentChance
+     * that an agent will move the higher the percentChance
      * the more likley to return true
      * 
-     * @param percentChance, in range 1-100
+     * @param percentChance in range 1-100
      * @return a bool of if the chances came up true or false
      */
     bool willMove(int percentChance);
@@ -202,7 +202,7 @@ class Transportation {
      * with more locations so this is mroe likley to return a higher number as the
      * list of locations is sorted lower to higher
      * 
-     * @param toMoveList, a vector of location pointers of the given type of place the agent will move to
+     * @param toMoveList a vector of location pointers of the given type of place the agent will move to
      * @return the index in the location vector that the agent will move to
      */
     int findIndexToMove(vector<Location*> toMoveList);
@@ -213,7 +213,7 @@ class Transportation {
      * this function will take in a residential location list
      * to find what location the agent will be moving to index wise.
      * 
-     * @param toMoveList, a vector of location pointers to residential places
+     * @param toMoveList a vector of location pointers to residential places
      * @return the index in the location vector that the agent will move to
      */
     int findResidentialIndex(vector<Location*> toMoveList);
@@ -224,9 +224,9 @@ class Transportation {
      * this function will take the current time and then
      * the floor and roof of the time range that is acceptable 
      * 
-     * @param timeOfDay, the current time of day
-     * @param min, the inclusive floor of the range
-     * @param max, the inclusive roof of the range
+     * @param timeOfDay the current time of day
+     * @param min the inclusive floor of the range
+     * @param max the inclusive roof of the range
      * @return a bool of if it is range
      */
     bool inTimeRange(int timeOfDay, int min, int max);
@@ -238,8 +238,8 @@ class Transportation {
      * be at school for a paticular timestep ie 10am on a thursday they would
      * vs a sunday at 5pm
      * 
-     * @param currDay, an enum of the currDay
-     * @param timeOfDay, the current time
+     * @param currDay an enum of the currDay
+     * @param timeOfDay the current time
      * @return true if school is open false if not
      */
     bool willGoToSchool(DayOfWeek currDay, int timeOfDay);
@@ -251,8 +251,8 @@ class Transportation {
      * will be at work for a paticular timestep ie 10am on a thursday they
      * would be vs a sunday at 7pm
      * 
-     * @param currDay, an enum of the currDay
-     * @param timeOfDay, the current time
+     * @param currDay an enum of the currDay
+     * @param timeOfDay the current time
      * @return true if work is open false if not
      */
     bool willGoToWork(DayOfWeek currDay, int timeOfDay);
@@ -263,13 +263,13 @@ class Transportation {
      * this is a helper function for agent moving to
      * that allows a % chance of each agent moving to a given place given their age
      * 
-     * @param currrDay, the current day of the week
-     * @param currTime, the current time of the day
-     * @param genWork, the chance of someone going to a genreal store either for work or shopping
-     * @param servWork, the chance of someone going to a service store either for work or shopping
-     * @param goOut, the chance of someone going out for entertainment
-     * @param needServ, the chance of someone needing service
-     * @param goPark, the chance of someone going to parks and rec
+     * @param currrDay the current day of the week
+     * @param currTime the current time of the day
+     * @param genWork the chance of someone going to a genreal store either for work or shopping
+     * @param servWork the chance of someone going to a service store either for work or shopping
+     * @param goOut the chance of someone going out for entertainment
+     * @param needServ the chance of someone needing service
+     * @param goPark the chance of someone going to parks and rec
      * @return the index that the agent will be moving to
      */
     int adultChanceOfMoving(DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark);
@@ -281,7 +281,7 @@ class Transportation {
      * it is more likley to output a higher number in the range 
      * of 0 - (roof - 1)
      * 
-     * @param roof, the max number to generate (exlusive)
+     * @param roof the max number to generate (exlusive)
      * @return the random number generated
      */
     int monteCarloRandom(int roof);

@@ -122,8 +122,8 @@ Public Member Functions</h2></td></tr>
 <p>This is the constructor for the <a class="el" href="classTransportation.html">Transportation</a> class it takes in an array of agent pointers and the size of said array</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">**arr,and</td><td>array of agent pointers </td></tr>
-    <tr><td class="paramname">arrSize,the</td><td>size of the array </td></tr>
+    <tr><td class="paramname">**arr</td><td>and array of agent pointers </td></tr>
+    <tr><td class="paramname">arrSize</td><td>the size of the array </td></tr>
   </table>
   </dd>
 </dl>
@@ -169,7 +169,7 @@ Public Member Functions</h2></td></tr>
 <p>This gets the location data from a given index due to the location never changing it only returns a copy of the object</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index,the</td><td>index of the wanted data must be in range 0 &lt;= index &lt; listLength </td></tr>
+    <tr><td class="paramname">index</td><td>the index of the wanted data must be in range 0 &lt;= index &lt; listLength </td></tr>
   </table>
   </dd>
 </dl>
@@ -232,13 +232,13 @@ Public Member Functions</h2></td></tr>
 <p>This will move a infected agent from one location to another by removing it from one vector into another based on the given index</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">locationOne,the</td><td>locations index from which to remove the infected agent </td></tr>
-    <tr><td class="paramname">locationTwo,the</td><td>locations index from which to add the infected agent </td></tr>
-    <tr><td class="paramname">agentIndex,the</td><td>agents index from location ones infected vector </td></tr>
+    <tr><td class="paramname">locationOne</td><td>the locations index from which to remove the infected agent </td></tr>
+    <tr><td class="paramname">locationTwo</td><td>the locations index from which to add the infected agent </td></tr>
+    <tr><td class="paramname">agentIndex</td><td>the agents index from location ones infected vector </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the pointer to the moved agent, NULL if error occured </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the pointer to the moved agent NULL if error occured </dd></dl>
 
 </div>
 </div>
@@ -277,13 +277,13 @@ Public Member Functions</h2></td></tr>
 <p>This will move a susceptible agent from one location to another by removing it from one vector into another based on the given index</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">locationOne,the</td><td>locations index from which to remove the sus agent </td></tr>
-    <tr><td class="paramname">locationTwo,the</td><td>locations index from which to add the sus agent </td></tr>
-    <tr><td class="paramname">agentIndex,the</td><td>agents index from location ones susceptible vector </td></tr>
+    <tr><td class="paramname">locationOne</td><td>the locations index from which to remove the sus agent </td></tr>
+    <tr><td class="paramname">locationTwo</td><td>the locations index from which to add the sus agent </td></tr>
+    <tr><td class="paramname">agentIndex</td><td>the agents index from location ones susceptible vector </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the pointer to the moved agent, NULL if error occured </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the pointer to the moved agent NULL if error occured </dd></dl>
 
 </div>
 </div>
@@ -316,12 +316,12 @@ Public Member Functions</h2></td></tr>
 <p>This will move a susceptible agent to infected in a given location and will update the agents internal <a class="el" href="classSIR.html">SIR</a> data</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">locationIndex,the</td><td>index of the wanted location to shift the agent </td></tr>
-    <tr><td class="paramname">agentIndex,the</td><td>index of the agent from the locations sus vector </td></tr>
+    <tr><td class="paramname">locationIndex</td><td>the index of the wanted location to shift the agent </td></tr>
+    <tr><td class="paramname">agentIndex</td><td>the index of the agent from the locations sus vector </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a pointer to the shifted agent, NULL if error occurs </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a pointer to the shifted agent NULL if error occurs </dd></dl>
 
 </div>
 </div>
@@ -383,8 +383,8 @@ Public Member Functions</h2></td></tr>
 <p>updateLocationRisks</p>
 <p>When called this method will update coronavirus risk factors </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">socialDistancingSeverity,amount</td><td>of social distancing </td></tr>
-    <tr><td class="paramname">associatedLocRisks,coronavirus</td><td>risk dependant on type of business </td></tr>
+    <tr><td class="paramname">socialDistancingSeverity</td><td>amount of social distancing </td></tr>
+    <tr><td class="paramname">associatedLocRisks</td><td>coronavirus risk dependant on type of business </td></tr>
   </table>
   </dd>
 </dl>

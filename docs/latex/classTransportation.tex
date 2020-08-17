@@ -36,9 +36,9 @@ This is the constructor for the \mbox{\hyperlink{classTransportation}{Transporta
 
 
 \begin{DoxyParams}{Parameters}
-{\em $\ast$$\ast$arr,and} & array of agent pointers \\
+{\em $\ast$$\ast$arr} & and array of agent pointers \\
 \hline
-{\em arr\+Size,the} & size of the array \\
+{\em arr\+Size} & the size of the array \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classTransportation_ae63d1b7fa5006d357228196b6b81684d}\label{classTransportation_ae63d1b7fa5006d357228196b6b81684d}} 
@@ -64,7 +64,7 @@ This gets the location data from a given index due to the location never changin
 
 
 \begin{DoxyParams}{Parameters}
-{\em index,the} & index of the wanted data must be in range 0 $<$= index $<$ list\+Length \\
+{\em index} & the index of the wanted data must be in range 0 $<$= index $<$ list\+Length \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -95,15 +95,15 @@ This will move a infected agent from one location to another by removing it from
 
 
 \begin{DoxyParams}{Parameters}
-{\em location\+One,the} & locations index from which to remove the infected agent \\
+{\em location\+One} & the locations index from which to remove the infected agent \\
 \hline
-{\em location\+Two,the} & locations index from which to add the infected agent \\
+{\em location\+Two} & the locations index from which to add the infected agent \\
 \hline
-{\em agent\+Index,the} & agents index from location ones infected vector \\
+{\em agent\+Index} & the agents index from location ones infected vector \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-the pointer to the moved agent, N\+U\+LL if error occured 
+the pointer to the moved agent N\+U\+LL if error occured 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classTransportation_a66fa5b00273dd30dfdd18b93f266a01a}\label{classTransportation_a66fa5b00273dd30dfdd18b93f266a01a}} 
 \index{Transportation@{Transportation}!moveSusceptibleAgent@{moveSusceptibleAgent}}
@@ -117,15 +117,15 @@ This will move a susceptible agent from one location to another by removing it f
 
 
 \begin{DoxyParams}{Parameters}
-{\em location\+One,the} & locations index from which to remove the sus agent \\
+{\em location\+One} & the locations index from which to remove the sus agent \\
 \hline
-{\em location\+Two,the} & locations index from which to add the sus agent \\
+{\em location\+Two} & the locations index from which to add the sus agent \\
 \hline
-{\em agent\+Index,the} & agents index from location ones susceptible vector \\
+{\em agent\+Index} & the agents index from location ones susceptible vector \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-the pointer to the moved agent, N\+U\+LL if error occured 
+the pointer to the moved agent N\+U\+LL if error occured 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classTransportation_abf231157a852aaa85affda6ac73fcdb0}\label{classTransportation_abf231157a852aaa85affda6ac73fcdb0}} 
 \index{Transportation@{Transportation}!moveSusceptibleToInfected@{moveSusceptibleToInfected}}
@@ -139,13 +139,13 @@ This will move a susceptible agent to infected in a given location and will upda
 
 
 \begin{DoxyParams}{Parameters}
-{\em location\+Index,the} & index of the wanted location to shift the agent \\
+{\em location\+Index} & the index of the wanted location to shift the agent \\
 \hline
-{\em agent\+Index,the} & index of the agent from the locations sus vector \\
+{\em agent\+Index} & the index of the agent from the locations sus vector \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a pointer to the shifted agent, N\+U\+LL if error occurs 
+a pointer to the shifted agent N\+U\+LL if error occurs 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classTransportation_abf5324a5b9e426d4b82a1045073af722}\label{classTransportation_abf5324a5b9e426d4b82a1045073af722}} 
 \index{Transportation@{Transportation}!simulateAgentMovment@{simulateAgentMovment}}
@@ -165,9 +165,9 @@ update\+Location\+Risks
 
 When called this method will update coronavirus risk factors 
 \begin{DoxyParams}{Parameters}
-{\em social\+Distancing\+Severity,amount} & of social distancing \\
+{\em social\+Distancing\+Severity} & amount of social distancing \\
 \hline
-{\em associated\+Loc\+Risks,coronavirus} & risk dependant on type of business \\
+{\em associated\+Loc\+Risks} & coronavirus risk dependant on type of business \\
 \hline
 \end{DoxyParams}
 
