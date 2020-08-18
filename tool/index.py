@@ -472,7 +472,7 @@ def update_icu(input_data):
                                                 )}
 
 #Button Callback
-@app.callback(Output('simulationStart', 'children'),
+@app.callback([Output('placeholderdiv', 'children'),
              [Input('simulationStart', 'n_clicks')]
 )
 def on_button_click(n):
@@ -480,6 +480,7 @@ def on_button_click(n):
     global graph2
     global graph3
     global graph4
+
 
     if n is None:
         return
