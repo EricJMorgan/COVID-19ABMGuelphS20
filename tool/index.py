@@ -472,7 +472,17 @@ def update_icu(input_data):
                                                 )}
 
 #Button Callback
-@app.callback([Output('placeholderdiv', 'children'),
+@app.callback(Output('simulationStart', 'disabled'),
+             [Input('simulationStart', 'n_clicks')]
+)
+def on_button_click(n):
+
+    if n is None:
+        return False
+    else:
+        return True
+        
+@app.callback(Output('placeholderdiv', 'children'),
              [Input('simulationStart', 'n_clicks')]
 )
 def on_button_click(n):
