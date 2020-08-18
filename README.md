@@ -20,3 +20,9 @@ git clone https://github.com/joyglitch/COVID-19ABMGuelphS20.git
 
 ## Contributions
 If you would like to make a pull request, feel free to contribute. For any significant changes, please open an issue on the repository. Stay safe!
+
+## steps to install and run
+git clone https://github.com/joyglitch/COVID-19ABMGuelphS20.git
+cd into the directory
+type make
+
