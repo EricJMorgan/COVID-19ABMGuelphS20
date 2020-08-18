@@ -29,6 +29,7 @@ Simulation::Simulation(string fileName) {
     timeStep = 4;
     recoveredTotal = 0;
     deceasedTotal = 0;
+    newlyInfected = 0;
     sirTimeStep = (double)timeStep / 24.0;
     timeElapsed = 0;
     currDay = MON;
