@@ -1,9 +1,8 @@
-# README - add to this as we go
+# README
 **Contributors**: Danyal Mahmood, James Busch, Joyce Li
 
 ## Introduction
-Initial work on creating a very simple eABM to monitor infection and recovery/mortality rates
-Agents will travel around Guelph -- this is the team's current objective
+Initial work on creating an eABM to monitor COVID19 infection and recovery/mortality rates with agents will travel around Guelph.
 
 ## Methodology
 TBA
@@ -11,7 +10,7 @@ TBA
 ## Results & Discussion
 TBA
 
-## Demo It Yourself
+## How to run
 To try the simulation yourself, you must clone the repository by entering:
 
 ```bash
