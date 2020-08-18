@@ -49,7 +49,7 @@ class SIR {
     /**
      * SIR
      * 
-     * This is the constructor for the agent class, it sets the current severity to susceptible
+     * This is the constructor for the agent class it sets the current severity to susceptible
      * 
      */
     SIR();
@@ -67,11 +67,11 @@ class SIR {
      * SIRTimeStep
      * 
      * This progresses agents through their various SIR model paths. An agent can be in any of the severity stages.
-     * As time progresses the function decides what happens to the agent with COVID-19 next, until the
+     * As time progresses the function decides what happens to the agent with COVID-19 next until the
      * agent has either recovered or passed away from the virus.
      * 
-     * @param info, the timestep of the overall simulation in hours
-     * @return string, indicate if any update took place
+     * @param info the timestep of the overall simulation in hours
+     * @return string indicate if any update took place
      */
     string SIRTimeStep(double timeStep);
 
@@ -88,7 +88,7 @@ class SIR {
      * 
      * Set chance of agent being quaratined
      * 
-     * @param, value to set chance of quarantine
+     * @param value to set chance of quarantine
      */
     void setQuarantineCases(double val);
 
@@ -100,7 +100,7 @@ class SIR {
      * This returns if the agent is showing any symptoms
      * based on the SIR model
      * 
-     * @return, true if showing symptoms false if not
+     * @return true if showing symptoms false if not
      */
     bool getSymptoms();
 
@@ -170,13 +170,13 @@ class SIR {
      * DecideSIRCase
      * 
      * This function takes in parameters to decide whether the infected agent's COVID19 condition will
-     * be fatal. If the case is fatal, the agent will progress down the SIR pipeline from infected, to
-     * hospital, to ICU, and then to deceased. If the agent's case is not fatal, a path of recovery will be 
-     * assigned to the agent based on the probabilities of being symptomatic, admitted to hospital, and
+     * be fatal. If the case is fatal the agent will progress down the SIR pipeline from infected to
+     * hospital to ICU and then to deceased. If the agent's case is not fatal a path of recovery will be 
+     * assigned to the agent based on the probabilities of being symptomatic admitted to hospital and
      * admitted to ICU.
      * 
-     * @param infectedNumb, the agent's odds of having the virus
-     * @param infectedChance, the chance of being infected based on Worldometer death rates
+     * @param infectedNumb the agent's odds of having the virus
+     * @param infectedChance the chance of being infected based on Worldometer death rates
      */
     void DecideSIRCase(double infectedNumb, double infectedChance);
 };

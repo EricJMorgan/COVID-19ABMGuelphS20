@@ -166,7 +166,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This is the constructor for the simulation class it takes in a file name of the csv file of the demographic data and creates all the needed data to start the simulation</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fileName,the</td><td>file name of the census data </td></tr>
+    <tr><td class="paramname">fileName</td><td>the file name of the census data </td></tr>
   </table>
   </dd>
 </dl>
@@ -212,7 +212,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This function gets a specific agent from the internal data for what ever reason. It returns a copy of the agent instead of the original pointer</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index,the</td><td>index in the internal array must be in range of 0 &lt;= index &lt; population </td></tr>
+    <tr><td class="paramname">index</td><td>the index in the internal array must be in range of 0 &lt;= index &lt; population </td></tr>
   </table>
   </dd>
 </dl>
@@ -454,7 +454,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setEntertainmentRisk</p>
 <p>setter for EntertainmentRisk </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -479,7 +479,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setGenStoreRisk</p>
 <p>setter for GenStoreRisk </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -504,7 +504,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setHealthPlaceRisk</p>
 <p>setter for HealthPlaceRisk </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -529,7 +529,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setHygieneMaintainence</p>
 <p>setter for HygieneMaintainence </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -554,7 +554,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setMaskCompliance</p>
 <p>setter for MaskCompliance </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -579,7 +579,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setParkRisk</p>
 <p>setter for ParkRisk </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -604,7 +604,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setPlaceOfWorshipRisk</p>
 <p>setter for PlaceOfWorshipRisk </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -629,7 +629,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setQuarantineSeverity</p>
 <p>setter for Quarantine severity (odds of quarantine symptomatic cases) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -654,7 +654,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setResidentialRisk</p>
 <p>setter for ResidentialRisk </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -679,7 +679,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setSchoolRisk</p>
 <p>setter for SchoolRisk </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -704,7 +704,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setServiceRisk</p>
 <p>setter for ServiceRisk </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -730,7 +730,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>Takes inputs from front end sends them to the associated classes setSocialDistancingSeverity</p>
 <p>setter for SocialDistancingSeverity </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -755,7 +755,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>setTransportRisk</p>
 <p>setter for TransportRisk </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">val,the</td><td>value to set </td></tr>
+    <tr><td class="paramname">val</td><td>the value to set </td></tr>
   </table>
   </dd>
 </dl>
@@ -777,7 +777,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
       </table>
 </div><div class="memdoc">
 <p>simulateTimeStep</p>
-<p>when called this will simulate one time step in the simulation it will do everything for agent movement, infection spread, and time and date. </p>
+<p>when called this will simulate one time step in the simulation it will do everything for agent movement infection spread and time and date. </p>
 
 </div>
 </div>

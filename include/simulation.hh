@@ -32,7 +32,7 @@ class Simulation {
      * in a file name of the csv file of the demographic data and creates
      * all the needed data to start the simulation
      * 
-     * @param fileName, the file name of the census data
+     * @param fileName the file name of the census data
      */
     Simulation(string fileName);
 
@@ -47,7 +47,7 @@ class Simulation {
      * simulateTimeStep
      * 
      * when called this will simulate one time step in the simulation
-     * it will do everything for agent movement, infection spread, and time
+     * it will do everything for agent movement infection spread and time
      * and date.
      */
     void simulateTimeStep();
@@ -58,7 +58,7 @@ class Simulation {
      * This function gets a specific agent from the internal data for 
      * what ever reason. It returns a copy of the agent instead of the original pointer
      * 
-     * @param index, the index in the internal array must be in range of 0 <= index < population
+     * @param index the index in the internal array must be in range of 0 <= index < population
      */
     Agent *getAgentAt(int index);
 
@@ -170,7 +170,7 @@ class Simulation {
      * setSocialDistancingSeverity
      * 
      * setter for SocialDistancingSeverity
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setSocialDistancingSeverity(int val);
 
@@ -178,7 +178,7 @@ class Simulation {
      * setMaskCompliance
      * 
      * setter for MaskCompliance
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setMaskCompliance(double val);
 
@@ -186,7 +186,7 @@ class Simulation {
      * setHygieneMaintainence
      * 
      * setter for HygieneMaintainence
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setHygieneMaintainence(double val);
 
@@ -195,7 +195,7 @@ class Simulation {
      * setGenStoreRisk
      * 
      * setter for GenStoreRisk
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setGenStoreRisk(double val);
 
@@ -203,7 +203,7 @@ class Simulation {
      * setTransportRisk
      * 
      * setter for TransportRisk
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setTransportRisk(double val);
 
@@ -211,7 +211,7 @@ class Simulation {
      * setSchoolRisk
      * 
      * setter for SchoolRisk
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setSchoolRisk(double val);
 
@@ -219,7 +219,7 @@ class Simulation {
      * setParkRisk
      * 
      * setter for ParkRisk
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setParkRisk(double val);
 
@@ -227,7 +227,7 @@ class Simulation {
      * setServiceRisk
      * 
      * setter for ServiceRisk
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setServiceRisk(double val);
 
@@ -235,7 +235,7 @@ class Simulation {
      * setEntertainmentRisk
      * 
      * setter for EntertainmentRisk
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setEntertainmentRisk(double val);
 
@@ -243,7 +243,7 @@ class Simulation {
      * setHealthPlaceRisk
      * 
      * setter for HealthPlaceRisk
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setHealthPlaceRisk(double val);
 
@@ -251,7 +251,7 @@ class Simulation {
      * setPlaceOfWorshipRisk
      * 
      * setter for PlaceOfWorshipRisk
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setPlaceOfWorshipRisk(double val);
 
@@ -259,7 +259,7 @@ class Simulation {
      * setResidentialRisk
      * 
      * setter for ResidentialRisk
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setResidentialRisk(double val);
 
@@ -267,7 +267,7 @@ class Simulation {
      * setQuarantineSeverity
      * 
      * setter for Quarantine severity (odds of quarantine symptomatic cases)
-     * @param val, the value to set
+     * @param val the value to set
      */
     void setQuarantineSeverity(double val);
     
@@ -319,8 +319,8 @@ class Simulation {
      * This function takes in the agents info and the amount of said
      * agent and adds that amount to the array of people
      * 
-     * @param personInfo, this is a string in the fomat GENDER N-N where N is the age range
-     * @param amountToAdd, this is a int of how many of that agent there are for the area i.e there are 3875 males 0-4 in guelph
+     * @param personInfo this is a string in the fomat GENDER N-N where N is the age range
+     * @param amountToAdd this is a int of how many of that agent there are for the area i.e there are 3875 males 0-4 in guelph
      */
     void addNewAgent(string personInfo, int amountToAdd);
 
@@ -328,9 +328,9 @@ class Simulation {
      * setUpAgents
      * 
      * This function takes in the file name of the demographic file
-     * of an area in the format typeOfData,DataInfo,AmountOfPeople
+     * of an area in the format typeOfDataDataInfoAmountOfPeople
      * 
-     * @param filename, must be in the above format
+     * @param filename must be in the above format
      */
     void setUpAgents(string filename);
 

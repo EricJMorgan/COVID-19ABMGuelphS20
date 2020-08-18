@@ -38,7 +38,7 @@ Agent\+Info {\bfseries info}
 
 \mbox{\hyperlink{classSIR}{S\+IR}}
 
-This is the constructor for the agent class, it sets the current severity to susceptible 
+This is the constructor for the agent class it sets the current severity to susceptible 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classSIR_a4112f8603889169a2faffc5c2f00fafd}\label{classSIR_a4112f8603889169a2faffc5c2f00fafd}} 
@@ -68,7 +68,7 @@ get\+Symptoms
 This returns if the agent is showing any symptoms based on the \mbox{\hyperlink{classSIR}{S\+IR}} model
 
 \begin{DoxyReturn}{Returns}
-, true if showing symptoms false if not 
+true if showing symptoms false if not 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classSIR_a13711c865ce52ff1a1d002a3af32df18}\label{classSIR_a13711c865ce52ff1a1d002a3af32df18}} 
 \index{SIR@{SIR}!setQuarantineCases@{setQuarantineCases}}
@@ -93,15 +93,15 @@ Set chance of agent being quaratined
 
 S\+I\+R\+Time\+Step
 
-This progresses agents through their various \mbox{\hyperlink{classSIR}{S\+IR}} model paths. An agent can be in any of the severity stages. As time progresses the function decides what happens to the agent with C\+O\+V\+I\+D-\/19 next, until the agent has either recovered or passed away from the virus.
+This progresses agents through their various \mbox{\hyperlink{classSIR}{S\+IR}} model paths. An agent can be in any of the severity stages. As time progresses the function decides what happens to the agent with C\+O\+V\+I\+D-\/19 next until the agent has either recovered or passed away from the virus.
 
 
 \begin{DoxyParams}{Parameters}
-{\em info,the} & timestep of the overall simulation in hours \\
+{\em info} & the timestep of the overall simulation in hours \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-string, indicate if any update took place 
+string indicate if any update took place 
 \end{DoxyReturn}
 
 

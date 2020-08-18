@@ -38,7 +38,7 @@ class GeographicalRisk {
      * This function will take in a index and return how many of
      * the specified location index
      * 
-     * @param index, must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
+     * @param index must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
      * @return a int of the amount of the specified shops in a location
      */
     int getLocationCountAt(int index);
@@ -49,7 +49,7 @@ class GeographicalRisk {
      * This function will take in a index and return how many of
      * the specified location index
      * 
-     * @param index, must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
+     * @param index must be in range 0 <= index <= 8. Refer to condenseLocationType enum for which index you want
      * @return a int of the amount of the specified shops in a location
      */
     int getLocationCountAt(condenseLocationType index);
@@ -58,7 +58,7 @@ class GeographicalRisk {
      * getLocationCountAt
      * 
      * This function will call the private function updateAvgCountsAndRisk and update the risk for the region
-     * and various total counts, it will then take the succeptible people in the region and 
+     * and various total counts it will then take the succeptible people in the region and 
      * 
      */
     int infectPeople();
@@ -86,7 +86,7 @@ class GeographicalRisk {
      */
     void updateAvgCountsAndRisk();
 
-    // TODO: maybe needed later, if not can be changed to local function variables
+    // TODO: maybe needed later if not can be changed to local function variables
     double avgSymptomaticCarriers;
     double avgAsymptomatic;
     double avgMaskWearer;

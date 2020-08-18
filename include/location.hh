@@ -58,8 +58,8 @@ class Location : public GeographicalRisk {
      * 
      * This is the constructor for the location object that takes in data
      * 
-     * @param postalCode, a string of the postalCode
-     * @param shopData, an array of size 9 of ints that holds each type of shop based on the enum condenseLocationType
+     * @param postalCode a string of the postalCode
+     * @param shopData an array of size 9 of ints that holds each type of shop based on the enum condenseLocationType
      */
     Location(string postalCode, int shopData[LOCATIONTYPESIZE]);
 
@@ -97,7 +97,7 @@ class Location : public GeographicalRisk {
      * can be changed multiple times but in the future it should change to
      * only be able to change once
      * 
-     * @param newPostalCodeGrouping, this is the first 5 chars of the postalcode ie N1G 7J
+     * @param newPostalCodeGrouping this is the first 5 chars of the postalcode ie N1G 7J
      */
     void setPostalCodeGrouping(string newPostalCodeGrouping);
 
@@ -116,7 +116,7 @@ class Location : public GeographicalRisk {
      * This function will take a index of the wanted location
      * index in the locationCount array and increment it by one
      * 
-     * @param index, must be in range 0 <= index < LOCATIONTYPESIZE
+     * @param index must be in range 0 <= index < LOCATIONTYPESIZE
      */
     void increaseLocationCountAt(int index);
 
@@ -126,7 +126,7 @@ class Location : public GeographicalRisk {
      * This function will take a index of the wanted location
      * index in the locationCount array and increment it by one
      * 
-     * @param index, must be in range 0 <= index < LOCATIONTYPESIZE
+     * @param index must be in range 0 <= index < LOCATIONTYPESIZE
      */
     void increaseLocationCountAt(condenseLocationType index);
 
@@ -136,7 +136,7 @@ class Location : public GeographicalRisk {
      * This function adds a full postal code to the location groupings
      * list of postalCodes. It will not add dup postalCodes
      * 
-     * @param postalCode, the postal code to add to the list
+     * @param postalCode the postal code to add to the list
      */
     void addPostalCodeToList(string postalCode);
 
@@ -155,7 +155,7 @@ class Location : public GeographicalRisk {
      * 
      * This gets the postal code in the vector at a specified location
      * 
-     * @param index, must be in range of the list length
+     * @param index must be in range of the list length
      * @return the string of the postal code at the index
      */
     string getPostalCodeAt(int index);
@@ -167,7 +167,7 @@ class Location : public GeographicalRisk {
      * is no dups in the vector of postal codes before
      * adding it into the list
      * 
-     * @param newPostalCode, the postal code to check if it has a dup
+     * @param newPostalCode the postal code to check if it has a dup
      * @return a bool true if it contains a dup false if it dosent
      */
     bool postalCodeListContainsDup(string newPostalCode);
@@ -178,7 +178,7 @@ class Location : public GeographicalRisk {
      * This takes in an agent pointer and adds it to the locations 
      * susceptible vector
      * 
-     * @param toAdd, the agent pointer
+     * @param toAdd the agent pointer
      */
     void addAgentToSusceptible(Agent *toAdd);
 
@@ -188,7 +188,7 @@ class Location : public GeographicalRisk {
      * This takes in an agent pointer and adds it to the locations
      * infected vector
      * 
-     * @param toAdd, the agent pointer
+     * @param toAdd the agent pointer
      */
     void addAgentToInfected(Agent *toAdd);
 
@@ -198,7 +198,7 @@ class Location : public GeographicalRisk {
      * This takes in an index and removes an agent at the the wanted 
      * index from the susceptible vector and returns its pointer
      * 
-     * @param index, the index to remove from
+     * @param index the index to remove from
      * @return the pointer to the removed agent
      */
     Agent *removeSusceptibleAgent(int index);
@@ -209,7 +209,7 @@ class Location : public GeographicalRisk {
      * This takes in an index and removes an agent at the wanted
      * index from the infected vector and returns its pointer
      * 
-     * @param index, the index to remove from
+     * @param index the index to remove from
      * @return the pointer to the removed agent
      */
     Agent *removeInfectedAgent(int index);
@@ -220,7 +220,7 @@ class Location : public GeographicalRisk {
      * This takes in an index and returns the agent
      * at the wanted index from the sus vector
      * 
-     * @param index, the index to get the agent from
+     * @param index the index to get the agent from
      * @return a pointer to the agent
      */
     Agent *getSusceptibleAgentAt(int index);
@@ -231,7 +231,7 @@ class Location : public GeographicalRisk {
      * This takes in an index and returns the agent
      * at the wanted index from the infected vector
      * 
-     * @param index, the index to get the agent from
+     * @param index the index to get the agent from
      * @return a pointer to the agent
      */
     Agent *getInfectedAgentAt(int index);
@@ -259,7 +259,7 @@ class Location : public GeographicalRisk {
      * 
      * This sets the objects location index
      * 
-     * @param index, the index of the location in the locationListVector
+     * @param index the index of the location in the locationListVector
      */
     void setLocationIndex(int index);
 

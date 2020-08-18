@@ -69,9 +69,9 @@ class Agent : public SIR {
      * Agent
      * 
      * This is the constructor for the agent class it takes in the the gender/age enum and gives it 
-     * a race, income, education, and marital status
+     * a race income education and marital status
      * 
-     * @param agentInfo, the enum of the gender/Age based on the AgentInfo enum
+     * @param agentInfo the enum of the gender/Age based on the AgentInfo enum
      */
     Agent(AgentInfo agentInfo);
 
@@ -108,7 +108,7 @@ class Agent : public SIR {
      * 
      * This sets the agents hasMoved varible
      * 
-     * @param newMove, true if the agent has moved this cycle false if they have not
+     * @param newMove true if the agent has moved this cycle false if they have not
      */
     void setHasMoved(bool newMove);
 
@@ -125,7 +125,7 @@ class Agent : public SIR {
      * DecideMigitationStrategy
      * 
      * Decides the agents chance of wearing a mask and following appropriate hygiene
-     * @param maskWearing, chance 
+     * @param maskWearing chance 
      */
     void DecideMigitationStrategy(double maskWearing, double hygieneMaintain);
 

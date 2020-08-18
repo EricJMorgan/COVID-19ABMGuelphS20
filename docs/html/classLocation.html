@@ -212,8 +212,8 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This is the constructor for the location object that takes in data</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">postalCode,a</td><td>string of the postalCode </td></tr>
-    <tr><td class="paramname">shopData,an</td><td>array of size 9 of ints that holds each type of shop based on the enum condenseLocationType </td></tr>
+    <tr><td class="paramname">postalCode</td><td>a string of the postalCode </td></tr>
+    <tr><td class="paramname">shopData</td><td>an array of size 9 of ints that holds each type of shop based on the enum condenseLocationType </td></tr>
   </table>
   </dd>
 </dl>
@@ -240,7 +240,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This takes in an agent pointer and adds it to the locations infected vector</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">toAdd,the</td><td>agent pointer </td></tr>
+    <tr><td class="paramname">toAdd</td><td>the agent pointer </td></tr>
   </table>
   </dd>
 </dl>
@@ -266,7 +266,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This takes in an agent pointer and adds it to the locations susceptible vector</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">toAdd,the</td><td>agent pointer </td></tr>
+    <tr><td class="paramname">toAdd</td><td>the agent pointer </td></tr>
   </table>
   </dd>
 </dl>
@@ -292,7 +292,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This function adds a full postal code to the location groupings list of postalCodes. It will not add dup postalCodes</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">postalCode,the</td><td>postal code to add to the list </td></tr>
+    <tr><td class="paramname">postalCode</td><td>the postal code to add to the list </td></tr>
   </table>
   </dd>
 </dl>
@@ -338,7 +338,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This takes in an index and returns the agent at the wanted index from the infected vector</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index,the</td><td>index to get the agent from </td></tr>
+    <tr><td class="paramname">index</td><td>the index to get the agent from </td></tr>
   </table>
   </dd>
 </dl>
@@ -425,7 +425,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This gets the postal code in the vector at a specified location</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index,must</td><td>be in range of the list length </td></tr>
+    <tr><td class="paramname">index</td><td>must be in range of the list length </td></tr>
   </table>
   </dd>
 </dl>
@@ -512,7 +512,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This takes in an index and returns the agent at the wanted index from the sus vector</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index,the</td><td>index to get the agent from </td></tr>
+    <tr><td class="paramname">index</td><td>the index to get the agent from </td></tr>
   </table>
   </dd>
 </dl>
@@ -559,7 +559,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This function will take a index of the wanted location index in the locationCount array and increment it by one</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index,must</td><td>be in range 0 &lt;= index &lt; LOCATIONTYPESIZE </td></tr>
+    <tr><td class="paramname">index</td><td>must be in range 0 &lt;= index &lt; LOCATIONTYPESIZE </td></tr>
   </table>
   </dd>
 </dl>
@@ -585,7 +585,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This function will take a index of the wanted location index in the locationCount array and increment it by one</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index,must</td><td>be in range 0 &lt;= index &lt; LOCATIONTYPESIZE </td></tr>
+    <tr><td class="paramname">index</td><td>must be in range 0 &lt;= index &lt; LOCATIONTYPESIZE </td></tr>
   </table>
   </dd>
 </dl>
@@ -611,7 +611,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>THis is a helper function that makes sure there is no dups in the vector of postal codes before adding it into the list</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newPostalCode,the</td><td>postal code to check if it has a dup </td></tr>
+    <tr><td class="paramname">newPostalCode</td><td>the postal code to check if it has a dup </td></tr>
   </table>
   </dd>
 </dl>
@@ -638,7 +638,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This takes in an index and removes an agent at the wanted index from the infected vector and returns its pointer</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index,the</td><td>index to remove from </td></tr>
+    <tr><td class="paramname">index</td><td>the index to remove from </td></tr>
   </table>
   </dd>
 </dl>
@@ -665,7 +665,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This takes in an index and removes an agent at the the wanted index from the susceptible vector and returns its pointer</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index,the</td><td>index to remove from </td></tr>
+    <tr><td class="paramname">index</td><td>the index to remove from </td></tr>
   </table>
   </dd>
 </dl>
@@ -692,7 +692,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This sets the objects location index</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index,the</td><td>index of the location in the locationListVector </td></tr>
+    <tr><td class="paramname">index</td><td>the index of the location in the locationListVector </td></tr>
   </table>
   </dd>
 </dl>
@@ -718,7 +718,7 @@ std::vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td>
 <p>This function sets a locations grouping string. For now this can be changed multiple times but in the future it should change to only be able to change once</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newPostalCodeGrouping,this</td><td>is the first 5 chars of the postalcode ie N1G 7J </td></tr>
+    <tr><td class="paramname">newPostalCodeGrouping</td><td>this is the first 5 chars of the postalcode ie N1G 7J </td></tr>
   </table>
   </dd>
 </dl>
