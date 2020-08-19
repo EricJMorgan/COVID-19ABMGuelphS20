@@ -1,4 +1,4 @@
-#Import
+#Import packages
 import dash
 import dash_bootstrap_components as dbc
 import dash_html_components as html
@@ -7,17 +7,16 @@ from dash.dependencies import Input, Output, State
 import element
 import os
 import math
+import cffi
 
-#Import plotly packages
+#Import Plotly packages
 import plotly
 import plotly.graph_objs as go
 import plotly.express as px
 from plotly.tools import mpl_to_plotly
 import matplotlib.pyplot as plt
 
-############################################################
-
-import cffi
+##################################################
 
 ffi = cffi.FFI()
 ffi.cdef('''
@@ -119,7 +118,7 @@ class Simulation(object):
     def quarantineSeverity(self, val):
         lib.quarantineSeverity(self.obj, val)
 
-#Initialize times and values
+#Initialize times and variable values
 sim = Simulation()
 time = element.start_time()
 infectedC = sim.infectedCurrent()
@@ -134,7 +133,7 @@ icuT = sim.ICUtotal()
 totalBedCount = 130
 icuBedCount = 22
 
-############################################################
+##################################################
 
 app = dash.Dash(external_stylesheets=[dbc.themes.FLATLY])
 
@@ -142,7 +141,6 @@ infectedGraph = element.graph_linear('infectedGraph', 1000, 1)
 idrGraph = element.graph_linear('idrGraph', 1000, 2)
 hospitalGraph = element.graph_linear('hospitalGraph', 1000, 3)
 icuGraph = element.graph_linear('icuGraph', 1000, 4)
-
 
 infectedGraph = dbc.Card([
     dbc.CardBody([
