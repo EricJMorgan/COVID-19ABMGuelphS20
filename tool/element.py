@@ -115,7 +115,7 @@ tabs = dbc.Tabs([
 )
 
 #Function to make graph
-def graph_linear(id_tag, step, num):
+def create_graph(id_tag, step, num):
     """Makes a graph with the following parameters.
 
     id_tag: tag
