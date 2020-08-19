@@ -1,26 +1,21 @@
+#Import packages
 import dash
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
+import cffi
 import element
-import os
 import math
 
-#Import plotly packages
+#Import Plotly packages
 import plotly
 import plotly.graph_objs as go
 import plotly.express as px
-
-import pandas as pd
-# import geopandas as gpd
-import matplotlib.pyplot as plt
 from plotly.tools import mpl_to_plotly
+import matplotlib.pyplot as plt
 
-############################################################
-
-import cffi
-
+#Create library of C++ functions
 ffi = cffi.FFI()
 ffi.cdef('''
     typedef struct _Simulation Simulation;
@@ -52,6 +47,7 @@ ffi.cdef('''
 
 lib = ffi.dlopen('./libProject.so')
 
+#Create Simulation class in Python
 class Simulation(object):
     def __init__(self):
         self.obj = lib.Simulation_new()
@@ -121,7 +117,7 @@ class Simulation(object):
     
     def quarantineSeverity(self, val):
         lib.quarantineSeverity(self.obj, val)
-
+        
     def setServiceRisk(self, val):
         lib.serviceRiskSetter(self.obj, val)
 
@@ -137,43 +133,47 @@ hospitalC = sim.hospitalCurrent()
 hospitalT = sim.hospitalTotal()
 icuC = sim.ICUCurrent()
 icuT = sim.ICUtotal()
+
+#Hospital and ICU variables
 totalBedCount = 130
 icuBedCount = 22
 
-############################################################
-
+#Start Dash application
 app = dash.Dash(external_stylesheets=[dbc.themes.FLATLY])
 
-infectedGraph = element.graph_linear('infectedGraph', 1000, 1)
-idrGraph = element.graph_linear('idrGraph', 1000, 2)
-hospitalGraph = element.graph_linear('hospitalGraph', 1000, 3)
-icuGraph = element.graph_linear('icuGraph', 1000, 4)
+#Create graphs for Dash application
+infectedGraph = element.create_graph('infectedGraph', 1000, 1)
+idrGraph = element.create_graph('idrGraph', 1000, 2)
+hospitalGraph = element.create_graph('hospitalGraph', 1000, 3)
+icuGraph = element.create_graph('icuGraph', 1000, 4)
 
-
+#Infected Cases graph tab
 infectedGraph = dbc.Card([
     dbc.CardBody([
         html.Div([infectedGraph]),
         html.Div([idrGraph]),
     ],
-    id="i_tab")
+    id="i_tab",)
 ])
 
+#Hospital/ICU Cases graph tab
 hospitalGraph = dbc.Card([
     dbc.CardBody([
         html.Div([hospitalGraph]),
         html.Div([icuGraph]),
     ],
-    id="h_tab")
+    id="h_tab",)
 ])
 
+#Tabs of graphs
 graphTabs = dbc.Tabs([
     dbc.Tab(infectedGraph, label="COVID-19 Cases", tab_id="i_tab"),
     dbc.Tab(hospitalGraph, label="Hospital & ICU Cases", tab_id="h_tab"),
 ],
-id="graph_tabs",
-active_tab="i_tab",
+id="graph_tabs", active_tab="i_tab",
 )
 
+#Layout for Dash application
 app.layout = html.Div([
     element.navigator,
     dbc.Row(dbc.Col(html.Div(element.buttons))),
@@ -183,6 +183,7 @@ app.layout = html.Div([
     ]),
 ])
 
+#Toggling Navbar
 def toggle_navbar_collapse(n, is_open):
     if n:
         return not is_open
@@ -194,11 +195,12 @@ app.callback(
     [State("navbar-collapse", "is_open")],
 )(toggle_navbar_collapse)
 
-##################################################
+#List of slider names
 list_elements = ['Q_slider', 'SD_slider', 'MC_slider', 'HM_slider', 'gs_slider',
                 't_slider', 'sch_slider', 'pnr_slider', 'serv_slider',
                 'ent_slider', 'health_slider', 'poworship_slider', 'res_slider',]
 
+#Callback functions for sliders
 @app.callback(
     Output(list_elements[0]+'_value', 'children'),
     [Input(list_elements[0], 'value')])
@@ -289,18 +291,20 @@ def update_output_poworship(value):
 def update_output_res(value):
     sim.setResidentialRisk(value)
     return '{}'.format(value)
-###########################################################
 
+#List of graphs names, outputs to graphs, hospital and ICU maximum capacities
 list_graphs  = ['infectedGraph', 'idrGraph', 'hospitalGraph', 'icuGraph']
 list_outputs = [[infectedC], [infectedT], [deceasedT], [recoveredT], [hospitalC], [hospitalT], [icuC], [icuT], [infectedN]]
 limitHospital = [totalBedCount]
 limitICU = [icuBedCount]
+
+#Graph Boolean variables for schedule handling
 graph1 = False
 graph2 = False
 graph3 = False
 graph4 = False
 
-#Infected Graph
+#Callback function for the infected graph
 @app.callback(Output('infectedGraph', 'figure'),
              [Input('linear-update1', 'n_intervals')]
 )
@@ -312,28 +316,9 @@ def update_infectedGraph(input_data):
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Scatter(
-        x = list(converted_time),
-        y = list(list_outputs[0]),
-        name = 'Current Infected Cases',
-        mode = 'lines+markers',
-        marker_color = '#F5CB5C',
-    )
-
-    data2 = go.Scatter(
-        x = list(converted_time),
-        y = list(list_outputs[1]),
-        name = 'Total Infected Cases',
-        mode = 'lines+markers',
-        marker_color = '#F71735',
-    )
-
-    data3 = go.Bar(
-        x = list(converted_time),
-        y = list(list_outputs[8]),
-        name = 'Newly Infected Cases',
-        marker_color = '#76B041',
-    )
+    data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[0]), name='Current Infected Cases', mode='lines+markers', marker_color='#F5CB5C')
+    data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[1]), name='Total Infected Cases', mode='lines+markers', marker_color='#F71735')
+    data3 = go.Bar(x=list(converted_time), y=list(list_outputs[8]), name='Newly Infected Cases', marker_color='#76B041')
 
     global graph1
     graph1 = True
@@ -344,7 +329,7 @@ def update_infectedGraph(input_data):
                                                 showlegend=True,
                                                 )}
 
-#I-D-R Graph
+#Callback function for the Infected-Deceased-Recovered graph
 @app.callback(Output('idrGraph', 'figure'),
              [Input('linear-update2', 'n_intervals')]
 )
@@ -354,29 +339,9 @@ def update_idrGraph(input_data):
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Scatter(
-        x = list(converted_time),
-        y = list(list_outputs[1]),
-        name = 'Total Infected Cases',
-        mode = 'lines+markers',
-        marker_color = '#F71735',
-    )
-
-    data2 = go.Scatter(
-        x = list(converted_time),
-        y = list(list_outputs[2]),
-        name = 'Total Deceased Cases',
-        mode = 'lines+markers',
-        marker_color = '#242423',
-    )
-
-    data3 = go.Scatter(
-        x = list(converted_time),
-        y = list(list_outputs[3]),
-        name = 'Total Recovered Cases',
-        mode = 'lines+markers',
-        marker_color = '#00A8E8',
-    )
+    data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[1]), name='Total Infected Cases', mode='lines+markers', marker_color='#F71735')
+    data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[2]), name='Total Deceased Cases', mode='lines+markers', marker_color='#242423')
+    data3 = go.Scatter(x=list(converted_time), y=list(list_outputs[3]), name='Total Recovered Cases', mode='lines+markers', marker_color='#00A8E8')
 
     global graph2
     graph2 = True
@@ -387,7 +352,7 @@ def update_idrGraph(input_data):
                                                 showlegend=True,
                                                 )}
 
-#Hospital Graph
+#Callback function for the hospital graph
 @app.callback(Output('hospitalGraph', 'figure'),
              [Input('linear-update3', 'n_intervals')]
 )
@@ -398,40 +363,20 @@ def update_hospital(input_data):
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Scatter(
-        x = list(converted_time),
-        y = list(list_outputs[4]),
-        name = 'Current Hospitalized Cases',
-        mode = 'lines+markers',
-        marker_color = '#F3DC68',
-    )
-
-    data2 = go.Scatter(
-        x = list(converted_time),
-        y = list(list_outputs[5]),
-        name = 'Total Hospitalized Cases',
-        mode = 'lines+markers',
-        marker_color = '#D6B50D',
-    )
-
-    data3 = go.Scatter(
-        x = list(converted_time),
-        y = list(limitHospital),
-        name = 'Hospital Bed Limit',
-        mode = 'lines',
-        marker_color = '#11151C',
-    )
+    data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[4]), name='Current Hospitalized Cases', mode='lines+markers', marker_color='#F3DC68')
+    data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[5]), name='Total Hospitalized Cases', mode='lines+markers', marker_color='#D6B50D')
+    data3 = go.Scatter(x=list(converted_time), y=list(limitHospital), name='Hospital Bed Limit', mode='lines', marker_color='#11151C')
 
     global graph3
     graph3 = True
 
     return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
-                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[4]),max(list_outputs[5]))/100.0)*100)], title='Number of Cases', side='left'),
+                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[4]),max(list_outputs[5]),max(limitHospital))/100.0)*100)], title='Number of Cases', side='left'),
                                                 title='Hospitalized Cases Over Time',
                                                 showlegend=True,
                                                 )}
 
-#ICU Graph
+#Callback function for the ICU graph
 @app.callback(Output('icuGraph', 'figure'),
              [Input('linear-update4', 'n_intervals')]
 )
@@ -442,50 +387,28 @@ def update_icu(input_data):
     converted_time = [val/24 for val in time]
     converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Scatter(
-        x = list(converted_time),
-        y = list(list_outputs[6]),
-        name = 'Current ICU Cases',
-        mode = 'lines+markers',
-        marker_color = '#7D1128',
-    )
-
-    data2 = go.Scatter(
-        x = list(converted_time),
-        y = list(list_outputs[7]),
-        name = 'Total ICU Cases',
-        mode = 'lines+markers',
-        marker_color = '#3C0919',
-    )
-
-    data3 = go.Scatter(
-        x = list(converted_time),
-        y = list(limitICU),
-        name = 'ICU Bed Limit',
-        mode = 'lines',
-        marker_color = '#11151C',
-    )
+    data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[6]), name='Current ICU Cases', mode='lines+markers', marker_color='#7D1128')
+    data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[7]), name='Total ICU Cases', mode='lines+markers', marker_color='#3C0919')
+    data3 = go.Scatter(x=list(converted_time), y=list(limitICU), name='ICU Bed Limit', mode='lines', marker_color='#11151C')
 
     global graph4
     graph4 = True
 
     return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
-                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[6]),max(list_outputs[7]))/100.0)*100)], title='Number of Cases', side='left'),
+                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[6]),max(list_outputs[7]),max(limitICU))/100.0)*100)], title='Number of Cases', side='left'),
                                                 title='ICU Cases Over Time',
                                                 showlegend=True,
                                                 )}
 
-#Button Callback
+#Callback function for the button to disable after first click
 @app.callback(Output('simulationStart', 'disabled'),
              [Input('simulationStart', 'n_clicks')]
 )
-def on_button_click(n):
+def disable_button(n):
+    if n is None: return False
+    else: return True
 
-    if n is None:
-        return False
-    else:
-        return True
-        
+#Callback function for the button to loop timestep after first click
 @app.callback(Output('placeholderdiv', 'children'),
              [Input('simulationStart', 'n_clicks')]
 )
@@ -494,7 +417,6 @@ def on_button_click(n):
     global graph2
     global graph3
     global graph4
-
 
     if n is None:
         return
