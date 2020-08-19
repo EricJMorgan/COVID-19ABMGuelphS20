@@ -47,6 +47,7 @@ ffi.cdef('''
     void placeOfWorshipRiskSetter(Simulation* sim, double val);
     void residentialRiskSetter(Simulation* sim, double val);
     void quarantineSeverity(Simulation* sim, double val);
+    void serviceRiskSetter(Simulation* sim, double val);
 ''')
 
 lib = ffi.dlopen('./libProject.so')
@@ -120,6 +121,9 @@ class Simulation(object):
     
     def quarantineSeverity(self, val):
         lib.quarantineSeverity(self.obj, val)
+
+    def setServiceRisk(self, val):
+        lib.serviceRiskSetter(self.obj, val)
 
 #Initialize times and values
 sim = Simulation()
@@ -255,7 +259,7 @@ def update_output_pnr(value):
     Output(list_elements[8]+'_value', 'children'),
     [Input(list_elements[8], 'value')])
 def update_output_serv(value):
-    #RETURN VALUE
+    sim.setServiceRisk(value)
     return '{}'.format(value)
 
 @app.callback(
