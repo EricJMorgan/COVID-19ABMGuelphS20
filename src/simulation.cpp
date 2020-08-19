@@ -24,6 +24,7 @@ Simulation::Simulation(string fileName) {
     population = 0;
     currTime = 0;
     hospitalTotal = 0;
+    hospitalCurrent = 0;
     icuCurrent = 0;
     icuTotal = 0;
     timeStep = 4;
