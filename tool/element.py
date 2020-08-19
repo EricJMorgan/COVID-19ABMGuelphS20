@@ -1,45 +1,54 @@
+#Import Packages
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
-#########################################################################################################################################
-#Navbar items
+from collections import deque
+
+#Navbar Items
 dashboard_item = dbc.NavItem(dbc.NavLink("Dashboard", href="#"))
 about_item = dbc.NavItem(dbc.NavLink("About", href="#"))
 
 #Navbar
 navigator = dbc.Navbar(
-    dbc.Container(
-        [
+    dbc.Container([
             html.A(
                 dbc.Row(
-                    [
-                        dbc.Col(dbc.NavbarBrand("COVID-19 Guelph eABM", className="ml-2")),
-                    ],
+                    [dbc.Col(dbc.NavbarBrand("COVID-19 Guelph eABM", className="ml-2"))],
                     align="center",
                 ),
             ),
             dbc.NavbarToggler(id="navbar-toggler"),
             dbc.Collapse(
                 dbc.Nav(
-                    [dashboard_item, about_item], className="ml-auto", navbar=True
+                    [dashboard_item, about_item],
+                    className="ml-auto", navbar=True
                 ),
-                id="navbar-collapse",
-                navbar=True,
+                id="navbar-collapse", navbar=True,
             ),
-        ]
-    ),
+        ]),
     className="mb-5",
 )
-#########################################################################################################################################
+
 #Button Container
 buttons = html.Div([
-    dbc.Button("Play", outline=True, color="primary", className="mr-1", id="simulationStart"),
-    #dbc.Button("Reset", outline=True, color="secondary", className="mr-1"),
-]
-)
-#########################################################################################################################################
+    dbc.Button("Start Movement", outline=True, color="primary", className="mr-1", id="simulationStart"),
+    html.P(id='placeholderdiv')
+])
+
 #Function to make slider
 def make_slider(label, id_tag, slider_value, minimum, maximum, step_value, start_value):
+    """Makes a slider with a label with the following parameters.
+
+    label: name of slider
+    id_tag: tag
+    slider_value: number id tag
+    minimum: minimum value of slider
+    maximum: maximum value of slider
+    step_value: interval of slider
+    start_value: initial value of slider
+
+    returns: slider with label as an object
+    """
     return dbc.FormGroup([
         dbc.Row([
             dbc.Label(label, html_for=id_tag+"_label"),
@@ -65,8 +74,7 @@ geo_tab = dbc.Card([
         html.Div([mask_compliance, html.Div(id='mask_compliance_container')]),
         html.Div([hygiene_maint, html.Div(id='hygiene_maint_container')]),
     ],
-    className="mt-1",
-    id="geo_tab",
+    className="mt-1", id="geo_tab",
     )
 ])
 
@@ -94,8 +102,7 @@ loc_tab = dbc.Card([
         html.Div([placeofworship, html.Div(id='placeofworship_container')]),
         html.Div([residential, html.Div(id='residential_container')]),
     ],
-    className="mt-1",
-    id="loc_tab",
+    className="mt-1", id="loc_tab",
     )
 ])
 
@@ -103,38 +110,40 @@ loc_tab = dbc.Card([
 tabs = dbc.Tabs([
     dbc.Tab(geo_tab, label="Geographical Risks", tab_id="geo_tab"),
     dbc.Tab(loc_tab, label="Location Risks", tab_id="loc_tab"),
-],
-id="tabs",
-active_tab="geo_tab",
+    ],
+    id="tabs", active_tab="geo_tab",
 )
-#########################################################################################################################################
-#Graphs
-import random
-from collections import deque
 
+#Function to make graph
 def graph_linear(id_tag, step, num):
+    """Makes a graph with the following parameters.
+
+    id_tag: tag
+    step: interval in milliseconds
+    num: number id tag
+
+    returns: animated graph
+    """
     return html.Div([
         dcc.Graph(id = id_tag,
             animate = True,
         ),
         dcc.Interval(
             id = 'linear-update'+str(num),
-            interval = step #update every predetermined interval
+            interval = step
         )
     ])
 
+#Function to start timer
 def start_time():
+    """Starts time for graphs.
+    """
     X = deque()
     X.append(0)
     return X
 
-def start_value(initial):
-    Y = deque()
-    Y.append(initial)
-    return Y
-
+#Function to increment timer
 def next_timestep(value):
+    """Increments time by 4 hours for graphs. Please check other documentation for details.
+    """
     return value + 4
-
-def get_randomY(value):
-    return value + (value * random.uniform(-0.1,0.1)) + 1

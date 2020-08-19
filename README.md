@@ -10,18 +10,14 @@ TBA
 ## Results & Discussion
 TBA
 
-## How to run
-To try the simulation yourself, you must clone the repository by entering:
-
-```bash
-git clone https://github.com/joyglitch/COVID-19ABMGuelphS20.git
-```
-
 ## Contributions
 If you would like to make a pull request, feel free to contribute. For any significant changes, please open an issue on the repository. Stay safe!
 
 ## steps to install and run
+```bash
 git clone https://github.com/joyglitch/COVID-19ABMGuelphS20.git
-cd into the directory
-type make
-
+```
+cd into the directory  
+```bash
+make  
+```

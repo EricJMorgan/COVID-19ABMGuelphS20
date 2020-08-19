@@ -329,10 +329,11 @@ def update_infectedGraph(input_data):
         marker_color = '#76B041',
     )
 
+    global graph1
     graph1 = True
 
     return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
-                                                yaxis=dict(range=[0, int(math.ceil(max(list_outputs[1])/100.0)*100)], title='Number of Cases', side='left'),
+                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[0]),max(list_outputs[1]))/100.0)*100)], title='Number of Cases', side='left'),
                                                 title='Infected Cases Over Time',
                                                 showlegend=True,
                                                 )}
@@ -371,10 +372,11 @@ def update_idrGraph(input_data):
         marker_color = '#00A8E8',
     )
 
+    global graph2
     graph2 = True
 
     return {'data':[data1,data2, data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
-                                                yaxis=dict(range=[0, int(math.ceil(max(list_outputs[1])/100.0)*100)], title='Number of Cases', side='left'),
+                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[1]),max(list_outputs[2]),max(list_outputs[3]))/100.0)*100)], title='Number of Cases', side='left'),
                                                 title='Infected, Deceased and Recovered Cases Over Time',
                                                 showlegend=True,
                                                 )}
@@ -414,10 +416,11 @@ def update_hospital(input_data):
         marker_color = '#11151C',
     )
 
+    global graph3
     graph3 = True
 
     return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
-                                                yaxis=dict(range=[0, int(math.ceil(max(list_outputs[5])/100.0)*100)], title='Number of Cases', side='left'),
+                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[4]),max(list_outputs[5]))/100.0)*100)], title='Number of Cases', side='left'),
                                                 title='Hospitalized Cases Over Time',
                                                 showlegend=True,
                                                 )}
@@ -457,27 +460,46 @@ def update_icu(input_data):
         marker_color = '#11151C',
     )
 
+    global graph4
     graph4 = True
 
     return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
-                                                yaxis=dict(range=[0, int(math.ceil(max(list_outputs[7])/100.0)*100)], title='Number of Cases', side='left'),
+                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[6]),max(list_outputs[7]))/100.0)*100)], title='Number of Cases', side='left'),
                                                 title='ICU Cases Over Time',
                                                 showlegend=True,
                                                 )}
-@app.callback(Output('simulationStart', 'children'),
+
+#Button Callback
+@app.callback(Output('simulationStart', 'disabled'),
              [Input('simulationStart', 'n_clicks')]
 )
 def on_button_click(n):
+
+    if n is None:
+        return False
+    else:
+        return True
+        
+@app.callback(Output('placeholderdiv', 'children'),
+             [Input('simulationStart', 'n_clicks')]
+)
+def on_button_click(n):
+    global graph1
+    global graph2
+    global graph3
+    global graph4
+
+
     if n is None:
         return
     else:
-        print("test")
-        while (graph1 & graph2 & graph3 & graph4):
-            sim.timeStep()
-            graph1 = False
-            graph2 = False
-            graph3 = False
-            graph4 = False
+        while (1) :
+            if (graph1 & graph2 & graph3 & graph4):
+                sim.timeStep()
+                graph1 = False
+                graph2 = False
+                graph3 = False
+                graph4 = False
 
 if __name__ == "__main__":
     app.run_server(debug=True, use_reloader=True)
