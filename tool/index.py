@@ -275,7 +275,7 @@ def update_output_ent(value):
     Output(list_elements[10]+'_value', 'children'),
     [Input(list_elements[10], 'value')])
 def update_output_health(value):
-    sim.setEntertainmentRisk(value)
+    sim.setHealthPlaceRisk(value)
     return '{}'.format(value)
 
 @app.callback(
