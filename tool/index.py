@@ -233,7 +233,7 @@ def on_button_click(n_clicks):
             buttonPressed = True
             if (graph1 & graph2 & graph3 & graph4):
                 print("timestep")
-                #element.timeStep()
+                sim.timeStep()
                 graph1 = False
                 graph2 = False
                 graph3 = False
