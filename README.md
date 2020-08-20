@@ -21,7 +21,7 @@ The following list consists of potential improvements to be made:
 * More work to be done to improve the "accuracy" of agent behaviours
 * Flu season in the Fall, especially with students coming to campus or not
 
-Here is a snapshot of the simulation:
+Here is a snapshot of the overall simulation functionality:
 ![Alt text](Screenshot.gif)
 ___
 ## Contributions
