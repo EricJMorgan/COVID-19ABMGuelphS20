@@ -30,7 +30,7 @@ git clone https://github.com/joyglitch/COVID-19ABMGuelphS20.git
 ```
 Then, `cd` into the directory that contains the cloned repository and enter the following commands:
 ```bash
-make  
+make library
 ```
 Furthermore, ensure that you have installed all the necessary Python packages by running the following command:
 ```bash
