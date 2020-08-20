@@ -36,3 +36,14 @@ Furthermore, ensure that you have installed all the necessary Python packages by
 ```bash
 pip install -r requirements.txt
 ```
+
+## Steps to update documentation
+For the documentation generation we used doxygen to create md and html files.  
+To learn more about the standards we used while documenting please use the following resources:  
+https://flcwiki.desy.de/How%20to%20document%20your%20code%20using%20doxygen  
+https://developer.lsst.io/cpp/api-docs.html  
+After doxygen has been installed run:  
+```bash
+doxygen COVIDABMDOCCONFIG
+```
+
