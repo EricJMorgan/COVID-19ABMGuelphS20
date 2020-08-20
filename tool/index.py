@@ -170,7 +170,7 @@ graphTabs = dbc.Tabs([
     dbc.Tab(infectedGraph, label="COVID-19 Cases", tab_id="i_tab"),
     dbc.Tab(hospitalGraph, label="Hospital & ICU Cases", tab_id="h_tab"),
 ],
-id="graph_tabs", active_tab="i_tab",
+id="graph_tabs", active_tab="i_tab", persistence=True, persistence_type='session',
 )
 
 #Layout for Dash application
@@ -194,6 +194,50 @@ app.callback(
     [Input("navbar-toggler", "n_clicks")],
     [State("navbar-collapse", "is_open")],
 )(toggle_navbar_collapse)
+
+#Graph Boolean variables for schedule handling
+graph1 = False
+graph2 = False
+graph3 = False
+graph4 = False
+buttonPressed = False
+
+#Callback function for the button to disable after first click
+@app.callback(Output('simulationStart', 'disabled'),
+             [Input('simulationStart', 'n_clicks')]
+)
+def disable_button(n_clicks):
+    global buttonPressed
+    if buttonPressed:
+        return True
+    if n_clicks is None:
+        return False
+    else:
+        return True
+
+#Callback function for the button to loop timestep after first click
+@app.callback(Output('placeholderdiv', 'children'),
+             [Input('simulationStart', 'n_clicks')]
+)
+def on_button_click(n_clicks):
+    global graph1
+    global graph2
+    global graph3
+    global graph4
+    global buttonPressed
+
+    if n_clicks is None:
+        return
+    else:
+        while (1) :
+            buttonPressed = True
+            if (graph1 & graph2 & graph3 & graph4):
+                print("timestep")
+                #element.timeStep()
+                graph1 = False
+                graph2 = False
+                graph3 = False
+                graph4 = False
 
 #List of slider names
 list_elements = ['Q_slider', 'SD_slider', 'MC_slider', 'HM_slider', 'gs_slider',
@@ -297,12 +341,6 @@ list_graphs  = ['infectedGraph', 'idrGraph', 'hospitalGraph', 'icuGraph']
 list_outputs = [[infectedC], [infectedT], [deceasedT], [recoveredT], [hospitalC], [hospitalT], [icuC], [icuT], [infectedN]]
 limitHospital = [totalBedCount]
 limitICU = [icuBedCount]
-
-#Graph Boolean variables for schedule handling
-graph1 = False
-graph2 = False
-graph3 = False
-graph4 = False
 
 #Callback function for the infected graph
 @app.callback(Output('infectedGraph', 'figure'),
