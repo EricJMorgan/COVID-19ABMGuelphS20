@@ -17,8 +17,12 @@ The finished project entails a successfully working eABM that resembles Guelph. 
 The following list consists of potential improvements to be made:
 * A map of Guelph that displays the hotspots of where agents are getting infected the most
 * More buttons to start, pause, and reset the simulation
+* More work to be done to improve the user interface dashboard
 * More work to be done to improve the "accuracy" of agent behaviours
 * Flu season in the Fall, especially with students coming to campus or not
+
+Here is a snapshot of the simulation:
+![Alt text](Screenshot.gif)
 ___
 ## Contributions
 Currently, this project is made private. We will not be taking any pull requests. Stay safe!
@@ -28,7 +32,7 @@ Firstly, clone the repository. You can do this by entering the following:
 ```bash
 git clone https://github.com/joyglitch/COVID-19ABMGuelphS20.git
 ```
-Then, `cd` into the directory that contains the cloned repository and enter the following commands:
+Then, `cd` into the directory that contains the cloned repository and enter the following command:
 ```bash
 make library
 ```
@@ -37,13 +41,12 @@ Furthermore, ensure that you have installed all the necessary Python packages by
 pip install -r requirements.txt
 ```
 
-## Steps to update documentation
-For the documentation generation we used doxygen to create md and html files.  
-To learn more about the standards we used while documenting please use the following resources:  
+## Steps to Update Documentation
+For the documentation generation, we used [Doxygen](https://www.doxygen.nl/index.html) to create MD and HTML files. To learn more about the standards we used while documenting, please use the following resources:  
 https://flcwiki.desy.de/How%20to%20document%20your%20code%20using%20doxygen  
 https://developer.lsst.io/cpp/api-docs.html  
-After doxygen has been installed run:  
+
+After [Doxygen](https://www.doxygen.nl/index.html) has been installed, run the following command:  
 ```bash
 doxygen COVIDABMDOCCONFIG
 ```
-
