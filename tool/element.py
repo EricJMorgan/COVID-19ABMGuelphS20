@@ -32,6 +32,7 @@ navigator = dbc.Navbar(
 #Button Container
 buttons = html.Div([
     dbc.Button("Start Movement", outline=True, color="primary", className="mr-1", id="simulationStart"),
+    html.A(dbc.Button("Refresh Graph", outline=True, color="info", className="mr-1", id="refresh"), href='/'),
     html.P(id='placeholderdiv')
 ])
 
@@ -54,7 +55,7 @@ def make_slider(label, id_tag, slider_value, minimum, maximum, step_value, start
             dbc.Label(label, html_for=id_tag+"_label"),
             html.Div(className="values", id=slider_value),
         ]),
-        dcc.Slider(id=id_tag, min=minimum, max=maximum, step=step_value, value=start_value, marks={
+        dcc.Slider(id=id_tag, persistence=True, persistence_type='session', min=minimum, max=maximum, step=step_value, value=start_value, marks={
             minimum: str(minimum),
             maximum: str(maximum),
         }),
@@ -111,7 +112,7 @@ tabs = dbc.Tabs([
     dbc.Tab(geo_tab, label="Geographical Risks", tab_id="geo_tab"),
     dbc.Tab(loc_tab, label="Location Risks", tab_id="loc_tab"),
     ],
-    id="tabs", active_tab="geo_tab",
+    id="tabs", active_tab="geo_tab", persistence=True, persistence_type='session',
 )
 
 #Function to make graph
