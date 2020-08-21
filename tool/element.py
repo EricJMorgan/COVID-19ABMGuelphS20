@@ -5,8 +5,7 @@ import dash_html_components as html
 from collections import deque
 
 #Navbar Items
-dashboard_item = dbc.NavItem(dbc.NavLink("Dashboard", href="#"))
-about_item = dbc.NavItem(dbc.NavLink("About", href="#"))
+dashboard_item = dbc.NavItem(dbc.NavLink("Dashboard", href="/"))
 
 #Navbar
 navigator = dbc.Navbar(
@@ -20,7 +19,7 @@ navigator = dbc.Navbar(
             dbc.NavbarToggler(id="navbar-toggler"),
             dbc.Collapse(
                 dbc.Nav(
-                    [dashboard_item, about_item],
+                    [dashboard_item],
                     className="ml-auto", navbar=True
                 ),
                 id="navbar-collapse", navbar=True,
