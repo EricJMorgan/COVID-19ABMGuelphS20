@@ -438,34 +438,5 @@ def update_icu(input_data):
                                                 showlegend=True,
                                                 )}
 
-#Callback function for the button to disable after first click
-@app.callback(Output('simulationStart', 'disabled'),
-             [Input('simulationStart', 'n_clicks')]
-)
-def disable_button(n):
-    if n is None: return False
-    else: return True
-
-#Callback function for the button to loop timestep after first click
-@app.callback(Output('placeholderdiv', 'children'),
-             [Input('simulationStart', 'n_clicks')]
-)
-def on_button_click(n):
-    global graph1
-    global graph2
-    global graph3
-    global graph4
-
-    if n is None:
-        return
-    else:
-        while (1) :
-            if (graph1 & graph2 & graph3 & graph4):
-                sim.timeStep()
-                graph1 = False
-                graph2 = False
-                graph3 = False
-                graph4 = False
-
 if __name__ == "__main__":
     app.run_server(debug=True, use_reloader=True)
