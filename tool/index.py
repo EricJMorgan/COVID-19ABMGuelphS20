@@ -147,30 +147,22 @@ idrGraph = element.create_graph('idrGraph', 1000, 2)
 hospitalGraph = element.create_graph('hospitalGraph', 1000, 3)
 icuGraph = element.create_graph('icuGraph', 1000, 4)
 
-#Infected Cases graph tab
+#COVID-19 Cases graph tab
 infectedGraph = dbc.Card([
     dbc.CardBody([
         html.Div([infectedGraph]),
         html.Div([idrGraph]),
-    ],
-    id="i_tab",)
-])
-
-#Hospital/ICU Cases graph tab
-hospitalGraph = dbc.Card([
-    dbc.CardBody([
         html.Div([hospitalGraph]),
         html.Div([icuGraph]),
     ],
-    id="h_tab",)
+    id="i_tab",)
 ])
 
 #Tabs of graphs
 graphTabs = dbc.Tabs([
     dbc.Tab(infectedGraph, label="COVID-19 Cases", tab_id="i_tab"),
-    dbc.Tab(hospitalGraph, label="Hospital & ICU Cases", tab_id="h_tab"),
 ],
-id="graph_tabs", active_tab="i_tab", persistence=True, persistence_type='session',
+id="graph_tabs", persistence=True, persistence_type='session',
 )
 
 #Layout for Dash application
