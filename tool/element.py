@@ -31,7 +31,7 @@ navigator = dbc.Navbar(
 #Button Container
 buttons = html.Div([
     dbc.Button("Start Movement", outline=True, color="primary", className="mr-1", id="simulationStart"),
-    html.A(dbc.Button("Refresh Graph", outline=True, color="info", className="mr-1", id="refresh"), href='/'),
+    html.A(dbc.Button("Refresh Page", outline=True, color="info", className="mr-1", id="refresh"), href='/'),
     html.P(id='placeholderdiv')
 ])
 
