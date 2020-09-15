@@ -1,5 +1,5 @@
 # README
-**Contributors**: Danyal Mahmood, James Busch, Joyce Li
+**Contributors**: Danyal Mahmood, James Busch, Joyce Li, Eric Morgan
 ___
 ## Introduction
 This project entails an initial proof of concept for an environmental agent-based model (eABM) that monitors the spread of COVID-19 within a population of agents that resembles the demography of Guelph. It consists of infection and recovery/mortality rates of agents that live and travel around Guelph.
