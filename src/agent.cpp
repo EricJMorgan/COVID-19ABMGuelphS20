@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 29/07/20
- * ver 0.06
+ * 21/09/20
+ * ver 0.07
  * 
  * This is the class file for the agent class
  ***************/
@@ -21,6 +21,7 @@ Agent::Agent(AgentInfo agentInfo) {
     DecideMartialStatus();
     DecideHouseholdIncome();
     DecideEducation();
+    setEducationIndex(-1);
 }
 
 AgentInfo Agent::getAgentInfo(){
@@ -38,6 +39,14 @@ void Agent::setHasMoved(bool newMove){
 
 bool Agent::getHasMoved(){
     return hasMoved;
+}
+
+void Agent::setEducationIndex(int index){
+    educationIndex = index;
+}
+
+int Agent::getEducationIndex(){
+    return educationIndex;
 }
 
 /*************************
