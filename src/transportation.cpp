@@ -233,7 +233,7 @@ bool Transportation::inTimeRange(int timeOfDay, int min, int max){
 }
 
 bool Transportation::willGoToSchool(DayOfWeek currDay, int timeOfDay){//TODO students might move to multiple schools a day, might need a fix
-    return isWeekDay(currDay) && inTimeRange(timeOfDay, 8, 12);
+    return isWeekDay(currDay) && inTimeRange(timeOfDay, 8, 16);
 }
 
 bool Transportation::willGoToWork(DayOfWeek currDay, int timeOfDay){

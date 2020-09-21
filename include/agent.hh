@@ -129,8 +129,24 @@ class Agent : public SIR {
      */
     void DecideMigitationStrategy(double maskWearing, double hygieneMaintain);
 
+    /**
+     * setEducationIndex
+     * 
+     * sets the index of education that the agent will be
+     * using for the rest of the simulation
+     * 
+     * @param the index of the agents school
+     */
     void setEducationIndex(int index);
 
+    /**
+     * getEducationIndex
+     * 
+     * gets the index of education that the agent will be
+     * using for the rest of the simulation
+     * 
+     * @return the index of the agents school
+     */
     int getEducationIndex();
 
     //To be implemented later
