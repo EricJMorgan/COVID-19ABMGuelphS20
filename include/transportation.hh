@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 21/09/20
- * ver 0.09
+ * ver 0.10
  * 
  * This is the header file for the transportation class
  ***************/
@@ -157,7 +157,7 @@ class Transportation {
      * @param currDay the day of the week
      * @return the index that the agent will move to -1 if it will stay in place
      */
-    int agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay);
+    int agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay);
 
     /**
      * InfectAgentsPostMovement
@@ -273,6 +273,8 @@ class Transportation {
      * @return the index that the agent will be moving to
      */
     int adultChanceOfMoving(DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark, int health, int worship);
+
+    int getAgentEducationIndex(Agent *agent);
 
     /**
      * moteCarloRandom

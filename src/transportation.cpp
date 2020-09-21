@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
  * 21/09/20
- * ver 1.01
+ * ver 1.02
  * 
  * This is the class file for the transportation class
  ***************/
@@ -93,14 +93,14 @@ int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
     for(int i = 0; i < locationListSize; i++){
         for(int j = 0; j < getLocationAt(i)->getSusceptibleSize(); j++){
             if(!getLocationAt(i)->getSusceptibleAgentAt(j)->getHasMoved()){
-                newLocation = agentMovingTo(getLocationAt(i)->getSusceptibleAgentAt(j)->getAgentInfo(), timeOfDay, currDay);
+                newLocation = agentMovingTo(getLocationAt(i)->getSusceptibleAgentAt(j), getLocationAt(i)->getSusceptibleAgentAt(j)->getAgentInfo(), timeOfDay, currDay);
                 moveSusceptibleAgent(i, newLocation, j);
                 if(newLocation != i) j--;
             }
         }
         for(int j = 0; j < getLocationAt(i)->getInfectedSize(); j++){
             if(!getLocationAt(i)->getInfectedAgentAt(j)->getHasMoved()){
-                newLocation = agentMovingTo(getLocationAt(i)->getInfectedAgentAt(j)->getAgentInfo(), timeOfDay, currDay);
+                newLocation = agentMovingTo(getLocationAt(i)->getInfectedAgentAt(j), getLocationAt(i)->getInfectedAgentAt(j)->getAgentInfo(), timeOfDay, currDay);
                 moveInfectedAgent(i, newLocation, j);
                 if(newLocation != i) j--;
             }
@@ -130,18 +130,18 @@ int Transportation::InfectAgentsPostMovement(){
 }
 
 
-int Transportation::agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay){//TODO no health or Place of worship incluided yet
+int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay){//TODO no health or Place of worship incluided yet
     if(agentInfo== MALE0TO4 || agentInfo == FEMALE0TO4);
     else if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){//5to9 year olds only go to school and then go home really
-        if(willGoToSchool(currDay, timeOfDay)) return findIndexToMove(hasSchool);
+        if(willGoToSchool(currDay, timeOfDay)) return getAgentEducationIndex(agent);
         if(!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 18) && willMove(30)) return findIndexToMove(hasEntertainment);//TODO might change % chance based on income
     }
     else if(agentInfo == MALE10TO14 || agentInfo == FEMALE10TO14){
-        if(willGoToSchool(currDay, timeOfDay)) return findIndexToMove(hasSchool);
+        if(willGoToSchool(currDay, timeOfDay)) return getAgentEducationIndex(agent);
         if(!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 18) && willMove(40)) return findIndexToMove(hasEntertainment);
     }
     else if(agentInfo == MALE15TO19 || agentInfo == FEMALE15TO19){
-        if(willGoToSchool(currDay, timeOfDay) && willMove(85)) return findIndexToMove(hasSchool);
+        if(willGoToSchool(currDay, timeOfDay) && willMove(85)) return getAgentEducationIndex(agent);;
         if(!isWeekDay(currDay) && willMove(40) && inTimeRange(timeOfDay, 9, 18)) return findIndexToMove(hasParksAndRec);
         if((isWeekDay(currDay) && inTimeRange(timeOfDay, 11,20) && willMove(30)) || 
             (!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 24) && willMove(75))) return findIndexToMove(hasEntertainment);
@@ -149,7 +149,7 @@ int Transportation::agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek 
         if(inTimeRange(timeOfDay, 12, 20) && willMove(40)) return findIndexToMove(hasServices);
     }
     else if(agentInfo == MALE20TO24 || agentInfo == FEMALE20TO24){
-        if(willGoToSchool(currDay, timeOfDay) && willMove(75)) return findIndexToMove(hasSchool);
+        if(willGoToSchool(currDay, timeOfDay) && willMove(75)) return getAgentEducationIndex(agent);;
         if(willGoToWork(currDay, timeOfDay) && willMove(15)) return findIndexToMove(hasGenStore);//Yes this is done twice in this statment
         if(inTimeRange(timeOfDay, 18, 24) && !isWeekDay(currDay) && willMove(50)) return findIndexToMove(hasEntertainment);
         if(inTimeRange(timeOfDay, 16, 20) && willMove(35)) return findIndexToMove(hasServices);
@@ -158,7 +158,7 @@ int Transportation::agentMovingTo(AgentInfo agentInfo, int timeOfDay, DayOfWeek 
     }
     else if(agentInfo == MALE25TO29 || agentInfo == FEMALE25TO29){
         if(willGoToWork(currDay, timeOfDay) && willMove(75)) return findIndexToMove(hasGenStore);
-        if(willGoToSchool(currDay, timeOfDay) && willMove(15)) return findIndexToMove(hasSchool);//TODO no distinction between full and part time jobs
+        if(willGoToSchool(currDay, timeOfDay) && willMove(15)) return getAgentEducationIndex(agent);;//TODO no distinction between full and part time jobs
         if(inTimeRange(timeOfDay, 18, 24) && !isWeekDay(currDay) && willMove(45)) return findIndexToMove(hasEntertainment);
         if(inTimeRange(timeOfDay, 12,20) && willMove(25))return findIndexToMove(hasServices);
         if(inTimeRange(timeOfDay, 10, 18) && !isWeekDay(currDay) && willMove(20)) return findIndexToMove(hasParksAndRec);
@@ -233,7 +233,7 @@ bool Transportation::inTimeRange(int timeOfDay, int min, int max){
 }
 
 bool Transportation::willGoToSchool(DayOfWeek currDay, int timeOfDay){//TODO students might move to multiple schools a day, might need a fix
-    return isWeekDay(currDay) && inTimeRange(timeOfDay, 8, 16);
+    return isWeekDay(currDay) && inTimeRange(timeOfDay, 8, 12);
 }
 
 bool Transportation::willGoToWork(DayOfWeek currDay, int timeOfDay){
@@ -249,6 +249,11 @@ int Transportation::adultChanceOfMoving(DayOfWeek currDay, int currTime, int gen
     if(inTimeRange(currTime, 9, 17) && willMove(health)) return findIndexToMove(hasHealth);
     if(inTimeRange(currTime, 8, 18) && !isWeekDay(currDay) && willMove(worship)) return findIndexToMove(hasPlaceOfWorship);
     return findResidentialIndex(hasResidential);
+}
+
+int Transportation::getAgentEducationIndex(Agent *agent){
+    if(agent->getEducationIndex() == -1) agent->setEducationIndex(findIndexToMove(hasSchool));
+    return agent->getEducationIndex();
 }
 
 int Transportation::monteCarloRandom(int roof){

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 04/08/20
- * ver 0.08
+ * 21/09/20
+ * ver 0.09
  * 
  * This is the header file for the agent class
  ***************/
@@ -129,6 +129,10 @@ class Agent : public SIR {
      */
     void DecideMigitationStrategy(double maskWearing, double hygieneMaintain);
 
+    void setEducationIndex(int index);
+
+    int getEducationIndex();
+
     //To be implemented later
     void quarantineTime();
     void goodHygiene();
@@ -149,6 +153,7 @@ class Agent : public SIR {
     string sector;
     Location* currLocation;
     bool hasMoved;
+    int educationIndex;
 
     /**
      * DecideEthnicity
