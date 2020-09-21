@@ -141,7 +141,7 @@ int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfD
         if(!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 18) && willMove(40)) return findIndexToMove(hasEntertainment);
     }
     else if(agentInfo == MALE15TO19 || agentInfo == FEMALE15TO19){
-        if(willGoToSchool(currDay, timeOfDay) && willMove(85)) return getAgentEducationIndex(agent);;
+        if(willGoToSchool(currDay, timeOfDay) && willMove(85)) return getAgentEducationIndex(agent);
         if(!isWeekDay(currDay) && willMove(40) && inTimeRange(timeOfDay, 9, 18)) return findIndexToMove(hasParksAndRec);
         if((isWeekDay(currDay) && inTimeRange(timeOfDay, 11,20) && willMove(30)) || 
             (!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 24) && willMove(75))) return findIndexToMove(hasEntertainment);
@@ -158,7 +158,7 @@ int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfD
     }
     else if(agentInfo == MALE25TO29 || agentInfo == FEMALE25TO29){
         if(willGoToWork(currDay, timeOfDay) && willMove(75)) return findIndexToMove(hasGenStore);
-        if(willGoToSchool(currDay, timeOfDay) && willMove(15)) return getAgentEducationIndex(agent);;//TODO no distinction between full and part time jobs
+        if(willGoToSchool(currDay, timeOfDay) && willMove(15)) return getAgentEducationIndex(agent);//TODO no distinction between full and part time jobs
         if(inTimeRange(timeOfDay, 18, 24) && !isWeekDay(currDay) && willMove(45)) return findIndexToMove(hasEntertainment);
         if(inTimeRange(timeOfDay, 12,20) && willMove(25))return findIndexToMove(hasServices);
         if(inTimeRange(timeOfDay, 10, 18) && !isWeekDay(currDay) && willMove(20)) return findIndexToMove(hasParksAndRec);
