@@ -149,7 +149,7 @@ int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfD
         if(inTimeRange(timeOfDay, 12, 20) && willMove(40)) return findIndexToMove(hasServices);
     }
     else if(agentInfo == MALE20TO24 || agentInfo == FEMALE20TO24){
-        if(willGoToSchool(currDay, timeOfDay) && willMove(75)) return getAgentEducationIndex(agent);;
+        if(willGoToSchool(currDay, timeOfDay) && willMove(75)) return getAgentEducationIndex(agent);
         if(willGoToWork(currDay, timeOfDay) && willMove(15)) return findIndexToMove(hasGenStore);//Yes this is done twice in this statment
         if(inTimeRange(timeOfDay, 18, 24) && !isWeekDay(currDay) && willMove(50)) return findIndexToMove(hasEntertainment);
         if(inTimeRange(timeOfDay, 16, 20) && willMove(35)) return findIndexToMove(hasServices);
