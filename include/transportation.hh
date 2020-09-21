@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 04/08/20
- * ver 0.08
+ * 21/09/20
+ * ver 0.09
  * 
  * This is the header file for the transportation class
  ***************/
@@ -272,7 +272,7 @@ class Transportation {
      * @param goPark the chance of someone going to parks and rec
      * @return the index that the agent will be moving to
      */
-    int adultChanceOfMoving(DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark);
+    int adultChanceOfMoving(DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark, int health, int worship);
 
     /**
      * moteCarloRandom
