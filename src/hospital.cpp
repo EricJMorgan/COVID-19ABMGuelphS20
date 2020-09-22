@@ -1,9 +1,11 @@
 /****************
  * COVID-19ABMGuelphS20
- * 05/08/20
- * ver 1.00
+ * 22/09/20
+ * ver 1.01
  * 
- * This is the class file for the hospital class
+ * This is the class file for the hospital class. The purpose of
+ * this class is to keep track of hopsital statistics. Mainly the amount
+ * of beds being used and the amount of ICU beds being used.
  ***************/
 
 
