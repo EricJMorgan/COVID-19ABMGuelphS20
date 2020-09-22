@@ -1,9 +1,10 @@
 /****************
  * COVID-19ABMGuelphS20
- * 29/07/20
- * ver 0.07
+ * 22/09/20
+ * ver 1.01
  * 
- * This is the source code for the postalCodeHash object for the COVID-19 eABM
+ * This is the source code for the postalCodeHash object for the COVID-19 eABM. This class takes in
+ * two tsv files and creates a hashtable of locations (grouped by the first 5 digits of the postal code)
  ***************/
 
 #include "postalCodeHash.hh"

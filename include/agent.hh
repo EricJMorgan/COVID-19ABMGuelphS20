@@ -1,9 +1,12 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/09/20
- * ver 0.09
+ * 22/09/20
+ * ver 0.10
  * 
- * This is the header file for the agent class
+ * This is the header file for the agent class. It contains all of the 
+ * info for each individual agent. When a new agent is created it decides its
+ * ethnicty, gender, education, marital status, and income. For the most part all that will
+ * be used from this class is getters for the agents information.
  ***************/
 
 

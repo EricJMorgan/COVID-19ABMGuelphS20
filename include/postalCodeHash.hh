@@ -1,9 +1,10 @@
 /****************
  * COVID-19ABMGuelphS20
- * 29/07/20
- * ver 0.05
+ * 22/09/20
+ * ver 1.00
  * 
- * This is the header file for the postalCodeHash object for the COVID-19 eABM
+ * This is the header file for the postalCodeHash object for the COVID-19 eABM. This class takes in
+ * two tsv files and creates a hashtable of locations (grouped by the first 5 digits of the postal code)
  ***************/
 
 #ifndef POSTALCODEHASH_H_

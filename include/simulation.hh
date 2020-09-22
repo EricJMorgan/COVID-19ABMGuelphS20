@@ -1,9 +1,11 @@
 /****************
  * COVID-19ABMGuelphS20
- * 13/08/20
- * ver 1.02
+ * 22/09/20
+ * ver 1.03
  * 
- * This is the header file for the simulation class
+ * This is the header file for the simulation class. This is where all of the classes come together
+ * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
+ * for the simulation, along with giving the results as outputs to both the frontend and the console.
  ***************/
 
 

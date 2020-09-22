@@ -1,9 +1,10 @@
  /****************
  * COVID-19ABMGuelphS20
- * 23/07/20
- * ver 0.04
+ * 22/09/20
+ * ver 1.00
  * 
- * This is the header file for the isolation compartment class
+ * This is the header file for the isolation compartment class. This is used
+ * for when an agent has visable symptoms and isolates. 
  ***************/
 
 

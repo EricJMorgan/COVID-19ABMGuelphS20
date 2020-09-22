@@ -1,9 +1,11 @@
 /****************
  * COVID-19ABMGuelphS20
- * 05/08/20
- * ver 1.00
+ * 22/09/20
+ * ver 1.01
  * 
- * This is the header file for the geographical risk class
+ * This is the header file for the geographical risk class. The main
+ * use for this class is to do the math for each area and decide how many 
+ * people to infect in a given area.
  ***************/
 
 

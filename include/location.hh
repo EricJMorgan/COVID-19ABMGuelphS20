@@ -1,9 +1,12 @@
 /****************
  * COVID-19ABMGuelphS20
- * 04/08/20
- * ver 0.10
+ * 22/09/20
+ * ver 1.00
  * 
- * This is the header file for the location class
+ * This is the header file for the location class. This holds the
+ * location grouping (The first 5 digits of a postal code), the locations
+ * in each postal code grouping (amount of shops, bars, etc) and the current
+ * agents in the location
  ***************/
 
 

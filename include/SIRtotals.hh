@@ -1,9 +1,10 @@
 /****************
  * COVID-19ABMGuelphS20
- * 04/08/20
- * ver 0.05
+ * 22/09/20
+ * ver 1.00
  * 
- * This is the header file for the SIR totals class
+ * This is the header file for the SIR totals class. This just keeps track of agents behavious such as
+ * wearing masks, hygiene, ect.
  ***************/
 
 

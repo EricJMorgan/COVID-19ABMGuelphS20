@@ -1,9 +1,11 @@
 /****************
  * COVID-19ABMGuelphS20
- * 21/09/20
- * ver 0.07
+ * 22/09/20
+ * ver 0.08
  * 
- * This is the class file for the agent class
+ * This is the class file for the agent class. It contains all of the 
+ * info for each individual agent. When a new agent is created it decides its
+ * ethnicty, gender, education, marital status, and income. 
  ***************/
 
 

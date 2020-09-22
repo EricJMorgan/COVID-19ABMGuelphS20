@@ -1,9 +1,11 @@
 /****************
  * COVID-19ABMGuelphS20
- * 13/08/20
- * ver 1.01
+ * 22/09/20
+ * ver 1.02
  * 
- * This is the header file for the SIR class
+ * This is the header file for the SIR class. This is the pipline that moves
+ * agents from Susceptible to infected to recoverd. It looks at the agents current infection
+ * status and moves them through at the appropriate times. It also decides when an agent dies.
  ***************/
 
 
