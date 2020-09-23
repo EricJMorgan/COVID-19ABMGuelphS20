@@ -1,7 +1,7 @@
 #!/bin/bash
 # This script can be used to quickly install the required components for the project
 
-read -p "Are you sure you want to setup and install all required components: $filename? [y/n]" -n 1 -r
+read -p "Are you sure you want to setup and install all required components? [y/n]" -n 1 -r
 echo  # move to new line
 
 if [[ $REPLY =~ ^[Yy]$ ]]
