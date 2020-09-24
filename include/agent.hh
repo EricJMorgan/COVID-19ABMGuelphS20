@@ -152,6 +152,28 @@ class Agent : public SIR {
      */
     int getEducationIndex();
 
+    /**
+     * setResidentialIndex
+     * 
+     * sets the index of education that the agent will be 
+     * using for the rest of the simulation as their housing area
+     * instead of bouncing around residential areas
+     * 
+     * @param the index of the agents Residential area
+     */
+    void setResidentialIndex(int index);
+
+    /**
+     * getResidentialIndex
+     * 
+     * gets the index of education that the agent will be 
+     * using for the rest of the simulation as their housing area
+     * instead of bouncing around residential areas
+     * 
+     * @return the index of the agents Residential area
+     */
+    int getResidentialIndex();
+
     //To be implemented later
     void quarantineTime();
     void goodHygiene();
@@ -173,6 +195,7 @@ class Agent : public SIR {
     Location* currLocation;
     bool hasMoved;
     int educationIndex;
+    int residentialIndex;
 
     /**
      * DecideEthnicity

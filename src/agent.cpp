@@ -51,6 +51,14 @@ int Agent::getEducationIndex(){
     return educationIndex;
 }
 
+void Agent::setResidentialIndex(int index){
+    residentialIndex = index;
+}
+
+int Agent::getResidentialIndex(){
+    return residentialIndex;
+}
+
 /*************************
  * DecideEducation
  * 
