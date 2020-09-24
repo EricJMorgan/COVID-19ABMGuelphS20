@@ -273,9 +273,33 @@ class Transportation {
      * @param goPark the chance of someone going to parks and rec
      * @return the index that the agent will be moving to
      */
-    int adultChanceOfMoving(DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark, int health, int worship);
+    int adultChanceOfMoving(Agent *agent, DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark, int health, int worship);
 
+    /**
+     * getAgentEducationIndex
+     * 
+     * This is a helper function to get the agents
+     * education index. If the agent does not have one yet
+     * it will be assigned a random one, for the rest of the
+     * simulation that agent will always go to that school
+     * 
+     * @param agent to get education index from
+     * @return the index the agent will use
+     */
     int getAgentEducationIndex(Agent *agent);
+
+    /**
+     * getAgentResidentialIndex
+     * 
+     * This is a helper function to get the agents 
+     * residentialIndex. If the agent does not have one yet,
+     * it will be assigned a random one, for the rest of the simulation
+     * that agent will always go to that residential area
+     * 
+     * @param agent to get residential index from
+     * @return the index the agent will use
+     */
+    int getAgentResidentialIndex(Agent *agent);
 
     /**
      * moteCarloRandom

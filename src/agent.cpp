@@ -24,6 +24,7 @@ Agent::Agent(AgentInfo agentInfo) {
     DecideHouseholdIncome();
     DecideEducation();
     setEducationIndex(-1);
+    setResidentialIndex(-1);
 }
 
 AgentInfo Agent::getAgentInfo(){
