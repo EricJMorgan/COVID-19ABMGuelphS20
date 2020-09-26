@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
+from dash import no_update
 import cffi
 import element
 import math
@@ -137,6 +138,7 @@ icuT = sim.ICUtotal()
 #Hospital and ICU variables
 totalBedCount = 130
 icuBedCount = 22
+appStart = False
 
 #Start Dash application
 app = dash.Dash(external_stylesheets=[dbc.themes.FLATLY])
@@ -217,12 +219,14 @@ def on_button_click(n_clicks):
     global graph3
     global graph4
     global buttonPressed
+    global appStart
 
     if n_clicks is None:
         return
     else:
         while (1) :
             buttonPressed = True
+            appStart = True
             if (graph1 & graph2 & graph3 & graph4):
                 sim.timeStep()
                 graph1 = False
@@ -338,96 +342,108 @@ limitICU = [icuBedCount]
              [Input('linear-update1', 'n_intervals')]
 )
 def update_infectedGraph(input_data):
-    time.append(element.next_timestep(time[-1]))
-    list_outputs[0].append(sim.infectedCurrent())
-    list_outputs[1].append(sim.infectedTotal())
-    list_outputs[8].append(sim.newlyInfected())
-    converted_time = [val/24 for val in time]
-    converted_time = [round(val,2) for val in converted_time]
+    if (appStart == False):
+        return no_update
+    else:
+        time.append(element.next_timestep(time[-1]))
+        list_outputs[0].append(sim.infectedCurrent())
+        list_outputs[1].append(sim.infectedTotal())
+        list_outputs[8].append(sim.newlyInfected())
+        converted_time = [val/24 for val in time]
+        converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[0]), name='Current Infected Cases', mode='lines+markers', marker_color='#F5CB5C')
-    data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[1]), name='Total Infected Cases', mode='lines+markers', marker_color='#F71735')
-    data3 = go.Bar(x=list(converted_time), y=list(list_outputs[8]), name='Newly Infected Cases', marker_color='#76B041')
+        data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[0]), name='Current Infected Cases', mode='lines+markers', marker_color='#F5CB5C')
+        data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[1]), name='Total Infected Cases', mode='lines+markers', marker_color='#F71735')
+        data3 = go.Bar(x=list(converted_time), y=list(list_outputs[8]), name='Newly Infected Cases', marker_color='#76B041')
 
-    global graph1
-    graph1 = True
+        global graph1
+        graph1 = True
 
-    return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
-                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[0]),max(list_outputs[1]))/100.0)*100)], title='Number of Cases', side='left'),
-                                                title='Infected Cases Over Time',
-                                                showlegend=True,
-                                                )}
+        return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
+                                                    yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[0]),max(list_outputs[1]))/100.0)*100)], title='Number of Cases', side='left'),
+                                                    title='Infected Cases Over Time',
+                                                    showlegend=True,
+                                                    )}
 
 #Callback function for the Infected-Deceased-Recovered graph
 @app.callback(Output('idrGraph', 'figure'),
              [Input('linear-update2', 'n_intervals')]
 )
 def update_idrGraph(input_data):
-    list_outputs[2].append(sim.deceasedTotal())
-    list_outputs[3].append(sim.recoveredTotal())
-    converted_time = [val/24 for val in time]
-    converted_time = [round(val,2) for val in converted_time]
+    if (appStart == False):
+        return no_update
+    else:
+        list_outputs[2].append(sim.deceasedTotal())
+        list_outputs[3].append(sim.recoveredTotal())
+        converted_time = [val/24 for val in time]
+        converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[1]), name='Total Infected Cases', mode='lines+markers', marker_color='#F71735')
-    data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[2]), name='Total Deceased Cases', mode='lines+markers', marker_color='#242423')
-    data3 = go.Scatter(x=list(converted_time), y=list(list_outputs[3]), name='Total Recovered Cases', mode='lines+markers', marker_color='#00A8E8')
+        data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[1]), name='Total Infected Cases', mode='lines+markers', marker_color='#F71735')
+        data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[2]), name='Total Deceased Cases', mode='lines+markers', marker_color='#242423')
+        data3 = go.Scatter(x=list(converted_time), y=list(list_outputs[3]), name='Total Recovered Cases', mode='lines+markers', marker_color='#00A8E8')
 
-    global graph2
-    graph2 = True
+        global graph2
+        graph2 = True
 
-    return {'data':[data1,data2, data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
-                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[1]),max(list_outputs[2]),max(list_outputs[3]))/100.0)*100)], title='Number of Cases', side='left'),
-                                                title='Infected, Deceased and Recovered Cases Over Time',
-                                                showlegend=True,
-                                                )}
+        return {'data':[data1,data2, data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
+                                                    yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[1]),max(list_outputs[2]),max(list_outputs[3]))/100.0)*100)], title='Number of Cases', side='left'),
+                                                    title='Infected, Deceased and Recovered Cases Over Time',
+                                                    showlegend=True,
+                                                    )}
 
 #Callback function for the hospital graph
 @app.callback(Output('hospitalGraph', 'figure'),
              [Input('linear-update3', 'n_intervals')]
 )
 def update_hospital(input_data):
-    list_outputs[4].append(sim.hospitalCurrent())
-    list_outputs[5].append(sim.hospitalTotal())
-    limitHospital.append(totalBedCount)
-    converted_time = [val/24 for val in time]
-    converted_time = [round(val,2) for val in converted_time]
+    if (appStart == False):
+        return no_update
+    else:
+        list_outputs[4].append(sim.hospitalCurrent())
+        list_outputs[5].append(sim.hospitalTotal())
+        limitHospital.append(totalBedCount)
+        converted_time = [val/24 for val in time]
+        converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[4]), name='Current Hospitalized Cases', mode='lines+markers', marker_color='#F3DC68')
-    data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[5]), name='Total Hospitalized Cases', mode='lines+markers', marker_color='#D6B50D')
-    data3 = go.Scatter(x=list(converted_time), y=list(limitHospital), name='Hospital Bed Limit', mode='lines', marker_color='#11151C')
+        data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[4]), name='Current Hospitalized Cases', mode='lines+markers', marker_color='#F3DC68')
+        data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[5]), name='Total Hospitalized Cases', mode='lines+markers', marker_color='#D6B50D')
+        data3 = go.Scatter(x=list(converted_time), y=list(limitHospital), name='Hospital Bed Limit', mode='lines', marker_color='#11151C')
 
-    global graph3
-    graph3 = True
+        global graph3
+        graph3 = True
 
-    return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
-                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[4]),max(list_outputs[5]),max(limitHospital))/100.0)*100)], title='Number of Cases', side='left'),
-                                                title='Hospitalized Cases Over Time',
-                                                showlegend=True,
-                                                )}
+        return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
+                                                    yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[4]),max(list_outputs[5]),max(limitHospital))/100.0)*100)], title='Number of Cases', side='left'),
+                                                    title='Hospitalized Cases Over Time',
+                                                    showlegend=True,
+                                                    )}
 
 #Callback function for the ICU graph
 @app.callback(Output('icuGraph', 'figure'),
              [Input('linear-update4', 'n_intervals')]
 )
 def update_icu(input_data):
-    list_outputs[6].append(sim.ICUCurrent())
-    list_outputs[7].append(sim.ICUtotal())
-    limitICU.append(icuBedCount)
-    converted_time = [val/24 for val in time]
-    converted_time = [round(val,2) for val in converted_time]
+    if (appStart == False):
+        return no_update
+    else:
+        list_outputs[6].append(sim.ICUCurrent())
+        list_outputs[7].append(sim.ICUtotal())
+        limitICU.append(icuBedCount)
+        converted_time = [val/24 for val in time]
+        converted_time = [round(val,2) for val in converted_time]
 
-    data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[6]), name='Current ICU Cases', mode='lines+markers', marker_color='#7D1128')
-    data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[7]), name='Total ICU Cases', mode='lines+markers', marker_color='#3C0919')
-    data3 = go.Scatter(x=list(converted_time), y=list(limitICU), name='ICU Bed Limit', mode='lines', marker_color='#11151C')
+        data1 = go.Scatter(x=list(converted_time), y=list(list_outputs[6]), name='Current ICU Cases', mode='lines+markers', marker_color='#7D1128')
+        data2 = go.Scatter(x=list(converted_time), y=list(list_outputs[7]), name='Total ICU Cases', mode='lines+markers', marker_color='#3C0919')
+        data3 = go.Scatter(x=list(converted_time), y=list(limitICU), name='ICU Bed Limit', mode='lines', marker_color='#11151C')
 
-    global graph4
-    graph4 = True
+        global graph4
+        graph4 = True
 
-    return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
-                                                yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[6]),max(list_outputs[7]),max(limitICU))/100.0)*100)], title='Number of Cases', side='left'),
-                                                title='ICU Cases Over Time',
-                                                showlegend=True,
-                                                )}
+        return {'data':[data1,data2,data3], 'layout': go.Layout(xaxis=dict(range=[0, max(converted_time)], title='Time (Days)'),
+                                                    yaxis=dict(range=[0, int(math.ceil(max(max(list_outputs[6]),max(list_outputs[7]),max(limitICU))/100.0)*100)], title='Number of Cases', side='left'),
+                                                    title='ICU Cases Over Time',
+                                                    showlegend=True,
+                                                    )}
 
 if __name__ == "__main__":
     app.run_server(debug=True, use_reloader=True)
