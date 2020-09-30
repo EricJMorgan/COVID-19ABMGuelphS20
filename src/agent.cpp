@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 0.08
+ * 30/09/20
+ * ver 1.00
  * 
  * This is the class file for the agent class. It contains all of the 
  * info for each individual agent. When a new agent is created it decides its
@@ -24,6 +24,7 @@ Agent::Agent(AgentInfo agentInfo) {
     DecideHouseholdIncome();
     DecideEducation();
     setEducationIndex(-1);
+    setResidentialIndex(-1);
 }
 
 AgentInfo Agent::getAgentInfo(){
@@ -49,6 +50,14 @@ void Agent::setEducationIndex(int index){
 
 int Agent::getEducationIndex(){
     return educationIndex;
+}
+
+void Agent::setResidentialIndex(int index){
+    residentialIndex = index;
+}
+
+int Agent::getResidentialIndex(){
+    return residentialIndex;
 }
 
 /*************************

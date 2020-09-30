@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.03
+ * 30/09/20
+ * ver 1.04
  * 
  * This is the class file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
@@ -166,34 +166,34 @@ int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfD
         if(inTimeRange(timeOfDay, 7, 12) && !isWeekDay(currDay) && willMove(10)) return findIndexToMove(hasPlaceOfWorship);
     }
     else if(agentInfo == MALE30TO34 || agentInfo == FEMALE30TO34){
-        return adultChanceOfMoving(currDay, timeOfDay, 85, 50, 35, 25, 25, 5, 30);
+        return adultChanceOfMoving(agent, currDay, timeOfDay, 85, 50, 35, 25, 25, 5, 30);
     }
     else if(agentInfo == MALE35TO39 || agentInfo == FEMALE35TO39){
-        return adultChanceOfMoving(currDay, timeOfDay, 80, 70, 30, 25, 30, 5, 35);
+        return adultChanceOfMoving(agent, currDay, timeOfDay, 80, 70, 30, 25, 30, 5, 35);
     }
     else if(agentInfo == MALE40TO44 || agentInfo == FEMALE40TO44){
-        return adultChanceOfMoving(currDay, timeOfDay,70, 85, 20, 35, 35, 5, 35);
+        return adultChanceOfMoving(agent, currDay, timeOfDay,70, 85, 20, 35, 35, 5, 35);
     }
     else if(agentInfo == MALE45TO49 || agentInfo == FEMALE45TO49){
-        return adultChanceOfMoving(currDay, timeOfDay, 65, 90, 15, 40, 25, 10, 35);
+        return adultChanceOfMoving(agent, currDay, timeOfDay, 65, 90, 15, 40, 25, 10, 35);
     }
     else if(agentInfo == MALE50TO54 || agentInfo == FEMALE50TO54){
-        return adultChanceOfMoving(currDay, timeOfDay, 55, 90, 10, 45, 20, 10, 35);
+        return adultChanceOfMoving(agent, currDay, timeOfDay, 55, 90, 10, 45, 20, 10, 35);
     }
     else if(agentInfo == MALE55TO59 || agentInfo == FEMALE55TO59){
-        return adultChanceOfMoving(currDay, timeOfDay, 50, 90, 10, 45, 20, 10, 35);
+        return adultChanceOfMoving(agent, currDay, timeOfDay, 50, 90, 10, 45, 20, 10, 35);
     }
     else if(agentInfo == MALE60TO64 || agentInfo == FEMALE60TO64){
-        return adultChanceOfMoving(currDay, timeOfDay, 30, 70, 10, 50, 15, 15, 35);
+        return adultChanceOfMoving(agent, currDay, timeOfDay, 30, 70, 10, 50, 15, 15, 35);
     }
     else if(agentInfo == MALE65TO69 || agentInfo == FEMALE65TO69){
-        return adultChanceOfMoving(currDay, timeOfDay, 25, 50, 10, 60, 20, 20, 40);
+        return adultChanceOfMoving(agent, currDay, timeOfDay, 25, 50, 10, 60, 20, 20, 40);
     }
     else if(agentInfo == MALE70TO74 || agentInfo == FEMALE70TO74){
-        return adultChanceOfMoving(currDay, timeOfDay, 15, 30, 5, 60, 10, 20, 40);
+        return adultChanceOfMoving(agent, currDay, timeOfDay, 15, 30, 5, 60, 10, 20, 40);
     }
     else if(agentInfo == MALE75TO79 || agentInfo == FEMALE75TO79){
-        return adultChanceOfMoving(currDay, timeOfDay, 5, 15, 5, 65, 5, 25, 40);
+        return adultChanceOfMoving(agent, currDay, timeOfDay, 5, 15, 5, 65, 5, 25, 40);
     }
     else if(agentInfo == MALE80TO84 || agentInfo == FEMALE80TO84){
         if(inTimeRange(timeOfDay, 10, 18) && !isWeekDay(currDay) && willMove(5)) return findIndexToMove(hasEntertainment);
@@ -208,7 +208,7 @@ int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfD
         else return findIndexToMove(hasResidential);
     }
 
-    return findResidentialIndex(hasResidential);//default return
+    return getAgentResidentialIndex(agent);//default return
 }
 
 bool Transportation::isWeekDay(DayOfWeek currDay){
@@ -241,7 +241,7 @@ bool Transportation::willGoToWork(DayOfWeek currDay, int timeOfDay){
     return isWeekDay(currDay) && inTimeRange(timeOfDay, 9, 17);
 }
 
-int Transportation::adultChanceOfMoving(DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark, int health, int worship){
+int Transportation::adultChanceOfMoving(Agent *agent, DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark, int health, int worship){
     if(willGoToWork(currDay, currTime) && willMove(genWork)) return findIndexToMove(hasGenStore);
     if(willGoToWork(currDay, currTime) && willMove(servWork)) return findIndexToMove(hasServices);
     if(inTimeRange(currTime, 18, 24) && !isWeekDay(currDay) && willMove(goOut)) return findIndexToMove(hasEntertainment);
@@ -249,12 +249,17 @@ int Transportation::adultChanceOfMoving(DayOfWeek currDay, int currTime, int gen
     if(inTimeRange(currTime, 10, 18) && !isWeekDay(currDay) && willMove(goPark)) return findIndexToMove(hasParksAndRec);
     if(inTimeRange(currTime, 9, 17) && willMove(health)) return findIndexToMove(hasHealth);
     if(inTimeRange(currTime, 8, 18) && !isWeekDay(currDay) && willMove(worship)) return findIndexToMove(hasPlaceOfWorship);
-    return findResidentialIndex(hasResidential);
+    return getAgentResidentialIndex(agent);
 }
 
 int Transportation::getAgentEducationIndex(Agent *agent){
     if(agent->getEducationIndex() == -1) agent->setEducationIndex(findIndexToMove(hasSchool));
     return agent->getEducationIndex();
+}
+
+int Transportation::getAgentResidentialIndex(Agent *agent){
+    if(agent->getResidentialIndex() == -1) agent->setResidentialIndex(findIndexToMove(hasResidential));
+    return agent->getResidentialIndex();
 }
 
 int Transportation::monteCarloRandom(int roof){
