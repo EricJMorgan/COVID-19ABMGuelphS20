@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 0.10
+ * 30/09/20
+ * ver 1.00
  * 
  * This is the header file for the agent class. It contains all of the 
  * info for each individual agent. When a new agent is created it decides its
