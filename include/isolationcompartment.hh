@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.00
+ * 30/09/20
+ * ver 1.01
  * 
  * This is the header file for the isolation compartment class. This is used
  * for when an agent has visable symptoms and isolates. 
@@ -44,6 +44,9 @@ class IsolationCompartment {
      * ReleaseRecoveredAgents
      * 
      * This function releases agents when they have recovered
+     * 
+     * @param the index of the agent to be released
+     * @return the pointer to the agent to be released
      */
     Agent *ReleaseRecoveredAgents(int index);
 
@@ -51,6 +54,8 @@ class IsolationCompartment {
      * AddMildlyInfectedAgents
      * 
      * This function quarantines/isolates agents that have mild symptoms
+     * 
+     * @param the pointer to the agent to isolate
      */
     void AddMildlyInfectedAgents(Agent *toIsolate);
 
@@ -58,6 +63,8 @@ class IsolationCompartment {
      * SimulateIsoTimeStep
      * 
      * This function simulates the time step for the isolation compartment
+     * 
+     * @param the size of the timeStep
      */
     void SimulateIsoTimeStep(double timeStep);
 

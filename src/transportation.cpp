@@ -18,6 +18,7 @@ using namespace std;
 Transportation::Transportation(Agent **arr, int arrSize){
     postalCodes = new PostalCodeHash("placeData.tsv", "AllPostalCodes.csv", 7000);
    
+    //place non empty buckets into postalCodegrouping list
     for(int i = 0; i < 7000; i++){
         if(postalCodes->hashTable[i]->getPostalCodeGrouping().compare("") != 0){
             locationList.push_back(postalCodes->hashTable[i]);
@@ -68,7 +69,8 @@ Location* Transportation::getLocationAt(int index){
 }
 
 Agent *Transportation::moveSusceptibleAgent(int locationOne, int locationTwo, int agentIndex){
-    if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;//Test cases to make sure input is valid
+    //error checking
+    if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;
     if(locationTwo < 0 || locationTwo >= getLocationListLength()) return NULL;
     if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne)->getSusceptibleSize()) return NULL;
 
@@ -79,7 +81,8 @@ Agent *Transportation::moveSusceptibleAgent(int locationOne, int locationTwo, in
 }
 
 Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int agentIndex){
-    if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;//Test cases to make sure input is valid
+    //error checking
+    if(locationOne < 0 || locationOne >= getLocationListLength()) return NULL;
     if(locationTwo < 0 || locationTwo >= getLocationListLength()) return NULL;
     if(agentIndex < 0 || agentIndex >= getLocationAt(locationOne)->getInfectedSize()) return NULL;
 
@@ -89,8 +92,10 @@ Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int a
 }
 
 int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay){
-    int locationListSize = getLocationListLength();//This is done so this function is not called more that once
+    int locationListSize = getLocationListLength();
     int newLocation;
+
+    //loops through all the locations and moves each agent
     for(int i = 0; i < locationListSize; i++){
         for(int j = 0; j < getLocationAt(i)->getSusceptibleSize(); j++){
             if(!getLocationAt(i)->getSusceptibleAgentAt(j)->getHasMoved()){
@@ -131,9 +136,10 @@ int Transportation::InfectAgentsPostMovement(){
 }
 
 
-int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay){//TODO no health or Place of worship incluided yet
+int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay){
+    //This checks the agents data and decides their chance of moving based on age, time, and day of the week
     if(agentInfo== MALE0TO4 || agentInfo == FEMALE0TO4);
-    else if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){//5to9 year olds only go to school and then go home really
+    else if(agentInfo == MALE5TO9 || agentInfo == FEMALE5TO9){
         if(willGoToSchool(currDay, timeOfDay)) return getAgentEducationIndex(agent);
         if(!isWeekDay(currDay) && inTimeRange(timeOfDay, 11, 18) && willMove(30)) return findIndexToMove(hasEntertainment);//TODO might change % chance based on income
     }

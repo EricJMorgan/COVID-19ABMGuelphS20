@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.01
+ * 30/09/20
+ * ver 1.02
  * 
  * This is the header file for the hospital class. The purpose of
  * this class is to keep track of hopsital statistics. Mainly the amount
@@ -91,6 +91,8 @@ class Hospital {
      * 
      * This moves the Agents currently in the hospital through an SIR timestep
      * and then determines if the agent needs to be moved to a different stage
+     * 
+     * @param the timestep size
      */
     void HospitalTimeStep(double timestep);
 

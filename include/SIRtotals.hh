@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.00
+ * 30/09/20
+ * ver 1.01
  * 
  * This is the header file for the SIR totals class. This just keeps track of agents behavious such as
  * wearing masks, hygiene, ect.
@@ -32,7 +32,25 @@ class SIRtotals {
     int showsSymptoms;
 
     public:
+
+    /**
+     * SIRtotals
+     * 
+     * This is the contstructor of the object.
+     * It is empty as it does not need to call anything
+     * on initilzation
+     */
     SIRtotals();
+
+    /**
+     * updateTotals
+     * 
+     * This is the method that updates the counters for each agents
+     * status.
+     * 
+     * @param the list of susceptibale agents
+     * @param the list of infected agents
+     */
     void updateTotals(vector<Agent *> susAgents, vector<Agent *> infAgents);
 
     /**

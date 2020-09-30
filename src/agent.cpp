@@ -14,6 +14,7 @@
 
 // Constructor
 Agent::Agent(AgentInfo agentInfo) {
+    //Init varibles
     info = agentInfo;
     hasMoved = false;
     wearingMask = false;
@@ -60,13 +61,11 @@ int Agent::getResidentialIndex(){
     return residentialIndex;
 }
 
-/*************************
- * DecideEducation
- * 
- * This function randomly decides an agents educational background income based on demographics
- * of guelph from the Canadian Census of 2017
- ************************/
+
 void Agent::DecideEducation() {
+    //if agents are younger than 20 they will not have a formal education yet
+    //Females have too be done like this due too their placement in the enum being
+    //in the middle
     if (info < MALE20TO24 || (FEMALE0TO4 <= info && info <= FEMALE15TO19)) {
         education = NA;
     }
@@ -90,13 +89,8 @@ void Agent::DecideEducation() {
     
 }
 
-/*************************
- * DecideHouseholdIncome
- * 
- * This function randomly decides an agents household income based on demographics
- * of guelph from the Canadian Census of 2017
- ************************/
 void Agent::DecideHouseholdIncome() {
+    //if someone is younger than 20 we assume they have no income tied too themselves
     if (info < MALE20TO24 || (FEMALE0TO4 <= info && info <= FEMALE15TO19)) {
         income = HNA;
     }
@@ -133,14 +127,9 @@ void Agent::DecideHouseholdIncome() {
     }
 }
 
-/*************************
- * DecideMartialStatus
- * 
- * This function randomly decides an agents marital status based 
- * on demographics of guelph from the Canadian Census of 2017
- ************************/
 void Agent::DecideMartialStatus() { 
-    if (info < 4 || (18 <= info && info <= 21)) {
+    //if someone is younger than 20 they are not in a serious relationship
+    if (info < MALE20TO24 || (FEMALE0TO4 <= info && info <= FEMALE15TO19)) {
         maritalStatus = "Single";
     }
 
@@ -162,12 +151,6 @@ void Agent::DecideMartialStatus() {
     }
 }
 
-/*************************
- * DecideEthnicity
- * 
- * This function randomly decides an agents ethnicity based on 
- * demographics of guelph from the Canadian Census of 2017
- ************************/
 void Agent::DecideEthnicity() {
     double randomNumber = (double) rand()/RAND_MAX;
     
@@ -206,12 +189,6 @@ void Agent::DecideEthnicity() {
 
 }
 
-/*************************
- * DecideMigitationStrategy
- * 
- * This function randomly decides an agents chance of wearing 
- * a face mask and practicing good hygiene
- ************************/
 void Agent::DecideMigitationStrategy(double maskWearing, double hygieneMaintain) {
     double maskChance = (double) rand()/RAND_MAX;
     double hygieneChance = (double) rand()/RAND_MAX;
@@ -228,6 +205,7 @@ void Agent::DecideMigitationStrategy(double maskWearing, double hygieneMaintain)
 string Agent::agentToString() {
     string agentString = "";
 
+    //just a string for error checking
     agentString.append(AgentInfoMapReverse[info]);
     agentString.append(" ");
     agentString.append(ethnicity);

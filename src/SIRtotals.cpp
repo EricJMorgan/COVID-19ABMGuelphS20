@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.00
+ * 30/09/20
+ * ver 1.01
  * 
  * This is the class file for the SIR totals class. This just keeps track of agents behavious such as
  * wearing masks, hygiene, ect.
@@ -16,6 +16,7 @@ SIRtotals::SIRtotals() {
     //
 }
 
+//TODO need to account for recoverd agents
 void SIRtotals::updateTotals(vector<Agent *> susAgents, vector<Agent *> infAgents) {
     susceptible = (int)susAgents.size();
     infected = (int)infAgents.size();

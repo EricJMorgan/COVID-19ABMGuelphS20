@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.01
+ * 30/09/20
+ * ver 1.02
  * 
  * This is the class file for the hospital class. The purpose of
  * this class is to keep track of hopsital statistics. Mainly the amount
@@ -14,6 +14,7 @@
 
 // Constructor
 Hospital::Hospital() {
+    //init values
     numberPpl = 0;
     icuCount = 0;
     totalICU = 0;
@@ -23,28 +24,33 @@ Hospital::Hospital() {
 }
 
 void Hospital::freeIcuBeds(int indexToRemove) {
+    //error checking
     if (indexToRemove < 0 || indexToRemove >= (int)hospitalICU.size()) {
         cout << "Trying to free icu out of bounds index" << endl;
         return;
     }
 
+    //removes agent at a given index
     hospitalICU.erase(hospitalICU.begin() + indexToRemove);
     icuCount--;
     indicateOverflow();
 }
 
 void Hospital::freeHospitalBeds(int indexToRemove) {
+    //error checking
     if (indexToRemove < 0 || indexToRemove >= (int)hospitalGeneralWard.size()) {
         cout << "Trying to free hospital out of bounds index" << endl;
         return;
     }
     
+    //removes agent at a given index
     hospitalGeneralWard.erase(hospitalGeneralWard.begin() + indexToRemove);
     numberPpl--;
     indicateOverflow();
 }
 
-void Hospital::indicateOverflow() {
+void Hospital::indicateOverflow() {\
+    //sets the flag if more people are in beds than what the hospital has
     if(numberPpl > totalBedCount) {
         hospitalOverflow = true;
     } else {
@@ -59,11 +65,13 @@ void Hospital::indicateOverflow() {
 }
 
 void Hospital::increaseHospitalCount(Agent* agentToAdd) {
+    //error checking
     if (agentToAdd == NULL) {
         cout << "Passing NULL to increase hospital" << endl;
         return;
     }
 
+    //adds agent to hospital beds
     hospitalGeneralWard.push_back(agentToAdd);
     numberPpl++;
     totalHospital++;
@@ -71,11 +79,13 @@ void Hospital::increaseHospitalCount(Agent* agentToAdd) {
 }
 
 void Hospital::increaseIcuCount(Agent* agentToAdd) {
+    //error checking
     if (agentToAdd == NULL) {
         cout << "Passing NULL to increase ICU" << endl;
         return;
     }
     
+    //adds agent to ICU beds
     hospitalICU.push_back(agentToAdd);
     icuCount++;
     totalICU++;
@@ -83,8 +93,11 @@ void Hospital::increaseIcuCount(Agent* agentToAdd) {
 }
 
 void Hospital::HospitalTimeStep(double timestep) {
+    //loop through all the beds in the icu
     for (int i = 0; i < (int)hospitalICU.size(); i++) {
         string sirResponse  = hospitalICU[i]->SIRTimeStep(timestep);
+
+        //check if an agent is recoverd or dead and remove them from the list
         if (sirResponse == "RECOVERAGENT") {
             Agent *recoveredAgent = hospitalICU.at(i);
             hospitalICU.erase(hospitalICU.begin() + i);
@@ -98,8 +111,11 @@ void Hospital::HospitalTimeStep(double timestep) {
         }
     }
 
+    //loop through all the beds in the gen pop
     for (int i = 0; i < (int)hospitalGeneralWard.size(); i++) {
         string sirResponse  = hospitalGeneralWard[i]->SIRTimeStep(timestep);
+
+        //check if an agent is recoverd or needing to move too the ICU and remove them from the list
         if (sirResponse == "ICUAGENT") {
             Agent *toICU = hospitalGeneralWard.at(i);
             hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);

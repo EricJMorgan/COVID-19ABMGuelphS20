@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.00
+ * 30/09/20
+ * ver 1.01
  * 
  * This is the class file for the isolation compartment class. This is used
  * for when an agent has visable symptoms and isolates. 
@@ -22,6 +22,8 @@ vector<Agent *> IsolationCompartment::isolatedAgents() {
 
 Agent *IsolationCompartment::ReleaseRecoveredAgents(int index) {
     if(index < 0 || index >= (int)isolated.size()) return NULL;
+
+    //releases agent at a given index
     Agent *toBeReleased = isolated.at(index);
     isolated.erase(isolated.begin() + index);
     return toBeReleased;
@@ -33,8 +35,11 @@ void IsolationCompartment::AddMildlyInfectedAgents(Agent *toIsolate) {
 }
 
 void IsolationCompartment::SimulateIsoTimeStep (double timeStep) {
+    //loops through the isolated agent list
     for (int i = 0; i < (int)isolated.size(); i++) {
         string sirResponse  = isolated[i]->SIRTimeStep(timeStep);
+
+        //check if the agent is in need of the hospital or good too leave isolation
         if (sirResponse == "HOSPITALAGENT") {
             Agent *recoveredAgent = isolated.at(i);
             isolated.erase(isolated.begin() + i);

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.02
+ * 30/09/20
+ * ver 1.03
  * 
  * This is the header file for the SIR class. This is the pipline that moves
  * agents from Susceptible to infected to recoverd. It looks at the agents current infection
@@ -82,6 +82,7 @@ class SIR {
      * 
      * Function returns the current severity stage of the SIR case. 
      * 
+     * @return The current stage of the SIR case (Infected, recoverd, etc)
      */
     SIRSeverity DetermineSeverity();
 
