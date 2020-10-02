@@ -21,6 +21,7 @@
 
 using namespace std;
 
+//The way to identify the day of the week
 enum DayOfWeek{MON, TUE, WED, THU, FRI, SAT, SUN};
 
 //Declare simulation class
@@ -41,7 +42,8 @@ class Transportation {
     /**
      * ~Transportation
      * 
-     * This is the de-constructor for the class
+     * This is the de-constructor for the class. 
+     * This delets the postalCode object
      */
     ~Transportation();
 

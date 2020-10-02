@@ -30,11 +30,6 @@ SIR::SIR() {
 // icu death after 5 days
 //possible timestep 0.125 3 hrs
 
-/*************************
- * SIRTimeStep
- * 
- * This progresses agents through their various SIR model paths.
- ************************/
 string SIR::SIRTimeStep(double timeStep) {
     if (currentSeverity == SUSCEPTIBLE || currentSeverity == RECOVERED || currentSeverity == DECEASED) {
         return "NA";
@@ -85,11 +80,6 @@ string SIR::SIRTimeStep(double timeStep) {
     return "NA";
 }
 
-/*************************
- * DecideSIRCase
- * 
- * Determines the path the agents COVID19 case will follow.
- ************************/
 void SIR::DecideSIRCase(double infectedNumb, double infectedChance) {
     // decide if the case is fatal
     if (infectedNumb <  infectedChance) {
@@ -202,11 +192,6 @@ void SIR::AgentDeceased() {
     currentSeverity = DECEASED;
 } 
 
-/*************************
- * DetermineSeverity
- * 
- * Get the current severity of the agents case.
- ************************/
 SIRSeverity SIR::DetermineSeverity() {
     return currentSeverity;
 }

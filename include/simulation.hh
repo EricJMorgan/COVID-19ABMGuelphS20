@@ -349,6 +349,9 @@ class Simulation {
      * 
      * This is a helper function to increment the currDay counter
      * int the program
+     * 
+     * @param the current day of the week
+     * @return the next day in line
      */
     DayOfWeek getNextDay(DayOfWeek currDay);
 };

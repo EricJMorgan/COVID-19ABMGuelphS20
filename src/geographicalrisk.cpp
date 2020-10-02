@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.01
+ * 30/09/20
+ * ver 1.02
  * 
  * This is the class file for the geographical risk class. The main
  * use for this class is to do the math for each area and decide how many 
@@ -18,6 +18,7 @@ GeographicalRisk::GeographicalRisk() {
 }
 
 void GeographicalRisk::updateAvgCountsAndRisk() {
+    //updates the total counts of the population
     sirTotalLocation.updateTotals(susceptible, infected);
     double population = (double)susceptible.size() + (double)infected.size();
 
@@ -26,7 +27,6 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     }
 
     // calculate averages in compartment during current timestep
-    
     avgSymptomaticCarriers = (double)sirTotalLocation.getShowsSymptoms() / population;
     avgAsymptomatic = ((double)sirTotalLocation.getInfected() - (double)sirTotalLocation.getShowsSymptoms()) / population;
     avgMaskWearer = (double)sirTotalLocation.getMaskWearer() / population;
@@ -80,9 +80,9 @@ int GeographicalRisk::infectPeople() {
     updateAvgCountsAndRisk();
     int infectedCount = 0;
 
+    //This loop goes throught and infects people based off of their % chance in a certin area
     for (int i = 0; i < (int)susceptible.size(); i++) {
         double agentInfectionChance = (double) rand()/RAND_MAX;
-
         if (agentInfectionChance < chanceOfInfection) {
             susceptible.at(i)->AgentInfected();
             infected.push_back(susceptible.at(i));

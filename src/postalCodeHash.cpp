@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.01
+ * 30/09/20
+ * ver 1.02
  * 
  * This is the source code for the postalCodeHash object for the COVID-19 eABM. This class takes in
  * two tsv files and creates a hashtable of locations (grouped by the first 5 digits of the postal code)
@@ -21,16 +21,21 @@ PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int has
     ifstream toParse;
     string holder;
     string currPostalCode;
+
+    //creates an emprty array for the hashtable
     hashTable = new Location*[hashSize];
     for(int i = 0; i < hashSize; i++){
         hashTable[i] = new Location();
     }
 
+    //opens and parses the tsv file for postal codes and their location types
     toParse = openFile(tsvFile);
     if(toParse.is_open()){
         while(getline(toParse, holder)){
             vector<string> tabValues;
-            split(tabValues, holder, boost::is_any_of("\t"));//Splits data into vector holder
+
+            //Splits tsv columns into a vector
+            split(tabValues, holder, boost::is_any_of("\t"));
             if(tabValues.size() != 6) continue;
             currPostalCode = getPostalCode(tabValues[1]);
             placePostalInHash(currPostalCode, tabValues[5] , hashSize);
@@ -38,6 +43,7 @@ PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int has
         toParse.close();
     }
 
+    //adds all extra postalcodes from guelph into hashtable
     toParse = openFile(evenMoreLocations);
     if(toParse.is_open()){
         while(getline(toParse, holder)){
@@ -48,6 +54,7 @@ PostalCodeHash::PostalCodeHash(string tsvFile, string evenMoreLocations, int has
 }
 
 PostalCodeHash::~PostalCodeHash(){
+    //deletes each bucket in hashTable then deletes the hashtable its self
     for(int i = 0; i < 7000; i++){//TODO make this dynamic sized with input
         delete hashTable[i];
     }
@@ -61,7 +68,9 @@ int PostalCodeHash::getPostalHash(int hashSize, string postalCodeToHash){
 
     int hashTotal = 0;
     for(int i = 0; i < (int)postalCodeToHash.length(); i++){
-        if(postalCodeToHash.at(i) == ' ');//Every postal code has a space so no need for adding it to the hash total
+
+        //Every postal code has a space so no need for adding it to the hash total
+        if(postalCodeToHash.at(i) == ' ');
         else{
             if(isalpha(postalCodeToHash.at(i))){
                 hashTotal += (postalCodeToHash.at(i) - 65) * pow(5, i);
@@ -79,6 +88,8 @@ int PostalCodeHash::getPostalHash(int hashSize, string postalCodeToHash){
 
 string PostalCodeHash::getPostalCode(string fullAddress){
     if(fullAddress.empty()) return "";
+
+    //Takes an address and parses it for its postal code
     vector<string> commaValues;//Comma holder
     split(commaValues, fullAddress, boost::is_any_of(","));
     for(int i = 0; i < (int)commaValues.size(); i++){
@@ -87,6 +98,7 @@ string PostalCodeHash::getPostalCode(string fullAddress){
         }
     }
 
+    //Sometimes the data is messy and it wont get a postal code so it returns unknown
     return "unknown";
 }
 
@@ -109,8 +121,13 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
         newGroupedPostalCode = getFirstFiveChars(newPostalCode);
         currHashValue = PostalCodeHash::getPostalHash(hashSize, newGroupedPostalCode);
         placed = false;
+
+            //loops over the hashtable until it finds either a postalcode grouping with the same first 5 chars or
+            //until it finds and empty bucket to place itsself in
             while(placed == false){
-            if(hashTable[currHashValue]->getPostalCodeGrouping().compare("") == 0){//If the bucket is empty
+            
+            //Compares and checks if the grouping is empty
+            if(hashTable[currHashValue]->getPostalCodeGrouping().compare("") == 0){
                 hashTable[currHashValue]->setPostalCodeGrouping(newGroupedPostalCode);
                 hashTable[currHashValue]->addPostalCodeToList(newPostalCode);
                 if((locationName.compare("residential") == 0 && !hashTable[currHashValue]->postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
@@ -118,6 +135,8 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
                      if(locationName.compare("residential") != 0) hashTable[currHashValue]->amountOfLocations++;
                 }
                 placed = true;
+            
+            //compares and checks if the grouping is the same
             }else if(hashTable[currHashValue]->getPostalCodeGrouping().compare(newGroupedPostalCode) == 0){//If the bucket has the same postal code grouping
                 if((locationName.compare("residential") == 0 && !hashTable[currHashValue]->postalCodeListContainsDup(newPostalCode)) || locationName.compare("residential") != 0){
                     hashTable[currHashValue]->increaseLocationCountAt(locationTypeMap[locationName]);
@@ -125,7 +144,9 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
                 }
                 hashTable[currHashValue]->addPostalCodeToList(newPostalCode);
                 placed = true;
-            }else{//If occupied by a differnt postal code grouping go to the next one
+
+            //if neither go too the next bucket
+            }else{
                 if(currHashValue == hashSize - 1) currHashValue = 0;
                 else currHashValue++;
             }
@@ -133,7 +154,8 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
     }
 }
 
-string PostalCodeHash::getFirstFiveChars(string fullPostal){
+string PostalCodeHash::getFirstFiveChars(string fullPostal){\
+    //due to some postal codes only having 3 chars this is a parser so we encounter no errors
     if(fullPostal.empty()) return "";
     if(fullPostal.length() == 3) return fullPostal;
     return fullPostal.substr(0, 6);

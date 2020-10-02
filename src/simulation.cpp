@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.03
+ * 30/09/20
+ * ver 1.04
  * 
  * This is the class file for the simulation class. This is where all of the classes come together
  * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
@@ -19,6 +19,7 @@
 
 // Constructor
 Simulation::Simulation(string fileName) {
+    //init vars and open a file
     ifstream demographicFile;
     demographicFile.open(fileName, ios::in);
     string line;
@@ -40,6 +41,7 @@ Simulation::Simulation(string fileName) {
     initiallyInfected = 0;
     socialDistancingSeverity = 0;
 
+    //make sure the file is valid
     if(!demographicFile.good()){
         cout << "Error invalid file" << endl;
         return;
@@ -78,15 +80,16 @@ int Simulation::getPopulation(){
     return population;
 }
 
+//This is where all the methods to update data are called for each 4 hour interval
 void Simulation::simulateTimeStep(){
-    // hospital
+    // hospital timestep method calls
     guelphHospital.HospitalTimeStep(sirTimeStep);
     deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
     guelphHospital.newlyDeceased.clear();
     recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());
     guelphHospital.newlyRecovered.clear();
 
-    // isolation compartment
+    // isolation compartment timestep method calls
     isoCompartment.SimulateIsoTimeStep(sirTimeStep);
     recoveredAgents.insert(recoveredAgents.end(), isoCompartment.newlyRecovered.begin(), isoCompartment.newlyRecovered.end());
     isoCompartment.newlyRecovered.clear();
@@ -95,7 +98,7 @@ void Simulation::simulateTimeStep(){
     }
     isoCompartment.newlyHospitalized.clear();
 
-    // agent sir time step
+    // agent sir timestep method calls
     for (int i = 0; i < (int)locationInfo->getLocationListLength(); i++) {
         for (int j = 0; j < (int)locationInfo->getLocationAt(i)->getInfected().size(); j++) {
             string sirResponse = locationInfo->getLocationAt(i)->getInfected()[j]->SIRTimeStep(sirTimeStep);
@@ -117,9 +120,10 @@ void Simulation::simulateTimeStep(){
         }
     }
     
-    // transport agents and infect ppl
+    // transport agents from location to location
     newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
 
+    //update SIR totals
     deceasedTotal = (int)deceasedAgents.size();
     recoveredTotal = (int)recoveredAgents.size();
     infectedTotal += newlyInfected;
@@ -131,6 +135,8 @@ void Simulation::simulateTimeStep(){
 
     timeElapsed += timeStep;
     double daysTotal = (double)timeElapsed/24.0;
+
+    //print to console for de-bugging
     cout << "Time elapsed: " << timeElapsed << " hours, " << daysTotal <<  " days" << endl;
     cout << "******************************" << endl;
     cout << "New cases " <<  newlyInfected << endl;
@@ -148,7 +154,8 @@ void Simulation::simulateTimeStep(){
     cout << endl;
 
 
-    stepTime();//increase time at end of day
+    //increase time at end of day
+    stepTime();
 }
 
 Agent *Simulation::getAgentAt(int index){
@@ -192,34 +199,42 @@ void Simulation::setGenStoreRisk(double val){
     locationRisk[0] = val;
     locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
+
 void Simulation::setTransportRisk(double val){
     locationRisk[1] = val;
     locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
+
 void Simulation::setSchoolRisk(double val){
     locationRisk[2] = val;
     locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
+
 void Simulation::setParkRisk(double val){
     locationRisk[3] = val;
     locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
+
 void Simulation::setServiceRisk(double val){
     locationRisk[4] = val;
     locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
+
 void Simulation::setEntertainmentRisk(double val){
     locationRisk[5] = val;
     locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
+
 void Simulation::setHealthPlaceRisk(double val){
     locationRisk[6] = val;
     locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
+
 void Simulation::setPlaceOfWorshipRisk(double val){
     locationRisk[7] = val;
     locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
 }
+
 void Simulation::setResidentialRisk(double val){
     locationRisk[8] = val;
     locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
@@ -228,6 +243,7 @@ void Simulation::setResidentialRisk(double val){
 
 /********************Private functions***************************************/
 void Simulation::addNewAgent(string personInfo, int amountToAdd){
+    //for the amount of agents in a demographic, add them to the agent list
     for(int i = 0; i < amountToAdd; i++){
         Agent* tempAgent = new Agent(AgentInfoMap[personInfo]);
         simAgents[agentCount] = tempAgent;
@@ -244,6 +260,8 @@ void Simulation::addNewAgent(string personInfo, int amountToAdd){
 }
 
 void Simulation::setUpAgents(string filename) {
+
+    //open file
     ifstream demographicFile;
     demographicFile.open(filename, ios::in);
     string line;

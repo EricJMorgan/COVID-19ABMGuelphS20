@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.01
+ * 30/09/20
+ * ver 1.02
  * 
  * This is the class file for the location class. This holds the
  * location grouping (The first 5 digits of a postal code), the locations
@@ -16,6 +16,8 @@
 
 // Constructor
 Location::Location() {
+
+    //creates an empty containor of a location for use in a hashtable
     postalCodeGrouping = "";
     for(int i = 0; i < LOCATIONTYPESIZE; i++){
         locationCount[i] = 0;
@@ -27,7 +29,10 @@ Location::Location() {
     amountOfLocations = 0;
 }
 
-Location::Location(string newPostalCode, int shopData[LOCATIONTYPESIZE]){
+Location::Location(string newPostalCode, int shopData[LOCATIONTYPESIZE]){//TODO seems too miss residential data
+
+    //gets the postal code grouping (First 5 chars of a postal code not including the space)
+    //adds 1 to the location count index in the location(amount of each type of location in a postal code grouping)
     postalCodeGrouping = newPostalCode;
     for(int i = 0; i < 9; i++){
         locationCount[i] = shopData[i];
@@ -51,7 +56,6 @@ string Location::getPostalCodeGrouping(){
 void Location::increaseLocationCountAt(int index){
     if(index < 0 || index > LOCATIONTYPESIZE) return;
     locationCount[index]++;
-    //isResidential = false;
 }
 
 void Location::increaseLocationCountAt(condenseLocationType index){
