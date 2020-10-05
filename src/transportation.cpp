@@ -286,3 +286,13 @@ void Transportation::updateLocationRisks(int socialDistancingSeverity, double as
         }
     }
 }
+
+void Transportation::setAgentChanceOfMovment(int ageGroup, int day, int time, int location, double value){
+    if(ageGroup < 0 || ageGroup > 17) return;
+    if(day < 0 || day > 1) return;
+    if(time < 0 || time > 24) return;
+    if(location < 0 || location > 9) return;
+    if(value < 0 || value > 1) return;
+
+    agentChanceOfMovment[ageGroup][day][time][location] = value;
+}

@@ -124,6 +124,19 @@ class Transportation {
      */
     void updateLocationRisks(int socialDistancingSeverity, double associatedLocRisks[]);
 
+    /**
+     * setAgentChanceOfMovment
+     * 
+     * This is used to set the array of agentChanceOfMovment
+     * 
+     * @param int ageGroup in range 0-17 where 0 is 0-4 1 is 5-9 etc
+     * @param int day in range 0-1 where 0 is a weekday and 1 is a weekend
+     * @param int time in range 0 <= time * timeStep < 24
+     * @param int location in range 0 - 9 where the number corisponds to the condenseLocationType enum
+     * @param double the percent chance of someone moving to the given location in range 0 - 1.0
+     */
+    void setAgentChanceOfMovment(int ageGroup, int day, int time, int location, double value);
+
     private:
     PostalCodeHash *postalCodes;
     std::vector<Location*> locationList;
@@ -136,6 +149,27 @@ class Transportation {
     std::vector<Location*> hasHealth;
     std::vector<Location*> hasPlaceOfWorship;
     std::vector<Location*> hasResidential;
+
+    double agentChanceOfMovment[18][2][6][9];//TODO j will change based on size of timestep
+    // double age5to9ChanceOfMovement[2][6][9];
+    // double age10to14ChanceOfMovement[2][6][9];
+    // double age15to19ChanceOfMovement[2][6][9];
+    // double age20to24ChanceOfMovement[2][6][9];
+    // double age25to29ChanceOfMovement[2][6][9];
+    // double age30to34ChanceOfMovement[2][6][9];
+    // double age35to39ChanceOfMovement[2][6][9];
+    // double age40to44ChanceOfMovement[2][6][9];
+    // double age45to49ChanceOfMovement[2][6][9];
+    // double age50to54ChanceOfMovement[2][6][9];
+    // double age55to59ChanceOfMovement[2][6][9];//TODO j will change based on size of timestep
+    // double age60to64ChanceOfMovement[2][6][9];
+    // double age65to69ChanceOfMovement[2][6][9];
+    // double age70to74ChanceOfMovement[2][6][9];
+    // double age75to79ChanceOfMovement[2][6][9];
+    // double age80to84ChanceOfMovement[2][6][9];
+    // double age85ChanceOfMovement[2][6][9];
+    
+
 
     /**
      * randomInRange
