@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.02
+ * 06/10/20
+ * ver 1.03
  * 
  * This is the class file for the hospital class. The purpose of
  * this class is to keep track of hopsital statistics. Mainly the amount
@@ -21,6 +21,12 @@ Hospital::Hospital() {
     totalHospital = 0;
     hospitalOverflow = false;
     icuOverflow = false;
+
+    //set all age values too 0
+    for(int i = 0; i < 18; i++){
+        setAgentDeathChance(i, 0);
+        setAgentRecoveryTime(i, 0);
+    }
 }
 
 void Hospital::freeIcuBeds(int indexToRemove) {
@@ -146,4 +152,17 @@ int Hospital::getTotalICUCount() {
 
 int Hospital::getTotalHospitalCount() {
     return totalHospital;
+}
+
+void Hospital::setAgentRecoveryTime(int ageRange, short value){
+    if(ageRange < 0 || ageRange > 17) return;
+    if(value < 0 || value > 127) return;
+
+    agentRecoveryTime[ageRange] = value;
+}
+
+void Hospital::setAgentDeathChance(int ageRange, double value){
+    if(ageRange < 0 || ageRange > 17) return;
+    if(value < 0 || value > 1) return;
+    agentDeathChance[ageRange] = value;
 }

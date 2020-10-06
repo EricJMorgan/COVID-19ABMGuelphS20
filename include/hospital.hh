@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.02
+ * 06/10/20
+ * ver 1.03
  * 
  * This is the header file for the hospital class. The purpose of
  * this class is to keep track of hopsital statistics. Mainly the amount
@@ -110,6 +110,28 @@ class Hospital {
      */
     int getTotalHospitalCount();
 
+    /**
+     * setAgentRecoveryTime
+     * 
+     * This will set each age ranges time too recovery from
+     * the given virus. Age ranges are 0 = 0 - 4, 1 = 5 - 9 ...
+     * 
+     * @param int ageRange in range 0 - 17
+     * @param short value in range 0 - 127
+     */
+    void setAgentRecoveryTime(int ageRange, short value);
+
+    /**
+     * setAgentDeathChance
+     * 
+     * This will set each age ranges chance too die from
+     * the given virus. Age ranges are 0 = 0 - 4, 1 = 5 - 9...
+     * 
+     * @param int ageRange in range 0 -17
+     * @param double value in range 0 - 1.0
+     */
+    void setAgentDeathChance(int ageRange, double value);
+
     // returns to be read and cleared
     std::vector<Agent *> newlyDeceased;
     std::vector<Agent *> newlyRecovered;
@@ -123,6 +145,9 @@ class Hospital {
     bool icuOverflow;
     int totalICU;
     int totalHospital;
+
+    short agentRecoveryTime[18];
+    double agentDeathChance[18];
 
     std::vector<Agent *> hospitalGeneralWard; // Agents admitted to general hospital
     std::vector<Agent *> hospitalICU;         // Agents admitted to ICU
