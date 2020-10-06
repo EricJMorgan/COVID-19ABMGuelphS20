@@ -76,6 +76,17 @@ class GeographicalRisk {
      * @param the mitigation strategy used in range 0 - 3
      */
     void setAgentMitagationChance(int ageGroup, int strategy, double value);
+    
+    /**
+     * setMitagationEffectivness
+     * 
+     * This sets each mitigation strategys effectivness with a value 
+     * between 0 and 1.0. 0 = social distancing, 1 = maskwearing, 2 = hygine, 3 = isolation
+     * 
+     * @param int strategy this is the strategy too be used in range 0 - 3
+     * @param double value in range 0 - 1.0
+     */
+    void setMitagationEffectivness(int strategy, double value);
 
     //int getAmountOfLocations();
 
@@ -108,6 +119,7 @@ class GeographicalRisk {
     SIRtotals sirTotalLocation;
 
     double agentMitagationChance[18][4];
+    double mitagationEffectivness[4];
 };
 
 #endif

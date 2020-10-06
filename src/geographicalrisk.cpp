@@ -22,6 +22,10 @@ GeographicalRisk::GeographicalRisk() {
             setAgentMitagationChance(i, j, 0);
         }
     }
+
+    for(int i = 0; i < 4; i++){
+        setMitagationEffectivness(i, 0);
+    }
 }
 
 void GeographicalRisk::updateAvgCountsAndRisk() {
@@ -118,3 +122,10 @@ void GeographicalRisk::setAgentMitagationChance(int ageGroup, int strategy, doub
 
     agentMitagationChance[ageGroup][strategy] = value;
 } 
+
+void GeographicalRisk::setMitagationEffectivness(int strategy, double value){
+    if(strategy < 0 || strategy > 3) return;
+    if(value < 0 || value > 1) return;
+
+    mitagationEffectivness[strategy] = value;
+}
