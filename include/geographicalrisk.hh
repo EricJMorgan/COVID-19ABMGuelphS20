@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 06/10/20
- * ver 1.02
+ * 13/10/20
+ * ver 1.03
  * 
  * This is the header file for the geographical risk class. The main
  * use for this class is to do the math for each area and decide how many 
@@ -87,6 +87,9 @@ class GeographicalRisk {
      * @param double value in range 0 - 1.0
      */
     void setMitagationEffectivness(int strategy, double value);
+
+    double getAgentMitagationChance(int ageGroup, int strategy);
+    double getMitagationEffectivness(int strategy);
 
     //int getAmountOfLocations();
 
