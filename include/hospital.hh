@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 06/10/20
- * ver 1.03
+ * 13/10/20
+ * ver 1.04
  * 
  * This is the header file for the hospital class. The purpose of
  * this class is to keep track of hopsital statistics. Mainly the amount
@@ -131,6 +131,28 @@ class Hospital {
      * @param double value in range 0 - 1.0
      */
     void setAgentDeathChance(int ageRange, double value);
+
+    /**
+     * getAgentRecoveryTime
+     * 
+     * This will get the given ages time to recover
+     * where ageRange is 0 = 0 -4, 1 = 5 - 9.
+     * 
+     * @param ageRange the age of the wanted recovery time in range 0 - 17.
+     * @return a short of the time it takes for the agent to recover
+     */
+    short getAgentRecoveryTime(int ageRange);
+
+    /**
+     * getAgentDeathChance
+     * 
+     * This will get the given ages chance of death where
+     * ageRange is 0 = 0 - 4, 1 = 5 - 9, etc.
+     * 
+     * @param ageRange the age of the wanted death chance in range 0 - 17.
+     * @return a double of the chance of death
+     */
+    double getAgentDeathChance(int ageRange);
 
     // returns to be read and cleared
     std::vector<Agent *> newlyDeceased;

@@ -307,3 +307,13 @@ void Transportation::setAgentChanceOfMovment(int ageGroup, int day, int time, in
 
     agentChanceOfMovment[ageGroup][day][time][location] = value;
 }
+
+double Transportation::getAgentChanceOfMovment(int ageGroup, int day, int time, int location){
+    if(ageGroup < 0 || ageGroup > 17) return-1;
+    if(day < 0 || day > 1) return -1;
+    if(time < 0 || time > 24) return -1;
+    if(location < 0 || location > 9) return -1;
+
+    return agentChanceOfMovment[ageGroup][day][time][location];
+    
+}
