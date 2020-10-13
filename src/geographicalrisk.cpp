@@ -130,6 +130,13 @@ void GeographicalRisk::setMitagationEffectivness(int strategy, double value){
     mitagationEffectivness[strategy] = value;
 }
 
+void GeographicalRisk::setLocationRisk(int location, double value){
+    if(location < 0 || location > 8) return;
+    if(value < 0 || value > 1.0) return;
+
+    locationRisks[location] = value;
+}
+
 double GeographicalRisk::getAgentMitagationChance(int ageGroup, int strategy){
     if(ageGroup < 0 || ageGroup > 17) return -1;
     if(strategy < 0 || strategy > 3) return -1;
@@ -141,4 +148,10 @@ double GeographicalRisk::getMitagationEffectivness(int strategy){
     if(strategy < 0 || strategy > 3) return -1;
 
     return mitagationEffectivness[strategy];
+}
+
+double GeographicalRisk::getLocationRisk(int location){
+    if(location < 0 || location > 8) return -1;
+
+    return locationRisks[location];
 }

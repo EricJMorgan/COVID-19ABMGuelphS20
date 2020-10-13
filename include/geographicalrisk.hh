@@ -88,8 +88,50 @@ class GeographicalRisk {
      */
     void setMitagationEffectivness(int strategy, double value);
 
+    /**
+     * setLocationRisk
+     * 
+     * This sets each locations risk with a value
+     * between 0 and 1.0. 0 = genstore, 1 = transportation, etc
+     * 
+     * @param int location is the location to be checked in range 0 - 8
+     * @param double value in range 0 - 1.0
+     */
+    void setLocationRisk(int location, double value);
+
+    /**
+     * getAgentMitagationChance
+     * 
+     * This gets the ageGroups mitagation chance for the wanted
+     * strategy. where ageGroup: 0 = 0 - 4, 1 = 5 - 9 etc and 
+     * strategy: 0 = social distancing, 1 = maskwearing, etc.
+     * 
+     * @param ageGroup is the age group in range 0 - 17.
+     * @param strategy is the wanted strategy in range 0 - 3.
+     */
     double getAgentMitagationChance(int ageGroup, int strategy);
+
+    /**
+     * getMitagationEffectivness
+     * 
+     * This gets the mitagation strategys given effectivness
+     * where 0 = social distancing, 1 = maskwearing, etc.
+     * 
+     * @param strategy is the wanted strategy in range 0 - 3.
+     */
     double getMitagationEffectivness(int strategy);
+
+    /**
+     * getLocationRisk
+     * 
+     * This gets each locations given risk where
+     * 0 = genreal store, 1 = transport, etc
+     * 
+     * @param the wanted location in range 0 - 8
+     */
+    double getLocationRisk(int location);
+
+
 
     //int getAmountOfLocations();
 
