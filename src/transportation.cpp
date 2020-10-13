@@ -268,6 +268,11 @@ int Transportation::adultChanceOfMoving(Agent *agent, DayOfWeek currDay, int cur
     return getAgentResidentialIndex(agent);
 }
 
+// genstore .8
+// parks .4
+// church .2
+
+
 int Transportation::getAgentEducationIndex(Agent *agent){
     if(agent->getEducationIndex() == -1) agent->setEducationIndex(findIndexToMove(hasSchool));
     return agent->getEducationIndex();
