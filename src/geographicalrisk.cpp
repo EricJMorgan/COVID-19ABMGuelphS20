@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.02
+ * 06/10/20
+ * ver 1.03
  * 
  * This is the class file for the geographical risk class. The main
  * use for this class is to do the math for each area and decide how many 
@@ -15,6 +15,17 @@
 // Constructor
 GeographicalRisk::GeographicalRisk() {
     socialDistancingSeverity = 8;
+
+    //set all agent chances of mitagation too 0
+    for(int i = 0; i < 18; i++){
+        for(int j = 0; j < 4; j++){
+            setAgentMitagationChance(i, j, 0);
+        }
+    }
+
+    for(int i = 0; i < 4; i++){
+        setMitagationEffectivness(i, 0);
+    }
 }
 
 void GeographicalRisk::updateAvgCountsAndRisk() {
@@ -102,4 +113,19 @@ int GeographicalRisk::getLocationCountAt(int index){
 
 int GeographicalRisk::getLocationCountAt(condenseLocationType index){
     return getLocationCountAt((int)index);
+}
+
+void GeographicalRisk::setAgentMitagationChance(int ageGroup, int strategy, double value){
+    if(ageGroup < 0 || ageGroup > 17) return;
+    if(strategy < 0 || strategy > 3) return;
+    if(value < 0 || value > 1) return;
+
+    agentMitagationChance[ageGroup][strategy] = value;
+} 
+
+void GeographicalRisk::setMitagationEffectivness(int strategy, double value){
+    if(strategy < 0 || strategy > 3) return;
+    if(value < 0 || value > 1) return;
+
+    mitagationEffectivness[strategy] = value;
 }

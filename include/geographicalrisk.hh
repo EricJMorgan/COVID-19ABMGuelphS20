@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.01
+ * 06/10/20
+ * ver 1.02
  * 
  * This is the header file for the geographical risk class. The main
  * use for this class is to do the math for each area and decide how many 
@@ -65,6 +65,29 @@ class GeographicalRisk {
      */
     int infectPeople();
 
+    /**
+     * setAgentMitagationChance
+     * 
+     * This is responsible for setting each age groups chance of
+     * following each mitigation strategy. ageGroup 0 = 0 to 4, ageGroup 1 = 5 to 9 etc
+     * strategy is 0 = social distancing, 1 = maskwearing, 2 = hygine, 3 = isolation
+     * 
+     * @param the age group the set of agents are in range 0 - 17
+     * @param the mitigation strategy used in range 0 - 3
+     */
+    void setAgentMitagationChance(int ageGroup, int strategy, double value);
+    
+    /**
+     * setMitagationEffectivness
+     * 
+     * This sets each mitigation strategys effectivness with a value 
+     * between 0 and 1.0. 0 = social distancing, 1 = maskwearing, 2 = hygine, 3 = isolation
+     * 
+     * @param int strategy this is the strategy too be used in range 0 - 3
+     * @param double value in range 0 - 1.0
+     */
+    void setMitagationEffectivness(int strategy, double value);
+
     //int getAmountOfLocations();
 
     // attributes shared by location and risk
@@ -94,6 +117,9 @@ class GeographicalRisk {
     double avgMaskWearer;
     double avgHygiene;
     SIRtotals sirTotalLocation;
+
+    double agentMitagationChance[18][4];
+    double mitagationEffectivness[4];
 };
 
 #endif
