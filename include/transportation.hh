@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 06/10/20
- * ver 1.02
+ * 13/10/20
+ * ver 1.03
  * 
  * This is the header file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
