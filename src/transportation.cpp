@@ -268,6 +268,7 @@ int Transportation::adultChanceOfMoving(Agent *agent, DayOfWeek currDay, int cur
     return getAgentResidentialIndex(agent);
 }
 
+
 int Transportation::getAgentEducationIndex(Agent *agent){
     if(agent->getEducationIndex() == -1) agent->setEducationIndex(findIndexToMove(hasSchool));
     return agent->getEducationIndex();
