@@ -76,6 +76,18 @@ class GeographicalRisk {
      * @param the mitigation strategy used in range 0 - 3
      */
     void setAgentMitagationChance(int ageGroup, int strategy, double value);
+
+    /**
+     * getAgentMitagationChance
+     * 
+     * This gets the ageGroups mitagation chance for the wanted
+     * strategy. where ageGroup: 0 = 0 - 4, 1 = 5 - 9 etc and 
+     * strategy: 0 = social distancing, 1 = maskwearing, etc.
+     * 
+     * @param ageGroup is the age group in range 0 - 17.
+     * @param strategy is the wanted strategy in range 0 - 3.
+     */
+    double getAgentMitagationChance(int ageGroup, int strategy);
     
     /**
      * setMitagationEffectivness
@@ -89,6 +101,16 @@ class GeographicalRisk {
     void setMitagationEffectivness(int strategy, double value);
 
     /**
+     * getMitagationEffectivness
+     * 
+     * This gets the mitagation strategys given effectivness
+     * where 0 = social distancing, 1 = maskwearing, etc.
+     * 
+     * @param strategy is the wanted strategy in range 0 - 3.
+     */
+    double getMitagationEffectivness(int strategy);
+
+    /**
      * setLocationRisk
      * 
      * This sets each locations risk with a value
@@ -100,28 +122,6 @@ class GeographicalRisk {
     void setLocationRisk(int location, double value);
 
     /**
-     * getAgentMitagationChance
-     * 
-     * This gets the ageGroups mitagation chance for the wanted
-     * strategy. where ageGroup: 0 = 0 - 4, 1 = 5 - 9 etc and 
-     * strategy: 0 = social distancing, 1 = maskwearing, etc.
-     * 
-     * @param ageGroup is the age group in range 0 - 17.
-     * @param strategy is the wanted strategy in range 0 - 3.
-     */
-    double getAgentMitagationChance(int ageGroup, int strategy);
-
-    /**
-     * getMitagationEffectivness
-     * 
-     * This gets the mitagation strategys given effectivness
-     * where 0 = social distancing, 1 = maskwearing, etc.
-     * 
-     * @param strategy is the wanted strategy in range 0 - 3.
-     */
-    double getMitagationEffectivness(int strategy);
-
-    /**
      * getLocationRisk
      * 
      * This gets each locations given risk where
@@ -131,7 +131,7 @@ class GeographicalRisk {
      */
     double getLocationRisk(int location);
 
-
+    
 
     //int getAmountOfLocations();
 

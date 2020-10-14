@@ -122,17 +122,6 @@ class Hospital {
     void setAgentRecoveryTime(int ageRange, short value);
 
     /**
-     * setAgentDeathChance
-     * 
-     * This will set each age ranges chance too die from
-     * the given virus. Age ranges are 0 = 0 - 4, 1 = 5 - 9...
-     * 
-     * @param int ageRange in range 0 -17
-     * @param double value in range 0 - 1.0
-     */
-    void setAgentDeathChance(int ageRange, double value);
-
-    /**
      * getAgentRecoveryTime
      * 
      * This will get the given ages time to recover
@@ -142,6 +131,17 @@ class Hospital {
      * @return a short of the time it takes for the agent to recover
      */
     short getAgentRecoveryTime(int ageRange);
+
+    /**
+     * setAgentDeathChance
+     * 
+     * This will set each age ranges chance too die from
+     * the given virus. Age ranges are 0 = 0 - 4, 1 = 5 - 9...
+     * 
+     * @param int ageRange in range 0 -17
+     * @param double value in range 0 - 1.0
+     */
+    void setAgentDeathChance(int ageRange, double value);
 
     /**
      * getAgentDeathChance
