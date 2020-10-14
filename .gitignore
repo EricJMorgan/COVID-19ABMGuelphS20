@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# cache files
+*.pyc
+
 # curr compiled file & folder
 abmSim
 venv
