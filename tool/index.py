@@ -202,10 +202,25 @@ icuGraph = element.create_graph('icuGraph', 1000, 4)
 #COVID-19 Cases graph tab
 infectedGraph = dbc.Card([
     dbc.CardBody([
-        html.Div([infectedGraph]),
-        html.Div([idrGraph]),
-        html.Div([hospitalGraph]),
-        html.Div([icuGraph]),
+        dbc.Row(
+            children=[
+                dbc.Col(
+                    children=[
+                        html.Div([infectedGraph]),
+                        html.Div([idrGraph]),
+                    ],
+                    width= 6
+                ),
+                dbc.Col(
+                    children=[
+                        html.Div([hospitalGraph]),
+                        html.Div([icuGraph]),
+                    ],
+                    width= 6
+                )
+            ]
+        )
+        
     ],
     id="i_tab",)
 ])
@@ -220,11 +235,33 @@ id="graph_tabs", persistence=True, persistence_type='session',
 #Layout for Dash application
 app.layout = html.Div([
     element.navigator,
-    dbc.Row(dbc.Col(html.Div(element.buttons))),
-    dbc.Row([
-        dbc.Col(html.Div(element.tabs), width=4),
-        dbc.Col(html.Div(graphTabs), width=8),
-    ]),
+    dbc.Tabs([
+        dbc.Tab(label='Simulation', children=[
+            dbc.Row(
+                className='content-row',
+                children=[
+                dbc.Row(dbc.Col(html.Div(element.buttons))),
+                dbc.Col(html.Div(graphTabs), width=12),
+            ])
+        ]),
+        dbc.Tab(label='Global Settings', children=[
+            dbc.Row(
+                className='content-row',
+                children=[
+                dbc.Row(html.Div(id='dd-output-container')),
+                dbc.Col(html.Div(element.tabs), width=12),    
+            ])
+        ]),
+        dbc.Tab(label='Age Specific Settings', children=[
+            dbc.Row(
+                className='content-row',
+                children=[
+                dbc.Col(html.Div(element.ageDropdown), width=2),
+                dbc.Row(html.Div(id='ageSettings-output-container')),
+                dbc.Col(html.Div(element.ageTabs), width=8),    
+            ])
+        ])
+    ])
 ])
 
 #Toggling Navbar
@@ -287,7 +324,17 @@ def on_button_click(n_clicks):
 #List of slider names
 list_elements = ['Q_slider', 'SD_slider', 'MC_slider', 'HM_slider', 'gs_slider',
                 't_slider', 'sch_slider', 'pnr_slider', 'serv_slider',
-                'ent_slider', 'health_slider', 'poworship_slider', 'res_slider',]
+                'ent_slider', 'health_slider', 'poworship_slider', 'res_slider',
+                'dc_slider', 'recov_slider','socialDis_slider','maskUse_slider',
+                'hygieneUse_slider','isolationRate_slider',]
+
+
+    # Function to get slider values for a given age range
+@app.callback(
+    dash.dependencies.Output('ageSettings-output-container', 'children'),
+    [dash.dependencies.Input('age-dropdown', 'value')])
+def update_output(value):
+    return 'You have selected "{}"'.format(value)
 
 #Callback functions for sliders
 @app.callback(
@@ -379,6 +426,54 @@ def update_output_poworship(value):
     [Input(list_elements[12], 'value')])
 def update_output_res(value):
     sim.setResidentialRisk(value)
+    return '{}'.format(value)
+
+# Death Chance Slider
+@app.callback(
+    Output(list_elements[13]+'_value', 'children'),
+    [Input(list_elements[13], 'value')])
+def update_output_death(value):
+    #sim.setResidentialRisk(value)
+    return '{}'.format(value)
+
+# Recovery Time Slider
+@app.callback(
+    Output(list_elements[14]+'_value', 'children'),
+    [Input(list_elements[14], 'value')])
+def update_output_recovery(value):
+    #sim.setResidentialRisk(value)
+    return '{}'.format(value)
+
+# Social Distancing Use Age Specific Slider
+@app.callback(
+    Output(list_elements[15]+'_value', 'children'),
+    [Input(list_elements[15], 'value')])
+def update_output_SD_use(value):
+    #sim.setResidentialRisk(value)
+    return '{}'.format(value)
+
+# Mask Wearing Use Age Specific Slider
+@app.callback(
+    Output(list_elements[16]+'_value', 'children'),
+    [Input(list_elements[16], 'value')])
+def update_output_mask_use(value):
+    #sim.setResidentialRisk(value)
+    return '{}'.format(value)
+
+# Hygiene Use Age Specific Slider
+@app.callback(
+    Output(list_elements[17]+'_value', 'children'),
+    [Input(list_elements[17], 'value')])
+def update_output_hygiene_use(value):
+    #sim.setResidentialRisk(value)
+    return '{}'.format(value)
+
+# Isolation Age Specific Slider
+@app.callback(
+    Output(list_elements[18]+'_value', 'children'),
+    [Input(list_elements[18], 'value')])
+def update_output_isolation_use(value):
+    #sim.setResidentialRisk(value)
     return '{}'.format(value)
 
 #List of graphs names, outputs to graphs, hospital and ICU maximum capacities
