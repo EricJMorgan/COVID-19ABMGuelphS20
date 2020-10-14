@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 06/10/20
- * ver 1.05
+ * 13/10/20
+ * ver 1.06
  * 
  * This is the class file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
@@ -306,4 +306,14 @@ void Transportation::setAgentChanceOfMovment(int ageGroup, int day, int time, in
     if(value < 0 || value > 1) return;
 
     agentChanceOfMovment[ageGroup][day][time][location] = value;
+}
+
+double Transportation::getAgentChanceOfMovment(int ageGroup, int day, int time, int location){
+    if(ageGroup < 0 || ageGroup > 17) return-1;
+    if(day < 0 || day > 1) return -1;
+    if(time < 0 || time > 24) return -1;
+    if(location < 0 || location > 9) return -1;
+
+    return agentChanceOfMovment[ageGroup][day][time][location];
+    
 }

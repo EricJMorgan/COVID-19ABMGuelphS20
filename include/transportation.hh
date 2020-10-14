@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 06/10/20
- * ver 1.02
+ * 13/10/20
+ * ver 1.03
  * 
  * This is the header file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
@@ -136,6 +136,20 @@ class Transportation {
      * @param double the percent chance of someone moving to the given location in range 0 - 1.0
      */
     void setAgentChanceOfMovment(int ageGroup, int day, int time, int location, double value);
+
+    /**
+     * getAgentChanceOfMovment
+     * 
+     * This is used to get the agents chance of movement based on ageGroup, day of the week,
+     * time of the day, and location.
+     * 
+     * @param int ageGroup in range 0-17 where 0 is 0-4 1 is 5-9 etc
+     * @param int day in range 0-1 where 0 is a weekday and 1 is a weekend
+     * @param int time in range 0 <= time * timeStep < 24
+     * @param int location in range 0 - 9 where the number corisponds to the condenseLocationType enum
+     * @return the percent chance of someone moving to the given location
+     */
+    double getAgentChanceOfMovment(int ageGroup, int day, int time, int location);
 
     private:
     PostalCodeHash *postalCodes;

@@ -44,6 +44,19 @@ ffi.cdef('''
     void residentialRiskSetter(Simulation* sim, double val);
     void quarantineSeverity(Simulation* sim, double val);
     void serviceRiskSetter(Simulation* sim, double val);
+    void setAgentMitagationChance(Simulation *sim, int ageGroup, int strategy, double value);
+    double getAgentMitagationChance(Simulation *sim, int ageGroup, int strategy);
+    void setMitagationEffectivness(Simulation *sim, int strategy, double value);
+    double getMitagationEffectivness(Simulation *sim, int strategy);
+    void setLocationRisk(Simulation *sim, int location, double value);
+    double getLocationRisk(Simulation *sim, int location);
+    void setAgentRecoveryTime(Simulation *sim, int ageRange, short value);
+    short getAgentRecoveryTime(Simulation *sim, int ageRange);
+    void setAgentDeathChance(Simulation *sim, int ageRange, double value);
+    double getAgentDeathChance(Simulation *sim, int ageRange);
+
+    void setAgentChanceOfMovment(Simulation *sim, int day, int time, int location, double value);
+    double getAgentChanceOfMovment(Simulation *sim, int ageGroup, int day, int time, int location);
 ''')
 
 lib = ffi.dlopen('./libProject.so')
@@ -121,6 +134,43 @@ class Simulation(object):
         
     def setServiceRisk(self, val):
         lib.serviceRiskSetter(self.obj, val)
+
+    def setAgentMitagationChance(self, ageGroup, strategy, value):
+        lib.setAgentMitagationChance(self.obj, ageGroup, strategy, value)
+    
+    def getAgentMitagationChance(self, ageGroup, strategy):
+        return lib.getAgentMitagationChance(self.obj, ageGroup, strategy)
+    
+    def setMitagationEffectivness(self, strategy, value):
+        lib.setMitagationEffectivness(self.obj, strategy, value)
+    
+    def getMitagationEffectivness(self, strategy):
+        return lib.getMitagationEffectivness(self.obj, strategy)
+
+    def setLocationRisk(self, location, value):
+        lib.setLocationRisk(self.obj, location, value)
+    
+    def getLocationRisk(self, location):
+        return lib.getLocationRisk(self.obj, location)
+    
+    def setAgentRecoveryTime(self, ageRange, value):
+        lib.setAgentRecoveryTime(self.obj, ageRange, value)
+    
+    def getAgentRecoveryTime(self, ageRange):
+        return lib.getAgentRecoveryTime(self.obj, ageRange)
+    
+    def setAgentDeathChance(self, ageRange, value):
+        lib.setAgentDeathChance(self.obj, ageRange, value)
+    
+    def getAgentDeathChance(self, ageRange):
+        return lib.getAgentDeathChance(self.obj, ageRange)
+    
+    def setAgentChanceOfMovment(self, day, time, location, value):
+        lib.setAgentChanceOfMovment(self.obj, day, time, location, value)
+    
+    def getAgentChanceOfMovment(self, ageGroup, day, time, location):
+        return lib.getAgentChanceOfMovment(self.obj, ageGroup, day, time, location)
+
 
 #Initialize times and values
 sim = Simulation()
