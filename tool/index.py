@@ -50,9 +50,9 @@ ffi.cdef('''
     double getMitagationEffectivness(Simulation *sim, int strategy);
     void setLocationRisk(Simulation *sim, int location, double value);
     double getLocationRisk(Simulation *sim, int location);
-    void setAgentRecoveryTime(Simulation *sim, int ageRange, short value);
+    void setAgentRecoveryTime(Simulation *sim, int ageRange, short val);
     short getAgentRecoveryTime(Simulation *sim, int ageRange);
-    void setAgentDeathChance(Simulation *sim, int ageRange, double value);
+    void setAgentDeathChance(Simulation *sim, int ageRange, double val);
     double getAgentDeathChance(Simulation *sim, int ageRange);
     void setAgentChanceOfMovment(Simulation *sim, int day, int time, int location, double value);
     double getAgentChanceOfMovment(Simulation *sim, int ageGroup, int day, int time, int location);
@@ -503,9 +503,12 @@ def update_output_isolation_use(value):
     State('hygieneUse_slider', 'value'),
     State('isolationRate_slider', 'value')])
 def update_ageSpecificValues(n_clicks, age_range, deathChance, recov, incubation, socialDis, maskUse, hygiene, isolation):
+    if(n_clicks == 0 or age_range == None):
+        return 'Please select an age range to apply settings.'
+    
     # Set all age specific values here when the apply button has been clicked
-    #sim.setAgentDeathChance(age_range, deathChance)
-    #sim.setAgentRecoveryTime(age_range,recov)
+    sim.setAgentDeathChance(age_range, deathChance)
+    sim.setAgentRecoveryTime(age_range,recov)
     #sim.setAgentIncubationPeriod(age_range, incubation)
     #sim.setAgentMitagationChance(age_range, 0, socialDis)
     #sim.setAgentMitagationChance(age_range, 1, maskUse)

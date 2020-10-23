@@ -272,6 +272,26 @@ class Simulation {
      * @param val the value to set
      */
     void setQuarantineSeverity(double val);
+
+/**
+     * setAgentDeathChance
+     * 
+     * This will set each age ranges chance too die from
+     * the given virus. Age ranges are 0 = 0 - 4, 1 = 5 - 9...
+     * 
+     * @param ageRange ageRange in range 0 -17
+     * @param val value in range 0 - 1.0
+     */
+    void setAgentDeathChance(int ageRange, double val);
+
+    /**
+     * setAgentRecoveryTime
+     * 
+     * setter for agent recovery time (how long for recovery)
+     * @param ageRange ageRange in range 0 -17
+     * @param val the index of the age group
+     */
+    void setAgentRecoveryTime(int ageRange, short val);
     
     SIRtotals totalSimSIRStats;
     
@@ -383,6 +403,8 @@ extern "C" {
     void placeOfWorshipRiskSetter(Simulation* sim, double val){sim->setPlaceOfWorshipRisk(val);}
     void residentialRiskSetter(Simulation* sim, double val){sim->setResidentialRisk(val);}
     void quarantineSeverity(Simulation* sim, double val) {sim->setQuarantineSeverity(val);}
+    void setAgentRecoveryTime(Simulation* sim, int ageRange, short val){sim->setAgentRecoveryTime(ageRange, val);}
+    void setAgentDeathChance(Simulation* sim, int ageRange, double val){sim->setAgentDeathChance(ageRange, val);}
 }
 
 #endif
