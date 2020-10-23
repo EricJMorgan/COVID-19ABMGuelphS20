@@ -326,7 +326,7 @@ list_elements = ['Q_slider', 'SD_slider', 'MC_slider', 'HM_slider', 'gs_slider',
                 't_slider', 'sch_slider', 'pnr_slider', 'serv_slider',
                 'ent_slider', 'health_slider', 'poworship_slider', 'res_slider',
                 'dc_slider', 'recov_slider','socialDis_slider','maskUse_slider',
-                'hygieneUse_slider','isolationRate_slider',]
+                'hygieneUse_slider','isolationRate_slider','incubation_slider']
 
 
     # Function to get slider values for a given age range
@@ -441,6 +441,14 @@ def update_output_death(value):
     Output(list_elements[14]+'_value', 'children'),
     [Input(list_elements[14], 'value')])
 def update_output_recovery(value):
+    #sim.setResidentialRisk(value)
+    return '{}'.format(value)
+
+ # Incubation Period Slider (Age Specific)
+@app.callback(
+    Output(list_elements[19]+'_value', 'children'),
+    [Input(list_elements[19], 'value')])
+def update_output_incubation(value):
     #sim.setResidentialRisk(value)
     return '{}'.format(value)
 

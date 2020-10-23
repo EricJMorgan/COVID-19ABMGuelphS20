@@ -91,7 +91,8 @@ residential = make_slider("Residential Areas", "res_slider", "res_slider_value",
 
 # Age specific COVID Risk Sliders
 deathChance = make_slider("Death Chance", "dc_slider", "dc_slider_value", 0, 1, 0.1, 0.2)
-recoveryTime = make_slider("Recovery Time", "recov_slider", "recov_slider_value", 0, 128, 1, 20)
+recoveryTime = make_slider("Recovery Time (days)", "recov_slider", "recov_slider_value", 0, 128, 1, 20)
+incubationPeriod = make_slider("Incubation Period (days)", "incubation_slider", "incubation_slider_value", 0, 30, 1, 5)
 # Mitigation Use for Age group
 socialDistancingUse = make_slider("Social Distancing", "socialDis_slider", "socialDis_slider_value", 0, 1, 0.1, 0.5)
 maskUse = make_slider("Mask Wearing", "maskUse_slider", "maskUse_slider_value", 0, 1, 0.1, 0.5)
@@ -103,6 +104,7 @@ generalSettings_tab = dbc.Card([
     dbc.CardBody([
         html.Div([deathChance, html.Div(id='deathChance_container')]),
         html.Div([recoveryTime, html.Div(id='recovery_container')]),
+        html.Div([incubationPeriod, html.Div(id='incubation_container')]),
     ],
     className="mt-1", id="genSettings_tab",
     )

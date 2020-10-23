@@ -33,9 +33,9 @@
 
 # cache files
 *.pyc
+*.pyo
 
 # curr compiled file & folder
 abmSim
 venv
-__pycache__
 .vscode/settings.json
