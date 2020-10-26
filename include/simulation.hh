@@ -534,6 +534,8 @@ extern "C" {
     void placeOfWorshipRiskSetter(Simulation* sim, double val){sim->setPlaceOfWorshipRisk(val);}
     void residentialRiskSetter(Simulation* sim, double val){sim->setResidentialRisk(val);}
     void quarantineSeverity(Simulation* sim, double val) {sim->setQuarantineSeverity(val);}
+    void setAgentRecoveryTime(Simulation* sim, int ageRange, short val){sim->setAgentRecoveryTime(ageRange, val);}
+    void setAgentDeathChance(Simulation* sim, int ageRange, double val){sim->setAgentDeathChance(ageRange, val);}
 }
 
 #endif

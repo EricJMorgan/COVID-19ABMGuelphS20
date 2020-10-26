@@ -91,7 +91,8 @@ residential = make_slider("Residential Areas", "res_slider", "res_slider_value",
 
 # Age specific COVID Risk Sliders
 deathChance = make_slider("Death Chance", "dc_slider", "dc_slider_value", 0, 1, 0.1, 0.2)
-recoveryTime = make_slider("Recovery Time", "recov_slider", "recov_slider_value", 0, 128, 1, 20)
+recoveryTime = make_slider("Recovery Time (days)", "recov_slider", "recov_slider_value", 0, 128, 1, 20)
+incubationPeriod = make_slider("Incubation Period (days)", "incubation_slider", "incubation_slider_value", 0, 30, 1, 5)
 # Mitigation Use for Age group
 socialDistancingUse = make_slider("Social Distancing", "socialDis_slider", "socialDis_slider_value", 0, 1, 0.1, 0.5)
 maskUse = make_slider("Mask Wearing", "maskUse_slider", "maskUse_slider_value", 0, 1, 0.1, 0.5)
@@ -103,6 +104,7 @@ generalSettings_tab = dbc.Card([
     dbc.CardBody([
         html.Div([deathChance, html.Div(id='deathChance_container')]),
         html.Div([recoveryTime, html.Div(id='recovery_container')]),
+        html.Div([incubationPeriod, html.Div(id='incubation_container')]),
     ],
     className="mt-1", id="genSettings_tab",
     )
@@ -140,24 +142,24 @@ loc_tab = dbc.Card([
 ageDropdown = dcc.Dropdown(
     id='age-dropdown',
     options=[
-        {'label': '0-4', 'value': '0-4'},
-        {'label': '5-9', 'value': '5-9'},
-        {'label': '10-14', 'value': '10-14'},
-        {'label': '15-19', 'value': '15-19'},
-        {'label': '20-24', 'value': '20-24'},
-        {'label': '25-29', 'value': '25-29'},
-        {'label': '30-34', 'value': '30-34'},
-        {'label': '35-39', 'value': '35-39'},
-        {'label': '40-44', 'value': '40-44'},
-        {'label': '45-49', 'value': '45-49'},
-        {'label': '50-54', 'value': '50-54'},
-        {'label': '55-59', 'value': '55-59'},
-        {'label': '60-64', 'value': '60-64'},
-        {'label': '65-69', 'value': '65-69'},
-        {'label': '70-74', 'value': '70-74'},
-        {'label': '75-79', 'value': '75-79'},
-        {'label': '80-84', 'value': '80-84'},
-        {'label': '85+', 'value': '85+'}
+        {'label': '0-4', 'value': 0},
+        {'label': '5-9', 'value': 1},
+        {'label': '10-14', 'value': 2},
+        {'label': '15-19', 'value': 3},
+        {'label': '20-24', 'value': 4},
+        {'label': '25-29', 'value': 5},
+        {'label': '30-34', 'value': 6},
+        {'label': '35-39', 'value': 7},
+        {'label': '40-44', 'value': 8},
+        {'label': '45-49', 'value': 9},
+        {'label': '50-54', 'value': 10},
+        {'label': '55-59', 'value': 11},
+        {'label': '60-64', 'value': 12},
+        {'label': '65-69', 'value': 13},
+        {'label': '70-74', 'value': 14},
+        {'label': '75-79', 'value': 15},
+        {'label': '80-84', 'value': 16},
+        {'label': '85+', 'value': 17}
     ],
     clearable=False,
     searchable=False,

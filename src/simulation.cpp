@@ -193,6 +193,15 @@ void Simulation::setHygieneMaintainence(double val){
     }
 }
 
+// Age-specific setters
+void Simulation::setAgentRecoveryTime(int ageRange, short val){ 
+    guelphHospital.setAgentRecoveryTime(ageRange, val);
+}
+
+void Simulation::setAgentDeathChance(int ageRange, double val){ 
+    guelphHospital.setAgentDeathChance(ageRange, val);
+}
+
 //location risks
 void Simulation::setGenStoreRisk(double val){
     locationRisks[0] = val;
