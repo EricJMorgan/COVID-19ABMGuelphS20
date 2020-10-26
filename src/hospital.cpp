@@ -22,40 +22,9 @@ Hospital::Hospital() {
     hospitalOverflow = false;
     icuOverflow = false;
 
-    //set all age values too 0
-    for(int i = 0; i < 18; i++){
-        setAgentDeathChance(i, 0);
-        setAgentRecoveryTime(i, 0);
-    }
 }
 
-void Hospital::freeIcuBeds(int indexToRemove) {
-    //error checking
-    if (indexToRemove < 0 || indexToRemove >= (int)hospitalICU.size()) {
-        cout << "Trying to free icu out of bounds index" << endl;
-        return;
-    }
-
-    //removes agent at a given index
-    hospitalICU.erase(hospitalICU.begin() + indexToRemove);
-    icuCount--;
-    indicateOverflow();
-}
-
-void Hospital::freeHospitalBeds(int indexToRemove) {
-    //error checking
-    if (indexToRemove < 0 || indexToRemove >= (int)hospitalGeneralWard.size()) {
-        cout << "Trying to free hospital out of bounds index" << endl;
-        return;
-    }
-    
-    //removes agent at a given index
-    hospitalGeneralWard.erase(hospitalGeneralWard.begin() + indexToRemove);
-    numberPpl--;
-    indicateOverflow();
-}
-
-void Hospital::indicateOverflow() {\
+void Hospital::indicateOverflow() {
     //sets the flag if more people are in beds than what the hospital has
     if(numberPpl > totalBedCount) {
         hospitalOverflow = true;
@@ -98,42 +67,59 @@ void Hospital::increaseIcuCount(Agent* agentToAdd) {
     indicateOverflow(); 
 }
 
-void Hospital::HospitalTimeStep(double timestep) {
+void Hospital::HospitalTimeStep(double timestep, short agentRecoveryTime[18], double agentDeathChance[18], double agentChanceOfICU[18]) {
     //loop through all the beds in the icu
+    string sirResponse;
+    Agent *currAgent;
+    int agentAgeGroup;
     for (int i = 0; i < (int)hospitalICU.size(); i++) {
-        string sirResponse  = hospitalICU[i]->SIRTimeStep(timestep);
+        //get agent info
+        currAgent = hospitalICU[i];
+        agentAgeGroup = currAgent->getAgentAgeGroup();
 
-        //check if an agent is recoverd or dead and remove them from the list
-        if (sirResponse == "RECOVERAGENT") {
-            Agent *recoveredAgent = hospitalICU.at(i);
+        //if agent is finished the recovery time
+        if (currAgent->timeInHospital > agentRecoveryTime[agentAgeGroup]) {
             hospitalICU.erase(hospitalICU.begin() + i);
-            newlyRecovered.push_back(recoveredAgent);
+            currAgent->recoverAgent();
+            currAgent->timeInHospital = 0;
+            newlyRecovered.push_back(currAgent);
             icuCount--;
-        } else if (sirResponse == "DECEASEAGENT") {
-            Agent *deceasedAgent = hospitalICU.at(i);
+        //if agent rolls within range of the death chance
+        } else if (agentDeathChance[agentAgeGroup] >= ((double) rand() / (RAND_MAX))) {
             hospitalICU.erase(hospitalICU.begin() + i);
-            newlyDeceased.push_back(deceasedAgent);
+            currAgent->killAgent();
+            currAgent->timeInHospital = 0;
+            newlyDeceased.push_back(currAgent);
             icuCount--;
+        //if agent stays put
+        } else {
+            currAgent->timeInHospital++;
         }
     }
 
     //loop through all the beds in the gen pop
     for (int i = 0; i < (int)hospitalGeneralWard.size(); i++) {
-        string sirResponse  = hospitalGeneralWard[i]->SIRTimeStep(timestep);
+        //get agent info
+        currAgent = hospitalGeneralWard[i];
+        agentAgeGroup = currAgent->getAgentAgeGroup;
 
-        //check if an agent is recoverd or needing to move too the ICU and remove them from the list
-        if (sirResponse == "ICUAGENT") {
-            Agent *toICU = hospitalGeneralWard.at(i);
+        //if agent rolls to go to the hospital
+        if (agentChanceOfICU[agentAgeGroup] >= ((double) rand() / (RAND_MAX))) {
             hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
-            hospitalICU.push_back(toICU);
+            currAgent->ICUAgent();
+            currAgent->timeInHospital++;
+            hospitalICU.push_back(currAgent);
             icuCount++;
             totalICU++;
             numberPpl--;
-        } else if (sirResponse == "RECOVERAGENT") {
-            Agent *recoveredAgent = hospitalGeneralWard.at(i);
+        } else if (currAgent->timeInHospital > agentRecoveryTime[agentAgeGroup]) {
             hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
-            newlyRecovered.push_back(recoveredAgent);
+            currAgent->recoverAgent();
+            currAgent->timeInHospital = 0;
+            newlyRecovered.push_back(currAgent);
             numberPpl--;
+        } else {
+            currAgent->timeInHospital++;
         }
     }
 }
@@ -154,25 +140,4 @@ int Hospital::getTotalHospitalCount() {
     return totalHospital;
 }
 
-void Hospital::setAgentRecoveryTime(int ageRange, short value){
-    if(ageRange < 0 || ageRange > 17) return;
-    if(value < 0 || value > 127) return;
 
-    agentRecoveryTime[ageRange] = value;
-}
-
-void Hospital::setAgentDeathChance(int ageRange, double value){
-    if(ageRange < 0 || ageRange > 17) return;
-    if(value < 0 || value > 1) return;
-    agentDeathChance[ageRange] = value;
-}
-
-short Hospital::getAgentRecoveryTime(int ageRange){
-    if(ageRange < 0 || ageRange > 17) return -1;
-    return agentRecoveryTime[ageRange];
-}
-
-double Hospital::getAgentDeathChance(int ageRange){
-    if(ageRange < 0 || ageRange > 17) return -1;
-    return agentDeathChance[ageRange];
-}

@@ -47,9 +47,9 @@ Transportation::Transportation(Agent **arr, int arrSize){
     }
 
     for(int i = 0; i < arrSize; i++){
-        if (arr[i]->DetermineSeverity() == INFECTED) {
+        if (arr[i]->getSeverity() == INFECTED) {
             locationList.at(rand() % getLocationListLength())->addAgentToInfected(arr[i]);
-        } else if (arr[i]->DetermineSeverity() == SUSCEPTIBLE) {
+        } else if (arr[i]->getSeverity() == SUSCEPTIBLE) {
             locationList.at(rand() % getLocationListLength())->addAgentToSusceptible(arr[i]);
         }
     }
@@ -298,22 +298,3 @@ void Transportation::updateLocationRisks(int socialDistancingSeverity, double as
     }
 }
 
-void Transportation::setAgentChanceOfMovment(int ageGroup, int day, int time, int location, double value){
-    if(ageGroup < 0 || ageGroup > 17) return;
-    if(day < 0 || day > 1) return;
-    if(time < 0 || time > 24) return;
-    if(location < 0 || location > 9) return;
-    if(value < 0 || value > 1) return;
-
-    agentChanceOfMovment[ageGroup][day][time][location] = value;
-}
-
-double Transportation::getAgentChanceOfMovment(int ageGroup, int day, int time, int location){
-    if(ageGroup < 0 || ageGroup > 17) return-1;
-    if(day < 0 || day > 1) return -1;
-    if(time < 0 || time > 24) return -1;
-    if(location < 0 || location > 9) return -1;
-
-    return agentChanceOfMovment[ageGroup][day][time][location];
-    
-}

@@ -124,13 +124,8 @@ class Agent : public SIR {
      */
     bool getHasMoved();
 
-    /**
-     * DecideMigitationStrategy
-     * 
-     * Decides the agents chance of wearing a mask and following appropriate hygiene
-     * @param maskWearing chance 
-     */
-    void DecideMigitationStrategy(double maskWearing, double hygieneMaintain);
+    
+    void DecideMigitationStrategy(double mitagationPerAge[18][4]);
 
     /**
      * setEducationIndex
@@ -174,14 +169,20 @@ class Agent : public SIR {
      */
     int getResidentialIndex();
 
+    int getAgentAgeGroup();
+
     //To be implemented later
     void quarantineTime();
     void goodHygiene();
     void followWearMask();
     void followSocialDistancing();
-    
-    bool agentHygiene = false;
+
+    //NOTE this is the order that these appear in any array 
     bool wearingMask = false;
+    bool agentHygiene = false;
+    bool socialDistancing = false;
+    bool willIsolate = false;
+    int timeInHospital = 0;
     
     private:
     HouseholdIncome income;

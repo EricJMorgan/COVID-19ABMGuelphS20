@@ -39,7 +39,6 @@ Simulation::Simulation(string fileName) {
     currDay = MON;
     initiallyInfectedChance = 0.0005;
     initiallyInfected = 0;
-    socialDistancingSeverity = 0;
 
     //make sure the file is valid
     if(!demographicFile.good()){
@@ -83,14 +82,14 @@ int Simulation::getPopulation(){
 //This is where all the methods to update data are called for each 4 hour interval
 void Simulation::simulateTimeStep(){
     // hospital timestep method calls
-    guelphHospital.HospitalTimeStep(sirTimeStep);
+    guelphHospital.HospitalTimeStep(sirTimeStep, agentRecoveryTime, agentDeathChance, agentChanceOfICU);
     deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
     guelphHospital.newlyDeceased.clear();
     recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());
     guelphHospital.newlyRecovered.clear();
 
     // isolation compartment timestep method calls
-    isoCompartment.SimulateIsoTimeStep(sirTimeStep);
+    isoCompartment.SimulateIsoTimeStep(sirTimeStep, agentRecoveryTime, agentNeedsHospital);
     recoveredAgents.insert(recoveredAgents.end(), isoCompartment.newlyRecovered.begin(), isoCompartment.newlyRecovered.end());
     isoCompartment.newlyRecovered.clear();
     for (int i = 0; i < (int)isoCompartment.newlyHospitalized.size(); i++) {
@@ -196,48 +195,48 @@ void Simulation::setHygieneMaintainence(double val){
 
 //location risks
 void Simulation::setGenStoreRisk(double val){
-    locationRisk[0] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
+    locationRisks[0] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
 }
 
 void Simulation::setTransportRisk(double val){
-    locationRisk[1] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
+    locationRisks[1] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
 }
 
 void Simulation::setSchoolRisk(double val){
-    locationRisk[2] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
+    locationRisks[2] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
 }
 
 void Simulation::setParkRisk(double val){
-    locationRisk[3] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
+    locationRisks[3] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
 }
 
 void Simulation::setServiceRisk(double val){
-    locationRisk[4] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
+    locationRisks[4] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
 }
 
 void Simulation::setEntertainmentRisk(double val){
-    locationRisk[5] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
+    locationRisks[5] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
 }
 
 void Simulation::setHealthPlaceRisk(double val){
-    locationRisk[6] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
+    locationRisks[6] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
 }
 
 void Simulation::setPlaceOfWorshipRisk(double val){
-    locationRisk[7] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
+    locationRisks[7] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
 }
 
 void Simulation::setResidentialRisk(double val){
-    locationRisk[8] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
+    locationRisks[8] = val;
+    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
 }
 
 
@@ -352,3 +351,112 @@ int Simulation::getICUCurrent() {
 int Simulation::getNewlyInfected() {
     return newlyInfected;
 }
+
+void Simulation::setAgentMitagationChance(int ageGroup, int strategy, double value){
+    if(ageGroup < 0 || ageGroup > 17) return;
+    if(strategy < 0 || strategy > 3) return;
+    if(value < 0 || value > 1) return;
+
+    agentMitagationChance[ageGroup][strategy] = value;
+} 
+
+void Simulation::setMitagationEffectivness(int strategy, double value){
+    if(strategy < 0 || strategy > 3) return;
+    if(value < 0 || value > 1) return;
+
+    mitagationEffectivness[strategy] = value;
+}
+
+void Simulation::setLocationRisk(int location, double value){
+    if(location < 0 || location > 8) return;
+    if(value < 0 || value > 1.0) return;
+
+    locationRisks[location] = value;
+}
+
+double Simulation::getAgentMitagationChance(int ageGroup, int strategy){
+    if(ageGroup < 0 || ageGroup > 17) return -1;
+    if(strategy < 0 || strategy > 3) return -1;
+
+    return agentMitagationChance[ageGroup][strategy];
+}
+
+double Simulation::getMitagationEffectivness(int strategy){
+    if(strategy < 0 || strategy > 3) return -1;
+
+    return mitagationEffectivness[strategy];
+}
+
+double Simulation::getLocationRisk(int location){
+    if(location < 0 || location > 8) return -1;
+
+    return locationRisks[location];
+}
+
+void Simulation::setAgentRecoveryTime(int ageRange, short value){
+    if(ageRange < 0 || ageRange > 17) return;
+    if(value < 0 || value > 127) return;
+
+    agentRecoveryTime[ageRange] = value;
+}
+
+void Simulation::setAgentDeathChance(int ageRange, double value){
+    if(ageRange < 0 || ageRange > 17) return;
+    if(value < 0 || value > 1) return;
+    agentDeathChance[ageRange] = value;
+}
+
+short Simulation::getAgentRecoveryTime(int ageRange){
+    if(ageRange < 0 || ageRange > 17) return -1;
+    return agentRecoveryTime[ageRange];
+}
+
+double Simulation::getAgentDeathChance(int ageRange){
+    if(ageRange < 0 || ageRange > 17) return -1;
+    return agentDeathChance[ageRange];
+}
+
+void Simulation::setAgentChanceOfMovment(int ageGroup, int day, int time, int location, double value){
+    if(ageGroup < 0 || ageGroup > 17) return;
+    if(day < 0 || day > 1) return;
+    if(time < 0 || time > 24) return;
+    if(location < 0 || location > 9) return;
+    if(value < 0 || value > 1) return;
+
+    agentChanceOfMovment[ageGroup][day][time][location] = value;
+}
+
+double Simulation::getAgentChanceOfMovment(int ageGroup, int day, int time, int location){
+    if(ageGroup < 0 || ageGroup > 17) return-1;
+    if(day < 0 || day > 1) return -1;
+    if(time < 0 || time > 24) return -1;
+    if(location < 0 || location > 9) return -1;
+
+    return agentChanceOfMovment[ageGroup][day][time][location];
+    
+}
+
+void Simulation::setAgentIncubationPeriod(int ageRange, short value){
+    if(ageRange < 0 || ageRange > 17) return;
+    if(value < 0 || value > 127) return;
+
+    agentIncubationTime[ageRange] = value;
+}
+
+short Simulation::getAgentIncubationPeriod(int ageRange){
+    if(ageRange < 0 || ageRange > 17) return -1;
+
+    return agentIncubationTime[ageRange];
+}
+
+void Simulation::setAgentNeedsHospital(int ageGroup, double chance){
+    if(ageGroup < 0 || ageGroup > 17) return;
+    if(chance < 0 || chance > 1) return;
+    agentNeedsHospital[ageGroup] = chance;
+}
+
+double Simulation::getAgentNeedsHospital(int ageGroup){
+    if(ageGroup < 0 || ageGroup > 17) return -1;
+    return agentNeedsHospital[ageGroup];
+}
+

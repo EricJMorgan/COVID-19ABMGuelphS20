@@ -189,17 +189,21 @@ void Agent::DecideEthnicity() {
 
 }
 
-void Agent::DecideMigitationStrategy(double maskWearing, double hygieneMaintain) {
-    double maskChance = (double) rand()/RAND_MAX;
-    double hygieneChance = (double) rand()/RAND_MAX;
+void Agent::DecideMigitationStrategy(double mitagationPerAge[18][4]) {
+    int ageGroup = AgentAgeGroupReverse.at(info);
+    double currRoll;
 
-    if (maskChance > maskWearing) {
-        wearingMask = true;
-    }
+    currRoll = ((double) rand() / (RAND_MAX)) + 1;
+    wearingMask = (currRoll <= mitagationPerAge[ageGroup][0]);
 
-    if (hygieneChance > hygieneMaintain) {
-        agentHygiene = true;
-    }
+    currRoll = ((double) rand() / (RAND_MAX)) + 1;
+    agentHygiene = (currRoll <= mitagationPerAge[ageGroup][1]);
+
+    currRoll = ((double) rand() / (RAND_MAX)) + 1;
+    socialDistancing = (currRoll <= mitagationPerAge[ageGroup][2]);
+
+    currRoll = ((double) rand() / (RAND_MAX)) + 1;
+    willIsolate = (currRoll <= mitagationPerAge[ageGroup][3]);
 }
 
 string Agent::agentToString() {
@@ -217,4 +221,8 @@ string Agent::agentToString() {
     agentString.append(EducationMap[education]);
 
     return agentString;
+}
+
+int Agent::getAgentAgeGroup() {
+    return AgentAgeGroupReverse.at(info);
 }
