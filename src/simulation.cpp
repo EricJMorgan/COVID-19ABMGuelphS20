@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.04
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the class file for the simulation class. This is where all of the classes come together
  * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
@@ -39,6 +39,35 @@ Simulation::Simulation(string fileName) {
     currDay = MON;
     initiallyInfectedChance = 0.0005;
     initiallyInfected = 0;
+
+    //modular value setters
+    for(int i = 0; i < 18; i++){
+        agentRecoveryTime[i] = 0;
+        agentIncubationTime[i] = 0;
+        agentNeedsHospital[i] = 0;
+        agentDeathChance[i] = 0;
+        agentChanceOfICU[i] = 0;
+        for(int j = 0; j < 4; j++){
+            agentMitagationChance[i][j] = 0;
+        }
+    }
+    for(int i = 0; i < 4; i++){
+        mitagationEffectivness[i] = 0;
+    }
+    for(int i = 0; i < 9; i++){
+        locationRisks[i] = 0;
+    }
+    for(int i = 0; i < 18; i++){
+        for(int j = 0; j < 2; j++){
+            for(int k = 0; k < 6; k++){
+                for(int l = 0; l < 9; l++){
+                    agentChanceOfMovment[i][j][k][l] = 0;
+                }
+            }
+        }
+    }
+
+
 
     //make sure the file is valid
     if(!demographicFile.good()){
@@ -97,27 +126,21 @@ void Simulation::simulateTimeStep(){
     }
     isoCompartment.newlyHospitalized.clear();
 
-    // agent sir timestep method calls
+    Location *locationHolder;
     for (int i = 0; i < (int)locationInfo->getLocationListLength(); i++) {
-        for (int j = 0; j < (int)locationInfo->getLocationAt(i)->getInfected().size(); j++) {
-            string sirResponse = locationInfo->getLocationAt(i)->getInfected()[j]->SIRTimeStep(sirTimeStep);
-            if (sirResponse == "ISOAGENT") {
-                Agent* toIsolate = locationInfo->getLocationAt(i)->removeInfectedAgent(j);
-                isoCompartment.AddMildlyInfectedAgents(toIsolate);
-                j--;
-            } else if (sirResponse == "RECOVERAGENT") {
-                Agent* recoveredAgent = locationInfo->getLocationAt(i)->removeInfectedAgent(j);
-                recoveredTotal++;
-                isoCompartment.AddMildlyInfectedAgents(recoveredAgent);
-                recoveredAgents.push_back(recoveredAgent);
-                j--;
-            } else if (sirResponse == "HOSPITALAGENT") {
-                Agent* hospitalAgent = locationInfo->getLocationAt(i)->removeInfectedAgent(j);
-                guelphHospital.increaseHospitalCount(hospitalAgent);
-                j--;
+        locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);
+
+        locationHolder = locationInfo->getLocationAt(i);
+        for(int j = 0; j < locationHolder->getInfectedSize(); j++){
+            if(locationHolder->getInfectedAgentAt(j)->randomAgentNeedsHospital(agentNeedsHospital)){
+                guelphHospital.increaseHospitalCount(locationHolder->getInfectedAgentAt(j));
+                locationHolder->removeInfectedAgent(j);//TODO this might skip over other agents
             }
+            if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INCUBATION) locationHolder->getInfectedAgentAt(j)->agentIncubationCheck(agentIncubationTime);
+
         }
     }
+    
     
     // transport agents from location to location
     newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
@@ -167,88 +190,6 @@ Agent *Simulation::getAgentAt(int index){
     return holder;
 }
 
-//user input setters
-void Simulation::setSocialDistancingSeverity(int val){
-    socialDistancingSeverity = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisk);
-}
-
-void Simulation::setMaskCompliance(double val){
-    maskCompliance = val;
-    for (int i = 0; i < agentCount; i++) {
-        simAgents[i]->DecideMigitationStrategy(maskCompliance, hygieneMaintainence);
-    }
-}
-
-void Simulation::setQuarantineSeverity(double val) {
-    for (int i = 0; i < agentCount; i++) {
-        simAgents[i]->setQuarantineCases(val);
-    }
-}
-
-void Simulation::setHygieneMaintainence(double val){
-    hygieneMaintainence = val;
-    for (int i = 0; i < agentCount; i++) {
-        simAgents[i]->DecideMigitationStrategy(maskCompliance, hygieneMaintainence);
-    }
-}
-
-// Age-specific setters
-void Simulation::setAgentRecoveryTime(int ageRange, short val){ 
-    guelphHospital.setAgentRecoveryTime(ageRange, val);
-}
-
-void Simulation::setAgentDeathChance(int ageRange, double val){ 
-    guelphHospital.setAgentDeathChance(ageRange, val);
-}
-
-//location risks
-void Simulation::setGenStoreRisk(double val){
-    locationRisks[0] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
-}
-
-void Simulation::setTransportRisk(double val){
-    locationRisks[1] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
-}
-
-void Simulation::setSchoolRisk(double val){
-    locationRisks[2] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
-}
-
-void Simulation::setParkRisk(double val){
-    locationRisks[3] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
-}
-
-void Simulation::setServiceRisk(double val){
-    locationRisks[4] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
-}
-
-void Simulation::setEntertainmentRisk(double val){
-    locationRisks[5] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
-}
-
-void Simulation::setHealthPlaceRisk(double val){
-    locationRisks[6] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
-}
-
-void Simulation::setPlaceOfWorshipRisk(double val){
-    locationRisks[7] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
-}
-
-void Simulation::setResidentialRisk(double val){
-    locationRisks[8] = val;
-    locationInfo->updateLocationRisks(socialDistancingSeverity, locationRisks);
-}
-
-
 /********************Private functions***************************************/
 void Simulation::addNewAgent(string personInfo, int amountToAdd){
     //for the amount of agents in a demographic, add them to the agent list
@@ -257,7 +198,7 @@ void Simulation::addNewAgent(string personInfo, int amountToAdd){
         simAgents[agentCount] = tempAgent;
         double chanceInfected  = (double) rand()/RAND_MAX;
         if (chanceInfected < initiallyInfectedChance) {
-            tempAgent->AgentInfected();
+            tempAgent->infectAgent();
             initiallyInfected++;
         }
         infectedCurrent = initiallyInfected;
@@ -465,7 +406,31 @@ void Simulation::setAgentNeedsHospital(int ageGroup, double chance){
 }
 
 double Simulation::getAgentNeedsHospital(int ageGroup){
-    if(ageGroup < 0 || ageGroup > 17) return -1;
     return agentNeedsHospital[ageGroup];
+}
+
+//TODO add error checking for all methods below
+void Simulation::setLocationRisks(int location, double value){
+    locationRisks[location] = value;
+}
+
+double Simulation::getLocationRisks(int location){
+    return locationRisks[location];
+}
+
+void Simulation::setAgentChanceOfICU(int ageGroup, double value){
+    agentChanceOfICU[ageGroup] = value;
+}
+
+double Simulation::getAgentChanceOfICU(int ageGroup){
+    return agentChanceOfICU[ageGroup];
+}
+
+void Simulation::setAgentIncubationTime(int ageGroup, double value){
+    agentIncubationTime[ageGroup] = value;
+}
+
+double Simulation::getAgentIncubationTime(int ageGroup){
+    return agentIncubationTime[ageGroup];
 }
 

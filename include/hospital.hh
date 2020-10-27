@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 13/10/20
- * ver 1.04
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the hospital class. The purpose of
  * this class is to keep track of hopsital statistics. Mainly the amount

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 13/10/20
- * ver 1.06
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the class file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
@@ -51,16 +51,6 @@ Transportation::Transportation(Agent **arr, int arrSize){
             locationList.at(rand() % getLocationListLength())->addAgentToInfected(arr[i]);
         } else if (arr[i]->getSeverity() == SUSCEPTIBLE) {
             locationList.at(rand() % getLocationListLength())->addAgentToSusceptible(arr[i]);
-        }
-    }
-
-    for(int i = 0; i < 18; i++){//set all values too 0 for now
-        for(int j = 0; j < 2; j++){
-            for(int k = 0; k < 6; k++){
-                for(int l = 0; l < 9; l++){
-                    setAgentChanceOfMovment(i, j, k, l, 0);
-                }
-            }
         }
     }
 }
@@ -288,13 +278,3 @@ int Transportation::monteCarloRandom(int roof){
         if(r2 < r1) return r1;
     }
 }
-
-void Transportation::updateLocationRisks(int socialDistancingSeverity, double associatedLocRisks[]) {
-    for(int i = 0; i < getLocationListLength(); i++){
-        getLocationAt(i)->socialDistancingSeverity = socialDistancingSeverity;
-        for (int j = 0; j < 9; j++) {
-            getLocationAt(i)->locationRisks[j] = associatedLocRisks[j];
-        }
-    }
-}
-

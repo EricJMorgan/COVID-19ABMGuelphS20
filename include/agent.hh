@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.00
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the agent class. It contains all of the 
  * info for each individual agent. When a new agent is created it decides its
@@ -171,6 +171,10 @@ class Agent : public SIR {
 
     int getAgentAgeGroup();
 
+    bool randomAgentNeedsHospital(double agentNeedsHospital[18]);
+
+    void agentIncubationCheck(short agentIncubationTime[18]);
+
     //To be implemented later
     void quarantineTime();
     void goodHygiene();
@@ -183,6 +187,7 @@ class Agent : public SIR {
     bool socialDistancing = false;
     bool willIsolate = false;
     int timeInHospital = 0;
+    int timeIncubating = 0;
     
     private:
     HouseholdIncome income;
@@ -229,6 +234,8 @@ class Agent : public SIR {
      * collected from the canadian census
      */
     void DecideEducation();
+
+   
 };
 
 #endif

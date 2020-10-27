@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.03
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the simulation class. This is where all of the classes come together
  * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
@@ -192,87 +192,6 @@ class Simulation {
      */
     void setHygieneMaintainence(double val);
 
-    //location risks
-    /**
-     * setGenStoreRisk
-     * 
-     * setter for GenStoreRisk
-     * @param val the value to set
-     */
-    void setGenStoreRisk(double val);
-
-    /**
-     * setTransportRisk
-     * 
-     * setter for TransportRisk
-     * @param val the value to set
-     */
-    void setTransportRisk(double val);
-
-    /**
-     * setSchoolRisk
-     * 
-     * setter for SchoolRisk
-     * @param val the value to set
-     */
-    void setSchoolRisk(double val);
-
-    /**
-     * setParkRisk
-     * 
-     * setter for ParkRisk
-     * @param val the value to set
-     */
-    void setParkRisk(double val);
-
-    /**
-     * setServiceRisk
-     * 
-     * setter for ServiceRisk
-     * @param val the value to set
-     */
-    void setServiceRisk(double val);
-
-    /**
-     * setEntertainmentRisk
-     * 
-     * setter for EntertainmentRisk
-     * @param val the value to set
-     */
-    void setEntertainmentRisk(double val);
-
-    /**
-     * setHealthPlaceRisk
-     * 
-     * setter for HealthPlaceRisk
-     * @param val the value to set
-     */
-    void setHealthPlaceRisk(double val);
-
-    /**
-     * setPlaceOfWorshipRisk
-     * 
-     * setter for PlaceOfWorshipRisk
-     * @param val the value to set
-     */
-    void setPlaceOfWorshipRisk(double val);
-
-    /**
-     * setResidentialRisk
-     * 
-     * setter for ResidentialRisk
-     * @param val the value to set
-     */
-    void setResidentialRisk(double val);
-
-    /**
-     * setQuarantineSeverity
-     * 
-     * setter for Quarantine severity (odds of quarantine symptomatic cases)
-     * @param val the value to set
-     */
-    void setQuarantineSeverity(double val);
-
     /**
      * setAgentMitagationChance
      * 
@@ -414,7 +333,16 @@ class Simulation {
     double getAgentChanceOfMovment(int ageGroup, int day, int time, int location);
 
     void setAgentNeedsHospital(int ageGroup, double chance);
-    // double getAgentNeedsHospital(int ageGroup);
+    double getAgentNeedsHospital(int ageGroup);
+
+    void setLocationRisks(int location, double value);
+    double getLocationRisks(int location);
+
+    void setAgentChanceOfICU(int ageGroup, double value);
+    double getAgentChanceOfICU(int ageGroup);
+
+    void setAgentIncubationTime(int ageGroup, double value);
+    double getAgentIncubationTime(int ageGroup);
 
 
     
@@ -437,16 +365,15 @@ class Simulation {
     int population;
     int newlyInfected;
     double sirTimeStep;
-    double locationRisk[9];
     
 
     // user inputs
-    double agentMitagationChance[18][4];//done
+    double agentMitagationChance[18][4];
     double mitagationEffectivness[4];
-    double locationRisks[9];
+    double locationRisks[9];//done
     short agentRecoveryTime[18];//done
-    short agentIncubationTime[18];
-    double agentNeedsHospital[18];
+    short agentIncubationTime[18];//done
+    double agentNeedsHospital[18];//done
     double agentDeathChance[18];//done
     double agentChanceOfICU[18];//done
     double agentChanceOfMovment[18][2][6][9];
@@ -521,21 +448,24 @@ extern "C" {
     int hospitalCurrent(Simulation* sim){ return sim->getHospitalCurrent(); }
     int ICUtotal(Simulation* sim){ return sim->getICUtotal(); }
     int ICUCurrent(Simulation* sim){ return sim->getICUCurrent(); }
-    void socialDistanceServeritySetter(Simulation* sim, int val){sim->setSocialDistancingSeverity(val);}
-    void maskComplianceSetter(Simulation* sim, double val){sim->setMaskCompliance(val);}
-    void hygieneMaintainenceSetter(Simulation* sim, double val){sim->setHygieneMaintainence(val);}
-    void genStoreRiskSetter(Simulation* sim, double val){sim->setGenStoreRisk(val);}
-    void transportRiskSetter(Simulation* sim, double val){sim->setTransportRisk(val);}
-    void schoolRiskSetter(Simulation* sim, double val){sim->setSchoolRisk(val);}
-    void parkRiskSetter(Simulation* sim, double val){sim->setParkRisk(val);}
-    void serviceRiskSetter(Simulation* sim, double val){sim->setServiceRisk(val);}
-    void entertainmentRiskSetter(Simulation* sim, double val){sim->setEntertainmentRisk(val);}
-    void healthPlaceRiskSetter(Simulation* sim, double val){sim->setHealthPlaceRisk(val);}
-    void placeOfWorshipRiskSetter(Simulation* sim, double val){sim->setPlaceOfWorshipRisk(val);}
-    void residentialRiskSetter(Simulation* sim, double val){sim->setResidentialRisk(val);}
-    void quarantineSeverity(Simulation* sim, double val) {sim->setQuarantineSeverity(val);}
+    void setAgentMitagationChance(Simulation* sim, int ageGroup, int strategy, double value){sim->setAgentMitagationChance(ageGroup, strategy, value);}
+    double getAgentMitagationChance(Simulation *sim, int ageGroup, int strategy){return sim->getAgentMitagationChance(ageGroup, strategy);}
+    void setMitagationEffectivness(Simulation *sim, int strategy, double value){sim->setMitagationEffectivness(strategy, value);}
+    double getMitagationEffectivness(Simulation *sim, int strategy){return sim->getMitagationEffectivness(strategy);}
     void setAgentRecoveryTime(Simulation* sim, int ageRange, short val){sim->setAgentRecoveryTime(ageRange, val);}
+    short getAgentRecoveryTime(Simulation *sim, int ageRange){return sim->getAgentRecoveryTime(ageRange);}
     void setAgentDeathChance(Simulation* sim, int ageRange, double val){sim->setAgentDeathChance(ageRange, val);}
+    double getAgentDeathChance(Simulation* sim, int ageRange){return sim->getAgentDeathChance(ageRange);}
+    void setAgentChanceOfMovment(Simulation* sim, int ageGroup, int day, int time, int location, double value){sim->setAgentChanceOfMovment(ageGroup, day, time, location, value);}
+    double getAgentChanceOfMovment(Simulation* sim, int ageGroup, int day, int time, int location){return sim->getAgentChanceOfMovment(ageGroup, day, time, location);}
+    void setAgentNeedsHospital(Simulation *sim, int ageGroup, double chance){sim->setAgentNeedsHospital(ageGroup, chance);}
+    double getAgentNeedsHospital(Simulation *sim, int ageGroup){return sim->getAgentNeedsHospital(ageGroup);}
+    void setLocationRisks(Simulation *sim, int location, double value){sim->setLocationRisks(location, value);}
+    double getLocationRisks(Simulation *sim, int location){return sim->getLocationRisks(location);}
+    void setAgentChanceOfICU(Simulation *sim, int ageGroup, double value){sim->setAgentChanceOfICU(ageGroup, value);}
+    double getAgentChanceOfICU(Simulation *sim, int ageGroup){return sim->getAgentChanceOfICU(ageGroup);}
+    void setAgentIncubationTime(Simulation *sim, int ageGroup, double value){sim->setAgentIncubationTime(ageGroup, value);}
+    double getAgentIncubationTime(Simulation *sim, int ageGroup){return sim->getAgentIncubationTime(ageGroup);}
 }
 
 #endif

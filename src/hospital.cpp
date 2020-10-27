@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 13/10/20
- * ver 1.04
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the class file for the hospital class. The purpose of
  * this class is to keep track of hopsital statistics. Mainly the amount
@@ -77,8 +77,8 @@ void Hospital::HospitalTimeStep(double timestep, short agentRecoveryTime[18], do
         currAgent = hospitalICU[i];
         agentAgeGroup = currAgent->getAgentAgeGroup();
 
-        //if agent is finished the recovery time
-        if (currAgent->timeInHospital > agentRecoveryTime[agentAgeGroup]) {
+        //if agent is finished the recovery time. Multiplied by 6 because it is incremented everytime step not every day
+        if (currAgent->timeInHospital > (agentRecoveryTime[agentAgeGroup] * 6)) {
             hospitalICU.erase(hospitalICU.begin() + i);
             currAgent->recoverAgent();
             currAgent->timeInHospital = 0;
@@ -101,7 +101,7 @@ void Hospital::HospitalTimeStep(double timestep, short agentRecoveryTime[18], do
     for (int i = 0; i < (int)hospitalGeneralWard.size(); i++) {
         //get agent info
         currAgent = hospitalGeneralWard[i];
-        agentAgeGroup = currAgent->getAgentAgeGroup;
+        agentAgeGroup = currAgent->getAgentAgeGroup();
 
         //if agent rolls to go to the hospital
         if (agentChanceOfICU[agentAgeGroup] >= ((double) rand() / (RAND_MAX))) {

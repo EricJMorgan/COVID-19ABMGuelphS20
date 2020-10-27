@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.00
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the location class. This holds the
  * location grouping (The first 5 digits of a postal code), the locations
@@ -275,6 +275,10 @@ class Location : public GeographicalRisk {
      */
     int getLocationIndex();
 
+    
+
+    void locationTimeStep(double agentMitagationChance[18][4], double mitagationEffectivness[4], double locationRisks[9]);
+
     private:
     int population;
     int pplDensity;
@@ -284,6 +288,7 @@ class Location : public GeographicalRisk {
     SIRtotals sirTotalLocation;
     string postalCodeGrouping;
     std::vector<string> postalCodes;
+    std::vector<int> amountOfAgeGroups();
 };
 
 #endif

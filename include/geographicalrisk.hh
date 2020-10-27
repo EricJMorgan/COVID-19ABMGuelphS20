@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 13/10/20
- * ver 1.03
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the geographical risk class. The main
  * use for this class is to do the math for each area and decide how many 
@@ -64,6 +64,8 @@ class GeographicalRisk {
      * 
      */
     int infectPeople();
+
+    
 
     //int getAmountOfLocations();
 

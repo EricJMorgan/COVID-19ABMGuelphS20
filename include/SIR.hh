@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.03
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the SIR class. This is the pipline that moves
  * agents from Susceptible to infected to recoverd. It looks at the agents current infection
@@ -54,7 +54,7 @@ static std::map<AgentInfo, std::string> AgentInfoMapReverse = boost::assign::map
 (FEMALE40TO44, "Female 40-44")(FEMALE45TO49, "Female 45-49")(FEMALE50TO54, "Female 50-54")(FEMALE55TO59, "Female 55-59")(FEMALE60TO64, "Female 60-64")
 (FEMALE65TO69, "Female 65-69")(FEMALE70TO74, "Female 70-74")(FEMALE75TO79, "Female 75-79")(FEMALE80TO84, "Female 80-84")(FEMALE85, "Female 85");
 
-enum SIRSeverity { SUSCEPTIBLE, INFECTED, ICU, RECOVERED, DECEASED };
+enum SIRSeverity { SUSCEPTIBLE, INCUBATION, INFECTED, ICU, RECOVERED, DECEASED };
 
 //Declare SIR class
 class SIR {
@@ -70,6 +70,7 @@ class SIR {
      */
     SIR();
 
+    void incubateAgent();
     void infectAgent();
     void recoverAgent();
     void ICUAgent();
