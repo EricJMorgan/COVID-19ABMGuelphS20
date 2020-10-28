@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.00
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the class file for the agent class. It contains all of the 
  * info for each individual agent. When a new agent is created it decides its
@@ -189,17 +189,21 @@ void Agent::DecideEthnicity() {
 
 }
 
-void Agent::DecideMigitationStrategy(double maskWearing, double hygieneMaintain) {
-    double maskChance = (double) rand()/RAND_MAX;
-    double hygieneChance = (double) rand()/RAND_MAX;
+void Agent::DecideMigitationStrategy(double mitagationPerAge[18][4]) {
+    int ageGroup = AgentAgeGroupReverse.at(info);
+    double currRoll;
 
-    if (maskChance > maskWearing) {
-        wearingMask = true;
-    }
+    currRoll = ((double) rand() / (RAND_MAX));
+    wearingMask = (currRoll <= mitagationPerAge[ageGroup][0]);
 
-    if (hygieneChance > hygieneMaintain) {
-        agentHygiene = true;
-    }
+    currRoll = ((double) rand() / (RAND_MAX));
+    agentHygiene = (currRoll <= mitagationPerAge[ageGroup][1]);
+
+    currRoll = ((double) rand() / (RAND_MAX));
+    socialDistancing = (currRoll <= mitagationPerAge[ageGroup][2]);
+
+    currRoll = ((double) rand() / (RAND_MAX));
+    willIsolate = (currRoll <= mitagationPerAge[ageGroup][3]);
 }
 
 string Agent::agentToString() {
@@ -217,4 +221,20 @@ string Agent::agentToString() {
     agentString.append(EducationMap[education]);
 
     return agentString;
+}
+
+int Agent::getAgentAgeGroup() {
+    return AgentAgeGroupReverse.at(info);
+}
+
+bool Agent::randomAgentNeedsHospital(double agentNeedsHospital[18]){
+    return agentNeedsHospital[getAgentAgeGroup()] >= ((double) rand() / (RAND_MAX)) && (getSeverity() != INCUBATION);
+}
+
+void Agent::agentIncubationCheck(short agentIncubationTime[18]){
+    //this is multiplied by the currTime step because this time will increment every time step instead of every day
+    if(timeIncubating < (agentIncubationTime[getAgentAgeGroup()] * 6)){
+        timeIncubating = 0;
+        infectAgent();
+    }
 }

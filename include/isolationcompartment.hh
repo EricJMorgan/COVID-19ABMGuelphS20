@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.01
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the isolation compartment class. This is used
  * for when an agent has visable symptoms and isolates. 
@@ -66,7 +66,7 @@ class IsolationCompartment {
      * 
      * @param the size of the timeStep
      */
-    void SimulateIsoTimeStep(double timeStep);
+    void SimulateIsoTimeStep (double timeStep, short agentRecoveryTime[18], double agentNeedsHospital[18]);
 
     // returns to be read and cleared
     std::vector<Agent *> newlyRecovered;

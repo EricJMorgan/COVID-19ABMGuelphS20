@@ -31,31 +31,24 @@ ffi.cdef('''
     int hospitalCurrent(Simulation* sim);
     int ICUtotal(Simulation* sim);
     int ICUCurrent(Simulation* sim);
-    void socialDistanceServeritySetter(Simulation* sim, int val);
-    void maskComplianceSetter(Simulation* sim, double val);
-    void hygieneMaintainenceSetter(Simulation* sim, double val);
-    void genStoreRiskSetter(Simulation* sim, double val);
-    void transportRiskSetter(Simulation* sim, double val);
-    void schoolRiskSetter(Simulation* sim, double val);
-    void parkRiskSetter(Simulation* sim, double val);
-    void entertainmentRiskSetter(Simulation* sim, double val);
-    void healthPlaceRiskSetter(Simulation* sim, double val);
-    void placeOfWorshipRiskSetter(Simulation* sim, double val);
-    void residentialRiskSetter(Simulation* sim, double val);
-    void quarantineSeverity(Simulation* sim, double val);
-    void serviceRiskSetter(Simulation* sim, double val);
-    void setAgentMitagationChance(Simulation *sim, int ageGroup, int strategy, double value);
+    void setAgentMitagationChance(Simulation* sim, int ageGroup, int strategy, double value);
     double getAgentMitagationChance(Simulation *sim, int ageGroup, int strategy);
     void setMitagationEffectivness(Simulation *sim, int strategy, double value);
     double getMitagationEffectivness(Simulation *sim, int strategy);
-    void setLocationRisk(Simulation *sim, int location, double value);
-    double getLocationRisk(Simulation *sim, int location);
-    void setAgentRecoveryTime(Simulation *sim, int ageRange, short val);
+    void setLocationRisks(Simulation *sim, int location, double value);
+    double getLocationRisks(Simulation *sim, int location);
+    void setAgentRecoveryTime(Simulation* sim, int ageRange, short val);
     short getAgentRecoveryTime(Simulation *sim, int ageRange);
-    void setAgentDeathChance(Simulation *sim, int ageRange, double val);
-    double getAgentDeathChance(Simulation *sim, int ageRange);
-    void setAgentChanceOfMovment(Simulation *sim, int day, int time, int location, double value);
-    double getAgentChanceOfMovment(Simulation *sim, int ageGroup, int day, int time, int location);
+    void setAgentDeathChance(Simulation* sim, int ageRange, double val);
+    double getAgentDeathChance(Simulation* sim, int ageRange);
+    void setAgentChanceOfMovment(Simulation* sim, int ageGroup, int day, int time, int location, double value);
+    double getAgentChanceOfMovment(Simulation* sim, int ageGroup, int day, int time, int location);
+    void setAgentNeedsHospital(Simulation *sim, int ageGroup, double chance);
+    double getAgentNeedsHospital(Simulation *sim, int ageGroup);
+    void setAgentChanceOfICU(Simulation *sim, int ageGroup, double value);
+    double getAgentChanceOfICU(Simulation *sim, int ageGroup);
+    void setAgentIncubationTime(Simulation *sim, int ageGroup, double value);
+    double getAgentIncubationTime(Simulation *sim, int ageGroup);
 ''')
 
 lib = ffi.dlopen('./libProject.so')
@@ -95,45 +88,6 @@ class Simulation(object):
     def ICUCurrent(self):
         return lib.ICUCurrent(self.obj)
 
-    def setSocialDistanceServerity(self, val):
-        lib.socialDistanceServeritySetter(self.obj, val)
-
-    def setmaskCompliance(self, val):
-        lib.maskComplianceSetter(self.obj, val)
-
-    def setHygieneMaintainence(self, val):
-        lib.hygieneMaintainenceSetter(self.obj, val)
-
-    def setGenStoreRisk(self, val):
-        lib.genStoreRiskSetter(self.obj, val)
-
-    def setTransportRisk(self, val):
-        lib.transportRiskSetter(self.obj, val)
-
-    def setSchoolRisk(self, val):
-        lib.schoolRiskSetter(self.obj, val)
-
-    def setParkRisk(self, val):
-        lib.parkRiskSetter(self.obj, val)
-
-    def setEntertainmentRisk(self, val):
-        lib.entertainmentRiskSetter(self.obj, val)
-
-    def setHealthPlaceRisk(self, val):
-        lib.healthPlaceRiskSetter(self.obj, val)
-
-    def setPlaceOfWorshipRisk(self, val):
-        lib.placeOfWorshipRiskSetter(self.obj, val)
-
-    def setResidentialRisk(self, val):
-        lib.residentialRiskSetter(self.obj, val)
-    
-    def quarantineSeverity(self, val):
-        lib.quarantineSeverity(self.obj, val)
-        
-    def setServiceRisk(self, val):
-        lib.serviceRiskSetter(self.obj, val)
-
     def setAgentMitagationChance(self, ageGroup, strategy, value):
         lib.setAgentMitagationChance(self.obj, ageGroup, strategy, value)
     
@@ -169,7 +123,24 @@ class Simulation(object):
     
     def getAgentChanceOfMovment(self, ageGroup, day, time, location):
         return lib.getAgentChanceOfMovment(self.obj, ageGroup, day, time, location)
-
+    
+    def setAgentNeedsHospital(self, ageGroup, chance):
+        lib.setAgentNeedsHospital(self.obj, ageGroup, chance)
+    
+    def getAgentNeedsHospital(self, ageGroup):
+        return lib.getAgentNeedsHospital(self.obj, ageGroup)
+    
+    def setAgentChanceOfICU(self, ageGroup, value):
+        lib.setAgentChanceOfICU(self.obj, ageGroup, value)
+    
+    def getAgentChanceOfICU(self, ageGroup):
+        return lib.getAgentChanceOfICU(self.obj, ageGroup)
+    
+    def setAgentIncubationTime(self, ageGroup, value):
+        lib.setAgentIncubationTime(self.obj, ageGroup, value)
+    
+    def getAgentIncubationTime(self, ageGroup):
+        return lib.getAgentIncubationTime(self.obj, ageGroup)
 
 #Initialize times and values
 sim = Simulation()
@@ -341,97 +312,98 @@ def update_output(value):
     return 'You have selected "{}"'.format(value)
 """
 
-#Callback functions for sliders
-@app.callback(
-    Output(list_elements[0]+'_value', 'children'),
-    [Input(list_elements[0], 'value')])
-def update_output_Q(value):
-    sim.quarantineSeverity(value/100)
-    return '{}'.format(value)
+#Callback functions for sliders]
+##TODO NOTE: these are outdated setters and getters
+# @app.callback(
+#     Output(list_elements[0]+'_value', 'children'),
+#     [Input(list_elements[0], 'value')])
+# def update_output_Q(value):
+#     sim.quarantineSeverity(value/100)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[1]+'_value', 'children'),
-    [Input(list_elements[1], 'value')])
-def update_output_SD(value):
-    sim.setSocialDistanceServerity(value)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[1]+'_value', 'children'),
+#     [Input(list_elements[1], 'value')])
+# def update_output_SD(value):
+#     sim.setSocialDistanceServerity(value)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[2]+'_value', 'children'),
-    [Input(list_elements[2], 'value')])
-def update_output_MC(value):
-    sim.setmaskCompliance(value/100)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[2]+'_value', 'children'),
+#     [Input(list_elements[2], 'value')])
+# def update_output_MC(value):
+#     sim.setmaskCompliance(value/100)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[3]+'_value', 'children'),
-    [Input(list_elements[3], 'value')])
-def update_output_HM(value):
-    sim.setHygieneMaintainence(value/100)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[3]+'_value', 'children'),
+#     [Input(list_elements[3], 'value')])
+# def update_output_HM(value):
+#     sim.setHygieneMaintainence(value/100)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[4]+'_value', 'children'),
-    [Input(list_elements[4], 'value')])
-def update_output_gs(value):
-    sim.setGenStoreRisk(value)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[4]+'_value', 'children'),
+#     [Input(list_elements[4], 'value')])
+# def update_output_gs(value):
+#     sim.setGenStoreRisk(value)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[5]+'_value', 'children'),
-    [Input(list_elements[5], 'value')])
-def update_output_t(value):
-    sim.setTransportRisk(value)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[5]+'_value', 'children'),
+#     [Input(list_elements[5], 'value')])
+# def update_output_t(value):
+#     sim.setTransportRisk(value)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[6]+'_value', 'children'),
-    [Input(list_elements[6], 'value')])
-def update_output_sch(value):
-    sim.setSchoolRisk(value)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[6]+'_value', 'children'),
+#     [Input(list_elements[6], 'value')])
+# def update_output_sch(value):
+#     sim.setSchoolRisk(value)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[7]+'_value', 'children'),
-    [Input(list_elements[7], 'value')])
-def update_output_pnr(value):
-    sim.setParkRisk(value)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[7]+'_value', 'children'),
+#     [Input(list_elements[7], 'value')])
+# def update_output_pnr(value):
+#     sim.setParkRisk(value)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[8]+'_value', 'children'),
-    [Input(list_elements[8], 'value')])
-def update_output_serv(value):
-    sim.setServiceRisk(value)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[8]+'_value', 'children'),
+#     [Input(list_elements[8], 'value')])
+# def update_output_serv(value):
+#     sim.setServiceRisk(value)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[9]+'_value', 'children'),
-    [Input(list_elements[9], 'value')])
-def update_output_ent(value):
-    sim.setEntertainmentRisk(value)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[9]+'_value', 'children'),
+#     [Input(list_elements[9], 'value')])
+# def update_output_ent(value):
+#     sim.setEntertainmentRisk(value)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[10]+'_value', 'children'),
-    [Input(list_elements[10], 'value')])
-def update_output_health(value):
-    sim.setHealthPlaceRisk(value)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[10]+'_value', 'children'),
+#     [Input(list_elements[10], 'value')])
+# def update_output_health(value):
+#     sim.setHealthPlaceRisk(value)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[11]+'_value', 'children'),
-    [Input(list_elements[11], 'value')])
-def update_output_poworship(value):
-    sim.setPlaceOfWorshipRisk(value)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[11]+'_value', 'children'),
+#     [Input(list_elements[11], 'value')])
+# def update_output_poworship(value):
+#     sim.setPlaceOfWorshipRisk(value)
+#     return '{}'.format(value)
 
-@app.callback(
-    Output(list_elements[12]+'_value', 'children'),
-    [Input(list_elements[12], 'value')])
-def update_output_res(value):
-    sim.setResidentialRisk(value)
-    return '{}'.format(value)
+# @app.callback(
+#     Output(list_elements[12]+'_value', 'children'),
+#     [Input(list_elements[12], 'value')])
+# def update_output_res(value):
+#     sim.setResidentialRisk(value)
+#     return '{}'.format(value)
 
 # Death Chance Slider
 @app.callback(

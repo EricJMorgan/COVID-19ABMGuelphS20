@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.03
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the simulation class. This is where all of the classes come together
  * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
@@ -192,106 +192,159 @@ class Simulation {
      */
     void setHygieneMaintainence(double val);
 
-    //location risks
     /**
-     * setGenStoreRisk
+     * setAgentMitagationChance
      * 
-     * setter for GenStoreRisk
-     * @param val the value to set
+     * This is responsible for setting each age groups chance of
+     * following each mitigation strategy. ageGroup 0 = 0 to 4, ageGroup 1 = 5 to 9 etc
+     * strategy is 0 = social distancing, 1 = maskwearing, 2 = hygine, 3 = isolation
+     * 
+     * @param the age group the set of agents are in range 0 - 17
+     * @param the mitigation strategy used in range 0 - 3
      */
-    void setGenStoreRisk(double val);
+    void setAgentMitagationChance(int ageGroup, int strategy, double value);
 
     /**
-     * setTransportRisk
+     * getAgentMitagationChance
      * 
-     * setter for TransportRisk
-     * @param val the value to set
+     * This gets the ageGroups mitagation chance for the wanted
+     * strategy. where ageGroup: 0 = 0 - 4, 1 = 5 - 9 etc and 
+     * strategy: 0 = social distancing, 1 = maskwearing, etc.
+     * 
+     * @param ageGroup is the age group in range 0 - 17.
+     * @param strategy is the wanted strategy in range 0 - 3.
      */
-    void setTransportRisk(double val);
+    double getAgentMitagationChance(int ageGroup, int strategy);
+    
+    /**
+     * setMitagationEffectivness
+     * 
+     * This sets each mitigation strategys effectivness with a value 
+     * between 0 and 1.0. 0 = social distancing, 1 = maskwearing, 2 = hygine, 3 = isolation
+     * 
+     * @param int strategy this is the strategy too be used in range 0 - 3
+     * @param double value in range 0 - 1.0
+     */
+    void setMitagationEffectivness(int strategy, double value);
 
     /**
-     * setSchoolRisk
+     * getMitagationEffectivness
      * 
-     * setter for SchoolRisk
-     * @param val the value to set
+     * This gets the mitagation strategys given effectivness
+     * where 0 = social distancing, 1 = maskwearing, etc.
+     * 
+     * @param strategy is the wanted strategy in range 0 - 3.
      */
-    void setSchoolRisk(double val);
+    double getMitagationEffectivness(int strategy);
 
     /**
-     * setParkRisk
+     * setLocationRisk
      * 
-     * setter for ParkRisk
-     * @param val the value to set
+     * This sets each locations risk with a value
+     * between 0 and 1.0. 0 = genstore, 1 = transportation, etc
+     * 
+     * @param int location is the location to be checked in range 0 - 8
+     * @param double value in range 0 - 1.0
      */
-    void setParkRisk(double val);
+    void setLocationRisk(int location, double value);
 
     /**
-     * setServiceRisk
+     * getLocationRisk
      * 
-     * setter for ServiceRisk
-     * @param val the value to set
+     * This gets each locations given risk where
+     * 0 = genreal store, 1 = transport, etc
+     * 
+     * @param the wanted location in range 0 - 8
      */
-    void setServiceRisk(double val);
+    double getLocationRisk(int location);
+
+    void setAgentIncubationPeriod(int ageRange, short value);
+    short getAgentIncubationPeriod(int ageRange);    
 
     /**
-     * setEntertainmentRisk
+     * setAgentRecoveryTime
      * 
-     * setter for EntertainmentRisk
-     * @param val the value to set
+     * This will set each age ranges time too recovery from
+     * the given virus. Age ranges are 0 = 0 - 4, 1 = 5 - 9 ...
+     * 
+     * @param int ageRange in range 0 - 17
+     * @param short value in range 0 - 127
      */
-    void setEntertainmentRisk(double val);
+    void setAgentRecoveryTime(int ageRange, short value);
 
     /**
-     * setHealthPlaceRisk
+     * getAgentRecoveryTime
      * 
-     * setter for HealthPlaceRisk
-     * @param val the value to set
+     * This will get the given ages time to recover
+     * where ageRange is 0 = 0 -4, 1 = 5 - 9.
+     * 
+     * @param ageRange the age of the wanted recovery time in range 0 - 17.
+     * @return a short of the time it takes for the agent to recover
      */
-    void setHealthPlaceRisk(double val);
+    short getAgentRecoveryTime(int ageRange);
 
     /**
-     * setPlaceOfWorshipRisk
-     * 
-     * setter for PlaceOfWorshipRisk
-     * @param val the value to set
-     */
-    void setPlaceOfWorshipRisk(double val);
-
-    /**
-     * setResidentialRisk
-     * 
-     * setter for ResidentialRisk
-     * @param val the value to set
-     */
-    void setResidentialRisk(double val);
-
-    /**
-     * setQuarantineSeverity
-     * 
-     * setter for Quarantine severity (odds of quarantine symptomatic cases)
-     * @param val the value to set
-     */
-    void setQuarantineSeverity(double val);
-
-/**
      * setAgentDeathChance
      * 
      * This will set each age ranges chance too die from
      * the given virus. Age ranges are 0 = 0 - 4, 1 = 5 - 9...
      * 
-     * @param ageRange ageRange in range 0 -17
-     * @param val value in range 0 - 1.0
+     * @param int ageRange in range 0 -17
+     * @param double value in range 0 - 1.0
      */
-    void setAgentDeathChance(int ageRange, double val);
+    void setAgentDeathChance(int ageRange, double value);
 
     /**
-     * setAgentRecoveryTime
+     * getAgentDeathChance
      * 
-     * setter for agent recovery time (how long for recovery)
-     * @param ageRange ageRange in range 0 -17
-     * @param val the index of the age group
+     * This will get the given ages chance of death where
+     * ageRange is 0 = 0 - 4, 1 = 5 - 9, etc.
+     * 
+     * @param ageRange the age of the wanted death chance in range 0 - 17.
+     * @return a double of the chance of death
      */
-    void setAgentRecoveryTime(int ageRange, short val);
+    double getAgentDeathChance(int ageRange);
+
+    /**
+     * setAgentChanceOfMovment
+     * 
+     * This is used to set the array of agentChanceOfMovment
+     * 
+     * @param int ageGroup in range 0-17 where 0 is 0-4 1 is 5-9 etc
+     * @param int day in range 0-1 where 0 is a weekday and 1 is a weekend
+     * @param int time in range 0 <= time * timeStep < 24
+     * @param int location in range 0 - 9 where the number corisponds to the condenseLocationType enum
+     * @param double the percent chance of someone moving to the given location in range 0 - 1.0
+     */
+    void setAgentChanceOfMovment(int ageGroup, int day, int time, int location, double value);
+
+    /**
+     * getAgentChanceOfMovment
+     * 
+     * This is used to get the agents chance of movement based on ageGroup, day of the week,
+     * time of the day, and location.
+     * 
+     * @param int ageGroup in range 0-17 where 0 is 0-4 1 is 5-9 etc
+     * @param int day in range 0-1 where 0 is a weekday and 1 is a weekend
+     * @param int time in range 0 <= time * timeStep < 24
+     * @param int location in range 0 - 9 where the number corisponds to the condenseLocationType enum
+     * @return the percent chance of someone moving to the given location
+     */
+    double getAgentChanceOfMovment(int ageGroup, int day, int time, int location);
+
+    void setAgentNeedsHospital(int ageGroup, double chance);
+    double getAgentNeedsHospital(int ageGroup);
+
+    void setLocationRisks(int location, double value);
+    double getLocationRisks(int location);
+
+    void setAgentChanceOfICU(int ageGroup, double value);
+    double getAgentChanceOfICU(int ageGroup);
+
+    void setAgentIncubationTime(int ageGroup, double value);
+    double getAgentIncubationTime(int ageGroup);
+
+
     
     SIRtotals totalSimSIRStats;
     
@@ -312,13 +365,18 @@ class Simulation {
     int population;
     int newlyInfected;
     double sirTimeStep;
-    double locationRisk[9];
+    
 
     // user inputs
-    // geographical risks
-    int socialDistancingSeverity;
-    double maskCompliance;
-    double hygieneMaintainence;
+    double agentMitagationChance[18][4];
+    double mitagationEffectivness[4];
+    double locationRisks[9];//done
+    short agentRecoveryTime[18];//done
+    short agentIncubationTime[18];//done
+    double agentNeedsHospital[18];//done
+    double agentDeathChance[18];//done
+    double agentChanceOfICU[18];//done
+    double agentChanceOfMovment[18][2][6][9];
 
     //outputs for Front End graph
     int infectedCurrent;
@@ -390,21 +448,24 @@ extern "C" {
     int hospitalCurrent(Simulation* sim){ return sim->getHospitalCurrent(); }
     int ICUtotal(Simulation* sim){ return sim->getICUtotal(); }
     int ICUCurrent(Simulation* sim){ return sim->getICUCurrent(); }
-    void socialDistanceServeritySetter(Simulation* sim, int val){sim->setSocialDistancingSeverity(val);}
-    void maskComplianceSetter(Simulation* sim, double val){sim->setMaskCompliance(val);}
-    void hygieneMaintainenceSetter(Simulation* sim, double val){sim->setHygieneMaintainence(val);}
-    void genStoreRiskSetter(Simulation* sim, double val){sim->setGenStoreRisk(val);}
-    void transportRiskSetter(Simulation* sim, double val){sim->setTransportRisk(val);}
-    void schoolRiskSetter(Simulation* sim, double val){sim->setSchoolRisk(val);}
-    void parkRiskSetter(Simulation* sim, double val){sim->setParkRisk(val);}
-    void serviceRiskSetter(Simulation* sim, double val){sim->setServiceRisk(val);}
-    void entertainmentRiskSetter(Simulation* sim, double val){sim->setEntertainmentRisk(val);}
-    void healthPlaceRiskSetter(Simulation* sim, double val){sim->setHealthPlaceRisk(val);}
-    void placeOfWorshipRiskSetter(Simulation* sim, double val){sim->setPlaceOfWorshipRisk(val);}
-    void residentialRiskSetter(Simulation* sim, double val){sim->setResidentialRisk(val);}
-    void quarantineSeverity(Simulation* sim, double val) {sim->setQuarantineSeverity(val);}
+    void setAgentMitagationChance(Simulation* sim, int ageGroup, int strategy, double value){sim->setAgentMitagationChance(ageGroup, strategy, value);}
+    double getAgentMitagationChance(Simulation *sim, int ageGroup, int strategy){return sim->getAgentMitagationChance(ageGroup, strategy);}
+    void setMitagationEffectivness(Simulation *sim, int strategy, double value){sim->setMitagationEffectivness(strategy, value);}
+    double getMitagationEffectivness(Simulation *sim, int strategy){return sim->getMitagationEffectivness(strategy);}
     void setAgentRecoveryTime(Simulation* sim, int ageRange, short val){sim->setAgentRecoveryTime(ageRange, val);}
+    short getAgentRecoveryTime(Simulation *sim, int ageRange){return sim->getAgentRecoveryTime(ageRange);}
     void setAgentDeathChance(Simulation* sim, int ageRange, double val){sim->setAgentDeathChance(ageRange, val);}
+    double getAgentDeathChance(Simulation* sim, int ageRange){return sim->getAgentDeathChance(ageRange);}
+    void setAgentChanceOfMovment(Simulation* sim, int ageGroup, int day, int time, int location, double value){sim->setAgentChanceOfMovment(ageGroup, day, time, location, value);}
+    double getAgentChanceOfMovment(Simulation* sim, int ageGroup, int day, int time, int location){return sim->getAgentChanceOfMovment(ageGroup, day, time, location);}
+    void setAgentNeedsHospital(Simulation *sim, int ageGroup, double chance){sim->setAgentNeedsHospital(ageGroup, chance);}
+    double getAgentNeedsHospital(Simulation *sim, int ageGroup){return sim->getAgentNeedsHospital(ageGroup);}
+    void setLocationRisks(Simulation *sim, int location, double value){sim->setLocationRisks(location, value);}
+    double getLocationRisks(Simulation *sim, int location){return sim->getLocationRisks(location);}
+    void setAgentChanceOfICU(Simulation *sim, int ageGroup, double value){sim->setAgentChanceOfICU(ageGroup, value);}
+    double getAgentChanceOfICU(Simulation *sim, int ageGroup){return sim->getAgentChanceOfICU(ageGroup);}
+    void setAgentIncubationTime(Simulation *sim, int ageGroup, double value){sim->setAgentIncubationTime(ageGroup, value);}
+    double getAgentIncubationTime(Simulation *sim, int ageGroup){return sim->getAgentIncubationTime(ageGroup);}
 }
 
 #endif

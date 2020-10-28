@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.01
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the class file for the isolation compartment class. This is used
  * for when an agent has visable symptoms and isolates. 
@@ -34,20 +34,23 @@ void IsolationCompartment::AddMildlyInfectedAgents(Agent *toIsolate) {
     isolated.push_back(toIsolate);
 }
 
-void IsolationCompartment::SimulateIsoTimeStep (double timeStep) {
+void IsolationCompartment::SimulateIsoTimeStep (double timeStep, short agentRecoveryTime[18], double agentNeedsHospital[18]) {
     //loops through the isolated agent list
+    Agent* currAgent;
+    int agentAgeGroup;
     for (int i = 0; i < (int)isolated.size(); i++) {
-        string sirResponse  = isolated[i]->SIRTimeStep(timeStep);
-
+        currAgent =  isolated[i];
+        agentAgeGroup = currAgent->getAgentAgeGroup();
         //check if the agent is in need of the hospital or good too leave isolation
-        if (sirResponse == "HOSPITALAGENT") {
-            Agent *recoveredAgent = isolated.at(i);
+        if (agentNeedsHospital[agentAgeGroup] >= ((double) rand() / (RAND_MAX))) {
+            currAgent->timeInfected++;
             isolated.erase(isolated.begin() + i);
-            newlyHospitalized.push_back(recoveredAgent);
-        } else if (sirResponse == "RECOVERAGENT") {
-            Agent *recoveredAgent = isolated.at(i);
+            newlyHospitalized.push_back(currAgent);
+        } else if (currAgent->timeInfected > agentRecoveryTime[agentAgeGroup]) {
+            currAgent->timeInfected = 0;
+            currAgent->recoverAgent();
             isolated.erase(isolated.begin() + i);
-            newlyRecovered.push_back(recoveredAgent);
+            newlyRecovered.push_back(currAgent);
         }
     }
 }

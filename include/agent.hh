@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.00
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the agent class. It contains all of the 
  * info for each individual agent. When a new agent is created it decides its
@@ -124,13 +124,8 @@ class Agent : public SIR {
      */
     bool getHasMoved();
 
-    /**
-     * DecideMigitationStrategy
-     * 
-     * Decides the agents chance of wearing a mask and following appropriate hygiene
-     * @param maskWearing chance 
-     */
-    void DecideMigitationStrategy(double maskWearing, double hygieneMaintain);
+    
+    void DecideMigitationStrategy(double mitagationPerAge[18][4]);
 
     /**
      * setEducationIndex
@@ -174,14 +169,25 @@ class Agent : public SIR {
      */
     int getResidentialIndex();
 
+    int getAgentAgeGroup();
+
+    bool randomAgentNeedsHospital(double agentNeedsHospital[18]);
+
+    void agentIncubationCheck(short agentIncubationTime[18]);
+
     //To be implemented later
     void quarantineTime();
     void goodHygiene();
     void followWearMask();
     void followSocialDistancing();
-    
-    bool agentHygiene = false;
+
+    //NOTE this is the order that these appear in any array 
     bool wearingMask = false;
+    bool agentHygiene = false;
+    bool socialDistancing = false;
+    bool willIsolate = false;
+    int timeInHospital = 0;
+    int timeIncubating = 0;
     
     private:
     HouseholdIncome income;
@@ -228,6 +234,8 @@ class Agent : public SIR {
      * collected from the canadian census
      */
     void DecideEducation();
+
+   
 };
 
 #endif
