@@ -189,10 +189,11 @@ void Agent::DecideEthnicity() {
 
 }
 
-void Agent::DecideMigitationStrategy(double mitagationPerAge[18][4]) {
+void Agent::decideMitigationStrategy(double mitagationPerAge[18][4]) {
     int ageGroup = AgentAgeGroupReverse.at(info);
     double currRoll;
 
+    //Roll for each mitagation chance for the agent
     currRoll = ((double) rand() / (RAND_MAX));
     wearingMask = (currRoll <= mitagationPerAge[ageGroup][0]);
 
