@@ -125,7 +125,14 @@ class Agent : public SIR {
     bool getHasMoved();
 
     
-    void DecideMigitationStrategy(double mitagationPerAge[18][4]);
+    /**
+     * decideMitigationStrategy
+     * 
+     * This takes the agents chanes of each mitagation strategy
+     * 
+     * @param the array of each agents age groups chance of using each mitigation strategy
+     */
+    void decideMitigationStrategy(double mitagationPerAge[18][4]);
 
     /**
      * setEducationIndex
@@ -169,10 +176,33 @@ class Agent : public SIR {
      */
     int getResidentialIndex();
 
+    /**
+     * getAgentAgeGroup
+     * 
+     * gets the agents age group (0 - 17)
+     * 
+     * @return the agents age Group 0 - 17
+     */
     int getAgentAgeGroup();
 
+    /**
+     * randomAgentNeedsHospital
+     * 
+     * tells the agent if they will need the hostpital
+     * 
+     * @param each agents age groups chance of needing the hospital
+     * @return true if needing the hospital false if not
+     */
     bool randomAgentNeedsHospital(double agentNeedsHospital[18]);
 
+    /**
+     * agentIncubationCheck
+     * 
+     * checks if the agents incubation period is up and
+     * if they will start showing symptoms
+     * 
+     * @param an array of agent age groups of the time it takes for the virus to incubate
+     */
     void agentIncubationCheck(short agentIncubationTime[18]);
 
     //To be implemented later
