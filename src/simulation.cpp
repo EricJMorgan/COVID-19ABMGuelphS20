@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 27/10/20
- * ver 2.00
+ * 02/11/20
+ * ver 2.01
  * 
  * This is the class file for the simulation class. This is where all of the classes come together
  * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
@@ -127,6 +127,7 @@ void Simulation::simulateTimeStep(){
     isoCompartment.newlyHospitalized.clear();
 
     Location *locationHolder;
+    //gets each location and steps their time then checks if each agent will need the hospital
     for (int i = 0; i < (int)locationInfo->getLocationListLength(); i++) {
         locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);
 
@@ -426,11 +427,11 @@ double Simulation::getAgentChanceOfICU(int ageGroup){
     return agentChanceOfICU[ageGroup];
 }
 
-void Simulation::setAgentIncubationTime(int ageGroup, double value){
+void Simulation::setAgentIncubationTime(int ageGroup, short value){
     agentIncubationTime[ageGroup] = value;
 }
 
-double Simulation::getAgentIncubationTime(int ageGroup){
+short Simulation::getAgentIncubationTime(int ageGroup){
     return agentIncubationTime[ageGroup];
 }
 
