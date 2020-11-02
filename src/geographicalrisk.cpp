@@ -21,7 +21,7 @@ void GeographicalRisk::updateAvgCountsAndRisk() {
     
 }
 
-int GeographicalRisk::infectPeople() {
+int GeographicalRisk::infectPeople() {//TODO this does not take into account each ageGroups chance of using mitigation strategys
     updateAvgCountsAndRisk();
     int infectedCount = 0;
     double agentInfectionChance;

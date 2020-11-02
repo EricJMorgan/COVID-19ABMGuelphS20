@@ -144,6 +144,7 @@ int Location::getLocationIndex(){
 
 void Location::locationTimeStep(double agentMitagationChance[18][4], double mitagationEffectivness[4], double locationRisks[9]){
     double currRisk = 0;
+    //if area dosent have anyone infected inside no one can pass the infection along
     if(getInfectedSize() > 0){
         std::vector<int> ageGroups = amountOfAgeGroups();
         for(int i = 0; i < 9; i++){
