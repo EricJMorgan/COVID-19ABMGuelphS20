@@ -1,13 +1,12 @@
 /****************
  * COVID-19ABMGuelphS20
- * 27/10/20
- * ver 2.00
+ * 02/11/20
+ * ver 2.01
  * 
  * This is the header file for the simulation class. This is where all of the classes come together
  * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
  * for the simulation, along with giving the results as outputs to both the frontend and the console.
  ***************/
-
 
 #ifndef SIMULATION_H_
 #define SIMULATION_H_
@@ -25,8 +24,9 @@
 using namespace std;
 
 //Declare simulation class
-class Simulation {
-    public:
+class Simulation
+{
+public:
     /**
      * Simulation
      * 
@@ -43,7 +43,7 @@ class Simulation {
      * 
      * This is the deconstructor for the simlation class
      */
-    ~Simulation();//Destructor
+    ~Simulation(); //Destructor
 
     /**
      * simulateTimeStep
@@ -215,7 +215,7 @@ class Simulation {
      * @param strategy is the wanted strategy in range 0 - 3.
      */
     double getAgentMitagationChance(int ageGroup, int strategy);
-    
+
     /**
      * setMitagationEffectivness
      * 
@@ -258,8 +258,25 @@ class Simulation {
      */
     double getLocationRisk(int location);
 
+    /**
+     * setAgentIncubationPeriod
+     * 
+     * This method will set each age groups incubation period with the virus
+     * 
+     * @param the ageGroup that you want to assign the value too 0 <= ageRange <= 17
+     * @param the length of the incubation period 0 <= value <= 127
+     */
     void setAgentIncubationPeriod(int ageRange, short value);
-    short getAgentIncubationPeriod(int ageRange);    
+
+    /**
+     * getAgentIncubationPeriod
+     * 
+     * This method gets the specific age groups incubation period
+     * 
+     * @param the ageGroup that you want to get the incubation period for
+     * @return the length of the incubation period for the wanted ageGroup
+     */
+    short getAgentIncubationPeriod(int ageRange);
 
     /**
      * setAgentRecoveryTime
@@ -332,17 +349,86 @@ class Simulation {
      */
     double getAgentChanceOfMovment(int ageGroup, int day, int time, int location);
 
+    /**
+     * setAgentNeedsHospital
+     * 
+     * This is used to set each ageGroups chance of needing the hospital
+     * after getting infected
+     * 
+     * @param int ageGroup in range 0-17
+     * @param the chance of needing the hospial 0 <= chance <= 1
+     */
     void setAgentNeedsHospital(int ageGroup, double chance);
+
+    /**
+     * getAgentNeedsHospital
+     * 
+     * This method gets the ageGroups chance of needing the hospital
+     * 
+     * @param int ageGroup in range 0-17
+     * @return the chance of the ageGroup needs the hospital
+     */
     double getAgentNeedsHospital(int ageGroup);
 
+    /**
+     * setLocationRisks
+     * 
+     * This method is used to set each locations inherite risk
+     * 
+     * @param the type of location to edit 0 <= locaiton <= 8
+     * @param the risk of the wanted location 0 <= value <= 1
+     */
     void setLocationRisks(int location, double value);
+
+    /**
+     * getLocationRisks
+     * 
+     * This method takes a location type and returns its risk
+     * 
+     * @param the type of location 0 <= location <= 8
+     * @return the risk of the wanted location
+     */
     double getLocationRisks(int location);
 
+    /**
+     * setAgentChanceOfICU
+     * 
+     * This method sets each ageGroups chance of needing the ICU
+     * 
+     * @param the ageGroup wanted to set the chance of ICU for 0 <= ageGroup <= 17
+     * @param the chance of an agent needing the ICU 0 <= value <= 1.0
+     */
     void setAgentChanceOfICU(int ageGroup, double value);
+
+    /**
+     * getAgentChanceOfICU
+     * 
+     * This method gets the ageGroups chance of needing the ICU
+     * 
+     * @param the ageGroup wanted to get the chance of ICU where 0 <= ageGroup <= 17
+     * @return the chance of the ageGroup needing the ICU
+     */
     double getAgentChanceOfICU(int ageGroup);
 
-    void setAgentIncubationTime(int ageGroup, double value);
-    double getAgentIncubationTime(int ageGroup);
+    /**
+     * setAgentIncubationTime
+     * 
+     * This method sets an ageGroups virus incubation time
+     * 
+     * @param the ageGroup wanted to set the incubation time where 0 <= ageGroup <= 17
+     * @param the time it takes for the virus to incubate where 0 <= value <= 127
+     */
+    void setAgentIncubationTime(int ageGroup, short value);
+
+    /**
+     * getAgentIncubationTime
+     * 
+     * This method gets an ageGroups virus incubation time
+     * 
+     * @param the ageGroup which the incubation time is wanted where 0 <= ageGroup <= 17
+     * @return a short of the time of the virus incubating
+     */
+    short getAgentIncubationTime(int ageGroup);
 
 
     
@@ -434,38 +520,38 @@ class Simulation {
     DayOfWeek getNextDay(DayOfWeek currDay);
 };
 
-
 //for python binding
-extern "C" {
-    Simulation* Simulation_new(){ return new Simulation("demographicGuelph.csv"); }
-    void simTimeStep(Simulation* sim){ sim->simulateTimeStep(); }
-    int newlyInfected(Simulation* sim) { return sim->getNewlyInfected(); }
-    int infectedCurrent(Simulation* sim){ return sim->getInfectedCurrent(); }
-    int infectedTotal(Simulation* sim){ return sim->getInfectedTotal(); }
-    int deceasedTotal(Simulation* sim){ return sim->getDeceasedTotal(); }
-    int recoveredTotal(Simulation* sim){ return sim->getRecoveredTotal(); }
-    int hospitalTotal(Simulation* sim){ return sim->getHospitalTotal(); }
-    int hospitalCurrent(Simulation* sim){ return sim->getHospitalCurrent(); }
-    int ICUtotal(Simulation* sim){ return sim->getICUtotal(); }
-    int ICUCurrent(Simulation* sim){ return sim->getICUCurrent(); }
-    void setAgentMitagationChance(Simulation* sim, int ageGroup, int strategy, double value){sim->setAgentMitagationChance(ageGroup, strategy, value);}
-    double getAgentMitagationChance(Simulation *sim, int ageGroup, int strategy){return sim->getAgentMitagationChance(ageGroup, strategy);}
-    void setMitagationEffectivness(Simulation *sim, int strategy, double value){sim->setMitagationEffectivness(strategy, value);}
-    double getMitagationEffectivness(Simulation *sim, int strategy){return sim->getMitagationEffectivness(strategy);}
-    void setAgentRecoveryTime(Simulation* sim, int ageRange, short val){sim->setAgentRecoveryTime(ageRange, val);}
-    short getAgentRecoveryTime(Simulation *sim, int ageRange){return sim->getAgentRecoveryTime(ageRange);}
-    void setAgentDeathChance(Simulation* sim, int ageRange, double val){sim->setAgentDeathChance(ageRange, val);}
-    double getAgentDeathChance(Simulation* sim, int ageRange){return sim->getAgentDeathChance(ageRange);}
-    void setAgentChanceOfMovment(Simulation* sim, int ageGroup, int day, int time, int location, double value){sim->setAgentChanceOfMovment(ageGroup, day, time, location, value);}
-    double getAgentChanceOfMovment(Simulation* sim, int ageGroup, int day, int time, int location){return sim->getAgentChanceOfMovment(ageGroup, day, time, location);}
-    void setAgentNeedsHospital(Simulation *sim, int ageGroup, double chance){sim->setAgentNeedsHospital(ageGroup, chance);}
-    double getAgentNeedsHospital(Simulation *sim, int ageGroup){return sim->getAgentNeedsHospital(ageGroup);}
-    void setLocationRisks(Simulation *sim, int location, double value){sim->setLocationRisks(location, value);}
-    double getLocationRisks(Simulation *sim, int location){return sim->getLocationRisks(location);}
-    void setAgentChanceOfICU(Simulation *sim, int ageGroup, double value){sim->setAgentChanceOfICU(ageGroup, value);}
-    double getAgentChanceOfICU(Simulation *sim, int ageGroup){return sim->getAgentChanceOfICU(ageGroup);}
-    void setAgentIncubationTime(Simulation *sim, int ageGroup, double value){sim->setAgentIncubationTime(ageGroup, value);}
-    double getAgentIncubationTime(Simulation *sim, int ageGroup){return sim->getAgentIncubationTime(ageGroup);}
+extern "C"
+{
+    Simulation *Simulation_new() { return new Simulation("demographicGuelph.csv"); }
+    void simTimeStep(Simulation *sim) { sim->simulateTimeStep(); }
+    int newlyInfected(Simulation *sim) { return sim->getNewlyInfected(); }
+    int infectedCurrent(Simulation *sim) { return sim->getInfectedCurrent(); }
+    int infectedTotal(Simulation *sim) { return sim->getInfectedTotal(); }
+    int deceasedTotal(Simulation *sim) { return sim->getDeceasedTotal(); }
+    int recoveredTotal(Simulation *sim) { return sim->getRecoveredTotal(); }
+    int hospitalTotal(Simulation *sim) { return sim->getHospitalTotal(); }
+    int hospitalCurrent(Simulation *sim) { return sim->getHospitalCurrent(); }
+    int ICUtotal(Simulation *sim) { return sim->getICUtotal(); }
+    int ICUCurrent(Simulation *sim) { return sim->getICUCurrent(); }
+    void setAgentMitagationChance(Simulation *sim, int ageGroup, int strategy, double value) { sim->setAgentMitagationChance(ageGroup, strategy, value); }
+    double getAgentMitagationChance(Simulation *sim, int ageGroup, int strategy) { return sim->getAgentMitagationChance(ageGroup, strategy); }
+    void setMitagationEffectivness(Simulation *sim, int strategy, double value) { sim->setMitagationEffectivness(strategy, value); }
+    double getMitagationEffectivness(Simulation *sim, int strategy) { return sim->getMitagationEffectivness(strategy); }
+    void setAgentRecoveryTime(Simulation *sim, int ageRange, short val) { sim->setAgentRecoveryTime(ageRange, val); }
+    short getAgentRecoveryTime(Simulation *sim, int ageRange) { return sim->getAgentRecoveryTime(ageRange); }
+    void setAgentDeathChance(Simulation *sim, int ageRange, double val) { sim->setAgentDeathChance(ageRange, val); }
+    double getAgentDeathChance(Simulation *sim, int ageRange) { return sim->getAgentDeathChance(ageRange); }
+    void setAgentChanceOfMovment(Simulation *sim, int ageGroup, int day, int time, int location, double value) { sim->setAgentChanceOfMovment(ageGroup, day, time, location, value); }
+    double getAgentChanceOfMovment(Simulation *sim, int ageGroup, int day, int time, int location) { return sim->getAgentChanceOfMovment(ageGroup, day, time, location); }
+    void setAgentNeedsHospital(Simulation *sim, int ageGroup, double chance) { sim->setAgentNeedsHospital(ageGroup, chance); }
+    double getAgentNeedsHospital(Simulation *sim, int ageGroup) { return sim->getAgentNeedsHospital(ageGroup); }
+    void setLocationRisks(Simulation *sim, int location, double value) { sim->setLocationRisks(location, value); }
+    double getLocationRisks(Simulation *sim, int location) { return sim->getLocationRisks(location); }
+    void setAgentChanceOfICU(Simulation *sim, int ageGroup, double value) { sim->setAgentChanceOfICU(ageGroup, value); }
+    double getAgentChanceOfICU(Simulation *sim, int ageGroup) { return sim->getAgentChanceOfICU(ageGroup); }
+    void setAgentIncubationTime(Simulation *sim, int ageGroup, short value) { sim->setAgentIncubationTime(ageGroup, value); }
+    short getAgentIncubationTime(Simulation *sim, int ageGroup) { return sim->getAgentIncubationTime(ageGroup); }
 }
 
 #endif

@@ -25,6 +25,7 @@ enum AgentInfo { MALE0TO4, MALE5TO9, MALE10TO14, MALE15TO19, MALE20TO24, MALE25T
                 FEMALE10TO14, FEMALE15TO19, FEMALE20TO24, FEMALE25TO29, FEMALE30TO34, FEMALE35TO39, FEMALE40TO44, FEMALE45TO49,
                 FEMALE50TO54, FEMALE55TO59, FEMALE60TO64, FEMALE65TO69, FEMALE70TO74, FEMALE75TO79, FEMALE80TO84, FEMALE85 };
 
+// assigning age and sex groups to just age groups
 static std::map<int, AgentInfo> AgentAgeGroup = boost::assign::map_list_of(0, MALE0TO4)(0, FEMALE0TO4)(1, MALE5TO9)(1, FEMALE5TO9)
 (2, MALE10TO14)(2, FEMALE10TO14)(3, MALE15TO19)(3, FEMALE15TO19)(4, MALE20TO24)(4, FEMALE20TO24)(5, MALE25TO29)(5, FEMALE25TO29)
 (6, MALE30TO34)(6, FEMALE30TO34)(7, MALE35TO39)(7, FEMALE35TO39)(8, MALE40TO44)(8, FEMALE40TO44)(9, MALE45TO49)(9, FEMALE45TO49)
@@ -37,6 +38,7 @@ static std::map<AgentInfo, int> AgentAgeGroupReverse = boost::assign::map_list_o
 (MALE50TO54, 10)(FEMALE50TO54, 10)(MALE55TO59, 11)(FEMALE55TO59, 11)(MALE60TO64, 12)(FEMALE60TO64, 12)(MALE65TO69, 13)(FEMALE65TO69, 13)
 (MALE70TO74, 14)(FEMALE70TO74, 14)(MALE75TO79, 15)(FEMALE75TO79, 15)(MALE80TO84, 16)(FEMALE80TO84, 16)(MALE85, 17)(FEMALE85, 17);
 
+//converting strings to enums and vice versa
 static std::map<std::string, AgentInfo> AgentInfoMap = boost::assign::map_list_of("Male 0-4", MALE0TO4)("Male 5-9", MALE5TO9)("Male 10-14", MALE10TO14)
 ("Male 15-19", MALE15TO19)("Male 20-24", MALE20TO24)("Male 25-29", MALE25TO29)("Male 30-34", MALE30TO34)("Male 35-39", MALE35TO39)
 ("Male 40-44", MALE40TO44)("Male 45-49", MALE45TO49)("Male 50-54", MALE50TO54)("Male 55-59", MALE55TO59)("Male 60-64", MALE60TO64)("Male 65-69", MALE65TO69)
@@ -70,10 +72,39 @@ class SIR {
      */
     SIR();
 
+    /**
+     * incubateAgent
+     * 
+     * used to push agent into the incubation stage
+     */
     void incubateAgent();
+
+    /**
+     * infectAgent
+     * 
+     * used to push agent into symptoms stage
+     */
     void infectAgent();
+
+    /**
+     * recoverAgent
+     * 
+     * used to push agent into recoverd stage
+     */
     void recoverAgent();
+
+    /**
+     * ICUAgent
+     * 
+     * used to push agent into the ICU
+     */
     void ICUAgent();
+
+    /**
+     * killAgent
+     * 
+     * used to push agent into death stage
+     */
     void killAgent();
 
     int timeInfected;

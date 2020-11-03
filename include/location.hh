@@ -24,6 +24,7 @@
 
 using namespace std;
 
+//This defines each google maps value as 1 of 9 location types
 static std::map<std::string, condenseLocationType> locationTypeMap = boost::assign::map_list_of("accounting", SERVICES)("airport", TRANSPORT)("amusement_park", PARKSANDREC)
 ("aquarium", ENTERTAINMENT)("art_gallery", ENTERTAINMENT)("atm", UNNEEDED)("bakery", GENSTORE)("bank", SERVICES)("bar", ENTERTAINMENT)("beauty_salon", SERVICES)("bicycle_store", GENSTORE)
 ("book_store", GENSTORE)("bowling_alley", ENTERTAINMENT)("bus_station", TRANSPORT)("cafe", ENTERTAINMENT)("campground", PARKSANDREC)("car_dealer", SERVICES)
@@ -276,7 +277,17 @@ class Location : public GeographicalRisk {
     int getLocationIndex();
 
     
-
+    /**
+     * locationTimeStep
+     * 
+     * This method takes in the agents stats for mitagation chances
+     * the effectivness for minagation and each locations risk and uses
+     * an algorithm to determine the areas risk before moving to infect agents
+     * 
+     * @param the array of each age groups chance of using each mitagation strategy
+     * @param the array of each mitagation strategys effectivness
+     * @param the array of each location types risk of being there
+     */
     void locationTimeStep(double agentMitagationChance[18][4], double mitagationEffectivness[4], double locationRisks[9]);
 
     private:

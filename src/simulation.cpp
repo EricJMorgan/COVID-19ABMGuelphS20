@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 27/10/20
- * ver 2.00
+ * 02/11/20
+ * ver 2.01
  * 
  * This is the class file for the simulation class. This is where all of the classes come together
  * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
@@ -23,6 +23,7 @@ Simulation::Simulation(string fileName) {
     ifstream demographicFile;
     demographicFile.open(fileName, ios::in);
     string line;
+    //init values
     int arraySize = 0;
     population = 0;
     currTime = 0;
@@ -127,6 +128,7 @@ void Simulation::simulateTimeStep(){
     isoCompartment.newlyHospitalized.clear();
 
     Location *locationHolder;
+    //gets each location and steps their time then checks if each agent will need the hospital
     for (int i = 0; i < (int)locationInfo->getLocationListLength(); i++) {
         locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);
 
@@ -402,35 +404,52 @@ short Simulation::getAgentIncubationPeriod(int ageRange){
 void Simulation::setAgentNeedsHospital(int ageGroup, double chance){
     if(ageGroup < 0 || ageGroup > 17) return;
     if(chance < 0 || chance > 1) return;
+
     agentNeedsHospital[ageGroup] = chance;
 }
 
 double Simulation::getAgentNeedsHospital(int ageGroup){
+    if(ageGroup < 0 || ageGroup > 17) return -1;
+
     return agentNeedsHospital[ageGroup];
 }
 
-//TODO add error checking for all methods below
 void Simulation::setLocationRisks(int location, double value){
+    if(location < 0 || location > 8) return;
+    if(value < 0 || value > 1) return;
+
     locationRisks[location] = value;
 }
 
 double Simulation::getLocationRisks(int location){
+    if(location < 0 || location > 8) return -1;
+
     return locationRisks[location];
 }
 
 void Simulation::setAgentChanceOfICU(int ageGroup, double value){
+    if(ageGroup < 0 || ageGroup > 17) return;
+    if(value < 0 || value > 1) return;
+
     agentChanceOfICU[ageGroup] = value;
 }
 
 double Simulation::getAgentChanceOfICU(int ageGroup){
+    if(ageGroup < 0 || ageGroup > 17) return - 1;
+
     return agentChanceOfICU[ageGroup];
 }
 
-void Simulation::setAgentIncubationTime(int ageGroup, double value){
+void Simulation::setAgentIncubationTime(int ageGroup, short value){
+    if(ageGroup < 0 || ageGroup > 17) return;
+    if(value < 0 || value > 127) return;
+
     agentIncubationTime[ageGroup] = value;
 }
 
-double Simulation::getAgentIncubationTime(int ageGroup){
+short Simulation::getAgentIncubationTime(int ageGroup){
+    if(ageGroup < 0 || ageGroup > 17) return -1;
+
     return agentIncubationTime[ageGroup];
 }
 
