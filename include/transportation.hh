@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 13/10/20
- * ver 1.03
+ * 06/11/20
+ * ver 2.00
  * 
  * This is the header file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
@@ -113,7 +113,7 @@ class Transportation {
      * When called this method will simulate the movment of the entire population of
      * the given location
      */
-    int simulateAgentMovment(int timeOfDay, DayOfWeek currDay);
+    int simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9]);
 
     /**
      * updateLocationRisks
@@ -139,6 +139,8 @@ class Transportation {
     std::vector<Location*> hasPlaceOfWorship;
     std::vector<Location*> hasResidential;
 
+    std::vector<Location*> findLocationList(int locationToMove);
+
     /**
      * randomInRange
      * 
@@ -162,7 +164,7 @@ class Transportation {
      * @param currDay the day of the week
      * @return the index that the agent will move to -1 if it will stay in place
      */
-    int agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay);
+    int agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9]);
 
     /**
      * InfectAgentsPostMovement
