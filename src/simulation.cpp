@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 02/11/20
- * ver 2.01
+ * 06/11/20
+ * ver 2.02
  * 
  * This is the class file for the simulation class. This is where all of the classes come together
  * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
@@ -145,7 +145,7 @@ void Simulation::simulateTimeStep(){
     
     
     // transport agents from location to location
-    newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay);
+    newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay, agentChanceOfMovment);
 
     //update SIR totals
     deceasedTotal = (int)deceasedAgents.size();
