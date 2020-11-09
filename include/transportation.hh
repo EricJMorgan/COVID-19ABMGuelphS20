@@ -265,23 +265,6 @@ class Transportation {
     bool willGoToWork(DayOfWeek currDay, int timeOfDay);
 
     /**
-     * adultChanceOfMoving
-     * 
-     * this is a helper function for agent moving to
-     * that allows a % chance of each agent moving to a given place given their age
-     * 
-     * @param currrDay the current day of the week
-     * @param currTime the current time of the day
-     * @param genWork the chance of someone going to a genreal store either for work or shopping
-     * @param servWork the chance of someone going to a service store either for work or shopping
-     * @param goOut the chance of someone going out for entertainment
-     * @param needServ the chance of someone needing service
-     * @param goPark the chance of someone going to parks and rec
-     * @return the index that the agent will be moving to
-     */
-    int adultChanceOfMoving(Agent *agent, DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark, int health, int worship);
-
-    /**
      * getAgentEducationIndex
      * 
      * This is a helper function to get the agents
