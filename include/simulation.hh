@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 02/11/20
- * ver 2.01
+ * 12/11/20
+ * ver 2.02
  * 
  * This is the header file for the simulation class. This is where all of the classes come together
  * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
@@ -430,6 +430,8 @@ public:
      */
     short getAgentIncubationTime(int ageGroup);
 
+    void simDayTimeStep();
+
 
     
     SIRtotals totalSimSIRStats;
@@ -454,8 +456,8 @@ public:
     
 
     // user inputs
-    double agentMitagationChance[18][4];
-    double mitagationEffectivness[4];
+    double agentMitagationChance[18][5];
+    double mitagationEffectivness[5];
     double locationRisks[9];//done
     short agentRecoveryTime[18];//done
     short agentIncubationTime[18];//done
@@ -552,6 +554,7 @@ extern "C"
     double getAgentChanceOfICU(Simulation *sim, int ageGroup) { return sim->getAgentChanceOfICU(ageGroup); }
     void setAgentIncubationTime(Simulation *sim, int ageGroup, short value) { sim->setAgentIncubationTime(ageGroup, value); }
     short getAgentIncubationTime(Simulation *sim, int ageGroup) { return sim->getAgentIncubationTime(ageGroup); }
+    void simDayTimeStep(Simulation *sim) {sim->simDayTimeStep();}
 }
 
 #endif

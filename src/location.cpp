@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 27/10/20
- * ver 2.00
+ * 12/11/20
+ * ver 2.01
  * 
  * This is the class file for the location class. This holds the
  * location grouping (The first 5 digits of a postal code), the locations
@@ -142,7 +142,7 @@ int Location::getLocationIndex(){
     return vectorLocation;
 }
 
-void Location::locationTimeStep(double agentMitagationChance[18][4], double mitagationEffectivness[4], double locationRisks[9]){
+void Location::locationTimeStep(double agentMitagationChance[18][5], double mitagationEffectivness[5], double locationRisks[9]){
     double currRisk = 0;
     //if area dosent have anyone infected inside no one can pass the infection along
     if(getInfectedSize() > 0){
@@ -152,7 +152,7 @@ void Location::locationTimeStep(double agentMitagationChance[18][4], double mita
         }
         currRisk /= 9;
 
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 5; i++){
             for(int j = 0; j < 18; j++){
                 currRisk += ((agentMitagationChance[j][i] * mitagationEffectivness[i]) / 50);//TODO this sucks and will need to be fixed lmao
             }
