@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 06/11/20
- * ver 2.00
+ * 12/11/20
+ * ver 2.01
  * 
  * This is the header file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
@@ -263,23 +263,6 @@ class Transportation {
      * @return true if work is open false if not
      */
     bool willGoToWork(DayOfWeek currDay, int timeOfDay);
-
-    /**
-     * adultChanceOfMoving
-     * 
-     * this is a helper function for agent moving to
-     * that allows a % chance of each agent moving to a given place given their age
-     * 
-     * @param currrDay the current day of the week
-     * @param currTime the current time of the day
-     * @param genWork the chance of someone going to a genreal store either for work or shopping
-     * @param servWork the chance of someone going to a service store either for work or shopping
-     * @param goOut the chance of someone going out for entertainment
-     * @param needServ the chance of someone needing service
-     * @param goPark the chance of someone going to parks and rec
-     * @return the index that the agent will be moving to
-     */
-    int adultChanceOfMoving(Agent *agent, DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark, int health, int worship);
 
     /**
      * getAgentEducationIndex

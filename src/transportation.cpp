@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 06/11/20
- * ver 2.01
+ * 12/11/20
+ * ver 2.02
  * 
  * This is the class file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
@@ -156,7 +156,16 @@ int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfD
         if(randomNumber <= chanceOfMovementRange[locationToMove]) break;
     }
 
-    return findIndexToMove(findLocationList(locationToMove));
+    switch(locationToMove){
+        //This causes any agent going to school/home to always go to the same residential/education area
+        case SCHOOL:
+            return getAgentEducationIndex(agent);
+        case RESIDENTIAL:
+            return getAgentResidentialIndex(agent);
+        default:
+            return findIndexToMove(findLocationList(locationToMove));
+    }
+    
     
 }
 
@@ -180,7 +189,7 @@ vector<Location*> Transportation::findLocationList(int locationToMove){
     case PLACEOFWORSHIP:
         return hasPlaceOfWorship;
     case RESIDENTIAL:
-        return hasResidential;//TODO this may cause agents to go to differnt residental areas
+        return hasResidential;
     default:
         return hasResidential;
     }
@@ -215,18 +224,6 @@ bool Transportation::willGoToSchool(DayOfWeek currDay, int timeOfDay){//TODO stu
 bool Transportation::willGoToWork(DayOfWeek currDay, int timeOfDay){
     return isWeekDay(currDay) && inTimeRange(timeOfDay, 9, 17);
 }
-
-int Transportation::adultChanceOfMoving(Agent *agent, DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark, int health, int worship){
-    if(willGoToWork(currDay, currTime) && willMove(genWork)) return findIndexToMove(hasGenStore);
-    if(willGoToWork(currDay, currTime) && willMove(servWork)) return findIndexToMove(hasServices);
-    if(inTimeRange(currTime, 18, 24) && !isWeekDay(currDay) && willMove(goOut)) return findIndexToMove(hasEntertainment);
-    if(inTimeRange(currTime, 12,20) && willMove(needServ))return findIndexToMove(hasServices);
-    if(inTimeRange(currTime, 10, 18) && !isWeekDay(currDay) && willMove(goPark)) return findIndexToMove(hasParksAndRec);
-    if(inTimeRange(currTime, 9, 17) && willMove(health)) return findIndexToMove(hasHealth);
-    if(inTimeRange(currTime, 8, 18) && !isWeekDay(currDay) && willMove(worship)) return findIndexToMove(hasPlaceOfWorship);
-    return getAgentResidentialIndex(agent);
-}
-
 
 int Transportation::getAgentEducationIndex(Agent *agent){
     if(agent->getEducationIndex() == -1) agent->setEducationIndex(findIndexToMove(hasSchool));
