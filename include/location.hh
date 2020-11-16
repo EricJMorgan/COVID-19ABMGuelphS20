@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 27/10/20
- * ver 2.00
+ * 12/11/20
+ * ver 2.01
  * 
  * This is the header file for the location class. This holds the
  * location grouping (The first 5 digits of a postal code), the locations
@@ -288,7 +288,7 @@ class Location : public GeographicalRisk {
      * @param the array of each mitagation strategys effectivness
      * @param the array of each location types risk of being there
      */
-    void locationTimeStep(double agentMitagationChance[18][4], double mitagationEffectivness[4], double locationRisks[9]);
+    void locationTimeStep(double agentMitagationChance[18][5], double mitagationEffectivness[5], double locationRisks[9]);
 
     private:
     int population;

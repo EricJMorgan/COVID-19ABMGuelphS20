@@ -49,6 +49,7 @@ ffi.cdef('''
     double getAgentChanceOfICU(Simulation *sim, int ageGroup);
     void setAgentIncubationTime(Simulation *sim, int ageGroup, double value);
     double getAgentIncubationTime(Simulation *sim, int ageGroup);
+    void simDayTimeStep(Simulation *sim);
 ''')
 
 lib = ffi.dlopen('./libProject.so')
@@ -141,6 +142,9 @@ class Simulation(object):
     
     def getAgentIncubationTime(self, ageGroup):
         return lib.getAgentIncubationTime(self.obj, ageGroup)
+    
+    def simDayTimeStep(self):
+        lib.simDayTimeStep(self.obj)
 
 #Initialize times and values
 sim = Simulation()

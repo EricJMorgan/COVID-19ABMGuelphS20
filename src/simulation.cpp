@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 06/11/20
- * ver 2.02
+ * 12/11/20
+ * ver 2.03
  * 
  * This is the class file for the simulation class. This is where all of the classes come together
  * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
@@ -305,17 +305,10 @@ int Simulation::getNewlyInfected() {
 }
 
 void Simulation::setAgentMitagationChance(int ageGroup, int strategy, double value){
-    if(ageGroup < 0 || ageGroup > 17) return;
-    if(strategy < 0 || strategy > 3) return;
-    if(value < 0 || value > 1) return;
-
     agentMitagationChance[ageGroup][strategy] = value;
 } 
 
 void Simulation::setMitagationEffectivness(int strategy, double value){
-    if(strategy < 0 || strategy > 3) return;
-    if(value < 0 || value > 1) return;
-
     mitagationEffectivness[strategy] = value;
 }
 
@@ -327,15 +320,10 @@ void Simulation::setLocationRisk(int location, double value){
 }
 
 double Simulation::getAgentMitagationChance(int ageGroup, int strategy){
-    if(ageGroup < 0 || ageGroup > 17) return -1;
-    if(strategy < 0 || strategy > 3) return -1;
-
     return agentMitagationChance[ageGroup][strategy];
 }
 
 double Simulation::getMitagationEffectivness(int strategy){
-    if(strategy < 0 || strategy > 3) return -1;
-
     return mitagationEffectivness[strategy];
 }
 
@@ -453,3 +441,8 @@ short Simulation::getAgentIncubationTime(int ageGroup){
     return agentIncubationTime[ageGroup];
 }
 
+void Simulation::simDayTimeStep(){
+    for(int i = 0; i < 6; i++){
+        simulateTimeStep();
+    }
+}
