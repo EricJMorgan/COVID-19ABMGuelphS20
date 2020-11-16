@@ -403,7 +403,7 @@ double Simulation::getAgentNeedsHospital(int ageGroup){
 }
 
 void Simulation::setLocationRisks(int location, double value){
-    if(location < 0 || location > 8) return;
+    if(location < 0 || location > 9) return;
     if(value < 0 || value > 1) return;
 
     locationRisks[location] = value;
@@ -445,4 +445,69 @@ void Simulation::simDayTimeStep(){
     for(int i = 0; i < 6; i++){
         simulateTimeStep();
     }
+}
+
+void Simulation::setPresets(int preset){
+    switch(preset){
+        case 0:
+
+            break;
+
+        default:
+            break;
+    }
+}
+
+void Simulation::setAnarchyPreset(){
+    for(int i = 0; i < 5; i++){
+        setMitagationEffectivness(i, 0);
+        for(int j = 0; j < 18; j++){
+            setAgentMitagationChance(j, i, 0);
+        }
+    }
+    for(int i = 0; i < 9; i++){
+        setLocationRisks(i, 1);
+    }
+    for(int i = 0; i < 18; i++){
+        setAgentRecoveryTime(i, 127);
+        setAgentChanceOfICU(i, 1);
+        setAgentDeathChance(i, 1);
+        setAgentIncubationTime(i, 127);
+        setAgentNeedsHospital(i, 1);
+    }
+    for(int i = 0; i < 18; i++){
+        for(int j = 0; j < 2; j++){
+            for(int k = 0; k < 6; k++){
+                for(int l = 0; i < 9; i++){
+                    setAgentChanceOfMovment(i, j, k, l, 1);
+                }
+            }
+        }
+    }
+}
+
+void Simulation::setRealWorldPreset(){
+
+}
+
+void Simulation::setTotalIsolation(){
+
+}
+
+void Simulation::setInformedPopulation(){
+
+}
+
+void Simulation::setConspiracyPopulation(){
+
+}
+
+void Simulation::setRealWorldNoSchool(){
+    setRealWorldPreset();
+    //TODO add settings to remove in person school
+}
+
+void Simulation::setRealWorldNoVaccine(){
+    setRealWorldPreset();
+    //TODO add settings to remove all vaccines for virus
 }

@@ -374,6 +374,7 @@ public:
      * setLocationRisks
      * 
      * This method is used to set each locations inherite risk
+     * location 0 = 
      * 
      * @param the type of location to edit 0 <= locaiton <= 8
      * @param the risk of the wanted location 0 <= value <= 1
@@ -430,9 +431,17 @@ public:
      */
     short getAgentIncubationTime(int ageGroup);
 
+    /**
+     * simDayTimeStep
+     * 
+     * This method simulates a full day of timesteps
+     * instead of a singular 4 hour time step. This is so
+     * the front end does not need to take on as much work for each timestep and
+     * can update only once per simulation day
+     */
     void simDayTimeStep();
 
-
+    void setPresets(int preset);
     
     SIRtotals totalSimSIRStats;
     
@@ -520,6 +529,27 @@ public:
      * @return the next day in line
      */
     DayOfWeek getNextDay(DayOfWeek currDay);
+
+    /**
+     * setAnarchyPreset
+     * 
+     * This is essintally the crank it up to 11
+     * setting everything to the max chance, meaning everything
+     * from each locations risk to death chances are at 100%
+     */
+    void setAnarchyPreset();
+
+    void setRealWorldPreset();
+
+    void setTotalIsolation();
+
+    void setInformedPopulation();
+
+    void setConspiracyPopulation();
+
+    void setRealWorldNoSchool();
+
+    void setRealWorldNoVaccine();
 };
 
 //for python binding
