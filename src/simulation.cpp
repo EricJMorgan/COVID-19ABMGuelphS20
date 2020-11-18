@@ -484,6 +484,15 @@ void Simulation::setAnarchyPreset(){
             }
         }
     }
+
+    //set chance to move to un-needed location to 0
+    for(int i = 0; i < 18; i++){
+        for(int j = 0; j < 2; j++){
+            for(int k = 0; k < 6; k++){
+                setAgentChanceOfMovment(i, j, k, 8, 0);
+            }
+        }
+    }
 }
 
 void Simulation::setRealWorldPreset(){
@@ -495,6 +504,60 @@ void Simulation::setTotalIsolation(){
 }
 
 void Simulation::setInformedPopulation(){
+    //0 to 4
+    setMitagationEffectivness(0, .95);
+    setMitagationEffectivness(1, .85);
+    setMitagationEffectivness(2, .8);
+    setMitagationEffectivness(3, .99);
+    setMitagationEffectivness(4, .95);
+    
+    //5 to 9
+    setAgentMitagationChance(0, 0, 1);
+    setAgentMitagationChance(0, 1, 0);//babies dont wear masks
+    setAgentMitagationChance(0, 2, .1);
+    setAgentMitagationChance(0, 3, .95);
+    setAgentMitagationChance(0, 4, 1);
+
+    //10 to 14
+    setAgentMitagationChance(1, 0, .8);
+    setAgentMitagationChance(1, 1, .9);
+    setAgentMitagationChance(1, 2, .4);
+    setAgentMitagationChance(1, 3, .5);
+    setAgentMitagationChance(1, 4, 1);
+
+    //14 to 19
+    setAgentMitagationChance(2, 0, .9);
+    setAgentMitagationChance(2, 1, 1);
+    setAgentMitagationChance(2, 2, .7);
+    setAgentMitagationChance(2, 3, .7);
+    setAgentMitagationChance(2, 4, 1);
+
+    //20 to 24
+    setAgentMitagationChance(3, 0, .9);
+    setAgentMitagationChance(3, 1, 1);
+    setAgentMitagationChance(3, 2, .8);
+    setAgentMitagationChance(3, 3, .85);
+    setAgentMitagationChance(3, 4, 1);
+
+    //25 to 85+, because pretty much every adult/senoir should be following these rules
+    for(int i = 4; i < 18; i++){
+        setAgentMitagationChance(i, 0, .9);
+        setAgentMitagationChance(i, 1, 1);
+        setAgentMitagationChance(i, 2, .8);
+        setAgentMitagationChance(i, 3, .95);
+        setAgentMitagationChance(i, 4, 1);
+    }
+
+    setLocationRisks(GENSTORE, .6);
+    setLocationRisks(TRANSPORT, .6);
+    setLocationRisks(SCHOOL, .75);
+    setLocationRisks(PARKSANDREC, .2);
+    setLocationRisks(SERVICES, .6);
+    setLocationRisks(ENTERTAINMENT, .82);
+    setLocationRisks(HEALTH, .6);
+    setLocationRisks(PLACEOFWORSHIP, .8);
+    setLocationRisks(UNNEEDED, 0);
+    setLocationRisks(RESIDENTIAL, .3);
 
 }
 

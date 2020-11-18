@@ -197,7 +197,7 @@ public:
      * 
      * This is responsible for setting each age groups chance of
      * following each mitigation strategy. ageGroup 0 = 0 to 4, ageGroup 1 = 5 to 9 etc
-     * strategy is 0 = social distancing, 1 = maskwearing, 2 = hygine, 3 = isolation
+     * strategy is 0 = social distancing, 1 = maskwearing, 2 = hygine, 3 = isolation, 4 = vaccine
      * 
      * @param the age group the set of agents are in range 0 - 17
      * @param the mitigation strategy used in range 0 - 3
@@ -209,7 +209,7 @@ public:
      * 
      * This gets the ageGroups mitagation chance for the wanted
      * strategy. where ageGroup: 0 = 0 - 4, 1 = 5 - 9 etc and 
-     * strategy: 0 = social distancing, 1 = maskwearing, etc.
+     * strategy: 0 = social distancing, 1 = maskwearing, 2 = hygiene, 3 = isolation, 4 = vaccine
      * 
      * @param ageGroup is the age group in range 0 - 17.
      * @param strategy is the wanted strategy in range 0 - 3.
