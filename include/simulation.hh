@@ -550,6 +550,10 @@ public:
     void setRealWorldNoSchool();
 
     void setRealWorldNoVaccine();
+
+    void setDefaultLocationRisks();
+
+    void setDefaultHospitalData();
 };
 
 //for python binding

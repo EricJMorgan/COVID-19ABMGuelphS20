@@ -430,7 +430,6 @@ double Simulation::getAgentChanceOfICU(int ageGroup){
 
 void Simulation::setAgentIncubationTime(int ageGroup, short value){
     if(ageGroup < 0 || ageGroup > 17) return;
-    if(value < 0 || value > 127) return;
 
     agentIncubationTime[ageGroup] = value;
 }
@@ -548,16 +547,7 @@ void Simulation::setInformedPopulation(){
         setAgentMitagationChance(i, 4, 1);
     }
 
-    setLocationRisks(GENSTORE, .6);
-    setLocationRisks(TRANSPORT, .6);
-    setLocationRisks(SCHOOL, .75);
-    setLocationRisks(PARKSANDREC, .2);
-    setLocationRisks(SERVICES, .6);
-    setLocationRisks(ENTERTAINMENT, .82);
-    setLocationRisks(HEALTH, .6);
-    setLocationRisks(PLACEOFWORSHIP, .8);
-    setLocationRisks(UNNEEDED, 0);
-    setLocationRisks(RESIDENTIAL, .3);
+    
 
 }
 
@@ -573,4 +563,49 @@ void Simulation::setRealWorldNoSchool(){
 void Simulation::setRealWorldNoVaccine(){
     setRealWorldPreset();
     //TODO add settings to remove all vaccines for virus
+}
+
+void Simulation::setDefaultLocationRisks(){
+    setLocationRisks(GENSTORE, .6);
+    setLocationRisks(TRANSPORT, .6);
+    setLocationRisks(SCHOOL, .75);
+    setLocationRisks(PARKSANDREC, .2);
+    setLocationRisks(SERVICES, .6);
+    setLocationRisks(ENTERTAINMENT, .82);
+    setLocationRisks(HEALTH, .6);
+    setLocationRisks(PLACEOFWORSHIP, .8);
+    setLocationRisks(UNNEEDED, 0);
+    setLocationRisks(RESIDENTIAL, .3);
+}
+
+void Simulation::setDefaultHospitalData(){
+    //0 to 4
+    setAgentRecoveryTime(0, 2);
+    setAgentChanceOfICU(0, .01);
+    setAgentDeathChance(0, .001);
+    setAgentIncubationTime(0, 7);
+    setAgentNeedsHospital(0, .001);
+
+    //5 to 9
+    setAgentRecoveryTime(1, 2);
+    setAgentChanceOfICU(1, .01);
+    setAgentDeathChance(1, .01);
+    setAgentIncubationTime(1, 7);
+    setAgentNeedsHospital(1, .01);
+
+    //10 to 14
+    setAgentRecoveryTime(2, 2);
+    setAgentChanceOfICU(2, .01);
+    setAgentDeathChance(2, .001);
+    setAgentIncubationTime(2, 8);
+    setAgentNeedsHospital(2, .1);
+
+    //15 to 19
+    setAgentRecoveryTime(0, 2);
+    setAgentChanceOfICU(0, .01);
+    setAgentDeathChance(0, .001);
+    setAgentIncubationTime(0, 7);
+    setAgentNeedsHospital(0, .001);
+    
+    
 }
