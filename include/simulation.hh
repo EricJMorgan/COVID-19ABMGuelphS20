@@ -554,6 +554,8 @@ public:
     void setDefaultLocationRisks();
 
     void setDefaultHospitalData();
+
+    void setDefaultMitagationEffectivness();
 };
 
 //for python binding

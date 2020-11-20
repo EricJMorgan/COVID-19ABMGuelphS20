@@ -496,42 +496,37 @@ void Simulation::setAnarchyPreset(){
 
 void Simulation::setRealWorldPreset(){
 
+    setDefaultHospitalData();
+    setDefaultLocationRisks();
 }
 
 void Simulation::setTotalIsolation(){
 
 }
 
-void Simulation::setInformedPopulation(){
+void Simulation::setInformedPopulation(){  
     //0 to 4
-    setMitagationEffectivness(0, .95);
-    setMitagationEffectivness(1, .85);
-    setMitagationEffectivness(2, .8);
-    setMitagationEffectivness(3, .99);
-    setMitagationEffectivness(4, .95);
-    
-    //5 to 9
     setAgentMitagationChance(0, 0, 1);
     setAgentMitagationChance(0, 1, 0);//babies dont wear masks
     setAgentMitagationChance(0, 2, .1);
     setAgentMitagationChance(0, 3, .95);
     setAgentMitagationChance(0, 4, 1);
 
-    //10 to 14
+    //5 to 9
     setAgentMitagationChance(1, 0, .8);
     setAgentMitagationChance(1, 1, .9);
     setAgentMitagationChance(1, 2, .4);
     setAgentMitagationChance(1, 3, .5);
     setAgentMitagationChance(1, 4, 1);
 
-    //14 to 19
+    //10 to 14
     setAgentMitagationChance(2, 0, .9);
     setAgentMitagationChance(2, 1, 1);
     setAgentMitagationChance(2, 2, .7);
     setAgentMitagationChance(2, 3, .7);
     setAgentMitagationChance(2, 4, 1);
 
-    //20 to 24
+    //15 to 19
     setAgentMitagationChance(3, 0, .9);
     setAgentMitagationChance(3, 1, 1);
     setAgentMitagationChance(3, 2, .8);
@@ -547,22 +542,44 @@ void Simulation::setInformedPopulation(){
         setAgentMitagationChance(i, 4, 1);
     }
 
-    
+    setDefaultLocationRisks();
+    setDefaultHospitalData();
+    setDefaultMitagationEffectivness();  
 
 }
 
 void Simulation::setConspiracyPopulation(){
 
+
+    setDefaultLocationRisks();
+    setDefaultHospitalData();
+    setDefaultMitagationEffectivness();  
 }
 
 void Simulation::setRealWorldNoSchool(){
     setRealWorldPreset();
+
+    //set every agents chance to move to a school 0
+    for(int i = 0; i < 18; i++){
+        for(int j = 0; j < 2; j++){
+            for(int k = 0; k < 6; k++){
+                for(int l = 0; i < 9; i++){
+                    setAgentChanceOfMovment(i, j, k, 2, 0);
+                }
+            }
+        }
+    }
+
     //TODO add settings to remove in person school
 }
 
 void Simulation::setRealWorldNoVaccine(){
     setRealWorldPreset();
-    //TODO add settings to remove all vaccines for virus
+
+    //set every agents chance to have a vaccine to 0 to simulate no vaccines
+    for(int i = 0; i < 18; i++){
+        setAgentMitagationChance(i, 4, 0);
+    }
 }
 
 void Simulation::setDefaultLocationRisks(){
@@ -578,6 +595,14 @@ void Simulation::setDefaultLocationRisks(){
     setLocationRisks(RESIDENTIAL, .3);
 }
 
+void Simulation::setDefaultMitagationEffectivness(){
+    setMitagationEffectivness(0, .95);
+    setMitagationEffectivness(1, .85);
+    setMitagationEffectivness(2, .8);
+    setMitagationEffectivness(3, .99);
+    setMitagationEffectivness(4, .95);
+}
+
 void Simulation::setDefaultHospitalData(){
     //0 to 4
     setAgentRecoveryTime(0, 2);
@@ -587,25 +612,51 @@ void Simulation::setDefaultHospitalData(){
     setAgentNeedsHospital(0, .001);
 
     //5 to 9
-    setAgentRecoveryTime(1, 2);
+    setAgentRecoveryTime(1, 3);
     setAgentChanceOfICU(1, .01);
     setAgentDeathChance(1, .01);
     setAgentIncubationTime(1, 7);
     setAgentNeedsHospital(1, .01);
 
     //10 to 14
-    setAgentRecoveryTime(2, 2);
+    setAgentRecoveryTime(2, 5);
     setAgentChanceOfICU(2, .01);
     setAgentDeathChance(2, .001);
     setAgentIncubationTime(2, 8);
     setAgentNeedsHospital(2, .1);
 
     //15 to 19
-    setAgentRecoveryTime(0, 2);
-    setAgentChanceOfICU(0, .01);
-    setAgentDeathChance(0, .001);
-    setAgentIncubationTime(0, 7);
-    setAgentNeedsHospital(0, .001);
-    
+    setAgentRecoveryTime(3, 7);
+    setAgentChanceOfICU(3, .01);
+    setAgentDeathChance(3, .01);
+    setAgentIncubationTime(3, 10);
+    setAgentNeedsHospital(3, .11);
+
+    //20 to 44
+    for(int i = 4; i < 8; i++){
+        setAgentRecoveryTime(i, 14);
+        setAgentChanceOfICU(i, .15);
+        setAgentDeathChance(i, .01);
+        setAgentIncubationTime(i, 10);
+        setAgentNeedsHospital(i, .11);
+    }
+
+    //45 to 64
+    for(int i = 9; i < 12; i++){
+        setAgentRecoveryTime(i, 14);
+        setAgentChanceOfICU(i, .25);
+        setAgentDeathChance(i, .04);
+        setAgentIncubationTime(i, 10);
+        setAgentNeedsHospital(i, .15);
+    }
+
+    //65 to 85+
+    for(int i = 13; i < 18; i++){
+        setAgentRecoveryTime(i, 14);
+        setAgentChanceOfICU(i, .40);
+        setAgentDeathChance(i, .15);
+        setAgentIncubationTime(i, 17);
+        setAgentNeedsHospital(i, .5);
+    }
     
 }
