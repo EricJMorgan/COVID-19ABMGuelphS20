@@ -539,23 +539,81 @@ public:
      */
     void setAnarchyPreset();
 
+    /**
+     * setRealWorldPreset
+     * 
+     * This is what the program will defualt too.
+     * It is meant to represt our current world and what is going on
+     */
     void setRealWorldPreset();
 
+    /**
+     * setTotalIsolation
+     * 
+     * This is an extreme preset in which pretty much no one leaves their house.
+     * They stay in total isolation and never come into contact with another person
+     * if they can avoid it
+     */
     void setTotalIsolation();
 
+    /**
+     * setInformedPopulation
+     * 
+     * This is what we as a society should be aiming for.
+     * The informed population while not perfect does its best.
+     * They do things such as wearing masks, staying in when they can, etc
+     */
     void setInformedPopulation();
 
+    /**
+     * setConspiracyPopulation
+     * 
+     * This is meant to represet the 5G is mind control,
+     * the lizard people are in the sewers, illumanti, flat earth kind
+     * of people that cant seem to grasp basic concepts. They think this is some
+     * goverment way of taking away their freedoms. The kinda people to say STOP THE COUNT
+     */
     void setConspiracyPopulation();
 
+    /**
+     * setRealWorldNoSchool
+     * 
+     * This uses the default settings but imagines if all school was
+     * online instead of in person.
+     */
     void setRealWorldNoSchool();
 
+    /**
+     * setRealWorldNoVaccine
+     * 
+     * This uses the default settings but imagines if there is no vaccine
+     */
     void setRealWorldNoVaccine();
 
+    /**
+     * setDefaultLocationRisks
+     * 
+     * This is a helper function to set all location risks to default risks
+     * to where it seems like they belong
+     */
     void setDefaultLocationRisks();
 
+    /**
+     * setDefaultHospitalData
+     * 
+     * This is a helper function to set all the hospital varibles
+     * to what the default should be
+     */
     void setDefaultHospitalData();
 
+    /**
+     * setDefaultMitagationEffectivness
+     * 
+     * This is a helper function to set each mitagation strategys effectivness
+     */
     void setDefaultMitagationEffectivness();
+
+    void setDefaultMovementData();
 };
 
 //for python binding
