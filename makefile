@@ -74,5 +74,5 @@ library:
 # memtest:
 #	valgrind --leak-check=full -s $(BINDIR)abmSim
 #
-# clean:
-#	rm $(OBJECTS) $(BINDIR)abmSim
+clean:
+	rm libProject.so
