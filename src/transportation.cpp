@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 12/11/20
- * ver 2.02
+ * 27/11/20
+ * ver 2.03
  * 
  * This is the class file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
@@ -92,7 +92,7 @@ Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int a
     return holder;
 }
 
-int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9]){
+int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9], double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[9]){
     int locationListSize = getLocationListLength();
     int newLocation;
 
@@ -123,14 +123,14 @@ int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay, doubl
         }
     }
 
-    return InfectAgentsPostMovement();
+    return InfectAgentsPostMovement(agentChanceOfMitigation, mitigationEffect, locationRisk);
 }
 
-int Transportation::InfectAgentsPostMovement(){
+int Transportation::InfectAgentsPostMovement(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[9]){
     int totalNewInfected = 0;
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     for(int i = 0; i < locationListSize; i++){
-        totalNewInfected += getLocationAt(i)->infectPeople();
+        totalNewInfected += getLocationAt(i)->infectPeople(agentChanceOfMitigation, mitigationEffect, locationRisk);
     }
 
     return totalNewInfected;

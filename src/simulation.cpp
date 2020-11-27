@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 12/11/20
- * ver 2.03
+ * 27/11/20
+ * ver 2.04
  * 
  * This is the class file for the simulation class. This is where all of the classes come together
  * to run the actual simulation. This is in charge of setting up all the objects, and running each timestep
@@ -145,7 +145,7 @@ void Simulation::simulateTimeStep(){
     
     
     // transport agents from location to location
-    newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay, agentChanceOfMovment);
+    newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay, agentChanceOfMovment, agentMitagationChance, mitagationEffectivness, locationRisks);
 
     //update SIR totals
     deceasedTotal = (int)deceasedAgents.size();
@@ -513,6 +513,7 @@ void Simulation::setRealWorldPreset(){
         setAgentMitagationChance(i, 4, .9);
     }
 
+    setDefaultMovementData();
     setDefaultHospitalData();
     setDefaultLocationRisks();
     setDefaultMitagationEffectivness();
@@ -620,7 +621,7 @@ void Simulation::setRealWorldNoSchool(){
     for(int i = 0; i < 18; i++){
         for(int j = 0; j < 2; j++){
             for(int k = 0; k < 6; k++){
-                for(int l = 0; i < 9; i++){
+                for(int l = 0; l < 9; l++){
                     setAgentChanceOfMovment(i, j, k, 2, 0);
                 }
             }
