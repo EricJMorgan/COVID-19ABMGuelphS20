@@ -35,8 +35,8 @@ ffi.cdef('''
     double getAgentMitagationChance(Simulation *sim, int ageGroup, int strategy);
     void setMitagationEffectivness(Simulation *sim, int strategy, double value);
     double getMitagationEffectivness(Simulation *sim, int strategy);
-    void setLocationRisks(Simulation *sim, int location, double value);
-    double getLocationRisks(Simulation *sim, int location);
+    void setLocationRisk(Simulation *sim, int location, double value);
+    double getLocationRisk(Simulation *sim, int location);
     void setAgentRecoveryTime(Simulation* sim, int ageRange, short val);
     short getAgentRecoveryTime(Simulation *sim, int ageRange);
     void setAgentDeathChance(Simulation* sim, int ageRange, double val);
@@ -233,10 +233,11 @@ app.layout = html.Div([
                 dbc.Col(
                     children=[
                         html.Div(element.ageDropdown),
-                        html.Button('ApplyChanges', id='submit-ageSliders')
+                        dbc.Button("Apply Changes", outline=True, color="primary", className="mr-1", id="submit-ageSliders")
                     ],
                     width=2),
                 dbc.Row(html.Div(id='ageSettings-output-container')),
+                dbc.Row(html.Div(id='ageSettings-drop-output')),
                 dbc.Col(html.Div(element.ageTabs), width=6),    
             ])
         ])
@@ -307,114 +308,118 @@ list_elements = ['Q_slider', 'SD_slider', 'MC_slider', 'HM_slider', 'gs_slider',
                 'dc_slider', 'recov_slider','socialDis_slider','maskUse_slider',
                 'hygieneUse_slider','isolationRate_slider','incubation_slider']
 
-"""
+
  # Function to get slider values for a given age range
 @app.callback(
-    dash.dependencies.Output('ageSettings-output-container', 'children'),
+    dash.dependencies.Output('ageSettings-drop-output', 'children'),
     [dash.dependencies.Input('age-dropdown', 'value')])
-def update_output(value):
-    return 'You have selected "{}"'.format(value)
-"""
+def get_age_sliders(value):
+    return 'Got slider values for "{}"'.format(value)
 
-#Callback functions for sliders]
-##TODO NOTE: these are outdated setters and getters
-# @app.callback(
-#     Output(list_elements[0]+'_value', 'children'),
-#     [Input(list_elements[0], 'value')])
-# def update_output_Q(value):
-#     sim.quarantineSeverity(value/100)
-#     return '{}'.format(value)
 
-# @app.callback(
-#     Output(list_elements[1]+'_value', 'children'),
-#     [Input(list_elements[1], 'value')])
-# def update_output_SD(value):
-#     sim.setSocialDistanceServerity(value)
-#     return '{}'.format(value)
+# Callback functions for sliders
 
-# @app.callback(
-#     Output(list_elements[2]+'_value', 'children'),
-#     [Input(list_elements[2], 'value')])
-# def update_output_MC(value):
-#     sim.setmaskCompliance(value/100)
-#     return '{}'.format(value)
+# Mitigation effectiveness sliders in chronological order (refer to C++ array indexing)
+@app.callback(
+    Output(list_elements[0]+'_value', 'children'),
+    [Input(list_elements[0], 'value')])
+def update_output_Q(value):
+    sim.setMitagationEffectivness(0,value)
+    return '{}'.format(value)
 
-# @app.callback(
-#     Output(list_elements[3]+'_value', 'children'),
-#     [Input(list_elements[3], 'value')])
-# def update_output_HM(value):
-#     sim.setHygieneMaintainence(value/100)
-#     return '{}'.format(value)
+@app.callback(
+    Output(list_elements[1]+'_value', 'children'),
+    [Input(list_elements[1], 'value')])
+def update_output_SD(value):
+    sim.setMitagationEffectivness(1,value)
+    return '{}'.format(value)
 
-# @app.callback(
-#     Output(list_elements[4]+'_value', 'children'),
-#     [Input(list_elements[4], 'value')])
-# def update_output_gs(value):
-#     sim.setGenStoreRisk(value)
-#     return '{}'.format(value)
+@app.callback(
+    Output(list_elements[2]+'_value', 'children'),
+    [Input(list_elements[2], 'value')])
+def update_output_MC(value):
+    sim.setMitagationEffectivness(2,value)
+    return '{}'.format(value)
 
-# @app.callback(
-#     Output(list_elements[5]+'_value', 'children'),
-#     [Input(list_elements[5], 'value')])
-# def update_output_t(value):
-#     sim.setTransportRisk(value)
-#     return '{}'.format(value)
+@app.callback(
+    Output(list_elements[3]+'_value', 'children'),
+    [Input(list_elements[3], 'value')])
+def update_output_HM(value):
+    sim.setMitagationEffectivness(3,value)
+    return '{}'.format(value)
 
-# @app.callback(
-#     Output(list_elements[6]+'_value', 'children'),
-#     [Input(list_elements[6], 'value')])
-# def update_output_sch(value):
-#     sim.setSchoolRisk(value)
-#     return '{}'.format(value)
+# Location risk sliders
+@app.callback(
+    Output(list_elements[4]+'_value', 'children'),
+    [Input(list_elements[4], 'value')])
+def update_output_gs(value):
+    sim.setLocationRisk(0, value)
+    return '{}'.format(value)
 
-# @app.callback(
-#     Output(list_elements[7]+'_value', 'children'),
-#     [Input(list_elements[7], 'value')])
-# def update_output_pnr(value):
-#     sim.setParkRisk(value)
-#     return '{}'.format(value)
+@app.callback(
+    Output(list_elements[5]+'_value', 'children'),
+    [Input(list_elements[5], 'value')])
+def update_output_t(value):
+    sim.setLocationRisk(1, value)
+    return '{}'.format(value)
 
-# @app.callback(
-#     Output(list_elements[8]+'_value', 'children'),
-#     [Input(list_elements[8], 'value')])
-# def update_output_serv(value):
-#     sim.setServiceRisk(value)
-#     return '{}'.format(value)
+@app.callback(
+    Output(list_elements[6]+'_value', 'children'),
+    [Input(list_elements[6], 'value')])
+def update_output_sch(value):
+    sim.setLocationRisk(2, value)
+    return '{}'.format(value)
 
-# @app.callback(
-#     Output(list_elements[9]+'_value', 'children'),
-#     [Input(list_elements[9], 'value')])
-# def update_output_ent(value):
-#     sim.setEntertainmentRisk(value)
-#     return '{}'.format(value)
+@app.callback(
+    Output(list_elements[7]+'_value', 'children'),
+    [Input(list_elements[7], 'value')])
+def update_output_pnr(value):
+    sim.setLocationRisk(3, value)
+    return '{}'.format(value)
 
-# @app.callback(
-#     Output(list_elements[10]+'_value', 'children'),
-#     [Input(list_elements[10], 'value')])
-# def update_output_health(value):
-#     sim.setHealthPlaceRisk(value)
-#     return '{}'.format(value)
+@app.callback(
+    Output(list_elements[8]+'_value', 'children'),
+    [Input(list_elements[8], 'value')])
+def update_output_serv(value):
+    sim.setLocationRisk(4, value)
+    return '{}'.format(value)
 
-# @app.callback(
-#     Output(list_elements[11]+'_value', 'children'),
-#     [Input(list_elements[11], 'value')])
-# def update_output_poworship(value):
-#     sim.setPlaceOfWorshipRisk(value)
-#     return '{}'.format(value)
+@app.callback(
+    Output(list_elements[9]+'_value', 'children'),
+    [Input(list_elements[9], 'value')])
+def update_output_ent(value):
+    sim.setLocationRisk(5, value)
+    return '{}'.format(value)
 
-# @app.callback(
-#     Output(list_elements[12]+'_value', 'children'),
-#     [Input(list_elements[12], 'value')])
-# def update_output_res(value):
-#     sim.setResidentialRisk(value)
-#     return '{}'.format(value)
+@app.callback(
+    Output(list_elements[10]+'_value', 'children'),
+    [Input(list_elements[10], 'value')])
+def update_output_health(value):
+    sim.setLocationRisk(6, value)
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[11]+'_value', 'children'),
+    [Input(list_elements[11], 'value')])
+def update_output_poworship(value):
+    sim.setLocationRisk(7, value)
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[12]+'_value', 'children'),
+    [Input(list_elements[12], 'value')])
+def update_output_res(value):
+    sim.setLocationRisk(8, value)
+    return '{}'.format(value)
+
+# Age specific slider functions that are just used to update slider values, they do not apply any
+# settings until the Apply button is pressed.
 
 # Death Chance Slider
 @app.callback(
     Output(list_elements[13]+'_value', 'children'),
     [Input(list_elements[13], 'value')])
 def update_output_death(value):
-    #sim.setResidentialRisk(value)
     return '{}'.format(value)
 
 # Recovery Time Slider
@@ -422,7 +427,6 @@ def update_output_death(value):
     Output(list_elements[14]+'_value', 'children'),
     [Input(list_elements[14], 'value')])
 def update_output_recovery(value):
-    #sim.setResidentialRisk(value)
     return '{}'.format(value)
 
  # Incubation Period Slider (Age Specific)
@@ -430,7 +434,6 @@ def update_output_recovery(value):
     Output(list_elements[19]+'_value', 'children'),
     [Input(list_elements[19], 'value')])
 def update_output_incubation(value):
-    #sim.setResidentialRisk(value)
     return '{}'.format(value)
 
 # Social Distancing Use Age Specific Slider
@@ -438,7 +441,6 @@ def update_output_incubation(value):
     Output(list_elements[15]+'_value', 'children'),
     [Input(list_elements[15], 'value')])
 def update_output_SD_use(value):
-    #sim.setResidentialRisk(value)
     return '{}'.format(value)
 
 # Mask Wearing Use Age Specific Slider
@@ -446,7 +448,6 @@ def update_output_SD_use(value):
     Output(list_elements[16]+'_value', 'children'),
     [Input(list_elements[16], 'value')])
 def update_output_mask_use(value):
-    #sim.setResidentialRisk(value)
     return '{}'.format(value)
 
 # Hygiene Use Age Specific Slider
@@ -454,7 +455,6 @@ def update_output_mask_use(value):
     Output(list_elements[17]+'_value', 'children'),
     [Input(list_elements[17], 'value')])
 def update_output_hygiene_use(value):
-    #sim.setResidentialRisk(value)
     return '{}'.format(value)
 
 # Isolation Age Specific Slider
@@ -462,7 +462,6 @@ def update_output_hygiene_use(value):
     Output(list_elements[18]+'_value', 'children'),
     [Input(list_elements[18], 'value')])
 def update_output_isolation_use(value):
-    #sim.setResidentialRisk(value)
     return '{}'.format(value)
 
 
@@ -485,13 +484,13 @@ def update_ageSpecificValues(n_clicks, age_range, deathChance, recov, incubation
     # Set all age specific values here when the apply button has been clicked
     sim.setAgentDeathChance(age_range, deathChance)
     sim.setAgentRecoveryTime(age_range,recov)
-    #sim.setAgentIncubationPeriod(age_range, incubation)
-    #sim.setAgentMitagationChance(age_range, 0, socialDis)
-    #sim.setAgentMitagationChance(age_range, 1, maskUse)
-    #sim.setAgentMitagationChance(age_range, 2, hygiene)
-    #sim.setAgentMitagationChance(age_range, 3, isolation)
+    sim.setAgentIncubationTime(age_range, incubation)
+    sim.setAgentMitagationChance(age_range, 0, socialDis)
+    sim.setAgentMitagationChance(age_range, 1, maskUse)
+    sim.setAgentMitagationChance(age_range, 2, hygiene)
+    sim.setAgentMitagationChance(age_range, 3, isolation)
 
-    return 'Values for the selected age range have been updated.'
+    return 'Values for the age range have been updated.'
 
 
 #List of graphs names, outputs to graphs, hospital and ICU maximum capacities

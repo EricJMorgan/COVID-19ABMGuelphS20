@@ -312,12 +312,7 @@ void Simulation::setMitagationEffectivness(int strategy, double value){
     mitagationEffectivness[strategy] = value;
 }
 
-void Simulation::setLocationRisk(int location, double value){
-    if(location < 0 || location > 8) return;
-    if(value < 0 || value > 1.0) return;
 
-    locationRisks[location] = value;
-}
 
 double Simulation::getAgentMitagationChance(int ageGroup, int strategy){
     return agentMitagationChance[ageGroup][strategy];
@@ -402,17 +397,11 @@ double Simulation::getAgentNeedsHospital(int ageGroup){
     return agentNeedsHospital[ageGroup];
 }
 
-void Simulation::setLocationRisks(int location, double value){
-    if(location < 0 || location > 9) return;
-    if(value < 0 || value > 1) return;
+void Simulation::setLocationRisk(int location, double value){
+    if(location < 0 || location > 8) return;
+    if(value < 0 || value > 1.0) return;
 
     locationRisks[location] = value;
-}
-
-double Simulation::getLocationRisks(int location){
-    if(location < 0 || location > 8) return -1;
-
-    return locationRisks[location];
 }
 
 void Simulation::setAgentChanceOfICU(int ageGroup, double value){
@@ -458,15 +447,12 @@ void Simulation::setPresets(int preset){
             setTotalIsolation();
             break;
         case 3:
-            setInformedPopulation();
-            break;
-        case 4:
             setConspiracyPopulation();
             break;
-        case 5:
+        case 4:
             setRealWorldNoSchool();
             break;
-        case 6:
+        case 5:
             setRealWorldNoVaccine();
             break;
         default:
@@ -527,7 +513,7 @@ void Simulation::setAnarchyPreset(){
         }
     }
     for(int i = 0; i < 9; i++){
-        setLocationRisks(i, 1);
+        setLocationRisk(i, 1);
     }
     for(int i = 0; i < 18; i++){
         setAgentRecoveryTime(i, 127);
@@ -556,13 +542,7 @@ void Simulation::setAnarchyPreset(){
     }
 }
 
-void Simulation::setTotalIsolation(){
-
-}
-
 void Simulation::setInformedPopulation(){  
-    setDefaultMovementData();
-
     //0 to 4
     setAgentMitagationChance(0, 0, 1);
     setAgentMitagationChance(0, 1, 0);//babies dont wear masks
@@ -602,11 +582,47 @@ void Simulation::setInformedPopulation(){
 
     setDefaultLocationRisks();
     setDefaultHospitalData();
-    setDefaultMitagationEffectivness();  
-
+    setDefaultMitagationEffectivness();
+    setDefaultMovementData();
 }
 
 void Simulation::setConspiracyPopulation(){
+    //0 to 4
+    setAgentMitagationChance(0, 0, .3);
+    setAgentMitagationChance(0, 1, 0);//babies dont wear masks
+    setAgentMitagationChance(0, 2, .1);
+    setAgentMitagationChance(0, 3, .4);
+    setAgentMitagationChance(0, 4, .02);
+
+    //5 to 9
+    setAgentMitagationChance(1, 0, .3);
+    setAgentMitagationChance(1, 1, .1);
+    setAgentMitagationChance(1, 2, .2);
+    setAgentMitagationChance(1, 3, .4);
+    setAgentMitagationChance(1, 4, .02);
+
+    //10 to 14
+    setAgentMitagationChance(2, 0, .3);
+    setAgentMitagationChance(2, 1, .2);
+    setAgentMitagationChance(2, 2, .3);
+    setAgentMitagationChance(2, 3, .3);
+    setAgentMitagationChance(2, 4, .05);
+
+    //15 to 19
+    setAgentMitagationChance(3, 0, .35);
+    setAgentMitagationChance(3, 1, .2);
+    setAgentMitagationChance(3, 2, .2);
+    setAgentMitagationChance(3, 3, .3);
+    setAgentMitagationChance(3, 4, .05);
+
+    //25 to 85+, because pretty much every adult/senoir should be following these rules
+    for(int i = 4; i < 18; i++){
+        setAgentMitagationChance(i, 0, .3);
+        setAgentMitagationChance(i, 1, .1);
+        setAgentMitagationChance(i, 2, .2);
+        setAgentMitagationChance(i, 3, .3);
+        setAgentMitagationChance(i, 4, .05);//Some people really just hate vaccines
+    }
 
     setDefaultMovementData();
     setDefaultLocationRisks();
@@ -621,9 +637,7 @@ void Simulation::setRealWorldNoSchool(){
     for(int i = 0; i < 18; i++){
         for(int j = 0; j < 2; j++){
             for(int k = 0; k < 6; k++){
-                for(int l = 0; l < 9; l++){
-                    setAgentChanceOfMovment(i, j, k, 2, 0);
-                }
+                setAgentChanceOfMovment(i, j, k, 2, 0);
             }
         }
     }
@@ -639,16 +653,16 @@ void Simulation::setRealWorldNoVaccine(){
 }
 
 void Simulation::setDefaultLocationRisks(){
-    setLocationRisks(GENSTORE, .6);
-    setLocationRisks(TRANSPORT, .6);
-    setLocationRisks(SCHOOL, .75);
-    setLocationRisks(PARKSANDREC, .2);
-    setLocationRisks(SERVICES, .6);
-    setLocationRisks(ENTERTAINMENT, .82);
-    setLocationRisks(HEALTH, .6);
-    setLocationRisks(PLACEOFWORSHIP, .8);
-    setLocationRisks(UNNEEDED, 0);
-    setLocationRisks(RESIDENTIAL, .3);
+    setLocationRisk(GENSTORE, .6);
+    setLocationRisk(TRANSPORT, .6);
+    setLocationRisk(SCHOOL, .75);
+    setLocationRisk(PARKSANDREC, .2);
+    setLocationRisk(SERVICES, .6);
+    setLocationRisk(ENTERTAINMENT, .82);
+    setLocationRisk(HEALTH, .6);
+    setLocationRisk(PLACEOFWORSHIP, .8);
+    setLocationRisk(UNNEEDED, 0);
+    setLocationRisk(RESIDENTIAL, .3);
 }
 
 void Simulation::setDefaultMitagationEffectivness(){
