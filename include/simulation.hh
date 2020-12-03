@@ -420,7 +420,24 @@ public:
      */
     void simDayTimeStep();
 
+    /**
+     * setPresets
+     * 
+     * This method sets all the varibles to specific presets
+     * 0 is realWorldPreset
+     * 1 is anarchyPreset
+     * 2 is totalIsolation
+     * 3 is conspiractPopulation
+     * 4 is realWorldNoSchool
+     * 5 is realWorkdNoVaccine
+     * 
+     * @param int preset of the preset wanted
+     */
     void setPresets(int preset);
+
+    int saveCurrentPreset(string fileName);
+
+    int uploadCurrentPreset(string fileName);
     
     SIRtotals totalSimSIRStats;
     
@@ -444,15 +461,15 @@ public:
     
 
     // user inputs
-    double agentMitagationChance[18][5];
-    double mitagationEffectivness[5];
-    double locationRisks[9];//done
-    short agentRecoveryTime[18];//done
-    short agentIncubationTime[18];//done
-    double agentNeedsHospital[18];//done
-    double agentDeathChance[18];//done
-    double agentChanceOfICU[18];//done
-    double agentChanceOfMovment[18][2][6][9];
+    double agentMitagationChance[18][5];//
+    double mitagationEffectivness[5];//
+    double locationRisks[9];//
+    short agentRecoveryTime[18];//
+    short agentIncubationTime[18];//
+    double agentNeedsHospital[18];//
+    double agentDeathChance[18];//
+    double agentChanceOfICU[18];//
+    double agentChanceOfMovment[18][2][6][9];//
 
     //outputs for Front End graph
     int infectedCurrent;

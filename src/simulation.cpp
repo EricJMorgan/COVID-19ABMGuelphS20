@@ -48,11 +48,11 @@ Simulation::Simulation(string fileName) {
         agentNeedsHospital[i] = 0;
         agentDeathChance[i] = 0;
         agentChanceOfICU[i] = 0;
-        for(int j = 0; j < 4; j++){
+        for(int j = 0; j < 5; j++){
             agentMitagationChance[i][j] = 0;
         }
     }
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < 5; i++){
         mitagationEffectivness[i] = 0;
     }
     for(int i = 0; i < 9; i++){
@@ -433,6 +433,26 @@ void Simulation::simDayTimeStep(){
     for(int i = 0; i < 6; i++){
         simulateTimeStep();
     }
+}
+
+int Simulation::saveCurrentPreset(string fileName){
+    ofstream newFile(fileName.append(".csv"));
+    //add agent mitagation chance to file each row denoting an ageGroup
+    for(int i = 0; i < 18; i++){
+        for(int j = 0; j < 5; j++){
+            newFile << agentMitagationChance[i][j];
+            if(j != 4) newFile << ",";
+        }
+        newFile << "/n";
+    }
+
+    for(int i = 0; i < 4; i++){
+        newFile << agentMitagationChance[i] << ",";
+    }
+    newFile << agentMitagationChance[4] << "/n";
+
+
+    newFile.close();
 }
 
 void Simulation::setPresets(int preset){
