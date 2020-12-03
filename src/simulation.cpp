@@ -312,12 +312,7 @@ void Simulation::setMitagationEffectivness(int strategy, double value){
     mitagationEffectivness[strategy] = value;
 }
 
-void Simulation::setLocationRisk(int location, double value){
-    if(location < 0 || location > 8) return;
-    if(value < 0 || value > 1.0) return;
 
-    locationRisks[location] = value;
-}
 
 double Simulation::getAgentMitagationChance(int ageGroup, int strategy){
     return agentMitagationChance[ageGroup][strategy];
@@ -402,17 +397,11 @@ double Simulation::getAgentNeedsHospital(int ageGroup){
     return agentNeedsHospital[ageGroup];
 }
 
-void Simulation::setLocationRisks(int location, double value){
-    if(location < 0 || location > 9) return;
-    if(value < 0 || value > 1) return;
+void Simulation::setLocationRisk(int location, double value){
+    if(location < 0 || location > 8) return;
+    if(value < 0 || value > 1.0) return;
 
     locationRisks[location] = value;
-}
-
-double Simulation::getLocationRisks(int location){
-    if(location < 0 || location > 8) return -1;
-
-    return locationRisks[location];
 }
 
 void Simulation::setAgentChanceOfICU(int ageGroup, double value){

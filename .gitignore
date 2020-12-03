@@ -34,6 +34,7 @@
 # cache files
 *.pyc
 *.pyo
+tool/__pycache__/*.pyc
 
 # curr compiled file & folder
 abmSim

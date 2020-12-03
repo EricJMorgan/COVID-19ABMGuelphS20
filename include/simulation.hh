@@ -371,27 +371,6 @@ public:
     double getAgentNeedsHospital(int ageGroup);
 
     /**
-     * setLocationRisks
-     * 
-     * This method is used to set each locations inherite risk
-     * location 0 = 
-     * 
-     * @param the type of location to edit 0 <= locaiton <= 8
-     * @param the risk of the wanted location 0 <= value <= 1
-     */
-    void setLocationRisks(int location, double value);
-
-    /**
-     * getLocationRisks
-     * 
-     * This method takes a location type and returns its risk
-     * 
-     * @param the type of location 0 <= location <= 8
-     * @return the risk of the wanted location
-     */
-    double getLocationRisks(int location);
-
-    /**
      * setAgentChanceOfICU
      * 
      * This method sets each ageGroups chance of needing the ICU
@@ -642,8 +621,8 @@ extern "C"
     double getAgentChanceOfMovment(Simulation *sim, int ageGroup, int day, int time, int location) { return sim->getAgentChanceOfMovment(ageGroup, day, time, location); }
     void setAgentNeedsHospital(Simulation *sim, int ageGroup, double chance) { sim->setAgentNeedsHospital(ageGroup, chance); }
     double getAgentNeedsHospital(Simulation *sim, int ageGroup) { return sim->getAgentNeedsHospital(ageGroup); }
-    void setLocationRisks(Simulation *sim, int location, double value) { sim->setLocationRisks(location, value); }
-    double getLocationRisks(Simulation *sim, int location) { return sim->getLocationRisks(location); }
+    void setLocationRisk(Simulation *sim, int location, double value) { sim->setLocationRisk(location, value); }
+    double getLocationRisk(Simulation *sim, int location) { return sim->getLocationRisk(location); }
     void setAgentChanceOfICU(Simulation *sim, int ageGroup, double value) { sim->setAgentChanceOfICU(ageGroup, value); }
     double getAgentChanceOfICU(Simulation *sim, int ageGroup) { return sim->getAgentChanceOfICU(ageGroup); }
     void setAgentIncubationTime(Simulation *sim, int ageGroup, short value) { sim->setAgentIncubationTime(ageGroup, value); }
