@@ -458,15 +458,12 @@ void Simulation::setPresets(int preset){
             setTotalIsolation();
             break;
         case 3:
-            setInformedPopulation();
-            break;
-        case 4:
             setConspiracyPopulation();
             break;
-        case 5:
+        case 4:
             setRealWorldNoSchool();
             break;
-        case 6:
+        case 5:
             setRealWorldNoVaccine();
             break;
         default:
@@ -555,13 +552,7 @@ void Simulation::setAnarchyPreset(){
     }
 }
 
-void Simulation::setTotalIsolation(){
-
-}
-
 void Simulation::setInformedPopulation(){  
-    setDefaultMovementData();
-
     //0 to 4
     setAgentMitagationChance(0, 0, 1);
     setAgentMitagationChance(0, 1, 0);//babies dont wear masks
@@ -601,11 +592,47 @@ void Simulation::setInformedPopulation(){
 
     setDefaultLocationRisks();
     setDefaultHospitalData();
-    setDefaultMitagationEffectivness();  
-
+    setDefaultMitagationEffectivness();
+    setDefaultMovementData();
 }
 
 void Simulation::setConspiracyPopulation(){
+    //0 to 4
+    setAgentMitagationChance(0, 0, .3);
+    setAgentMitagationChance(0, 1, 0);//babies dont wear masks
+    setAgentMitagationChance(0, 2, .1);
+    setAgentMitagationChance(0, 3, .4);
+    setAgentMitagationChance(0, 4, .02);
+
+    //5 to 9
+    setAgentMitagationChance(1, 0, .3);
+    setAgentMitagationChance(1, 1, .1);
+    setAgentMitagationChance(1, 2, .2);
+    setAgentMitagationChance(1, 3, .4);
+    setAgentMitagationChance(1, 4, .02);
+
+    //10 to 14
+    setAgentMitagationChance(2, 0, .3);
+    setAgentMitagationChance(2, 1, .2);
+    setAgentMitagationChance(2, 2, .3);
+    setAgentMitagationChance(2, 3, .3);
+    setAgentMitagationChance(2, 4, .05);
+
+    //15 to 19
+    setAgentMitagationChance(3, 0, .35);
+    setAgentMitagationChance(3, 1, .2);
+    setAgentMitagationChance(3, 2, .2);
+    setAgentMitagationChance(3, 3, .3);
+    setAgentMitagationChance(3, 4, .05);
+
+    //25 to 85+, because pretty much every adult/senoir should be following these rules
+    for(int i = 4; i < 18; i++){
+        setAgentMitagationChance(i, 0, .3);
+        setAgentMitagationChance(i, 1, .1);
+        setAgentMitagationChance(i, 2, .2);
+        setAgentMitagationChance(i, 3, .3);
+        setAgentMitagationChance(i, 4, .05);//Some people really just hate vaccines
+    }
 
     setDefaultMovementData();
     setDefaultLocationRisks();
@@ -620,9 +647,7 @@ void Simulation::setRealWorldNoSchool(){
     for(int i = 0; i < 18; i++){
         for(int j = 0; j < 2; j++){
             for(int k = 0; k < 6; k++){
-                for(int l = 0; i < 9; i++){
-                    setAgentChanceOfMovment(i, j, k, 2, 0);
-                }
+                setAgentChanceOfMovment(i, j, k, 2, 0);
             }
         }
     }
