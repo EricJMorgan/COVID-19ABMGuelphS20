@@ -50,6 +50,7 @@ ffi.cdef('''
     void setAgentIncubationTime(Simulation *sim, int ageGroup, double value);
     double getAgentIncubationTime(Simulation *sim, int ageGroup);
     void simDayTimeStep(Simulation *sim);
+    void setPresets(Simulation *sim, int preset);
 ''')
 
 lib = ffi.dlopen('./libProject.so')
@@ -146,6 +147,9 @@ class Simulation(object):
     def simDayTimeStep(self):
         lib.simDayTimeStep(self.obj)
 
+    def setPresets(self, preset):
+        lib.setPresets(self.obj, preset)
+
 #Initialize times and values
 sim = Simulation()
 time = element.start_time()
@@ -158,6 +162,7 @@ hospitalC = sim.hospitalCurrent()
 hospitalT = sim.hospitalTotal()
 icuC = sim.ICUCurrent()
 icuT = sim.ICUtotal()
+sim.setPresets(0)
 
 #Hospital and ICU variables
 totalBedCount = 130
