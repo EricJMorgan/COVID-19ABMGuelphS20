@@ -512,7 +512,7 @@ void Simulation::setAnarchyPreset(){
         }
     }
     for(int i = 0; i < 9; i++){
-        setLocationRisks(i, 1);
+        setLocationRisk(i, 1);
     }
     for(int i = 0; i < 18; i++){
         setAgentRecoveryTime(i, 127);
@@ -652,16 +652,16 @@ void Simulation::setRealWorldNoVaccine(){
 }
 
 void Simulation::setDefaultLocationRisks(){
-    setLocationRisks(GENSTORE, .6);
-    setLocationRisks(TRANSPORT, .6);
-    setLocationRisks(SCHOOL, .75);
-    setLocationRisks(PARKSANDREC, .2);
-    setLocationRisks(SERVICES, .6);
-    setLocationRisks(ENTERTAINMENT, .82);
-    setLocationRisks(HEALTH, .6);
-    setLocationRisks(PLACEOFWORSHIP, .8);
-    setLocationRisks(UNNEEDED, 0);
-    setLocationRisks(RESIDENTIAL, .3);
+    setLocationRisk(GENSTORE, .6);
+    setLocationRisk(TRANSPORT, .6);
+    setLocationRisk(SCHOOL, .75);
+    setLocationRisk(PARKSANDREC, .2);
+    setLocationRisk(SERVICES, .6);
+    setLocationRisk(ENTERTAINMENT, .82);
+    setLocationRisk(HEALTH, .6);
+    setLocationRisk(PLACEOFWORSHIP, .8);
+    setLocationRisk(UNNEEDED, 0);
+    setLocationRisk(RESIDENTIAL, .3);
 }
 
 void Simulation::setDefaultMitagationEffectivness(){
