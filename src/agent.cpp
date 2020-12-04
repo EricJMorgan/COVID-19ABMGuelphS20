@@ -195,16 +195,16 @@ void Agent::decideMitigationStrategy(double mitagationPerAge[18][4]) {
 
     //Roll for each mitagation chance for the agent
     currRoll = ((double) rand() / (RAND_MAX));
-    wearingMask = (currRoll <= mitagationPerAge[ageGroup][0]);
+    wearingMask = (currRoll < mitagationPerAge[ageGroup][0]);
 
     currRoll = ((double) rand() / (RAND_MAX));
-    agentHygiene = (currRoll <= mitagationPerAge[ageGroup][1]);
+    agentHygiene = (currRoll < mitagationPerAge[ageGroup][1]);
 
     currRoll = ((double) rand() / (RAND_MAX));
-    socialDistancing = (currRoll <= mitagationPerAge[ageGroup][2]);
+    socialDistancing = (currRoll < mitagationPerAge[ageGroup][2]);
 
     currRoll = ((double) rand() / (RAND_MAX));
-    willIsolate = (currRoll <= mitagationPerAge[ageGroup][3]);
+    willIsolate = (currRoll < mitagationPerAge[ageGroup][3]);
 }
 
 string Agent::agentToString() {

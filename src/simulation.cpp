@@ -505,12 +505,20 @@ int Simulation::saveCurrentPreset(string fileName){
     newFile <<  agentChanceOfICU[17] << "/n";
 
     for(int i = 0; i < 18; i++){
-        
+        for(int j = 0; j < 2; j++){
+            for(int k = 0; k < 6; k++){
+                newFile << agentChanceOfMovment[i][j][k][0] << ",";
+                newFile << agentChanceOfMovment[i][j][k][1] << ",";
+                newFile << agentChanceOfMovment[i][j][k][2] << ",";
+                newFile << agentChanceOfMovment[i][j][k][3] << ",";
+                newFile << agentChanceOfMovment[i][j][k][4] << ",";
+                newFile << agentChanceOfMovment[i][j][k][5] << ",";
+                newFile << agentChanceOfMovment[i][j][k][6] << ",";
+                newFile << agentChanceOfMovment[i][j][k][7] << ",";
+                newFile << agentChanceOfMovment[i][j][k][8] << "\n";
+            }
+        }
     }
-
-
-
-
     newFile.close();
     return 0;
 }
