@@ -426,7 +426,7 @@ public:
      * This method sets all the varibles to specific presets
      * 0 is realWorldPreset
      * 1 is anarchyPreset
-     * 2 is totalIsolation
+     * 2 is setInformedPopulation
      * 3 is conspiractPopulation
      * 4 is realWorldNoSchool
      * 5 is realWorkdNoVaccine

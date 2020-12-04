@@ -36,7 +36,7 @@ int GeographicalRisk::infectPeople(double agentChanceOfMitigation[18][5], double
     for(int i = 0; i < (int)susceptible.size(); i++){
         randomNum = ((double) rand() / (RAND_MAX));
         if(randomNum < agentChanceOfInfection[susceptible.at(i)->getAgentAgeGroup()]){
-            susceptible.at(i)->infectAgent();
+            susceptible.at(i)->incubateAgent();
             infected.push_back(susceptible.at(i));
             susceptible.erase(susceptible.begin() + i);
             i--;

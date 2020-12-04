@@ -451,8 +451,46 @@ int Simulation::saveCurrentPreset(string fileName){
     }
     newFile << agentMitagationChance[4] << "/n";
 
+    for(int i = 0; i < 8; i++){
+        newFile << locationRisks[i] << ",";
+    }
+    newFile << locationRisks[8] << "/n";
+
+    for(int i = 0; i < 17; i++){
+        newFile <<  agentRecoveryTime[i] << ",";
+    }
+    newFile <<  agentRecoveryTime[17] << "/n";
+
+    for(int i = 0; i < 17; i++){
+        newFile <<  agentIncubationTime[i] << ",";
+    }
+    newFile <<  agentIncubationTime[17] << "/n";
+
+    for(int i = 0; i < 17; i++){
+        newFile <<  agentNeedsHospital[i] << ",";
+    }
+    newFile <<  agentNeedsHospital[17] << "/n";
+
+    for(int i = 0; i < 17; i++){
+        newFile <<  agentDeathChance[i] << ",";
+    }
+    newFile <<  agentDeathChance[17] << "/n";
+
+    for(int i = 0; i < 17; i++){
+        newFile <<  agentChanceOfICU[i] << ",";
+    }
+    newFile <<  agentChanceOfICU[17] << "/n";
+
+    for(int i = 0; i < 18; i++){
+        
+    }
+
+
+
 
     newFile.close();
+
+    return 0;
 }
 
 void Simulation::setPresets(int preset){
@@ -464,7 +502,7 @@ void Simulation::setPresets(int preset){
             setAnarchyPreset();
             break;
         case 2:
-            setTotalIsolation();
+            setInformedPopulation();
             break;
         case 3:
             setConspiracyPopulation();
