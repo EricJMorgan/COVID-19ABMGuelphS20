@@ -544,15 +544,6 @@ public:
     void setRealWorldPreset();
 
     /**
-     * setTotalIsolation
-     * 
-     * This is an extreme preset in which pretty much no one leaves their house.
-     * They stay in total isolation and never come into contact with another person
-     * if they can avoid it
-     */
-    void setTotalIsolation();
-
-    /**
      * setInformedPopulation
      * 
      * This is what we as a society should be aiming for.
@@ -645,6 +636,7 @@ extern "C"
     void setAgentIncubationTime(Simulation *sim, int ageGroup, short value) { sim->setAgentIncubationTime(ageGroup, value); }
     short getAgentIncubationTime(Simulation *sim, int ageGroup) { return sim->getAgentIncubationTime(ageGroup); }
     void simDayTimeStep(Simulation *sim) {sim->simDayTimeStep();}
+    void setPresets(Simulation *sim, int preset) {sim->setPresets(preset);}
 }
 
 #endif

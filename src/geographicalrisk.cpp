@@ -44,6 +44,7 @@ int GeographicalRisk::infectPeople(double agentChanceOfMitigation[18][5], double
         }
     }
 
+    cout << amountOfInfected << "\n";
     return amountOfInfected;
     
 }

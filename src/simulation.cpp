@@ -118,6 +118,9 @@ void Simulation::simulateTimeStep(){
     recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());
     guelphHospital.newlyRecovered.clear();
 
+        cout << "pass 1\n";
+
+
     // isolation compartment timestep method calls
     isoCompartment.SimulateIsoTimeStep(sirTimeStep, agentRecoveryTime, agentNeedsHospital);
     recoveredAgents.insert(recoveredAgents.end(), isoCompartment.newlyRecovered.begin(), isoCompartment.newlyRecovered.end());
@@ -127,25 +130,38 @@ void Simulation::simulateTimeStep(){
     }
     isoCompartment.newlyHospitalized.clear();
 
+    cout << "pass 2\n";
+
     Location *locationHolder;
     //gets each location and steps their time then checks if each agent will need the hospital
     for (int i = 0; i < (int)locationInfo->getLocationListLength(); i++) {
         locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);
 
         locationHolder = locationInfo->getLocationAt(i);
+
+        cout << "pass 3\n";
         for(int j = 0; j < locationHolder->getInfectedSize(); j++){
             if(locationHolder->getInfectedAgentAt(j)->randomAgentNeedsHospital(agentNeedsHospital)){
                 guelphHospital.increaseHospitalCount(locationHolder->getInfectedAgentAt(j));
                 locationHolder->removeInfectedAgent(j);//TODO this might skip over other agents
             }
-            if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INCUBATION) locationHolder->getInfectedAgentAt(j)->agentIncubationCheck(agentIncubationTime);
+            cout << "pass 4\n";
+            if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INCUBATION){
+                cout << "pass 4 inside if 2\n";
+                locationHolder->getInfectedAgentAt(j)->agentIncubationCheck(agentIncubationTime);
+                cout << "pass 4 after if 2 process\n";
+            } 
 
         }
+        cout << "pass 5\n";
     }
+    cout << "pass 6\n";
     
     
     // transport agents from location to location
     newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay, agentChanceOfMovment, agentMitagationChance, mitagationEffectivness, locationRisks);
+
+    cout << "newly infectded: " << newlyInfected << "\n";
 
     //update SIR totals
     deceasedTotal = (int)deceasedAgents.size();
@@ -269,18 +285,25 @@ DayOfWeek Simulation::getNextDay(DayOfWeek oldDay){
 }
 
 int Simulation::getInfectedCurrent() {
+    cout << infectedCurrent << "\n";
     return infectedCurrent;
 }
 
 int Simulation::getInfectedTotal() {
+    cout << infectedTotal << "\n";
+
     return infectedTotal;
 }
 
 int Simulation::getDeceasedTotal() {
+        cout << deceasedTotal << "\n";
+
     return deceasedTotal;
 }
 
 int Simulation::getRecoveredTotal() {
+        cout << recoveredTotal << "\n";
+
     return recoveredTotal;
 }
 
@@ -489,7 +512,6 @@ int Simulation::saveCurrentPreset(string fileName){
 
 
     newFile.close();
-
     return 0;
 }
 
