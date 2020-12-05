@@ -398,7 +398,7 @@ public:
      * @param the ageGroup wanted to set the incubation time where 0 <= ageGroup <= 17
      * @param the time it takes for the virus to incubate where 0 <= value <= 127
      */
-    void setAgentIncubationTime(int ageGroup, short value);
+    void setAgentIncubationTime(int ageGroup, int value);
 
     /**
      * getAgentIncubationTime
@@ -463,13 +463,13 @@ public:
     // user inputs
     double agentMitagationChance[18][5];//
     double mitagationEffectivness[5];//
-    double locationRisks[9];//
+    double locationRisks[10];//
     short agentRecoveryTime[18];//
     short agentIncubationTime[18];//
     double agentNeedsHospital[18];//
     double agentDeathChance[18];//
     double agentChanceOfICU[18];//
-    double agentChanceOfMovment[18][2][6][9];//
+    double agentChanceOfMovment[18][2][6][10];//
 
     //outputs for Front End graph
     int infectedCurrent;
@@ -633,10 +633,10 @@ extern "C"
     double getLocationRisk(Simulation *sim, int location) { return sim->getLocationRisk(location); }
     void setAgentChanceOfICU(Simulation *sim, int ageGroup, double value) { sim->setAgentChanceOfICU(ageGroup, value); }
     double getAgentChanceOfICU(Simulation *sim, int ageGroup) { return sim->getAgentChanceOfICU(ageGroup); }
-    void setAgentIncubationTime(Simulation *sim, int ageGroup, short value) { sim->setAgentIncubationTime(ageGroup, value); }
+    void setAgentIncubationTime(Simulation *sim, int ageGroup, int value) { sim->setAgentIncubationTime(ageGroup, value); }
     short getAgentIncubationTime(Simulation *sim, int ageGroup) { return sim->getAgentIncubationTime(ageGroup); }
-    void simDayTimeStep(Simulation *sim) {sim->simDayTimeStep();}
-    void setPresets(Simulation *sim, int preset) {sim->setPresets(preset);}
+    void simDayTimeStep(Simulation *sim) {sim->simDayTimeStep(); }
+    void setPresets(Simulation *sim, int preset) {sim->setPresets(preset); }
 }
 
 #endif

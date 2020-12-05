@@ -288,7 +288,7 @@ class Location : public GeographicalRisk {
      * @param the array of each mitagation strategys effectivness
      * @param the array of each location types risk of being there
      */
-    void locationTimeStep(double agentMitagationChance[18][5], double mitagationEffectivness[5], double locationRisks[9]);
+    void locationTimeStep(double agentMitagationChance[18][5], double mitagationEffectivness[5], double locationRisks[10]);
 
     private:
     int population;

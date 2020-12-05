@@ -92,7 +92,7 @@ Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int a
     return holder;
 }
 
-int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9], double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[9]){
+int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10], double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]){
     int locationListSize = getLocationListLength();
     int newLocation;
 
@@ -126,21 +126,22 @@ int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay, doubl
     return InfectAgentsPostMovement(agentChanceOfMitigation, mitigationEffect, locationRisk);
 }
 
-int Transportation::InfectAgentsPostMovement(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[9]){
+int Transportation::InfectAgentsPostMovement(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]){
     int totalNewInfected = 0;
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     for(int i = 0; i < locationListSize; i++){
         totalNewInfected += getLocationAt(i)->infectPeople(agentChanceOfMitigation, mitigationEffect, locationRisk);
     }
 
+    cout << "Total new Infected: " << totalNewInfected << "\n";
     return totalNewInfected;
 }
 
 
-int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9]){
+int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10]){
     //This checks the agents data and decides their chance of moving based on age, time, and day of the week
     double sumOfChances = 0;
-    double chanceOfMovementRange[9];
+    double chanceOfMovementRange[10];
     for(int i = 0; i < 9; i++) sumOfChances += chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][i];
 
     chanceOfMovementRange[0] = chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][0] / sumOfChances;

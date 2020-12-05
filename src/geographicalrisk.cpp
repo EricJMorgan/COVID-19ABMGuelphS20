@@ -17,7 +17,7 @@ GeographicalRisk::GeographicalRisk() {
     socialDistancingSeverity = 8;
 }
 
-void GeographicalRisk::updateAvgCountsAndRisk(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[9]) {
+void GeographicalRisk::updateAvgCountsAndRisk(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]) {
     //give each age group a infection chance based on chanceOfMitigation[ageGroup] * mitigationEffect. Add all of those together to get a single age groups chance of infection
     for(int i = 0; i < 18; i++){
         agentChanceOfInfection[i] = 0;
@@ -29,7 +29,7 @@ void GeographicalRisk::updateAvgCountsAndRisk(double agentChanceOfMitigation[18]
     //TODO figure out location priority to add that to risk
 }
 
-int GeographicalRisk::infectPeople(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[9]) {//TODO this does not take into account each ageGroups chance of using mitigation strategys
+int GeographicalRisk::infectPeople(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]) {//TODO this does not take into account each ageGroups chance of using mitigation strategys
     updateAvgCountsAndRisk(agentChanceOfMitigation, mitigationEffect, locationRisk);
     double randomNum;
     int amountOfInfected = 0;
