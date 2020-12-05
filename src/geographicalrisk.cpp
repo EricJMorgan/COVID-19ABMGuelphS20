@@ -22,7 +22,7 @@ void GeographicalRisk::updateAvgCountsAndRisk(double agentChanceOfMitigation[18]
     for(int i = 0; i < 18; i++){
         agentChanceOfInfection[i] = 0;
         for(int j = 0; j < 5; j++){
-            agentChanceOfInfection[i] += agentChanceOfMitigation[i][j] * mitigationEffect[j];
+            agentChanceOfInfection[i] += ((agentChanceOfMitigation[i][j] * mitigationEffect[j]) * 0.20);  // we multiply by 0.20 to keep value under 1
         }
     }
 
@@ -35,6 +35,8 @@ int GeographicalRisk::infectPeople(double agentChanceOfMitigation[18][5], double
     int amountOfInfected = 0;
     for(int i = 0; i < (int)susceptible.size(); i++){
         randomNum = ((double) rand() / (RAND_MAX));
+        cout << randomNum << "    " << agentChanceOfInfection[susceptible.at(i)->getAgentAgeGroup()] << "\n";
+
         if(randomNum < agentChanceOfInfection[susceptible.at(i)->getAgentAgeGroup()]){
             susceptible.at(i)->incubateAgent();
             infected.push_back(susceptible.at(i));
@@ -44,7 +46,10 @@ int GeographicalRisk::infectPeople(double agentChanceOfMitigation[18][5], double
         }
     }
 
-    cout << amountOfInfected << "\n";
+    if(amountOfInfected > 0){
+        cout << "Amount Infected: " << amountOfInfected << "\n";
+    }
+    
     return amountOfInfected;
     
 }
