@@ -162,7 +162,7 @@ hospitalC = sim.hospitalCurrent()
 hospitalT = sim.hospitalTotal()
 icuC = sim.ICUCurrent()
 icuT = sim.ICUtotal()
-sim.setPresets(0)
+#sim.setPresets(0)
 
 #Hospital and ICU variables
 totalBedCount = 130

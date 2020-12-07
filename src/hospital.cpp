@@ -94,6 +94,7 @@ void Hospital::HospitalTimeStep(double timestep, short agentRecoveryTime[18], do
         //if agent stays put
         } else {
             currAgent->timeInHospital++;
+            currAgent->timeInfected++;
         }
     }
 
@@ -120,6 +121,7 @@ void Hospital::HospitalTimeStep(double timestep, short agentRecoveryTime[18], do
             numberPpl--;
         } else {
             currAgent->timeInHospital++;
+            currAgent->timeInfected++;
         }
     }
 }

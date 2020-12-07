@@ -121,14 +121,14 @@ void Simulation::simulateTimeStep(){
         cout << "pass 1\n";
 
 
-    // isolation compartment timestep method calls
-    isoCompartment.SimulateIsoTimeStep(sirTimeStep, agentRecoveryTime, agentNeedsHospital);
-    recoveredAgents.insert(recoveredAgents.end(), isoCompartment.newlyRecovered.begin(), isoCompartment.newlyRecovered.end());
-    isoCompartment.newlyRecovered.clear();
-    for (int i = 0; i < (int)isoCompartment.newlyHospitalized.size(); i++) {
-        guelphHospital.increaseHospitalCount(isoCompartment.newlyHospitalized[i]);
-    }
-    isoCompartment.newlyHospitalized.clear();
+    // // isolation compartment timestep method calls
+    // isoCompartment.SimulateIsoTimeStep(sirTimeStep, agentRecoveryTime, agentNeedsHospital);
+    // recoveredAgents.insert(recoveredAgents.end(), isoCompartment.newlyRecovered.begin(), isoCompartment.newlyRecovered.end());
+    // isoCompartment.newlyRecovered.clear();
+    // for (int i = 0; i < (int)isoCompartment.newlyHospitalized.size(); i++) {
+    //     guelphHospital.increaseHospitalCount(isoCompartment.newlyHospitalized[i]);
+    // }
+    // isoCompartment.newlyHospitalized.clear();
 
     cout << "pass 2\n";
 
@@ -150,7 +150,12 @@ void Simulation::simulateTimeStep(){
                 cout << "pass 4 inside if 2\n";
                 locationHolder->getInfectedAgentAt(j)->agentIncubationCheck(agentIncubationTime);
                 cout << "pass 4 after if 2 process\n";
-            } 
+            }else if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INFECTED){
+                locationHolder->getInfectedAgentAt(j)->agentInfectedCheck(agentRecoveryTime);
+                if(locationHolder->getInfectedAgentAt(j)->getSeverity() == RECOVERED){
+                    recoveredAgents.insert( recoveredAgents.end(), locationHolder->removeInfectedAgent(j));//TODO this could be an issue
+                }
+            }
 
         }
         cout << "pass 5\n";

@@ -205,6 +205,8 @@ class Agent : public SIR {
      */
     void agentIncubationCheck(short agentIncubationTime[18]);
 
+    void agentInfectedCheck(short agentRecoveryTime[18]);
+
     //To be implemented later
     void quarantineTime();
     void goodHygiene();
@@ -218,6 +220,7 @@ class Agent : public SIR {
     bool willIsolate = false;
     int timeInHospital = 0;
     int timeIncubating = 0;
+    int timeInfected = 0;
     
     private:
     HouseholdIncome income;
