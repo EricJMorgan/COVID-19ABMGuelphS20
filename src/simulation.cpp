@@ -119,11 +119,8 @@ void Simulation::simulateTimeStep(){
     guelphHospital.HospitalTimeStep(sirTimeStep, agentRecoveryTime, agentDeathChance, agentChanceOfICU);
     deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
     guelphHospital.newlyDeceased.clear();
-    recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());
+    recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());//TODO distibute recoverd Agents into locations
     guelphHospital.newlyRecovered.clear();
-
-        cout << "pass 1\n";
-
 
     // // isolation compartment timestep method calls
     // isoCompartment.SimulateIsoTimeStep(sirTimeStep, agentRecoveryTime, agentNeedsHospital);
@@ -134,39 +131,42 @@ void Simulation::simulateTimeStep(){
     // }
     // isoCompartment.newlyHospitalized.clear();
 
-    cout << "pass 2\n";
+    cout << "----------------------------------------" << endl;
 
     Location *locationHolder;
-    //gets each location and steps their time then checks if each agent will need the hospital
-    for (int i = 0; i < (int)locationInfo->getLocationListLength(); i++) {
-        locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);
 
+    cout << locationInfo->getLocationListLength() << "+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_" << endl;
+    //gets each location and steps their time then checks if each agent will need the hospital
+    for (int i = 0; i < locationInfo->getLocationListLength(); i++) {
+        locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);//TODO this is usless atm but may be needed later
         locationHolder = locationInfo->getLocationAt(i);
 
-        //cout << "pass 3\n";
+        cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " << i << endl;
+        fflush(stdin);
+        fflush(stdout);
+
         for(int j = 0; j < locationHolder->getInfectedSize(); j++){
+            cout << "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& " << j << endl;
             if(locationHolder->getInfectedAgentAt(j)->randomAgentNeedsHospital(agentNeedsHospital)){
                 guelphHospital.increaseHospitalCount(locationHolder->getInfectedAgentAt(j));
                 locationHolder->removeInfectedAgent(j);//TODO this might skip over other agents
             }
             
             if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INCUBATION){
-                //cout << "pass 4 inside if 2\n";
+                //check if agent is past incubation time and into infected time
                 locationHolder->getInfectedAgentAt(j)->agentIncubationCheck(agentIncubationTime);
-                cout << "pass 4 after if 2 process\n";
             }else if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INFECTED){
+                //check if agent is past infected time and into recoverd time
                 locationHolder->getInfectedAgentAt(j)->agentInfectedCheck(agentRecoveryTime);
+                //if agent is recoverd we have to move them into the infected list
                 if(locationHolder->getInfectedAgentAt(j)->getSeverity() == RECOVERED){
                     recoveredAgents.insert( recoveredAgents.end(), locationHolder->removeInfectedAgent(j));//TODO this could be an issue
                 }
             }
-                //cout << "pass 4 after if 2 process\n"; 
-
         }
-        //cout << "pass 5\n";
     }
-    cout << "pass 6\n";
-    
+
+    cout << "*********************************************" << endl;
     
     // transport agents from location to location
     newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay, agentChanceOfMovment, agentMitagationChance, mitagationEffectivness, locationRisks);
@@ -354,7 +354,7 @@ double Simulation::getLocationRisk(int location){
     return locationRisks[location];
 }
 
-void Simulation::setAgentRecoveryTime(int ageRange, short value){
+void Simulation::setAgentRecoveryTime(int ageRange, int value){
     if(ageRange < 0 || ageRange > 17) return;
     if(value < 0 || value > 127) return;
 
@@ -367,7 +367,7 @@ void Simulation::setAgentDeathChance(int ageRange, double value){
     agentDeathChance[ageRange] = value;
 }
 
-short Simulation::getAgentRecoveryTime(int ageRange){
+int Simulation::getAgentRecoveryTime(int ageRange){
     if(ageRange < 0 || ageRange > 17) return -1;
     return agentRecoveryTime[ageRange];
 }
@@ -454,7 +454,7 @@ void Simulation::setAgentIncubationTime(int ageGroup, int value){
     cout << "Setting incubation time to: " << agentIncubationTime[ageGroup] <<":" << value << "\n";
 }
 
-short Simulation::getAgentIncubationTime(int ageGroup){
+int Simulation::getAgentIncubationTime(int ageGroup){
     if(ageGroup < 0 || ageGroup > 17) return -1;
 
     return agentIncubationTime[ageGroup];

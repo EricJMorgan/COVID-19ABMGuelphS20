@@ -203,9 +203,9 @@ class Agent : public SIR {
      * 
      * @param an array of agent age groups of the time it takes for the virus to incubate
      */
-    void agentIncubationCheck(short agentIncubationTime[18]);
+    void agentIncubationCheck(int agentIncubationTime[18]);
 
-    void agentInfectedCheck(short agentRecoveryTime[18]);
+    void agentInfectedCheck(int agentRecoveryTime[18]);
 
     //To be implemented later
     void quarantineTime();

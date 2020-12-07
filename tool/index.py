@@ -37,8 +37,8 @@ ffi.cdef('''
     double getMitagationEffectivness(Simulation *sim, int strategy);
     void setLocationRisk(Simulation *sim, int location, double value);
     double getLocationRisk(Simulation *sim, int location);
-    void setAgentRecoveryTime(Simulation* sim, int ageRange, short val);
-    short getAgentRecoveryTime(Simulation *sim, int ageRange);
+    void setAgentRecoveryTime(Simulation* sim, int ageRange, int val);
+    int getAgentRecoveryTime(Simulation *sim, int ageRange);
     void setAgentDeathChance(Simulation* sim, int ageRange, double val);
     double getAgentDeathChance(Simulation* sim, int ageRange);
     void setAgentChanceOfMovment(Simulation* sim, int ageGroup, int day, int time, int location, double value);

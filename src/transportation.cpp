@@ -130,6 +130,7 @@ int Transportation::InfectAgentsPostMovement(double agentChanceOfMitigation[18][
     int totalNewInfected = 0;
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     for(int i = 0; i < locationListSize; i++){
+        cout << "in loop" << endl;
         totalNewInfected += getLocationAt(i)->infectPeople(agentChanceOfMitigation, mitigationEffect, locationRisk);
     }
 

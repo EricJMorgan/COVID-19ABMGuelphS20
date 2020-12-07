@@ -35,8 +35,8 @@ int GeographicalRisk::infectPeople(double agentChanceOfMitigation[18][5], double
     int amountOfInfected = 0;
     for(int i = 0; i < (int)susceptible.size(); i++){
         randomNum = ((double) rand() / (RAND_MAX));
-        cout << randomNum << "    " << agentChanceOfInfection[susceptible.at(i)->getAgentAgeGroup()] << "\n";
-
+        //randomNum = 2;
+        //cout << randomNum << "    " << agentChanceOfInfection[susceptible.at(i)->getAgentAgeGroup()] << "\n";
         if(randomNum < agentChanceOfInfection[susceptible.at(i)->getAgentAgeGroup()]){
             susceptible.at(i)->incubateAgent();
             infected.push_back(susceptible.at(i));
@@ -50,6 +50,7 @@ int GeographicalRisk::infectPeople(double agentChanceOfMitigation[18][5], double
         cout << "Amount Infected: " << amountOfInfected << "\n";
     }
     
+    //cout << "done infection" << endl;
     return amountOfInfected;
     
 }
