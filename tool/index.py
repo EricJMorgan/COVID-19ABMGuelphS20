@@ -152,6 +152,7 @@ class Simulation(object):
 
 #Initialize times and values
 sim = Simulation()
+sim.setPresets(0)
 time = element.start_time()
 infectedC = sim.infectedCurrent()
 infectedN = sim.newlyInfected()
@@ -162,7 +163,18 @@ hospitalC = sim.hospitalCurrent()
 hospitalT = sim.hospitalTotal()
 icuC = sim.ICUCurrent()
 icuT = sim.ICUtotal()
-#sim.setPresets(0)
+
+print("ICU chance - 3: ", sim.getAgentChanceOfICU(3))
+sim.setAgentChanceOfICU(3,.63)
+
+print("Incubation time - 3", sim.getAgentIncubationTime(3))
+print("location risk - 3: ", sim.getLocationRisk(3))
+print("agent recovery time - 4: ", sim.getAgentRecoveryTime(4))
+
+print("agent needs hospital - 3: ", sim.getAgentNeedsHospital(3))
+print("mitigationEffectiveness - 0: ", sim.getMitagationEffectivness(0))
+
+
 
 #Hospital and ICU variables
 totalBedCount = 130
@@ -173,10 +185,10 @@ appStart = False
 app = dash.Dash(external_stylesheets=[dbc.themes.FLATLY])
 
 #Create graphs for Dash application
-infectedGraph = element.create_graph('infectedGraph', 1000, 1)
-idrGraph = element.create_graph('idrGraph', 1000, 2)
-hospitalGraph = element.create_graph('hospitalGraph', 1000, 3)
-icuGraph = element.create_graph('icuGraph', 1000, 4)
+infectedGraph = element.create_graph('infectedGraph', 4000, 1)
+idrGraph = element.create_graph('idrGraph', 4000, 2)
+hospitalGraph = element.create_graph('hospitalGraph', 4000, 3)
+icuGraph = element.create_graph('icuGraph', 4000, 4)
 
 #COVID-19 Cases graph tab
 infectedGraph = dbc.Card([
@@ -512,6 +524,7 @@ def update_infectedGraph(input_data):
     if (appStart == False):
         return no_update
     else:
+        print("Infected Total in python: ", sim.infectedTotal())
         time.append(element.next_timestep(time[-1]))
         list_outputs[0].append(sim.infectedCurrent())
         list_outputs[1].append(sim.infectedTotal())
