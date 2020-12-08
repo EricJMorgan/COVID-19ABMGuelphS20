@@ -123,19 +123,19 @@ void Simulation::simulateTimeStep(){
     recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());//TODO distibute recoverd Agents into locations
     guelphHospital.newlyRecovered.clear();
 
-    // // isolation compartment timestep method calls
-    // isoCompartment.SimulateIsoTimeStep(sirTimeStep, agentRecoveryTime, agentNeedsHospital);
-    // recoveredAgents.insert(recoveredAgents.end(), isoCompartment.newlyRecovered.begin(), isoCompartment.newlyRecovered.end());
-    // isoCompartment.newlyRecovered.clear();
-    // for (int i = 0; i < (int)isoCompartment.newlyHospitalized.size(); i++) {
-    //     guelphHospital.increaseHospitalCount(isoCompartment.newlyHospitalized[i]);
-    // }
-    // isoCompartment.newlyHospitalized.clear();
+    // isolation compartment timestep method calls
+    isoCompartment.SimulateIsoTimeStep(sirTimeStep, agentRecoveryTime, agentNeedsHospital);
+    recoveredAgents.insert(recoveredAgents.end(), isoCompartment.newlyRecovered.begin(), isoCompartment.newlyRecovered.end());
+    isoCompartment.newlyRecovered.clear();
+    for (int i = 0; i < (int)isoCompartment.newlyHospitalized.size(); i++) {
+        guelphHospital.increaseHospitalCount(isoCompartment.newlyHospitalized[i]);
+    }
+    isoCompartment.newlyHospitalized.clear();
 
     Location *locationHolder;
     //gets each location and steps their time then checks if each agent will need the hospital
     for (int i = 0; i < locationInfo->getLocationListLength(); i++) {
-        locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);//TODO this is usless atm but may be needed later
+        //locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);//TODO this is usless atm but may be needed later
         locationHolder = locationInfo->getLocationAt(i);
 
         for(int j = 0; j < locationHolder->getInfectedSize(); j++){

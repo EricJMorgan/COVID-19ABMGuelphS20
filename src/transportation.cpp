@@ -145,10 +145,10 @@ int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfD
     //This checks the agents data and decides their chance of moving based on age, time, and day of the week
     double sumOfChances = 0;
     double chanceOfMovementRange[10];
-    for(int i = 0; i < 9; i++) sumOfChances += chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][i];
+    for(int i = 0; i < 10; i++) sumOfChances += chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][i];
 
     chanceOfMovementRange[0] = chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][0] / sumOfChances;
-    for(int i = 1; i < 9; i++) 
+    for(int i = 1; i < 10; i++) 
         chanceOfMovementRange[i] = chanceOfMovementRange[i - 1] + (chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][0] / sumOfChances);
     
     std::uniform_real_distribution<double> unif(0, sumOfChances);

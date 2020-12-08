@@ -47,9 +47,9 @@ int GeographicalRisk::infectPeople(double agentChanceOfMitigation[18][5], double
         }
     }
 
-    if(amountOfInfected > 0){
-        //cout << "Amount Infected: " << amountOfInfected << "\n";
-    }
+    // if(amountOfInfected > 0){
+    //     //cout << "Amount Infected: " << amountOfInfected << "\n";
+    // }
     
     //cout << "done infection" << endl;
     return amountOfInfected;
