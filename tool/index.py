@@ -152,7 +152,7 @@ class Simulation(object):
 
 #Initialize times and values
 sim = Simulation()
-sim.setPresets(0)
+sim.setPresets(2)
 time = element.start_time()
 infectedC = sim.infectedCurrent()
 infectedN = sim.newlyInfected()
