@@ -63,7 +63,7 @@ class GeographicalRisk {
      * and various total counts it will then take the succeptible people in the region and 
      * 
      */
-    int infectPeople(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[9]);
+    int infectPeople(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
     
 
@@ -89,7 +89,7 @@ class GeographicalRisk {
     double agentChanceOfInfection[18];
     SIRtotals sirTotalLocation;
 
-    void updateAvgCountsAndRisk(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[9]);
+    void updateAvgCountsAndRisk(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
     
 };

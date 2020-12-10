@@ -113,7 +113,7 @@ class Transportation {
      * When called this method will simulate the movment of the entire population of
      * the given location
      */
-    int simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9], double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[9]);
+    int simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10], double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
     /**
      * updateLocationRisks
@@ -164,7 +164,7 @@ class Transportation {
      * @param currDay the day of the week
      * @return the index that the agent will move to -1 if it will stay in place
      */
-    int agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9]);
+    int agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10]);
 
     /**
      * InfectAgentsPostMovement
@@ -174,7 +174,7 @@ class Transportation {
      * 
      * @return a int of the amount of the newly infected
      */
-    int InfectAgentsPostMovement(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[9]);
+    int InfectAgentsPostMovement(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
 
     /**

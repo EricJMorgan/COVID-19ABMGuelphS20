@@ -195,16 +195,16 @@ void Agent::decideMitigationStrategy(double mitagationPerAge[18][4]) {
 
     //Roll for each mitagation chance for the agent
     currRoll = ((double) rand() / (RAND_MAX));
-    wearingMask = (currRoll <= mitagationPerAge[ageGroup][0]);
+    wearingMask = (currRoll < mitagationPerAge[ageGroup][0]);
 
     currRoll = ((double) rand() / (RAND_MAX));
-    agentHygiene = (currRoll <= mitagationPerAge[ageGroup][1]);
+    agentHygiene = (currRoll < mitagationPerAge[ageGroup][1]);
 
     currRoll = ((double) rand() / (RAND_MAX));
-    socialDistancing = (currRoll <= mitagationPerAge[ageGroup][2]);
+    socialDistancing = (currRoll < mitagationPerAge[ageGroup][2]);
 
     currRoll = ((double) rand() / (RAND_MAX));
-    willIsolate = (currRoll <= mitagationPerAge[ageGroup][3]);
+    willIsolate = (currRoll < mitagationPerAge[ageGroup][3]);
 }
 
 string Agent::agentToString() {
@@ -232,10 +232,21 @@ bool Agent::randomAgentNeedsHospital(double agentNeedsHospital[18]){
     return agentNeedsHospital[getAgentAgeGroup()] >= ((double) rand() / (RAND_MAX)) && (getSeverity() != INCUBATION);
 }
 
-void Agent::agentIncubationCheck(short agentIncubationTime[18]){
+void Agent::agentIncubationCheck(int agentIncubationTime[18]){
     //this is multiplied by the currTime step because this time will increment every time step instead of every day
-    if(timeIncubating < (agentIncubationTime[getAgentAgeGroup()] * 6)){
+    if((timeIncubating * 6) < ((int)agentIncubationTime[getAgentAgeGroup()])){
         timeIncubating = 0;
         infectAgent();
+    }else{
+        timeIncubating++;
+    }
+}
+
+void Agent::agentInfectedCheck(int agentRecoveryTime[18]){
+    if((timeInfected * 6) < ((int)agentRecoveryTime[getAgentAgeGroup()])){
+        timeInfected = 0;
+        recoverAgent();
+    }else{
+        timeInfected++;
     }
 }

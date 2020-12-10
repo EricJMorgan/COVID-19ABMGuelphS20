@@ -66,7 +66,7 @@ class IsolationCompartment {
      * 
      * @param the size of the timeStep
      */
-    void SimulateIsoTimeStep (double timeStep, short agentRecoveryTime[18], double agentNeedsHospital[18]);
+    void SimulateIsoTimeStep (double timeStep, int agentRecoveryTime[18], double agentNeedsHospital[18]);
 
     // returns to be read and cleared
     std::vector<Agent *> newlyRecovered;

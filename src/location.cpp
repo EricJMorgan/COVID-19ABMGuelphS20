@@ -142,10 +142,10 @@ int Location::getLocationIndex(){
     return vectorLocation;
 }
 
-void Location::locationTimeStep(double agentMitagationChance[18][5], double mitagationEffectivness[5], double locationRisks[9]){
-    if(getInfectedSize() > 0){
-        infectPeople(agentMitagationChance, mitagationEffectivness, locationRisks);
-    }
+void Location::locationTimeStep(double agentMitagationChance[18][5], double mitagationEffectivness[5], double locationRisks[10]){
+    // if(getInfectedSize() > 0){
+    //     infectPeople(agentMitagationChance, mitagationEffectivness, locationRisks);
+    // }
 
 }
 
