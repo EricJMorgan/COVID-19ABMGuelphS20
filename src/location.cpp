@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 12/11/20
- * ver 2.01
+ * 27/11/20
+ * ver 2.02
  * 
  * This is the class file for the location class. This holds the
  * location grouping (The first 5 digits of a postal code), the locations
@@ -142,24 +142,10 @@ int Location::getLocationIndex(){
     return vectorLocation;
 }
 
-void Location::locationTimeStep(double agentMitagationChance[18][5], double mitagationEffectivness[5], double locationRisks[9]){
-    double currRisk = 0;
-    //if area dosent have anyone infected inside no one can pass the infection along
-    if(getInfectedSize() > 0){
-        std::vector<int> ageGroups = amountOfAgeGroups();
-        for(int i = 0; i < 9; i++){
-            currRisk += locationRisks[i];
-        }
-        currRisk /= 9;
-
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 18; j++){
-                currRisk += ((agentMitagationChance[j][i] * mitagationEffectivness[i]) / 50);//TODO this sucks and will need to be fixed lmao
-            }
-        }
-        chanceOfInfection = currRisk;
-        infectPeople();//TODO as of now this dosent take into account each agents age and mitagation use
-    }
+void Location::locationTimeStep(double agentMitagationChance[18][5], double mitagationEffectivness[5], double locationRisks[10]){
+    // if(getInfectedSize() > 0){
+    //     infectPeople(agentMitagationChance, mitagationEffectivness, locationRisks);
+    // }
 
 }
 

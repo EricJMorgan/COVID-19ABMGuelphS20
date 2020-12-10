@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 27/10/20
- * ver 2.00
+ * 27/11/20
+ * ver 2.01
  * 
  * This is the header file for the geographical risk class. The main
  * use for this class is to do the math for each area and decide how many 
@@ -63,7 +63,7 @@ class GeographicalRisk {
      * and various total counts it will then take the succeptible people in the region and 
      * 
      */
-    int infectPeople();
+    int infectPeople(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
     
 
@@ -81,21 +81,15 @@ class GeographicalRisk {
 
     private:
 
-    /**
-     * getLocationCountAt
-     * 
-     * This takes the current businesses and agents in the area and decides the amount of COVID transfer
-     * risk in the given region
-     * 
-     */
-    void updateAvgCountsAndRisk();
-
     // TODO: maybe needed later if not can be changed to local function variables
     double avgSymptomaticCarriers;
     double avgAsymptomatic;
     double avgMaskWearer;
     double avgHygiene;
+    double agentChanceOfInfection[18];
     SIRtotals sirTotalLocation;
+
+    void updateAvgCountsAndRisk(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
     
 };

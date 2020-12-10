@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 12/11/20
- * ver 2.02
+ * 27/11/20
+ * ver 2.03
  * 
  * This is the class file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
@@ -92,7 +92,7 @@ Agent *Transportation::moveInfectedAgent(int locationOne, int locationTwo, int a
     return holder;
 }
 
-int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9]){
+int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10], double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]){
     int locationListSize = getLocationListLength();
     int newLocation;
 
@@ -123,28 +123,32 @@ int Transportation::simulateAgentMovment(int timeOfDay, DayOfWeek currDay, doubl
         }
     }
 
-    return InfectAgentsPostMovement();
+    return InfectAgentsPostMovement(agentChanceOfMitigation, mitigationEffect, locationRisk);
 }
 
-int Transportation::InfectAgentsPostMovement(){
+int Transportation::InfectAgentsPostMovement(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]){
     int totalNewInfected = 0;
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     for(int i = 0; i < locationListSize; i++){
-        totalNewInfected += getLocationAt(i)->infectPeople();
+        //cout << "in loop" << endl;
+        if(getLocationAt(i)->getInfectedSize() > 0){
+            totalNewInfected += getLocationAt(i)->infectPeople(agentChanceOfMitigation, mitigationEffect, locationRisk);
+        }
     }
 
+    cout << "Total new Infected: " << totalNewInfected << "\n";
     return totalNewInfected;
 }
 
 
-int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9]){
+int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10]){
     //This checks the agents data and decides their chance of moving based on age, time, and day of the week
     double sumOfChances = 0;
-    double chanceOfMovementRange[9];
-    for(int i = 0; i < 9; i++) sumOfChances += chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][i];
+    double chanceOfMovementRange[10];
+    for(int i = 0; i < 10; i++) sumOfChances += chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][i];
 
     chanceOfMovementRange[0] = chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][0] / sumOfChances;
-    for(int i = 1; i < 9; i++) 
+    for(int i = 1; i < 10; i++) 
         chanceOfMovementRange[i] = chanceOfMovementRange[i - 1] + (chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][0] / sumOfChances);
     
     std::uniform_real_distribution<double> unif(0, sumOfChances);

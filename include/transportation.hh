@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 12/11/20
- * ver 2.01
+ * 27/11/20
+ * ver 2.02
  * 
  * This is the header file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
@@ -113,7 +113,7 @@ class Transportation {
      * When called this method will simulate the movment of the entire population of
      * the given location
      */
-    int simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9]);
+    int simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10], double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
     /**
      * updateLocationRisks
@@ -164,7 +164,7 @@ class Transportation {
      * @param currDay the day of the week
      * @return the index that the agent will move to -1 if it will stay in place
      */
-    int agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][9]);
+    int agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10]);
 
     /**
      * InfectAgentsPostMovement
@@ -174,7 +174,7 @@ class Transportation {
      * 
      * @return a int of the amount of the newly infected
      */
-    int InfectAgentsPostMovement();
+    int InfectAgentsPostMovement(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
 
     /**
