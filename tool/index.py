@@ -47,8 +47,8 @@ ffi.cdef('''
     double getAgentNeedsHospital(Simulation *sim, int ageGroup);
     void setAgentChanceOfICU(Simulation *sim, int ageGroup, double value);
     double getAgentChanceOfICU(Simulation *sim, int ageGroup);
-    void setAgentIncubationTime(Simulation *sim, int ageGroup, double value);
-    double getAgentIncubationTime(Simulation *sim, int ageGroup);
+    void setAgentIncubationTime(Simulation *sim, int ageGroup, int value);
+    int getAgentIncubationTime(Simulation *sim, int ageGroup);
     void simDayTimeStep(Simulation *sim);
     void setPresets(Simulation *sim, int preset);
 ''')
