@@ -12,19 +12,18 @@ navigator = dbc.Navbar(
     dbc.Container([
             html.A(
                 dbc.Row(
-                    [dbc.Col(dbc.NavbarBrand("COVID-19 Guelph eABM", className="ml-2"))],
-                    align="center",
+                    [dbc.Col(dbc.NavbarBrand("COVID-19 Guelph eABM"))],
+                    align="left",
                 ),
             ),
             dbc.NavbarToggler(id="navbar-toggler"),
             dbc.Collapse(
                 dbc.Nav(
-                    [dashboard_item],
-                    className="ml-auto", navbar=True
+                    navbar=True
                 ),
                 id="navbar-collapse", navbar=True,
             ),
-        ]),
+        ], className="margin-left-none"),
     className="mb-5",
 )
 

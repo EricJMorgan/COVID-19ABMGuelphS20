@@ -250,12 +250,12 @@ app.layout = html.Div([
                 dbc.Col(
                     children=[
                         html.Div(element.ageDropdown),
-                        dbc.Button("Apply Changes", outline=True, color="primary", className="mr-1", id="submit-ageSliders")
+                        html.Div(children=[dbc.Button("Apply Changes", outline=True, color="primary", className="mr-1", id="submit-ageSliders")], className="btn-container"),
+                        dbc.Row(html.Div(id='ageSettings-output-container')),
+                        dbc.Row(html.Div(id='ageSettings-drop-output'))
                     ],
-                    width=2),
-                dbc.Row(html.Div(id='ageSettings-output-container')),
-                dbc.Row(html.Div(id='ageSettings-drop-output')),
-                dbc.Col(html.Div(element.ageTabs), width=6),    
+                    width=4),
+                dbc.Col(html.Div(element.ageTabs), width=8),    
             ])
         ])
     ])

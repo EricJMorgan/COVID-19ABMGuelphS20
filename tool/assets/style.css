@@ -2,8 +2,12 @@ H1, H2, H3, H4, H5, H6 {
   color: #242423;
 }
 
+.margin-left-none {
+  margin-left: 0;
+}
+
 .navbar {
-  background-color:#032066ad !important
+  background-color:#2C3E50 !important
 }
 
 .navbar .nav-link {
@@ -62,4 +66,9 @@ H1, H2, H3, H4, H5, H6 {
 
 .card-body {
   padding: 0.9rem;
+}
+
+.btn-container {
+  padding-top:7px;
+  padding-bottom:7px;
 }
