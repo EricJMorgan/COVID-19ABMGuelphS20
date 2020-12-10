@@ -130,7 +130,10 @@ int Transportation::InfectAgentsPostMovement(double agentChanceOfMitigation[18][
     int totalNewInfected = 0;
     int locationListSize = getLocationListLength();//This is done so this function is not called more that once
     for(int i = 0; i < locationListSize; i++){
-        totalNewInfected += getLocationAt(i)->infectPeople(agentChanceOfMitigation, mitigationEffect, locationRisk);
+        //cout << "in loop" << endl;
+        if(getLocationAt(i)->getInfectedSize() > 0){
+            totalNewInfected += getLocationAt(i)->infectPeople(agentChanceOfMitigation, mitigationEffect, locationRisk);
+        }
     }
 
     cout << "Total new Infected: " << totalNewInfected << "\n";
@@ -142,10 +145,10 @@ int Transportation::agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfD
     //This checks the agents data and decides their chance of moving based on age, time, and day of the week
     double sumOfChances = 0;
     double chanceOfMovementRange[10];
-    for(int i = 0; i < 9; i++) sumOfChances += chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][i];
+    for(int i = 0; i < 10; i++) sumOfChances += chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][i];
 
     chanceOfMovementRange[0] = chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][0] / sumOfChances;
-    for(int i = 1; i < 9; i++) 
+    for(int i = 1; i < 10; i++) 
         chanceOfMovementRange[i] = chanceOfMovementRange[i - 1] + (chanceOfMoving[agent->getAgentAgeGroup()][!isWeekDay(currDay)][timeOfDay / 4][0] / sumOfChances);
     
     std::uniform_real_distribution<double> unif(0, sumOfChances);

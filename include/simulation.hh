@@ -266,7 +266,7 @@ public:
      * @param the ageGroup that you want to assign the value too 0 <= ageRange <= 17
      * @param the length of the incubation period 0 <= value <= 127
      */
-    void setAgentIncubationPeriod(int ageRange, short value);
+    void setAgentIncubationPeriod(int ageRange, int value);
 
     /**
      * getAgentIncubationPeriod
@@ -276,7 +276,7 @@ public:
      * @param the ageGroup that you want to get the incubation period for
      * @return the length of the incubation period for the wanted ageGroup
      */
-    short getAgentIncubationPeriod(int ageRange);
+    int getAgentIncubationPeriod(int ageRange);
 
     /**
      * setAgentRecoveryTime
@@ -285,9 +285,9 @@ public:
      * the given virus. Age ranges are 0 = 0 - 4, 1 = 5 - 9 ...
      * 
      * @param int ageRange in range 0 - 17
-     * @param short value in range 0 - 127
+     * @param int value in range 0 - 127
      */
-    void setAgentRecoveryTime(int ageRange, short value);
+    void setAgentRecoveryTime(int ageRange, int value);
 
     /**
      * getAgentRecoveryTime
@@ -296,9 +296,9 @@ public:
      * where ageRange is 0 = 0 -4, 1 = 5 - 9.
      * 
      * @param ageRange the age of the wanted recovery time in range 0 - 17.
-     * @return a short of the time it takes for the agent to recover
+     * @return a int of the time it takes for the agent to recover
      */
-    short getAgentRecoveryTime(int ageRange);
+    int getAgentRecoveryTime(int ageRange);
 
     /**
      * setAgentDeathChance
@@ -406,9 +406,9 @@ public:
      * This method gets an ageGroups virus incubation time
      * 
      * @param the ageGroup which the incubation time is wanted where 0 <= ageGroup <= 17
-     * @return a short of the time of the virus incubating
+     * @return a int of the time of the virus incubating
      */
-    short getAgentIncubationTime(int ageGroup);
+    int getAgentIncubationTime(int ageGroup);
 
     /**
      * simDayTimeStep
@@ -426,7 +426,7 @@ public:
      * This method sets all the varibles to specific presets
      * 0 is realWorldPreset
      * 1 is anarchyPreset
-     * 2 is totalIsolation
+     * 2 is setInformedPopulation
      * 3 is conspiractPopulation
      * 4 is realWorldNoSchool
      * 5 is realWorkdNoVaccine
@@ -464,8 +464,8 @@ public:
     double agentMitagationChance[18][5];//
     double mitagationEffectivness[5];//
     double locationRisks[10];//
-    short agentRecoveryTime[18];//
-    short agentIncubationTime[18];//
+    int agentRecoveryTime[18];//
+    int agentIncubationTime[18];//
     double agentNeedsHospital[18];//
     double agentDeathChance[18];//
     double agentChanceOfICU[18];//
@@ -621,8 +621,8 @@ extern "C"
     double getAgentMitagationChance(Simulation *sim, int ageGroup, int strategy) { return sim->getAgentMitagationChance(ageGroup, strategy); }
     void setMitagationEffectivness(Simulation *sim, int strategy, double value) { sim->setMitagationEffectivness(strategy, value); }
     double getMitagationEffectivness(Simulation *sim, int strategy) { return sim->getMitagationEffectivness(strategy); }
-    void setAgentRecoveryTime(Simulation *sim, int ageRange, short val) { sim->setAgentRecoveryTime(ageRange, val); }
-    short getAgentRecoveryTime(Simulation *sim, int ageRange) { return sim->getAgentRecoveryTime(ageRange); }
+    void setAgentRecoveryTime(Simulation *sim, int ageRange, int val) { sim->setAgentRecoveryTime(ageRange, val); }
+    int getAgentRecoveryTime(Simulation *sim, int ageRange) { return sim->getAgentRecoveryTime(ageRange); }
     void setAgentDeathChance(Simulation *sim, int ageRange, double val) { sim->setAgentDeathChance(ageRange, val); }
     double getAgentDeathChance(Simulation *sim, int ageRange) { return sim->getAgentDeathChance(ageRange); }
     void setAgentChanceOfMovment(Simulation *sim, int ageGroup, int day, int time, int location, double value) { sim->setAgentChanceOfMovment(ageGroup, day, time, location, value); }
@@ -634,7 +634,7 @@ extern "C"
     void setAgentChanceOfICU(Simulation *sim, int ageGroup, double value) { sim->setAgentChanceOfICU(ageGroup, value); }
     double getAgentChanceOfICU(Simulation *sim, int ageGroup) { return sim->getAgentChanceOfICU(ageGroup); }
     void setAgentIncubationTime(Simulation *sim, int ageGroup, int value) { sim->setAgentIncubationTime(ageGroup, value); }
-    short getAgentIncubationTime(Simulation *sim, int ageGroup) { return sim->getAgentIncubationTime(ageGroup); }
+    int getAgentIncubationTime(Simulation *sim, int ageGroup) { return sim->getAgentIncubationTime(ageGroup); }
     void simDayTimeStep(Simulation *sim) {sim->simDayTimeStep(); }
     void setPresets(Simulation *sim, int preset) {sim->setPresets(preset); }
 }

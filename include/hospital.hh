@@ -94,7 +94,7 @@ class Hospital {
      * 
      * @param the timestep size
      */
-    void HospitalTimeStep(double timestep, short agentRecoveryTime[18], double agentDeathChance[18], double agentChanceOfICU[18]);
+    void HospitalTimeStep(double timestep, int agentRecoveryTime[18], double agentDeathChance[18], double agentChanceOfICU[18]);
 
      /**
      * getTotalICUCount

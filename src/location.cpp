@@ -143,9 +143,9 @@ int Location::getLocationIndex(){
 }
 
 void Location::locationTimeStep(double agentMitagationChance[18][5], double mitagationEffectivness[5], double locationRisks[10]){
-    if(getInfectedSize() > 0){
-        infectPeople(agentMitagationChance, mitagationEffectivness, locationRisks);
-    }
+    // if(getInfectedSize() > 0){
+    //     infectPeople(agentMitagationChance, mitagationEffectivness, locationRisks);
+    // }
 
 }
 

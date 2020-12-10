@@ -23,6 +23,7 @@ Simulation::Simulation(string fileName) {
     ifstream demographicFile;
     demographicFile.open(fileName, ios::in);
     string line;
+    srand(time(NULL));
     //init values
     int arraySize = 0;
     population = 0;
@@ -38,7 +39,7 @@ Simulation::Simulation(string fileName) {
     sirTimeStep = (double)timeStep / 24.0;
     timeElapsed = 0;
     currDay = MON;
-    initiallyInfectedChance = 0.0005;
+    initiallyInfectedChance = 0.00015;
     initiallyInfected = 0;
 
     //modular value setters
@@ -119,11 +120,8 @@ void Simulation::simulateTimeStep(){
     guelphHospital.HospitalTimeStep(sirTimeStep, agentRecoveryTime, agentDeathChance, agentChanceOfICU);
     deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
     guelphHospital.newlyDeceased.clear();
-    recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());
+    recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());//TODO distibute recoverd Agents into locations
     guelphHospital.newlyRecovered.clear();
-
-        cout << "pass 1\n";
-
 
     // isolation compartment timestep method calls
     isoCompartment.SimulateIsoTimeStep(sirTimeStep, agentRecoveryTime, agentNeedsHospital);
@@ -134,33 +132,33 @@ void Simulation::simulateTimeStep(){
     }
     isoCompartment.newlyHospitalized.clear();
 
-    cout << "pass 2\n";
-
     Location *locationHolder;
     //gets each location and steps their time then checks if each agent will need the hospital
-    for (int i = 0; i < (int)locationInfo->getLocationListLength(); i++) {
-        locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);
-
+    for (int i = 0; i < locationInfo->getLocationListLength(); i++) {
+        //locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);//TODO this is usless atm but may be needed later
         locationHolder = locationInfo->getLocationAt(i);
 
-        //cout << "pass 3\n";
         for(int j = 0; j < locationHolder->getInfectedSize(); j++){
             if(locationHolder->getInfectedAgentAt(j)->randomAgentNeedsHospital(agentNeedsHospital)){
                 guelphHospital.increaseHospitalCount(locationHolder->getInfectedAgentAt(j));
                 locationHolder->removeInfectedAgent(j);//TODO this might skip over other agents
+                j--;
+                continue;
             }
             
             if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INCUBATION){
-                //cout << "pass 4 inside if 2\n";
+                //check if agent is past incubation time and into infected time
                 locationHolder->getInfectedAgentAt(j)->agentIncubationCheck(agentIncubationTime);
-                //cout << "pass 4 after if 2 process\n";
-            } 
-
+            }else if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INFECTED){
+                //check if agent is past infected time and into recoverd time
+                locationHolder->getInfectedAgentAt(j)->agentInfectedCheck(agentRecoveryTime);
+                //if agent is recoverd we have to move them into the infected list
+                if(locationHolder->getInfectedAgentAt(j)->getSeverity() == RECOVERED){
+                    recoveredAgents.insert( recoveredAgents.end(), locationHolder->removeInfectedAgent(j));//TODO this could be an issue
+                }
+            }
         }
-        //cout << "pass 5\n";
     }
-    cout << "pass 6\n";
-    
     
     // transport agents from location to location
     newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay, agentChanceOfMovment, agentMitagationChance, mitagationEffectivness, locationRisks);
@@ -348,7 +346,7 @@ double Simulation::getLocationRisk(int location){
     return locationRisks[location];
 }
 
-void Simulation::setAgentRecoveryTime(int ageRange, short value){
+void Simulation::setAgentRecoveryTime(int ageRange, int value){
     if(ageRange < 0 || ageRange > 17) return;
     if(value < 0 || value > 127) return;
 
@@ -361,7 +359,7 @@ void Simulation::setAgentDeathChance(int ageRange, double value){
     agentDeathChance[ageRange] = value;
 }
 
-short Simulation::getAgentRecoveryTime(int ageRange){
+int Simulation::getAgentRecoveryTime(int ageRange){
     if(ageRange < 0 || ageRange > 17) return -1;
     return agentRecoveryTime[ageRange];
 }
@@ -448,7 +446,7 @@ void Simulation::setAgentIncubationTime(int ageGroup, int value){
     cout << "Setting incubation time to: " << agentIncubationTime[ageGroup] <<":" << value << "\n";
 }
 
-short Simulation::getAgentIncubationTime(int ageGroup){
+int Simulation::getAgentIncubationTime(int ageGroup){
     if(ageGroup < 0 || ageGroup > 17) return -1;
 
     return agentIncubationTime[ageGroup];
@@ -476,7 +474,51 @@ int Simulation::saveCurrentPreset(string fileName){
     }
     newFile << agentMitagationChance[4] << "/n";
 
+    for(int i = 0; i < 8; i++){
+        newFile << locationRisks[i] << ",";
+    }
+    newFile << locationRisks[8] << "/n";
 
+    for(int i = 0; i < 17; i++){
+        newFile <<  agentRecoveryTime[i] << ",";
+    }
+    newFile <<  agentRecoveryTime[17] << "/n";
+
+    for(int i = 0; i < 17; i++){
+        newFile <<  agentIncubationTime[i] << ",";
+    }
+    newFile <<  agentIncubationTime[17] << "/n";
+
+    for(int i = 0; i < 17; i++){
+        newFile <<  agentNeedsHospital[i] << ",";
+    }
+    newFile <<  agentNeedsHospital[17] << "/n";
+
+    for(int i = 0; i < 17; i++){
+        newFile <<  agentDeathChance[i] << ",";
+    }
+    newFile <<  agentDeathChance[17] << "/n";
+
+    for(int i = 0; i < 17; i++){
+        newFile <<  agentChanceOfICU[i] << ",";
+    }
+    newFile <<  agentChanceOfICU[17] << "/n";
+
+    for(int i = 0; i < 18; i++){
+        for(int j = 0; j < 2; j++){
+            for(int k = 0; k < 6; k++){
+                newFile << agentChanceOfMovment[i][j][k][0] << ",";
+                newFile << agentChanceOfMovment[i][j][k][1] << ",";
+                newFile << agentChanceOfMovment[i][j][k][2] << ",";
+                newFile << agentChanceOfMovment[i][j][k][3] << ",";
+                newFile << agentChanceOfMovment[i][j][k][4] << ",";
+                newFile << agentChanceOfMovment[i][j][k][5] << ",";
+                newFile << agentChanceOfMovment[i][j][k][6] << ",";
+                newFile << agentChanceOfMovment[i][j][k][7] << ",";
+                newFile << agentChanceOfMovment[i][j][k][8] << "\n";
+            }
+        }
+    }
     newFile.close();
     return 0;
 }
@@ -490,6 +532,7 @@ void Simulation::setPresets(int preset){
             setAnarchyPreset();
             break;
         case 2:
+            setInformedPopulation();
             break;
         case 3:
             setConspiracyPopulation();
@@ -524,11 +567,11 @@ void Simulation::setRealWorldPreset(){
     setAgentMitagationChance(1, 4, .8);
 
     //10 to 14
-    setAgentMitagationChance(2, 0, .7);
+    setAgentMitagationChance(2, 0, .8);
     setAgentMitagationChance(2, 1, .8);
-    setAgentMitagationChance(2, 2, .7);
-    setAgentMitagationChance(2, 3, .7);
-    setAgentMitagationChance(2, 4, .8);
+    setAgentMitagationChance(2, 2, .8);
+    setAgentMitagationChance(2, 3, .8);
+    setAgentMitagationChance(2, 4, .9);
 
     //15 to 19
     setAgentMitagationChance(3, 0, .6);
@@ -539,10 +582,10 @@ void Simulation::setRealWorldPreset(){
 
     //25 to 85+, because pretty much every adult/senoir should be following these rules
     for(int i = 4; i < 18; i++){
-        setAgentMitagationChance(i, 0, .7);
+        setAgentMitagationChance(i, 0, .8);
         setAgentMitagationChance(i, 1, .8);
-        setAgentMitagationChance(i, 2, .6);
-        setAgentMitagationChance(i, 3, .6);
+        setAgentMitagationChance(i, 2, .75);
+        setAgentMitagationChance(i, 3, .75);
         setAgentMitagationChance(i, 4, .9);
     }
 
@@ -714,10 +757,10 @@ void Simulation::setDefaultLocationRisks(){
 
 void Simulation::setDefaultMitagationEffectivness(){
     setMitagationEffectivness(0, .95);
-    setMitagationEffectivness(1, .85);
-    setMitagationEffectivness(2, .8);
+    setMitagationEffectivness(1, .95);
+    setMitagationEffectivness(2, .95);
     setMitagationEffectivness(3, .99);
-    setMitagationEffectivness(4, .95);
+    setMitagationEffectivness(4, .99);
 }
 
 void Simulation::setDefaultHospitalData(){

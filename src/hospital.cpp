@@ -67,7 +67,7 @@ void Hospital::increaseIcuCount(Agent* agentToAdd) {
     indicateOverflow(); 
 }
 
-void Hospital::HospitalTimeStep(double timestep, short agentRecoveryTime[18], double agentDeathChance[18], double agentChanceOfICU[18]) {
+void Hospital::HospitalTimeStep(double timestep, int agentRecoveryTime[18], double agentDeathChance[18], double agentChanceOfICU[18]) {
     //loop through all the beds in the icu
     string sirResponse;
     Agent *currAgent;
@@ -94,6 +94,7 @@ void Hospital::HospitalTimeStep(double timestep, short agentRecoveryTime[18], do
         //if agent stays put
         } else {
             currAgent->timeInHospital++;
+            currAgent->timeInfected++;
         }
     }
 
@@ -120,6 +121,7 @@ void Hospital::HospitalTimeStep(double timestep, short agentRecoveryTime[18], do
             numberPpl--;
         } else {
             currAgent->timeInHospital++;
+            currAgent->timeInfected++;
         }
     }
 }
