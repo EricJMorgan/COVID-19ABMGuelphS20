@@ -39,7 +39,7 @@ Simulation::Simulation(string fileName) {
     sirTimeStep = (double)timeStep / 24.0;
     timeElapsed = 0;
     currDay = MON;
-    initiallyInfectedChance = 0.00015;
+    initiallyInfectedChance = 0.00035;
     initiallyInfected = 0;
 
     //modular value setters
