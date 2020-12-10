@@ -164,17 +164,6 @@ hospitalT = sim.hospitalTotal()
 icuC = sim.ICUCurrent()
 icuT = sim.ICUtotal()
 
-print("ICU chance - 3: ", sim.getAgentChanceOfICU(3))
-sim.setAgentChanceOfICU(3,.63)
-
-print("Incubation time - 3", sim.getAgentIncubationTime(3))
-print("location risk - 3: ", sim.getLocationRisk(3))
-print("agent recovery time - 4: ", sim.getAgentRecoveryTime(4))
-
-print("agent needs hospital - 3: ", sim.getAgentNeedsHospital(3))
-print("mitigationEffectiveness - 0: ", sim.getMitagationEffectivness(0))
-
-
 
 #Hospital and ICU variables
 totalBedCount = 130
