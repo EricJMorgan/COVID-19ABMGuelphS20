@@ -234,7 +234,8 @@ bool Agent::randomAgentNeedsHospital(double agentNeedsHospital[18]){
 
 void Agent::agentIncubationCheck(int agentIncubationTime[18]){
     //this is multiplied by the currTime step because this time will increment every time step instead of every day
-    if((timeIncubating * 6) < ((int)agentIncubationTime[getAgentAgeGroup()])){
+    if((timeIncubating) > ((int)agentIncubationTime[getAgentAgeGroup()] * 6)){
+        //cout << "Inc time: " << timeIncubating << "    AgentInctTimeForAge: " << (int)agentIncubationTime[getAgentAgeGroup()] * 6 << "\n";
         timeIncubating = 0;
         infectAgent();
     }else{
@@ -243,7 +244,7 @@ void Agent::agentIncubationCheck(int agentIncubationTime[18]){
 }
 
 void Agent::agentInfectedCheck(int agentRecoveryTime[18]){
-    if((timeInfected * 6) < ((int)agentRecoveryTime[getAgentAgeGroup()])){
+    if((timeInfected) > ((int)agentRecoveryTime[getAgentAgeGroup()] * 6)){
         timeInfected = 0;
         recoverAgent();
     }else{
