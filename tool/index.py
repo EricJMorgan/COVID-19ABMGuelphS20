@@ -312,7 +312,7 @@ list_elements = ['Q_slider', 'SD_slider', 'MC_slider', 'HM_slider', 'gs_slider',
                 't_slider', 'sch_slider', 'pnr_slider', 'serv_slider',
                 'ent_slider', 'health_slider', 'poworship_slider', 'res_slider',
                 'dc_slider', 'recov_slider','socialDis_slider','maskUse_slider',
-                'hygieneUse_slider','isolationRate_slider','incubation_slider']
+                'hygieneUse_slider','isolationRate_slider','vaccineUse_slider','incubation_slider']
 
 
  # Function to get slider values for a given age range
@@ -435,13 +435,6 @@ def update_output_death(value):
 def update_output_recovery(value):
     return '{}'.format(value)
 
- # Incubation Period Slider (Age Specific)
-@app.callback(
-    Output(list_elements[19]+'_value', 'children'),
-    [Input(list_elements[19], 'value')])
-def update_output_incubation(value):
-    return '{}'.format(value)
-
 # Social Distancing Use Age Specific Slider
 @app.callback(
     Output(list_elements[15]+'_value', 'children'),
@@ -470,6 +463,20 @@ def update_output_hygiene_use(value):
 def update_output_isolation_use(value):
     return '{}'.format(value)
 
+# Vaccine Age specific Slider
+@app.callback(
+    Output(list_elements[19]+'_value', 'children'),
+    [Input(list_elements[19], 'value')])
+def update_output_vaccine_use(value):
+    return '{}'.format(value)
+
+# Incubation Period Slider (Age Specific)
+@app.callback(
+    Output(list_elements[20]+'_value', 'children'),
+    [Input(list_elements[20], 'value')])
+def update_output_incubation(value):
+    return '{}'.format(value)
+
 
 # Function to update age-specific values in the simulation
 @app.callback(
@@ -482,8 +489,9 @@ def update_output_isolation_use(value):
     State('socialDis_slider', 'value'),
     State('maskUse_slider', 'value'),
     State('hygieneUse_slider', 'value'),
-    State('isolationRate_slider', 'value')])
-def update_ageSpecificValues(n_clicks, age_range, deathChance, recov, incubation, socialDis, maskUse, hygiene, isolation):
+    State('isolationRate_slider', 'value'),
+    State('vaccineUse_slider', 'value')])
+def update_ageSpecificValues(n_clicks, age_range, deathChance, recov, incubation, socialDis, maskUse, hygiene, isolation, vaccine):
     if(n_clicks == 0 or age_range == None):
         return 'Please select an age range to apply settings.'
     
@@ -495,6 +503,7 @@ def update_ageSpecificValues(n_clicks, age_range, deathChance, recov, incubation
     sim.setAgentMitagationChance(age_range, 1, maskUse)
     sim.setAgentMitagationChance(age_range, 2, hygiene)
     sim.setAgentMitagationChance(age_range, 3, isolation)
+    sim.setAgentMitagationChance(age_range, 4, vaccine)
 
     return 'Values for the age range have been updated.'
 
