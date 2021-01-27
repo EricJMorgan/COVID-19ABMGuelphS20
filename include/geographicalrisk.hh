@@ -91,7 +91,7 @@ class GeographicalRisk {
 
     void updateAvgCountsAndRisk(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
-    
+    double calculateDensityRisk(double locationRisk[10]);
 };
 
 #endif
