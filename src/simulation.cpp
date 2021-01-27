@@ -116,12 +116,21 @@ int Simulation::getPopulation(){
 void Simulation::simulateTimeStep(){
     cout << "infected total in timestep: " << getInfectedTotal() << "\n";
     
+    /* This section of codes updates the status 
+       of agents that are currently in the hospital 
+    */
+
     // hospital timestep method calls
     guelphHospital.HospitalTimeStep(sirTimeStep, agentRecoveryTime, agentDeathChance, agentChanceOfICU);
     deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
     guelphHospital.newlyDeceased.clear();
     recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());//TODO distibute recoverd Agents into locations
     guelphHospital.newlyRecovered.clear();
+
+
+    /* This section of code updates the status 
+       of agents that are in isolation 
+    */
 
     // isolation compartment timestep method calls
     isoCompartment.SimulateIsoTimeStep(sirTimeStep, agentRecoveryTime, agentNeedsHospital);
@@ -131,6 +140,18 @@ void Simulation::simulateTimeStep(){
         guelphHospital.increaseHospitalCount(isoCompartment.newlyHospitalized[i]);
     }
     isoCompartment.newlyHospitalized.clear();
+
+
+    /* Each location will be checked to see if agents need to be moved into the hospital
+        This is currently done in the following process:
+        1. Loop through each location
+        2. For reach location get the number of infected agents
+        3. For each infected agent at that location we check and see if the agent needs to go to the hospital
+        4. If the agent does need to go to the hospital they are removed from the infected list and placed in the hospital list
+        5. Once all infected agents are checked for hospital status we then check and see if each agent needs a status update
+            5.1) It is checked if each agent has been in incubation long enough to now be infected
+            5.2) Then if the agent has been infected long enough to now recover
+    */
 
     Location *locationHolder;
     //gets each location and steps their time then checks if each agent will need the hospital
@@ -160,7 +181,9 @@ void Simulation::simulateTimeStep(){
         }
     }
     
-    // transport agents from location to location
+    /* Finally we check to see if the agents are going to move from
+       one location to another during the timestep.
+    */
     newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay, agentChanceOfMovment, agentMitagationChance, mitagationEffectivness, locationRisks);
 
     cout << "newly infected: " << newlyInfected << "\n";
