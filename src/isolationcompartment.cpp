@@ -34,7 +34,7 @@ void IsolationCompartment::AddMildlyInfectedAgents(Agent *toIsolate) {
     isolated.push_back(toIsolate);
 }
 
-void IsolationCompartment::SimulateIsoTimeStep (double timeStep, int agentRecoveryTime[18], double agentNeedsHospital[18]) {
+void IsolationCompartment::SimulateIsoTimeStep(double timeStep, int agentRecoveryTime[18], double agentNeedsHospital[18]) {
     //loops through the isolated agent list
     Agent* currAgent;
     int agentAgeGroup;
