@@ -159,12 +159,20 @@ void Simulation::simulateTimeStep(){
         //locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);//TODO this is usless atm but may be needed later
         locationHolder = locationInfo->getLocationAt(i);
 
+        // loop through all agents at a given location
         for(int j = 0; j < locationHolder->getInfectedSize(); j++){
-            if(locationHolder->getInfectedAgentAt(j)->randomAgentNeedsHospital(agentNeedsHospital)){
-                guelphHospital.increaseHospitalCount(locationHolder->getInfectedAgentAt(j));
-                locationHolder->removeInfectedAgent(j);//TODO this might skip over other agents
-                j--;
-                continue;
+
+            //check to see if every single infected agent who has not yet completed a agentHopsitalRoll needs to go to the hospital
+            if(locationHolder->getInfectedAgentAt(j)->getAgentHospitalRoll() == -1){
+                if(locationHolder->getInfectedAgentAt(j)->randomAgentNeedsHospital(agentNeedsHospital)){
+                    locationHolder->getInfectedAgentAt(j)->setAgentHospitalRoll(1); // TODO: DEFAULT VALUE OF 1 SET, this should be the number of timesteps until hospital 
+                    
+                    // TODO Currently all infected agents are moved to the hospital immediately, this needs to be updated to insertion over time
+                    guelphHospital.increaseHospitalCount(locationHolder->getInfectedAgentAt(j));
+                    locationHolder->removeInfectedAgent(j);//TODO this might skip over other agents
+                    j--;
+                    continue;
+                }
             }
             
             if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INCUBATION){
@@ -806,14 +814,14 @@ void Simulation::setDefaultHospitalData(){
     setAgentChanceOfICU(2, .01);
     setAgentDeathChance(2, .001);
     setAgentIncubationTime(2, 8);
-    setAgentNeedsHospital(2, .1);
+    setAgentNeedsHospital(2, .01);
 
     //15 to 19
     setAgentRecoveryTime(3, 7);
     setAgentChanceOfICU(3, .01);
     setAgentDeathChance(3, .01);
     setAgentIncubationTime(3, 10);
-    setAgentNeedsHospital(3, .11);
+    setAgentNeedsHospital(3, .01);
 
     //20 to 44
     for(int i = 4; i < 9; i++){
@@ -821,7 +829,7 @@ void Simulation::setDefaultHospitalData(){
         setAgentChanceOfICU(i, .15);
         setAgentDeathChance(i, .01);
         setAgentIncubationTime(i, 10);
-        setAgentNeedsHospital(i, .11);
+        setAgentNeedsHospital(i, .03);
     }
 
     //45 to 64
@@ -830,16 +838,16 @@ void Simulation::setDefaultHospitalData(){
         setAgentChanceOfICU(i, .25);
         setAgentDeathChance(i, .04);
         setAgentIncubationTime(i, 10);
-        setAgentNeedsHospital(i, .15);
+        setAgentNeedsHospital(i, .08);
     }
 
     //65 to 85+
     for(int i = 13; i < 18; i++){
         setAgentRecoveryTime(i, 14);
-        setAgentChanceOfICU(i, .40);
+        setAgentChanceOfICU(i, .25);
         setAgentDeathChance(i, .15);
-        setAgentIncubationTime(i, 17);
-        setAgentNeedsHospital(i, .5);
+        setAgentIncubationTime(i, 10);
+        setAgentNeedsHospital(i, .10);
     }
 
     cout << "in function: " << getAgentIncubationTime(3) << "\n";

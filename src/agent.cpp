@@ -19,6 +19,8 @@ Agent::Agent(AgentInfo agentInfo) {
     hasMoved = false;
     wearingMask = false;
     agentHygiene = false;
+    agentICURoll = -1;
+    agentDeathRoll = -1;
 
     DecideEthnicity();
     DecideMartialStatus();
@@ -26,6 +28,7 @@ Agent::Agent(AgentInfo agentInfo) {
     DecideEducation();
     setEducationIndex(-1);
     setResidentialIndex(-1);
+    setAgentHospitalRoll(-1);
 }
 
 AgentInfo Agent::getAgentInfo(){
@@ -59,6 +62,15 @@ void Agent::setResidentialIndex(int index){
 
 int Agent::getResidentialIndex(){
     return residentialIndex;
+}
+
+void Agent::setAgentHospitalRoll(short rollValue){
+    agentHospitalRoll = rollValue;
+}
+
+short Agent::getAgentHospitalRoll(){
+    cout << agentHospitalRoll << "\n";
+    return agentHospitalRoll;
 }
 
 
@@ -229,6 +241,7 @@ int Agent::getAgentAgeGroup() {
 }
 
 bool Agent::randomAgentNeedsHospital(double agentNeedsHospital[18]){
+    cout << "AgentHospitalChance: " << agentNeedsHospital[getAgentAgeGroup()] << "\n";
     return agentNeedsHospital[getAgentAgeGroup()] >= ((double) rand() / (RAND_MAX)) && (getSeverity() != INCUBATION);
 }
 

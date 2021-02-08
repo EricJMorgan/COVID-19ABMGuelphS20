@@ -109,7 +109,7 @@ class Agent : public SIR {
     /**
      * setHasMoved
      * 
-     * This sets the agents hasMoved varible
+     * This sets the agents hasMoved variable
      * 
      * @param newMove true if the agent has moved this cycle false if they have not
      */
@@ -118,11 +118,30 @@ class Agent : public SIR {
     /**
      * getHasMoved
      * 
-     * This gets the hasMoved varible for the agent
+     * This gets the hasMoved variable for the agent
      * 
      * @return if the agent has moved in the current cycle
      */
     bool getHasMoved();
+
+    /**
+     * setAgentHospitalRoll
+     * 
+     * This sets the agentHospitalRoll variable
+     * 
+     * @param rollResult 0 if agent will not need hospital, positive integer if not
+     */
+    void setAgentHospitalRoll(short rollResult);
+
+    /**
+     * getAgentHospitalRoll
+     * 
+     * This gets the agentHospitalRoll variable from the agent
+     * 
+     * @return the agents hospital roll value, -1 default value if no roll has occured for the agent
+     */
+    short getAgentHospitalRoll();
+
 
     
     /**
@@ -235,6 +254,14 @@ class Agent : public SIR {
     bool hasMoved;
     int educationIndex;
     int residentialIndex;
+
+    /* variables to store roll status when checking if agent needs hospital / ICU / death
+       Stores as a short integer value, -1 = no roll has been completed, 0 = agent does not need to move
+       value > 0 indicates timestep < recovery time in which agent will move to given stage
+    */
+    short agentHospitalRoll;
+    short agentICURoll;
+    short agentDeathRoll;
 
     /**
      * DecideEthnicity

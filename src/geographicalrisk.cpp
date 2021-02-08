@@ -34,9 +34,9 @@ void GeographicalRisk::updateAvgCountsAndRisk(double agentChanceOfMitigation[18]
 double GeographicalRisk::calculateDensityRisk(double locationRisk[10]){
     // Account for the total population as well as the infected population at a location
     // to perform an analysis of what the risk of running into an infected person is
-    cout << "Susceptible count: " << (int)susceptible.size() << "   ";
-    cout << "Infected count: " << (int)infected.size() << "\n";
-    double denRisk = (int)infected.size() / ((int)susceptible.size());
+    //cout << "Susceptible count: " << (int)susceptible.size() << "   ";
+    //cout << "Infected count: " << (int)infected.size() << "\n";
+    double denRisk = (int)infected.size() / ((int)susceptible.size() * 0.30);
     
     // This needs to look at the location type as well to determine the odds of even having contact with people in the first place
 
