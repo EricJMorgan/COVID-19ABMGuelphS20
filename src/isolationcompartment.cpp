@@ -50,7 +50,7 @@ void IsolationCompartment::SimulateIsoTimeStep(double timeStep, int agentRecover
                 isolated.erase(isolated.begin() + i);
                 newlyHospitalized.push_back(currAgent);
             }
-        } else if (currAgent->timeInfected > agentRecoveryTime[agentAgeGroup]) { // if the agent doesn't need to go to the hospital we will check if they are no longer infected
+        } else if (currAgent->timeInfected > agentRecoveryTime[agentAgeGroup] * 6) { // if the agent doesn't need to go to the hospital we will check if they are no longer infected
             currAgent->timeInfected = 0;
             currAgent->recoverAgent();
             isolated.erase(isolated.begin() + i);
