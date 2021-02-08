@@ -142,7 +142,23 @@ class Agent : public SIR {
      */
     short getAgentHospitalRoll();
 
+/**
+     * setAgentDeathRoll
+     * 
+     * This sets the agentDeathRoll variable
+     * 
+     * @param rollResult 0 if agent will not die, positive integer if not
+     */
+    void setAgentDeathRoll(short rollResult);
 
+    /**
+     * getAgentDeathRoll
+     * 
+     * This gets the agentDeathRoll variable from the agent
+     * 
+     * @return the agents death roll value, -1 default value if no roll has occured for the agent
+     */
+    short getAgentDeathRoll();
     
     /**
      * decideMitigationStrategy

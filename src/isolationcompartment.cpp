@@ -49,6 +49,9 @@ void IsolationCompartment::SimulateIsoTimeStep(double timeStep, int agentRecover
                 currAgent->timeInfected++;
                 isolated.erase(isolated.begin() + i);
                 newlyHospitalized.push_back(currAgent);
+            }else{
+                // if the roll fails then the agent will not be going to the hospital during the simulation
+                currAgent->setAgentHospitalRoll(0);
             }
         } else if (currAgent->timeInfected > (agentRecoveryTime[agentAgeGroup] * 6)) { // if the agent doesn't need to go to the hospital we will check if they are no longer infected
             currAgent->timeInfected = 0;

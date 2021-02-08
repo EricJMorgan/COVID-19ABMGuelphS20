@@ -162,25 +162,30 @@ void Simulation::simulateTimeStep(){
         // loop through all agents at a given location
         for(int j = 0; j < locationHolder->getInfectedSize(); j++){
 
-            //check to see if every single infected agent who has not yet completed a agentHopsitalRoll needs to go to the hospital
-            if(locationHolder->getInfectedAgentAt(j)->getAgentHospitalRoll() == -1){
-                if(locationHolder->getInfectedAgentAt(j)->randomAgentNeedsHospital(agentNeedsHospital)){
-                    locationHolder->getInfectedAgentAt(j)->setAgentHospitalRoll(1); // TODO: DEFAULT VALUE OF 1 SET, this should be the number of timesteps until hospital 
-                    
-                    // TODO Currently all infected agents are moved to the hospital immediately, this needs to be updated to insertion over time
-                    guelphHospital.increaseHospitalCount(locationHolder->getInfectedAgentAt(j));
-                    locationHolder->removeInfectedAgent(j);//TODO this might skip over other agents
-                    j--;
-                    continue;
-                }
-            }
-            
             if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INCUBATION){
                 //check if agent is past incubation time and into infected time
                 locationHolder->getInfectedAgentAt(j)->agentIncubationCheck(agentIncubationTime);
+
             }else if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INFECTED){
+                //check to see if every single infected agent who has not yet completed a agentHopsitalRoll needs to go to the hospital
+                if(locationHolder->getInfectedAgentAt(j)->getAgentHospitalRoll() == -1){
+                    if(locationHolder->getInfectedAgentAt(j)->randomAgentNeedsHospital(agentNeedsHospital)){
+                        locationHolder->getInfectedAgentAt(j)->setAgentHospitalRoll(1); // TODO: DEFAULT VALUE OF 1 SET, this should be the number of timesteps until hospital 
+                        
+                        // TODO Currently all infected agents are moved to the hospital immediately, this needs to be updated to insertion over time
+                        guelphHospital.increaseHospitalCount(locationHolder->getInfectedAgentAt(j));
+                        locationHolder->removeInfectedAgent(j);//TODO this might skip over other agents
+                        j--;
+                        continue;
+                    }else{
+                        // if the roll fails then the agent will not be going to the hospital during the simulation
+                        locationHolder->getInfectedAgentAt(j)->setAgentHospitalRoll(0);
+                    }
+                }
+
                 //check if agent is past infected time and into recoverd time
                 locationHolder->getInfectedAgentAt(j)->agentInfectedCheck(agentRecoveryTime);
+
                 //if agent is recoverd we have to move them into the infected list
                 if(locationHolder->getInfectedAgentAt(j)->getSeverity() == RECOVERED){
                     recoveredAgents.insert( recoveredAgents.end(), locationHolder->removeInfectedAgent(j));//TODO this could be an issue
@@ -229,6 +234,12 @@ void Simulation::simulateTimeStep(){
 
     //increase time at end of day
     stepTime();
+}
+
+void Simulation::simDayTimeStep(){
+    for(int i = 0; i < 6; i++){
+        simulateTimeStep();
+    }
 }
 
 Agent *Simulation::getAgentAt(int index){
@@ -481,12 +492,6 @@ int Simulation::getAgentIncubationTime(int ageGroup){
     if(ageGroup < 0 || ageGroup > 17) return -1;
 
     return agentIncubationTime[ageGroup];
-}
-
-void Simulation::simDayTimeStep(){
-    for(int i = 0; i < 6; i++){
-        simulateTimeStep();
-    }
 }
 
 int Simulation::saveCurrentPreset(string fileName){

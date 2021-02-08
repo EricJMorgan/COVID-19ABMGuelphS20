@@ -20,7 +20,6 @@ Agent::Agent(AgentInfo agentInfo) {
     wearingMask = false;
     agentHygiene = false;
     agentICURoll = -1;
-    agentDeathRoll = -1;
 
     DecideEthnicity();
     DecideMartialStatus();
@@ -29,6 +28,7 @@ Agent::Agent(AgentInfo agentInfo) {
     setEducationIndex(-1);
     setResidentialIndex(-1);
     setAgentHospitalRoll(-1);
+    setAgentDeathRoll(-1);
 }
 
 AgentInfo Agent::getAgentInfo(){
@@ -69,10 +69,16 @@ void Agent::setAgentHospitalRoll(short rollValue){
 }
 
 short Agent::getAgentHospitalRoll(){
-    cout << agentHospitalRoll << "\n";
     return agentHospitalRoll;
 }
 
+void Agent::setAgentDeathRoll(short rollValue){
+    agentDeathRoll = rollValue;
+}
+
+short Agent::getAgentDeathRoll(){
+    return agentDeathRoll;
+}
 
 void Agent::DecideEducation() {
     //if agents are younger than 20 they will not have a formal education yet
@@ -241,8 +247,12 @@ int Agent::getAgentAgeGroup() {
 }
 
 bool Agent::randomAgentNeedsHospital(double agentNeedsHospital[18]){
-    cout << "AgentHospitalChance: " << agentNeedsHospital[getAgentAgeGroup()] << "\n";
-    return agentNeedsHospital[getAgentAgeGroup()] >= ((double) rand() / (RAND_MAX)) && (getSeverity() != INCUBATION);
+    //cout << "AgentHospitalChance: " << agentNeedsHospital[getAgentAgeGroup()] << "\n";
+    double compVal = ((double) rand() / (RAND_MAX));
+    if(agentNeedsHospital[getAgentAgeGroup()] >= compVal){
+        cout << "Agent Should be going to hospital \n";
+    }
+    return agentNeedsHospital[getAgentAgeGroup()] >= compVal;
 }
 
 void Agent::agentIncubationCheck(int agentIncubationTime[18]){
