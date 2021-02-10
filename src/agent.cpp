@@ -19,7 +19,6 @@ Agent::Agent(AgentInfo agentInfo) {
     hasMoved = false;
     wearingMask = false;
     agentHygiene = false;
-    agentICURoll = -1;
 
     DecideEthnicity();
     DecideMartialStatus();
@@ -28,6 +27,7 @@ Agent::Agent(AgentInfo agentInfo) {
     setEducationIndex(-1);
     setResidentialIndex(-1);
     setAgentHospitalRoll(-1);
+    setAgentICURoll(-1);
     setAgentDeathRoll(-1);
 }
 
@@ -70,6 +70,14 @@ void Agent::setAgentHospitalRoll(short rollValue){
 
 short Agent::getAgentHospitalRoll(){
     return agentHospitalRoll;
+}
+
+void Agent::setAgentICURoll(short rollValue){
+    agentICURoll = rollValue;
+}
+
+short Agent::getAgentICURoll(){
+    return agentICURoll;
 }
 
 void Agent::setAgentDeathRoll(short rollValue){

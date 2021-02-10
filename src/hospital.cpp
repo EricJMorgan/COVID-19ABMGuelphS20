@@ -77,19 +77,26 @@ void Hospital::HospitalTimeStep(double timestep, int agentRecoveryTime[18], doub
         currAgent = hospitalICU[i];
         agentAgeGroup = currAgent->getAgentAgeGroup();
 
+        // check to see if the agent has completed a death roll yet, and if not roll
+        if (currAgent->getAgentDeathRoll() == -1){
+            if (agentDeathChance[agentAgeGroup] >= ((double) rand() / (RAND_MAX))) {
+                currAgent->setAgentDeathRoll(1);
+                hospitalICU.erase(hospitalICU.begin() + i);
+                currAgent->killAgent();
+                currAgent->timeInHospital = 0;
+                newlyDeceased.push_back(currAgent);
+                icuCount--;
+            }else{
+                currAgent->setAgentDeathRoll(0); // agent will not die while in the ICU
+            }
+        }
+
         //if agent is finished the recovery time. Multiplied by 6 because it is incremented everytime step not every day
         if (currAgent->timeInHospital > (agentRecoveryTime[agentAgeGroup] * 6)) {
             hospitalICU.erase(hospitalICU.begin() + i);
             currAgent->recoverAgent();
             currAgent->timeInHospital = 0;
             newlyRecovered.push_back(currAgent);
-            icuCount--;
-        //if agent rolls within range of the death chance
-        } else if (agentDeathChance[agentAgeGroup] >= ((double) rand() / (RAND_MAX))) {
-            hospitalICU.erase(hospitalICU.begin() + i);
-            currAgent->killAgent();
-            currAgent->timeInHospital = 0;
-            newlyDeceased.push_back(currAgent);
             icuCount--;
         //if agent stays put
         } else {
@@ -104,16 +111,25 @@ void Hospital::HospitalTimeStep(double timestep, int agentRecoveryTime[18], doub
         currAgent = hospitalGeneralWard[i];
         agentAgeGroup = currAgent->getAgentAgeGroup();
 
-        //if agent rolls to go to the hospital
-        if (agentChanceOfICU[agentAgeGroup] >= ((double) rand() / (RAND_MAX))) {
-            hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
-            currAgent->ICUAgent();
-            currAgent->timeInHospital++;
-            hospitalICU.push_back(currAgent);
-            icuCount++;
-            totalICU++;
-            numberPpl--;
-        } else if (currAgent->timeInHospital > agentRecoveryTime[agentAgeGroup]) {
+        // check to see if the agent has already completed a ICU chance roll
+        if (currAgent->getAgentICURoll() == -1){
+            // if agent rolls to go to the hospital
+            if (agentChanceOfICU[agentAgeGroup] >= ((double) rand() / (RAND_MAX))) {
+                currAgent->setAgentICURoll(1);
+                hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
+                currAgent->ICUAgent();
+                currAgent->timeInHospital++;
+                hospitalICU.push_back(currAgent);
+                icuCount++;
+                totalICU++;
+                numberPpl--;
+            } else {
+                currAgent->setAgentICURoll(0);
+            }
+        }
+        
+        // check and see if the agent has recovered
+        if (currAgent->timeInHospital > agentRecoveryTime[agentAgeGroup]) {
             hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
             currAgent->recoverAgent();
             currAgent->timeInHospital = 0;

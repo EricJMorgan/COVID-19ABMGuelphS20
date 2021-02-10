@@ -142,7 +142,25 @@ class Agent : public SIR {
      */
     short getAgentHospitalRoll();
 
-/**
+    /**
+     * setAgentICURoll
+     * 
+     * This sets the agentICURoll variable
+     * 
+     * @param rollResult 0 if agent does not need ICU care, positive integer if not
+     */
+    void setAgentICURoll(short rollResult);
+
+    /**
+     * getAgentICURoll
+     * 
+     * This gets the agentICURoll variable from the agent
+     * 
+     * @return the agents ICU roll value, -1 default value if no roll has occured for the agent
+     */
+    short getAgentICURoll();
+
+    /**
      * setAgentDeathRoll
      * 
      * This sets the agentDeathRoll variable

@@ -471,8 +471,6 @@ void Simulation::setAgentChanceOfICU(int ageGroup, double value){
     if(value < 0 || value > 1) return;
 
     agentChanceOfICU[ageGroup] = value;
-    cout << "Setting incubation time to: " << agentChanceOfICU[ageGroup] <<":" << value << "\n";
-
 }
 
 double Simulation::getAgentChanceOfICU(int ageGroup){
@@ -485,7 +483,6 @@ void Simulation::setAgentIncubationTime(int ageGroup, int value){
     if(ageGroup < 0 || ageGroup > 17) return;
 
     agentIncubationTime[ageGroup] = value;
-    cout << "Setting incubation time to: " << agentIncubationTime[ageGroup] <<":" << value << "\n";
 }
 
 int Simulation::getAgentIncubationTime(int ageGroup){
