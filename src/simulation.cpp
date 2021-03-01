@@ -114,7 +114,6 @@ int Simulation::getPopulation(){
 
 //This is where all the methods to update data are called for each 4 hour interval
 void Simulation::simulateTimeStep(){
-    cout << "infected total in timestep: " << getInfectedTotal() << "\n";
     
     /* This section of codes updates the status 
        of agents that are currently in the hospital 
@@ -186,13 +185,12 @@ void Simulation::simulateTimeStep(){
                 //check if agent is past infected time and into recoverd time
                 locationHolder->getInfectedAgentAt(j)->agentInfectedCheck(agentRecoveryTime);
 
-                //if agent is recoverd we have to move them into the infected list
-                if(locationHolder->getInfectedAgentAt(j)->getSeverity() == RECOVERED){
+            // if agent is recovered we wat to remove them from the infected list               
+            }else if(locationHolder->getInfectedAgentAt(j)->getSeverity() == RECOVERED){
                     recoveredAgents.insert( recoveredAgents.end(), locationHolder->removeInfectedAgent(j));//TODO this could be an issue
                 }
             }
         }
-    }
     
     /* Finally we check to see if the agents are going to move from
        one location to another during the timestep.
@@ -295,7 +293,6 @@ void Simulation::setUpAgents(string filename) {
         split(csvValues, line, boost::is_any_of(","));
     }
 
-    cout << "infected total in C after setUpAgents: " << infectedTotal << "\n";
     demographicFile.close();
 }
 
@@ -334,7 +331,6 @@ int Simulation::getInfectedCurrent() {
 }
 
 int Simulation::getInfectedTotal() {
-    cout << "infected total in C: " << infectedTotal << "\n";
     return infectedTotal;
 }
 
@@ -491,55 +487,64 @@ int Simulation::getAgentIncubationTime(int ageGroup){
     return agentIncubationTime[ageGroup];
 }
 
-int Simulation::saveCurrentPreset(string fileName){
-    ofstream newFile(fileName.append(".csv"));
+int Simulation::saveCurrentPreset(int fileNum){
+
+    ofstream newFile;
+    newFile.open("testFile.csv");
+
+    cout << "successfully opened file \n";
     //add agent mitagation chance to file each row denoting an ageGroup
     for(int i = 0; i < 18; i++){
         for(int j = 0; j < 5; j++){
             newFile << agentMitagationChance[i][j];
             if(j != 4) newFile << ",";
         }
-        newFile << "/n";
+        newFile << "\n";
     }
 
+    newFile << "-Mitigation Effectiveness-\n";
     for(int i = 0; i < 4; i++){
-        newFile << agentMitagationChance[i] << ",";
+        newFile << mitagationEffectivness[i] << ",";
     }
-    newFile << agentMitagationChance[4] << "/n";
+    newFile << mitagationEffectivness[4] << "\n-Location Risks-\n";
 
     for(int i = 0; i < 8; i++){
         newFile << locationRisks[i] << ",";
     }
-    newFile << locationRisks[8] << "/n";
+    newFile << locationRisks[8] << "\n-Agent Recovery Time-\n";
 
     for(int i = 0; i < 17; i++){
         newFile <<  agentRecoveryTime[i] << ",";
     }
-    newFile <<  agentRecoveryTime[17] << "/n";
+    newFile <<  agentRecoveryTime[17] << "\n-Agent Incubation Time-\n";
 
     for(int i = 0; i < 17; i++){
         newFile <<  agentIncubationTime[i] << ",";
     }
-    newFile <<  agentIncubationTime[17] << "/n";
+    newFile <<  agentIncubationTime[17] << "\n-Agent Hospital Chance-\n";
 
     for(int i = 0; i < 17; i++){
         newFile <<  agentNeedsHospital[i] << ",";
     }
-    newFile <<  agentNeedsHospital[17] << "/n";
+    newFile <<  agentNeedsHospital[17] << "\n-Agent Death Chance-\n";
 
     for(int i = 0; i < 17; i++){
         newFile <<  agentDeathChance[i] << ",";
     }
-    newFile <<  agentDeathChance[17] << "/n";
+    newFile <<  agentDeathChance[17] << "\n-Agent ICU Chance-\n";
 
     for(int i = 0; i < 17; i++){
         newFile <<  agentChanceOfICU[i] << ",";
     }
-    newFile <<  agentChanceOfICU[17] << "/n";
+    newFile <<  agentChanceOfICU[17] << "\n-Agent Chance of movement-\n";
 
     for(int i = 0; i < 18; i++){
         for(int j = 0; j < 2; j++){
             for(int k = 0; k < 6; k++){
+                // save the location movement chances for each agent for given age, weekday status, and time of day
+                newFile << i << ",";
+                newFile << j << ",";
+                newFile << k << ",";
                 newFile << agentChanceOfMovment[i][j][k][0] << ",";
                 newFile << agentChanceOfMovment[i][j][k][1] << ",";
                 newFile << agentChanceOfMovment[i][j][k][2] << ",";
@@ -553,7 +558,8 @@ int Simulation::saveCurrentPreset(string fileName){
         }
     }
     newFile.close();
-    return 0;
+    cout << "file writing complete \n";
+    return 5;
 }
 
 void Simulation::setPresets(int preset){
@@ -581,7 +587,6 @@ void Simulation::setPresets(int preset){
             break;
     }
     cout << "Pre-set complete\n";
-    cout << "infected total after preset" << infectedTotal << "\n";
 }
 
 void Simulation::setRealWorldPreset(){

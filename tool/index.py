@@ -51,6 +51,7 @@ ffi.cdef('''
     int getAgentIncubationTime(Simulation *sim, int ageGroup);
     void simDayTimeStep(Simulation *sim);
     void setPresets(Simulation *sim, int preset);
+    int saveCurrentPreset(Simulation *sim, int fileNum);
 ''')
 
 lib = ffi.dlopen('./libProject.so')
@@ -149,6 +150,9 @@ class Simulation(object):
 
     def setPresets(self, preset):
         lib.setPresets(self.obj, preset)
+
+    def saveCurrentPreset(self, fileNum):
+        return lib.saveCurrentPreset(self.obj, fileNum)
 
 #Initialize times and values
 sim = Simulation()
@@ -281,6 +285,16 @@ def disable_button(n_clicks):
         return False
     else:
         return True
+
+#Callback function to save current simulation values to a CSV file
+@app.callback(Output('saveSimSetup', 'disabled'),
+             [Input('saveSimSetup', 'n_clicks')]
+)
+def saveSimulationSetup(n_clicks):
+    if(n_clicks == 0):
+        return
+    presetPrint = sim.saveCurrentPreset(2)
+    print(presetPrint)
 
 #Callback function for the button to loop timestep after first click
 @app.callback(Output('placeholderdiv', 'children'),
@@ -522,7 +536,6 @@ def update_infectedGraph(input_data):
     if (appStart == False):
         return no_update
     else:
-        print("Infected Total in python: ", sim.infectedTotal())
         time.append(element.next_timestep(time[-1]))
         list_outputs[0].append(sim.infectedCurrent())
         list_outputs[1].append(sim.infectedTotal())
