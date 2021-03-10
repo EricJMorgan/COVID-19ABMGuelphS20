@@ -326,7 +326,7 @@ list_elements = ['Q_slider', 'SD_slider', 'MC_slider', 'HM_slider', 'gs_slider',
                 't_slider', 'sch_slider', 'pnr_slider', 'serv_slider',
                 'ent_slider', 'health_slider', 'poworship_slider', 'res_slider',
                 'dc_slider', 'recov_slider','socialDis_slider','maskUse_slider',
-                'hygieneUse_slider','isolationRate_slider','vaccineUse_slider','incubation_slider']
+                'hygieneUse_slider','isolationRate_slider','vaccineUse_slider','incubation_slider', 'Vacc_slider']
 
 
  # Function to get slider values for a given age range
@@ -366,6 +366,13 @@ def update_output_MC(value):
     [Input(list_elements[3], 'value')])
 def update_output_HM(value):
     sim.setMitagationEffectivness(3,value)
+    return '{}'.format(value)
+
+@app.callback(
+    Output(list_elements[21]+'_value', 'children'),
+    [Input(list_elements[21], 'value')])
+def update_output_Vacc(value):
+    sim.setMitagationEffectivness(4,value)
     return '{}'.format(value)
 
 # Location risk sliders
