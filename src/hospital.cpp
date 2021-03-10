@@ -129,7 +129,7 @@ void Hospital::HospitalTimeStep(double timestep, int agentRecoveryTime[18], doub
         }
         
         // check and see if the agent has recovered
-        if (currAgent->timeInHospital > agentRecoveryTime[agentAgeGroup]) {
+        if (currAgent->timeInfected > (agentRecoveryTime[agentAgeGroup] * 6)) {
             hospitalGeneralWard.erase(hospitalGeneralWard.begin() + i);
             currAgent->recoverAgent();
             currAgent->timeInHospital = 0;
