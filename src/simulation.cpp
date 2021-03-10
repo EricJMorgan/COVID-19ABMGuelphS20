@@ -165,7 +165,18 @@ void Simulation::simulateTimeStep(){
                 //check if agent is past incubation time and into infected time
                 locationHolder->getInfectedAgentAt(j)->agentIncubationCheck(agentIncubationTime);
 
+                // check to see if an incubating agent will be entering isolation
+                if( (double)rand() / (double)RAND_MAX > 0.50) {
+                    isoCompartment.AddMildlyInfectedAgents(locationHolder->getInfectedAgentAt(j));
+                    locationHolder->removeInfectedAgent(j);
+                    j--;
+                    continue;
+                }
+
             }else if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INFECTED){
+
+                //check to see if an infected agent will be entering isolation
+
                 //check to see if every single infected agent who has not yet completed a agentHopsitalRoll needs to go to the hospital
                 if(locationHolder->getInfectedAgentAt(j)->getAgentHospitalRoll() == -1){
                     if(locationHolder->getInfectedAgentAt(j)->randomAgentNeedsHospital(agentNeedsHospital)){
@@ -229,6 +240,29 @@ void Simulation::simulateTimeStep(){
     cout << "******************************" << endl;
     cout << endl;
 
+
+
+    //print to log file for each timestep
+    ofstream logFile;
+    logFile.open("Results.txt", std::ios::app);
+
+    logFile << "Time elapsed: " << timeElapsed << " hours, " << daysTotal <<  " days" << endl;
+    logFile << "******************************" << endl;
+    logFile << "New cases " <<  newlyInfected << endl;
+    logFile << "Infected current " << infectedCurrent << endl;
+    logFile << "Infected total " << infectedTotal << endl;
+    logFile << "Deceased total " << deceasedTotal << endl;
+    logFile << "Recovered total " << recoveredTotal << endl;
+    
+    logFile << "Hospital current " << hospitalCurrent << endl;
+    logFile << "Hospital total " << hospitalTotal << endl;
+
+    logFile << "ICU current " << icuCurrent << endl;
+    logFile << "ICU total " << icuTotal << endl;
+    logFile << "******************************" << endl;
+    logFile << endl;
+
+    logFile.close();
 
     //increase time at end of day
     stepTime();
@@ -490,7 +524,7 @@ int Simulation::getAgentIncubationTime(int ageGroup){
 int Simulation::saveCurrentPreset(int fileNum){
 
     ofstream newFile;
-    newFile.open("testFile.csv");
+    newFile.open("simulationValues.csv");
 
     cout << "successfully opened file \n";
     //add agent mitagation chance to file each row denoting an ageGroup
