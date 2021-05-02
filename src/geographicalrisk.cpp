@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 13/10/20
- * ver 1.04
+ * 27/11/20
+ * ver 2.01
  * 
  * This is the class file for the geographical risk class. The main
  * use for this class is to do the math for each area and decide how many 
@@ -15,95 +15,57 @@
 // Constructor
 GeographicalRisk::GeographicalRisk() {
     socialDistancingSeverity = 8;
+}
 
-    //set all agent chances of mitagation too 0
+void GeographicalRisk::updateAvgCountsAndRisk(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]) {
+    //give each age group a infection chance based on chanceOfMitigation[ageGroup] * mitigationEffect. Add all of those together to get a single age groups chance of infection
     for(int i = 0; i < 18; i++){
-        for(int j = 0; j < 4; j++){
-            setAgentMitagationChance(i, j, 0);
+        agentChanceOfInfection[i] = 0;
+        for(int j = 0; j < 5; j++){
+            agentChanceOfInfection[i] += (((1 - agentChanceOfMitigation[i][j]) * (1 - mitigationEffect[j])) * 0.20);  // we multiply by 0.20 get a total of 1.00 weight of all the factors
         }
+        // Factor in the population density at the location
+        agentChanceOfInfection[i] = agentChanceOfInfection[i] * calculateDensityRisk(locationRisk);
     }
 
-    for(int i = 0; i < 4; i++){
-        setMitagationEffectivness(i, 0);
-    }
+    //TODO figure out location priority to add that to risk
 }
 
-void GeographicalRisk::updateAvgCountsAndRisk() {
-    //updates the total counts of the population
-    sirTotalLocation.updateTotals(susceptible, infected);
-    double population = (double)susceptible.size() + (double)infected.size();
+double GeographicalRisk::calculateDensityRisk(double locationRisk[10]){
+    // Account for the total population as well as the infected population at a location
+    // to perform an analysis of what the risk of running into an infected person is
+    //cout << "Susceptible count: " << (int)susceptible.size() << "   ";
+    //cout << "Infected count: " << (int)infected.size() << "\n";
+    double denRisk = (int)infected.size() / ((int)susceptible.size() * 0.30);
+    
+    // This needs to look at the location type as well to determine the odds of even having contact with people in the first place
 
-    if (population == 0) {
-        return;
-    }
+    /*
+    make the assumption that within the school we hve got a 5% chance of collision. for every indiv in the school draw a random unifmrom number
+    if that number < 5% then they collide with the person is infected, assuming somebody is infected
+    */
 
-    // calculate averages in compartment during current timestep
-    avgSymptomaticCarriers = (double)sirTotalLocation.getShowsSymptoms() / population;
-    avgAsymptomatic = ((double)sirTotalLocation.getInfected() - (double)sirTotalLocation.getShowsSymptoms()) / population;
-    avgMaskWearer = (double)sirTotalLocation.getMaskWearer() / population;
-    avgHygiene = (double)sirTotalLocation.getHygiene() / population;
-
-    //symptomatic carries have 100% chance of spreading relatively
-    //social distancing of about 6m greatly decreases chances of risk 
-    double socialDistancing = (10.0 - (double)socialDistancingSeverity) / 100.0;
-
-    // mask cuts risk by 65%, therefore 45% overall risk transmission
-    double avgMaskWearerRisk = 0.45 * avgMaskWearer;
-
-    //asympomatic spread "very rare" WHO (now they saying its not lol gonna jus assume 5%)
-    double avgAsymptomaticRisk = 0.05 * avgAsymptomatic;
-
-    // assume hygiene reduces contact transmission by 20% (need more info)
-    double avgHygieneRisk = 0.2 * avgHygiene;
-
-    // assumed increased chances of covid on a scale of 0 - 1.0 based on business(may be changed at a later date)
-    // GENSTORE 0.6
-    // TRANSPORT 0.8
-    // SCHOOL 0.9
-    // PARKSANDREC 0.2
-    // SERVICES 0.2
-    // ENTERTAINMENT 0.8
-    // HEALTH 0.9
-    // PLACEOFWORSHIP 0.8
-    // RESIDENTIAL 0.5
-
-    double locationRiskTotal = 0.0;
-    int totalBusiness = 0;
-
-    // loop through various business and add to risk
-    for(int k = 0; k < 9; k++){
-        totalBusiness += getLocationCountAt(k);
-        locationRiskTotal += getLocationCountAt(k)*locationRisks[k];
-    }
-
-    if (totalBusiness != 0) {
-        locationRiskTotal = locationRiskTotal / (double)totalBusiness;
-    }
-
-    // weight location based migitation by importance 70% mask, 20% location risk, 10% hygiene
-    double weightedMigitation = avgMaskWearerRisk * 0.7 + avgHygieneRisk * 0.1 + locationRiskTotal * 0.2;
-
-    // update chance of infection based on all factors, importance of factors
-    chanceOfInfection = weightedMigitation * socialDistancing * (avgSymptomaticCarriers + avgAsymptomaticRisk);
+    return denRisk;
 }
 
-int GeographicalRisk::infectPeople() {
-    updateAvgCountsAndRisk();
-    int infectedCount = 0;
-
-    //This loop goes throught and infects people based off of their % chance in a certin area
-    for (int i = 0; i < (int)susceptible.size(); i++) {
-        double agentInfectionChance = (double) rand()/RAND_MAX;
-        if (agentInfectionChance < chanceOfInfection) {
-            susceptible.at(i)->AgentInfected();
+int GeographicalRisk::infectPeople(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]) {
+    updateAvgCountsAndRisk(agentChanceOfMitigation, mitigationEffect, locationRisk);
+    double randomNum;
+    int amountOfInfected = 0;
+    for(int i = 0; i < (int)susceptible.size(); i++){
+        randomNum = ((double) rand() / (RAND_MAX));
+       
+        if(randomNum < agentChanceOfInfection[susceptible.at(i)->getAgentAgeGroup()]){
+            susceptible.at(i)->incubateAgent();
             infected.push_back(susceptible.at(i));
             susceptible.erase(susceptible.begin() + i);
             i--;
-            infectedCount++;
+            amountOfInfected++;
         }
     }
 
-    return infectedCount;
+    return amountOfInfected;
+    
 }
 
 int GeographicalRisk::getLocationCountAt(int index){
@@ -115,43 +77,4 @@ int GeographicalRisk::getLocationCountAt(condenseLocationType index){
     return getLocationCountAt((int)index);
 }
 
-void GeographicalRisk::setAgentMitagationChance(int ageGroup, int strategy, double value){
-    if(ageGroup < 0 || ageGroup > 17) return;
-    if(strategy < 0 || strategy > 3) return;
-    if(value < 0 || value > 1) return;
 
-    agentMitagationChance[ageGroup][strategy] = value;
-} 
-
-void GeographicalRisk::setMitagationEffectivness(int strategy, double value){
-    if(strategy < 0 || strategy > 3) return;
-    if(value < 0 || value > 1) return;
-
-    mitagationEffectivness[strategy] = value;
-}
-
-void GeographicalRisk::setLocationRisk(int location, double value){
-    if(location < 0 || location > 8) return;
-    if(value < 0 || value > 1.0) return;
-
-    locationRisks[location] = value;
-}
-
-double GeographicalRisk::getAgentMitagationChance(int ageGroup, int strategy){
-    if(ageGroup < 0 || ageGroup > 17) return -1;
-    if(strategy < 0 || strategy > 3) return -1;
-
-    return agentMitagationChance[ageGroup][strategy];
-}
-
-double GeographicalRisk::getMitagationEffectivness(int strategy){
-    if(strategy < 0 || strategy > 3) return -1;
-
-    return mitagationEffectivness[strategy];
-}
-
-double GeographicalRisk::getLocationRisk(int location){
-    if(location < 0 || location > 8) return -1;
-
-    return locationRisks[location];
-}

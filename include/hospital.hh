@@ -1,7 +1,7 @@
  /****************
  * COVID-19ABMGuelphS20
- * 13/10/20
- * ver 1.04
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the hospital class. The purpose of
  * this class is to keep track of hopsital statistics. Mainly the amount
@@ -94,7 +94,7 @@ class Hospital {
      * 
      * @param the timestep size
      */
-    void HospitalTimeStep(double timestep);
+    void HospitalTimeStep(double timestep, int agentRecoveryTime[18], double agentDeathChance[18], double agentChanceOfICU[18]);
 
      /**
      * getTotalICUCount
@@ -110,49 +110,7 @@ class Hospital {
      */
     int getTotalHospitalCount();
 
-    /**
-     * setAgentRecoveryTime
-     * 
-     * This will set each age ranges time too recovery from
-     * the given virus. Age ranges are 0 = 0 - 4, 1 = 5 - 9 ...
-     * 
-     * @param int ageRange in range 0 - 17
-     * @param short value in range 0 - 127
-     */
-    void setAgentRecoveryTime(int ageRange, short value);
-
-    /**
-     * getAgentRecoveryTime
-     * 
-     * This will get the given ages time to recover
-     * where ageRange is 0 = 0 -4, 1 = 5 - 9.
-     * 
-     * @param ageRange the age of the wanted recovery time in range 0 - 17.
-     * @return a short of the time it takes for the agent to recover
-     */
-    short getAgentRecoveryTime(int ageRange);
-
-    /**
-     * setAgentDeathChance
-     * 
-     * This will set each age ranges chance too die from
-     * the given virus. Age ranges are 0 = 0 - 4, 1 = 5 - 9...
-     * 
-     * @param int ageRange in range 0 -17
-     * @param double value in range 0 - 1.0
-     */
-    void setAgentDeathChance(int ageRange, double value);
-
-    /**
-     * getAgentDeathChance
-     * 
-     * This will get the given ages chance of death where
-     * ageRange is 0 = 0 - 4, 1 = 5 - 9, etc.
-     * 
-     * @param ageRange the age of the wanted death chance in range 0 - 17.
-     * @return a double of the chance of death
-     */
-    double getAgentDeathChance(int ageRange);
+    
 
     // returns to be read and cleared
     std::vector<Agent *> newlyDeceased;
@@ -168,8 +126,7 @@ class Hospital {
     int totalICU;
     int totalHospital;
 
-    short agentRecoveryTime[18];
-    double agentDeathChance[18];
+    
 
     std::vector<Agent *> hospitalGeneralWard; // Agents admitted to general hospital
     std::vector<Agent *> hospitalICU;         // Agents admitted to ICU

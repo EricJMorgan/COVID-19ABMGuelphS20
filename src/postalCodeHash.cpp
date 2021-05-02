@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.02
+ * 02/11/20
+ * ver 2.00
  * 
  * This is the source code for the postalCodeHash object for the COVID-19 eABM. This class takes in
  * two tsv files and creates a hashtable of locations (grouped by the first 5 digits of the postal code)
@@ -116,6 +116,7 @@ void PostalCodeHash::placePostalInHash(string newPostalCode, string locationName
     int currHashValue;
     bool placed;
     string newGroupedPostalCode;
+    //skip if postal code has parsing error
     if(newPostalCode.compare("unknown") == 0);
     else{
         newGroupedPostalCode = getFirstFiveChars(newPostalCode);

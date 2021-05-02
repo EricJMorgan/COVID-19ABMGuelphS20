@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.00
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the agent class. It contains all of the 
  * info for each individual agent. When a new agent is created it decides its
@@ -109,7 +109,7 @@ class Agent : public SIR {
     /**
      * setHasMoved
      * 
-     * This sets the agents hasMoved varible
+     * This sets the agents hasMoved variable
      * 
      * @param newMove true if the agent has moved this cycle false if they have not
      */
@@ -118,19 +118,74 @@ class Agent : public SIR {
     /**
      * getHasMoved
      * 
-     * This gets the hasMoved varible for the agent
+     * This gets the hasMoved variable for the agent
      * 
      * @return if the agent has moved in the current cycle
      */
     bool getHasMoved();
 
     /**
-     * DecideMigitationStrategy
+     * setAgentHospitalRoll
      * 
-     * Decides the agents chance of wearing a mask and following appropriate hygiene
-     * @param maskWearing chance 
+     * This sets the agentHospitalRoll variable
+     * 
+     * @param rollResult 0 if agent will not need hospital, positive integer if not
      */
-    void DecideMigitationStrategy(double maskWearing, double hygieneMaintain);
+    void setAgentHospitalRoll(short rollResult);
+
+    /**
+     * getAgentHospitalRoll
+     * 
+     * This gets the agentHospitalRoll variable from the agent
+     * 
+     * @return the agents hospital roll value, -1 default value if no roll has occured for the agent
+     */
+    short getAgentHospitalRoll();
+
+    /**
+     * setAgentICURoll
+     * 
+     * This sets the agentICURoll variable
+     * 
+     * @param rollResult 0 if agent does not need ICU care, positive integer if not
+     */
+    void setAgentICURoll(short rollResult);
+
+    /**
+     * getAgentICURoll
+     * 
+     * This gets the agentICURoll variable from the agent
+     * 
+     * @return the agents ICU roll value, -1 default value if no roll has occured for the agent
+     */
+    short getAgentICURoll();
+
+    /**
+     * setAgentDeathRoll
+     * 
+     * This sets the agentDeathRoll variable
+     * 
+     * @param rollResult 0 if agent will not die, positive integer if not
+     */
+    void setAgentDeathRoll(short rollResult);
+
+    /**
+     * getAgentDeathRoll
+     * 
+     * This gets the agentDeathRoll variable from the agent
+     * 
+     * @return the agents death roll value, -1 default value if no roll has occured for the agent
+     */
+    short getAgentDeathRoll();
+    
+    /**
+     * decideMitigationStrategy
+     * 
+     * This takes the agents chanes of each mitagation strategy
+     * 
+     * @param the array of each agents age groups chance of using each mitigation strategy
+     */
+    void decideMitigationStrategy(double mitagationPerAge[18][4]);
 
     /**
      * setEducationIndex
@@ -174,14 +229,51 @@ class Agent : public SIR {
      */
     int getResidentialIndex();
 
+    /**
+     * getAgentAgeGroup
+     * 
+     * gets the agents age group (0 - 17)
+     * 
+     * @return the agents age Group 0 - 17
+     */
+    int getAgentAgeGroup();
+
+    /**
+     * randomAgentNeedsHospital
+     * 
+     * tells the agent if they will need the hostpital
+     * 
+     * @param each agents age groups chance of needing the hospital
+     * @return true if needing the hospital false if not
+     */
+    bool randomAgentNeedsHospital(double agentNeedsHospital[18]);
+
+    /**
+     * agentIncubationCheck
+     * 
+     * checks if the agents incubation period is up and
+     * if they will start showing symptoms
+     * 
+     * @param an array of agent age groups of the time it takes for the virus to incubate
+     */
+    void agentIncubationCheck(int agentIncubationTime[18]);
+
+    void agentInfectedCheck(int agentRecoveryTime[18]);
+
     //To be implemented later
     void quarantineTime();
     void goodHygiene();
     void followWearMask();
     void followSocialDistancing();
-    
-    bool agentHygiene = false;
+
+    //NOTE this is the order that these appear in any array 
     bool wearingMask = false;
+    bool agentHygiene = false;
+    bool socialDistancing = false;
+    bool willIsolate = false;
+    int timeInHospital = 0;
+    int timeIncubating = 0;
+    int timeInfected = 0;
     
     private:
     HouseholdIncome income;
@@ -196,6 +288,14 @@ class Agent : public SIR {
     bool hasMoved;
     int educationIndex;
     int residentialIndex;
+
+    /* variables to store roll status when checking if agent needs hospital / ICU / death
+       Stores as a short integer value, -1 = no roll has been completed, 0 = agent does not need to move
+       value > 0 indicates timestep < recovery time in which agent will move to given stage
+    */
+    short agentHospitalRoll;
+    short agentICURoll;
+    short agentDeathRoll;
 
     /**
      * DecideEthnicity
@@ -228,6 +328,8 @@ class Agent : public SIR {
      * collected from the canadian census
      */
     void DecideEducation();
+
+   
 };
 
 #endif

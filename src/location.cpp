@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.02
+ * 27/11/20
+ * ver 2.02
  * 
  * This is the class file for the location class. This holds the
  * location grouping (The first 5 digits of a postal code), the locations
@@ -140,4 +140,27 @@ void Location::setLocationIndex(int index){
 
 int Location::getLocationIndex(){
     return vectorLocation;
+}
+
+void Location::locationTimeStep(double agentMitagationChance[18][5], double mitagationEffectivness[5], double locationRisks[10]){
+    // if(getInfectedSize() > 0){
+    //     infectPeople(agentMitagationChance, mitagationEffectivness, locationRisks);
+    // }
+
+}
+
+std::vector<int> Location::amountOfAgeGroups(){
+    std::vector<int> holder;
+    for(int i = 0; i < 18; i++)holder.push_back(0);
+
+    //These loops get each age groups population in a given area
+    for(int i = 0; i < getSusceptibleSize(); i++){
+        holder.at(getSusceptibleAgentAt(i)->getAgentAgeGroup())++;
+    }
+
+    for(int i = 0; i < getInfectedSize(); i++){
+         holder.at(getInfectedAgentAt(i)->getAgentAgeGroup())++;
+    }
+
+    return holder;
 }

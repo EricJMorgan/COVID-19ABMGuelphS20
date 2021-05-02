@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.00
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the class file for the agent class. It contains all of the 
  * info for each individual agent. When a new agent is created it decides its
@@ -26,6 +26,9 @@ Agent::Agent(AgentInfo agentInfo) {
     DecideEducation();
     setEducationIndex(-1);
     setResidentialIndex(-1);
+    setAgentHospitalRoll(-1);
+    setAgentICURoll(-1);
+    setAgentDeathRoll(-1);
 }
 
 AgentInfo Agent::getAgentInfo(){
@@ -61,6 +64,29 @@ int Agent::getResidentialIndex(){
     return residentialIndex;
 }
 
+void Agent::setAgentHospitalRoll(short rollValue){
+    agentHospitalRoll = rollValue;
+}
+
+short Agent::getAgentHospitalRoll(){
+    return agentHospitalRoll;
+}
+
+void Agent::setAgentICURoll(short rollValue){
+    agentICURoll = rollValue;
+}
+
+short Agent::getAgentICURoll(){
+    return agentICURoll;
+}
+
+void Agent::setAgentDeathRoll(short rollValue){
+    agentDeathRoll = rollValue;
+}
+
+short Agent::getAgentDeathRoll(){
+    return agentDeathRoll;
+}
 
 void Agent::DecideEducation() {
     //if agents are younger than 20 they will not have a formal education yet
@@ -189,17 +215,22 @@ void Agent::DecideEthnicity() {
 
 }
 
-void Agent::DecideMigitationStrategy(double maskWearing, double hygieneMaintain) {
-    double maskChance = (double) rand()/RAND_MAX;
-    double hygieneChance = (double) rand()/RAND_MAX;
+void Agent::decideMitigationStrategy(double mitagationPerAge[18][4]) {
+    int ageGroup = AgentAgeGroupReverse.at(info);
+    double currRoll;
 
-    if (maskChance > maskWearing) {
-        wearingMask = true;
-    }
+    //Roll for each mitagation chance for the agent
+    currRoll = ((double) rand() / (RAND_MAX));
+    wearingMask = (currRoll < mitagationPerAge[ageGroup][0]);
 
-    if (hygieneChance > hygieneMaintain) {
-        agentHygiene = true;
-    }
+    currRoll = ((double) rand() / (RAND_MAX));
+    agentHygiene = (currRoll < mitagationPerAge[ageGroup][1]);
+
+    currRoll = ((double) rand() / (RAND_MAX));
+    socialDistancing = (currRoll < mitagationPerAge[ageGroup][2]);
+
+    currRoll = ((double) rand() / (RAND_MAX));
+    willIsolate = (currRoll < mitagationPerAge[ageGroup][3]);
 }
 
 string Agent::agentToString() {
@@ -217,4 +248,37 @@ string Agent::agentToString() {
     agentString.append(EducationMap[education]);
 
     return agentString;
+}
+
+int Agent::getAgentAgeGroup() {
+    return AgentAgeGroupReverse.at(info);
+}
+
+bool Agent::randomAgentNeedsHospital(double agentNeedsHospital[18]){
+    //cout << "AgentHospitalChance: " << agentNeedsHospital[getAgentAgeGroup()] << "\n";
+    double compVal = ((double) rand() / (RAND_MAX));
+    if(agentNeedsHospital[getAgentAgeGroup()] >= compVal){
+        cout << "Agent Should be going to hospital \n";
+    }
+    return agentNeedsHospital[getAgentAgeGroup()] >= compVal;
+}
+
+void Agent::agentIncubationCheck(int agentIncubationTime[18]){
+    //this is multiplied by the currTime step because this time will increment every time step instead of every day
+    if((timeIncubating) > ((int)agentIncubationTime[getAgentAgeGroup()] * 6)){
+        //cout << "Inc time: " << timeIncubating << "    AgentInctTimeForAge: " << (int)agentIncubationTime[getAgentAgeGroup()] * 6 << "\n";
+        timeIncubating = 0;
+        infectAgent();
+    }else{
+        timeIncubating++;
+    }
+}
+
+void Agent::agentInfectedCheck(int agentRecoveryTime[18]){
+    if((timeInfected) > ((int)agentRecoveryTime[getAgentAgeGroup()] * 6)){
+        timeInfected = 0;
+        recoverAgent();
+    }else{
+        timeInfected++;
+    }
 }

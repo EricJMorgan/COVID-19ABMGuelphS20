@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 13/10/20
- * ver 1.03
+ * 27/11/20
+ * ver 2.02
  * 
  * This is the header file for the transportation class. It is used to decide where each agent will move at any given point.
  * The factors that affect this range from time, day, and age. It also initilizes the array of locations and places agents in inital starting areas
@@ -113,7 +113,7 @@ class Transportation {
      * When called this method will simulate the movment of the entire population of
      * the given location
      */
-    int simulateAgentMovment(int timeOfDay, DayOfWeek currDay);
+    int simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10], double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
     /**
      * updateLocationRisks
@@ -124,32 +124,7 @@ class Transportation {
      */
     void updateLocationRisks(int socialDistancingSeverity, double associatedLocRisks[]);
 
-    /**
-     * setAgentChanceOfMovment
-     * 
-     * This is used to set the array of agentChanceOfMovment
-     * 
-     * @param int ageGroup in range 0-17 where 0 is 0-4 1 is 5-9 etc
-     * @param int day in range 0-1 where 0 is a weekday and 1 is a weekend
-     * @param int time in range 0 <= time * timeStep < 24
-     * @param int location in range 0 - 9 where the number corisponds to the condenseLocationType enum
-     * @param double the percent chance of someone moving to the given location in range 0 - 1.0
-     */
-    void setAgentChanceOfMovment(int ageGroup, int day, int time, int location, double value);
-
-    /**
-     * getAgentChanceOfMovment
-     * 
-     * This is used to get the agents chance of movement based on ageGroup, day of the week,
-     * time of the day, and location.
-     * 
-     * @param int ageGroup in range 0-17 where 0 is 0-4 1 is 5-9 etc
-     * @param int day in range 0-1 where 0 is a weekday and 1 is a weekend
-     * @param int time in range 0 <= time * timeStep < 24
-     * @param int location in range 0 - 9 where the number corisponds to the condenseLocationType enum
-     * @return the percent chance of someone moving to the given location
-     */
-    double getAgentChanceOfMovment(int ageGroup, int day, int time, int location);
+    
 
     private:
     PostalCodeHash *postalCodes;
@@ -164,26 +139,7 @@ class Transportation {
     std::vector<Location*> hasPlaceOfWorship;
     std::vector<Location*> hasResidential;
 
-    double agentChanceOfMovment[18][2][6][9];//TODO j will change based on size of timestep
-    // double age5to9ChanceOfMovement[2][6][9];
-    // double age10to14ChanceOfMovement[2][6][9];
-    // double age15to19ChanceOfMovement[2][6][9];
-    // double age20to24ChanceOfMovement[2][6][9];
-    // double age25to29ChanceOfMovement[2][6][9];
-    // double age30to34ChanceOfMovement[2][6][9];
-    // double age35to39ChanceOfMovement[2][6][9];
-    // double age40to44ChanceOfMovement[2][6][9];
-    // double age45to49ChanceOfMovement[2][6][9];
-    // double age50to54ChanceOfMovement[2][6][9];
-    // double age55to59ChanceOfMovement[2][6][9];//TODO j will change based on size of timestep
-    // double age60to64ChanceOfMovement[2][6][9];
-    // double age65to69ChanceOfMovement[2][6][9];
-    // double age70to74ChanceOfMovement[2][6][9];
-    // double age75to79ChanceOfMovement[2][6][9];
-    // double age80to84ChanceOfMovement[2][6][9];
-    // double age85ChanceOfMovement[2][6][9];
-    
-
+    std::vector<Location*> findLocationList(int locationToMove);
 
     /**
      * randomInRange
@@ -208,7 +164,7 @@ class Transportation {
      * @param currDay the day of the week
      * @return the index that the agent will move to -1 if it will stay in place
      */
-    int agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay);
+    int agentMovingTo(Agent *agent, AgentInfo agentInfo, int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10]);
 
     /**
      * InfectAgentsPostMovement
@@ -218,7 +174,7 @@ class Transportation {
      * 
      * @return a int of the amount of the newly infected
      */
-    int InfectAgentsPostMovement();
+    int InfectAgentsPostMovement(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
 
     /**
@@ -307,23 +263,6 @@ class Transportation {
      * @return true if work is open false if not
      */
     bool willGoToWork(DayOfWeek currDay, int timeOfDay);
-
-    /**
-     * adultChanceOfMoving
-     * 
-     * this is a helper function for agent moving to
-     * that allows a % chance of each agent moving to a given place given their age
-     * 
-     * @param currrDay the current day of the week
-     * @param currTime the current time of the day
-     * @param genWork the chance of someone going to a genreal store either for work or shopping
-     * @param servWork the chance of someone going to a service store either for work or shopping
-     * @param goOut the chance of someone going out for entertainment
-     * @param needServ the chance of someone needing service
-     * @param goPark the chance of someone going to parks and rec
-     * @return the index that the agent will be moving to
-     */
-    int adultChanceOfMoving(Agent *agent, DayOfWeek currDay, int currTime, int genWork, int servWork, int goOut, int needServ, int goPark, int health, int worship);
 
     /**
      * getAgentEducationIndex

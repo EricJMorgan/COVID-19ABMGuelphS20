@@ -1,6 +1,6 @@
 # COVID-19ABMGuelphS20
-# 28/07/20
-# ver 0.03
+# 27/10/20
+# ver 2.00
 #
 # Makefile for the COVID-19 eABM
 
@@ -16,44 +16,18 @@ OBJECTS = $(BINDIR)main.o $(BINDIR)agent.o $(BINDIR)simulation.o $(BINDIR)locati
 all: library
 
 library:
-	@clear
-	@echo "creating .so file [------------]"
 	@g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/agent.cpp
-	@clear
-	@echo "creating .so file [#-----------]"
 	@g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/simulation.cpp
-	@clear
-	@echo "creating .so file [##----------]"
 	@g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/location.cpp
-	@clear
-	@echo "creating .so file [###---------]"
 	@g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/postalCodeHash.cpp
-	@clear
-	@echo "creating .so file [####--------]"
 	@g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/SIR.cpp
-	@clear
-	@echo "creating .so file [#####-------]"
 	@g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/SIRtotals.cpp
-	@clear
-	@echo "creating .so file [######------]"
 	@g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/transportation.cpp
-	@clear
-	@echo "creating .so file [#######-----]"
 	@g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/geographicalrisk.cpp
-	@clear
-	@echo "creating .so file [########----]"
 	@g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/hospital.cpp
-	@clear
-	@echo "creating .so file [#########---]"
 	@g++ -std=c++11 -Wall -I./include -I/opt/local/include -I/boost/boost_1_73_0 -c -fPIC ./src/isolationcompartment.cpp
-	@clear
-	@echo "creating .so file [##########--]"
 	@g++ -shared -o libProject.so agent.o simulation.o location.o postalCodeHash.o SIR.o SIRtotals.o transportation.o geographicalrisk.o hospital.o isolationcompartment.o
-	@clear
-	@echo "creating .so file [###########-]"
 	@rm agent.o simulation.o location.o postalCodeHash.o SIR.o SIRtotals.o transportation.o geographicalrisk.o hospital.o isolationcompartment.o
-	@clear
-	@echo "creating .so file [############]"
 	@echo ".so created"
 
 # CObjects: $(BINDIR)abmSim
@@ -100,5 +74,5 @@ library:
 # memtest:
 #	valgrind --leak-check=full -s $(BINDIR)abmSim
 #
-# clean:
-#	rm $(OBJECTS) $(BINDIR)abmSim
+clean:
+	rm libProject.so

@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 30/09/20
- * ver 1.03
+ * 27/10/20
+ * ver 2.00
  * 
  * This is the header file for the SIR class. This is the pipline that moves
  * agents from Susceptible to infected to recoverd. It looks at the agents current infection
@@ -25,6 +25,20 @@ enum AgentInfo { MALE0TO4, MALE5TO9, MALE10TO14, MALE15TO19, MALE20TO24, MALE25T
                 FEMALE10TO14, FEMALE15TO19, FEMALE20TO24, FEMALE25TO29, FEMALE30TO34, FEMALE35TO39, FEMALE40TO44, FEMALE45TO49,
                 FEMALE50TO54, FEMALE55TO59, FEMALE60TO64, FEMALE65TO69, FEMALE70TO74, FEMALE75TO79, FEMALE80TO84, FEMALE85 };
 
+// assigning age and sex groups to just age groups
+static std::map<int, AgentInfo> AgentAgeGroup = boost::assign::map_list_of(0, MALE0TO4)(0, FEMALE0TO4)(1, MALE5TO9)(1, FEMALE5TO9)
+(2, MALE10TO14)(2, FEMALE10TO14)(3, MALE15TO19)(3, FEMALE15TO19)(4, MALE20TO24)(4, FEMALE20TO24)(5, MALE25TO29)(5, FEMALE25TO29)
+(6, MALE30TO34)(6, FEMALE30TO34)(7, MALE35TO39)(7, FEMALE35TO39)(8, MALE40TO44)(8, FEMALE40TO44)(9, MALE45TO49)(9, FEMALE45TO49)
+(10, MALE50TO54)(10, FEMALE50TO54)(11, MALE55TO59)(11, FEMALE55TO59)(12, MALE60TO64)(12, FEMALE60TO64)(13, MALE65TO69)(13, FEMALE65TO69)
+(14, MALE70TO74)(14, FEMALE70TO74)(15, MALE75TO79)(15, FEMALE75TO79)(16, MALE80TO84)(16, FEMALE80TO84)(17, MALE85)(17, FEMALE85);
+
+static std::map<AgentInfo, int> AgentAgeGroupReverse = boost::assign::map_list_of(MALE0TO4, 0)(FEMALE0TO4, 0)(MALE5TO9, 1)(FEMALE5TO9, 1)
+(MALE10TO14, 2)(FEMALE10TO14, 2)(MALE15TO19, 3)(FEMALE15TO19, 3)(MALE20TO24, 4)(FEMALE20TO24, 4)(MALE25TO29, 5)(FEMALE25TO29, 5)
+(MALE30TO34, 6)(FEMALE30TO34, 6)(MALE35TO39, 7)(FEMALE35TO39, 7)(MALE40TO44, 8)(FEMALE40TO44, 8)(MALE45TO49, 9)(FEMALE45TO49, 9)
+(MALE50TO54, 10)(FEMALE50TO54, 10)(MALE55TO59, 11)(FEMALE55TO59, 11)(MALE60TO64, 12)(FEMALE60TO64, 12)(MALE65TO69, 13)(FEMALE65TO69, 13)
+(MALE70TO74, 14)(FEMALE70TO74, 14)(MALE75TO79, 15)(FEMALE75TO79, 15)(MALE80TO84, 16)(FEMALE80TO84, 16)(MALE85, 17)(FEMALE85, 17);
+
+//converting strings to enums and vice versa
 static std::map<std::string, AgentInfo> AgentInfoMap = boost::assign::map_list_of("Male 0-4", MALE0TO4)("Male 5-9", MALE5TO9)("Male 10-14", MALE10TO14)
 ("Male 15-19", MALE15TO19)("Male 20-24", MALE20TO24)("Male 25-29", MALE25TO29)("Male 30-34", MALE30TO34)("Male 35-39", MALE35TO39)
 ("Male 40-44", MALE40TO44)("Male 45-49", MALE45TO49)("Male 50-54", MALE50TO54)("Male 55-59", MALE55TO59)("Male 60-64", MALE60TO64)("Male 65-69", MALE65TO69)
@@ -42,11 +56,13 @@ static std::map<AgentInfo, std::string> AgentInfoMapReverse = boost::assign::map
 (FEMALE40TO44, "Female 40-44")(FEMALE45TO49, "Female 45-49")(FEMALE50TO54, "Female 50-54")(FEMALE55TO59, "Female 55-59")(FEMALE60TO64, "Female 60-64")
 (FEMALE65TO69, "Female 65-69")(FEMALE70TO74, "Female 70-74")(FEMALE75TO79, "Female 75-79")(FEMALE80TO84, "Female 80-84")(FEMALE85, "Female 85");
 
-enum SIRSeverity { SUSCEPTIBLE, INFECTED, ISOLATED, HOSPITALIZED, ICU, RECOVERED, DECEASED };
+enum SIRSeverity { SUSCEPTIBLE, INCUBATION, INFECTED, ICU, RECOVERED, DECEASED };
 
 //Declare SIR class
 class SIR {
     public:
+
+    AgentInfo info;
 
     /**
      * SIR
@@ -57,131 +73,55 @@ class SIR {
     SIR();
 
     /**
-     * AgentInfected
+     * incubateAgent
      * 
-     * This infects an Agent with the COVID19 virus. The function decides the severity of the case and whether
-     * the case will be fatal or not. 
-     * 
+     * used to push agent into the incubation stage
      */
-    void AgentInfected();
+    void incubateAgent();
 
     /**
-     * SIRTimeStep
+     * infectAgent
      * 
-     * This progresses agents through their various SIR model paths. An agent can be in any of the severity stages.
-     * As time progresses the function decides what happens to the agent with COVID-19 next until the
-     * agent has either recovered or passed away from the virus.
-     * 
-     * @param info the timestep of the overall simulation in hours
-     * @return string indicate if any update took place
+     * used to push agent into symptoms stage
      */
-    string SIRTimeStep(double timeStep);
+    void infectAgent();
 
     /**
-     * DetermineSeverity
+     * recoverAgent
+     * 
+     * used to push agent into recoverd stage
+     */
+    void recoverAgent();
+
+    /**
+     * ICUAgent
+     * 
+     * used to push agent into the ICU
+     */
+    void ICUAgent();
+
+    /**
+     * killAgent
+     * 
+     * used to push agent into death stage
+     */
+    void killAgent();
+
+    int timeInfected;
+
+    /**
+     * getSeverity
      * 
      * Function returns the current severity stage of the SIR case. 
      * 
      * @return The current stage of the SIR case (Infected, recoverd, etc)
      */
-    SIRSeverity DetermineSeverity();
-
-    /**
-     * setQuarantineCases
-     * 
-     * Set chance of agent being quaratined
-     * 
-     * @param value to set chance of quarantine
-     */
-    void setQuarantineCases(double val);
-
-    AgentInfo info;
-
-    /**
-     * getSymptoms
-     * 
-     * This returns if the agent is showing any symptoms
-     * based on the SIR model
-     * 
-     * @return true if showing symptoms false if not
-     */
-    bool getSymptoms();
+    SIRSeverity getSeverity();
 
     private:
-    // current state
+
     SIRSeverity currentSeverity;
 
-    // various possible stages
-    bool fatalCase;
-    bool showsSymptoms;
-    bool needHospital;
-    bool needIcu;
-    bool isIncubating;
-
-    double quarantineCases;
-
-    // time periods of various cases, user inputs
-    double incubationPeriod; // time take to incubate virus
-    double timeTilHospital; // time taken to get admitted to hospital after incubation, assuming hospital case
-    double timeTilICU; // time taken to get admitted to icu after hospitilization, assuming icu case
-    double timeTilDeath; // time taken to til death after icu, assuming fatal case
-    double timeTilRecovery; // time taken to til recovery after recovery starts at any stage, assuming non-fatal case
-                            // time til recovery will differ depending on which path to recovery is decided
-
-
-    /**
-     * QuarantineAgent
-     * 
-     * Move the agent's current SIR severity to isolated
-     * 
-     */
-    void QuarantineAgent();
-
-    /**
-     * HospitalAgent
-     * 
-     * Move the agent's current SIR severity to hospitalized and indicate they are no longer waiting for hospital
-     * 
-     */
-    void HospitalAgent();
-
-    /**
-     * PlaceAgentInICU
-     * 
-     * Move the agent's current SIR severity to ICU and indicate they are no longer waiting for ICU
-     * 
-     */
-    void PlaceAgentInICU();
-
-    /**
-     * RecoverAgent
-     * 
-     * Move the agent's current SIR severity to recovered
-     * 
-     */
-    void RecoverAgent();
-
-    /**
-     * AgentDeceased
-     * 
-     * Move the agent's current SIR severity to deceased
-     * 
-     */
-    void AgentDeceased();
-
-    /**
-     * DecideSIRCase
-     * 
-     * This function takes in parameters to decide whether the infected agent's COVID19 condition will
-     * be fatal. If the case is fatal the agent will progress down the SIR pipeline from infected to
-     * hospital to ICU and then to deceased. If the agent's case is not fatal a path of recovery will be 
-     * assigned to the agent based on the probabilities of being symptomatic admitted to hospital and
-     * admitted to ICU.
-     * 
-     * @param infectedNumb the agent's odds of having the virus
-     * @param infectedChance the chance of being infected based on Worldometer death rates
-     */
-    void DecideSIRCase(double infectedNumb, double infectedChance);
 };
 
 

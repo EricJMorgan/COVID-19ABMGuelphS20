@@ -12,25 +12,25 @@ navigator = dbc.Navbar(
     dbc.Container([
             html.A(
                 dbc.Row(
-                    [dbc.Col(dbc.NavbarBrand("COVID-19 Guelph eABM", className="ml-2"))],
-                    align="center",
+                    [dbc.Col(dbc.NavbarBrand("COVID-19 Guelph eABM"))],
+                    align="left",
                 ),
             ),
             dbc.NavbarToggler(id="navbar-toggler"),
             dbc.Collapse(
                 dbc.Nav(
-                    [dashboard_item],
-                    className="ml-auto", navbar=True
+                    navbar=True
                 ),
                 id="navbar-collapse", navbar=True,
             ),
-        ]),
+        ], className="margin-left-none"),
     className="mb-5",
 )
 
 #Button Container
 buttons = html.Div([
     dbc.Button("Start Movement", outline=True, color="primary", className="mr-1", id="simulationStart"),
+    dbc.Button("Save Simulation Values", outline=True, color="primary", className="mr-1", id="saveSimSetup"),
     html.A(dbc.Button("Refresh Page", outline=True, color="info", className="mr-1", id="refresh"), href='/'),
     html.P(id='placeholderdiv')
 ])
@@ -60,21 +60,24 @@ def make_slider(label, id_tag, slider_value, minimum, maximum, step_value, start
         }),
     ])
 
-#Geographical Risk Sliders (4)
-quarantine = make_slider("Quarantine", "Q_slider", "Q_slider_value", 0, 100, 1, 75)
-social_distance = make_slider("Social Distancing Severity", "SD_slider", "SD_slider_value", 0, 10, 1, 5)
-mask_compliance = make_slider("Mask Compliance", "MC_slider", "MC_slider_value", 0, 100, 1, 75)
-hygiene_maint = make_slider("Hygiene Maintenance", "HM_slider", "HM_slider_value", 0, 100, 1, 60)
+# Mitigation Risk Sliders (4)
+quarantine = make_slider("Quarantine", "Q_slider", "Q_slider_value", 0, 1, 0.05, 0.55)
+social_distance = make_slider("Social Distancing", "SD_slider", "SD_slider_value", 0, 1, 0.05, 0.65)
+mask_compliance = make_slider("Mask Compliance", "MC_slider", "MC_slider_value", 0, 1, 0.05, 0.75)
+hygiene_maint = make_slider("Hygiene Maintenance", "HM_slider", "HM_slider_value", 0, 1, 0.05, 0.60)
+vacc_effect = make_slider("Vaccine Effectiveness", "Vacc_slider", "Vacc_slider_value", 0, 1, 0.05, 1)
 
-#Geographical Tab
-geo_tab = dbc.Card([
+
+# Mitigation Strategies Tab
+mitigation_tab = dbc.Card([
     dbc.CardBody([
         html.Div([quarantine, html.Div(id='quarantine_container')]),
         html.Div([social_distance, html.Div(id='social_distance_container')]),
         html.Div([mask_compliance, html.Div(id='mask_compliance_container')]),
         html.Div([hygiene_maint, html.Div(id='hygiene_maint_container')]),
+        html.Div([vacc_effect, html.Div(id='vacc_effect_container')]),
     ],
-    className="mt-1", id="geo_tab",
+    className="mt-1", id="mitigation_tab",
     )
 ])
 
@@ -88,6 +91,41 @@ entertainment = make_slider("Entertainment", "ent_slider", "ent_slider_value", 0
 health = make_slider("Health", "health_slider", "health_slider_value", 0, 1, 0.1, 0.9)
 placeofworship = make_slider("Place of Worship", "poworship_slider", "poworship_slider_value", 0, 1, 0.1, 0.8)
 residential = make_slider("Residential Areas", "res_slider", "res_slider_value", 0, 1, 0.1, 0.5)
+
+# Age specific COVID Risk Sliders
+deathChance = make_slider("Death Chance", "dc_slider", "dc_slider_value", 0, 1, 0.1, 0.2)
+recoveryTime = make_slider("Recovery Time (days)", "recov_slider", "recov_slider_value", 0, 128, 1, 20)
+incubationPeriod = make_slider("Incubation Period (days)", "incubation_slider", "incubation_slider_value", 0, 30, 1, 5)
+# Mitigation Use for Age group
+socialDistancingUse = make_slider("Social Distancing", "socialDis_slider", "socialDis_slider_value", 0, 1, 0.1, 0.5)
+maskUse = make_slider("Mask Wearing", "maskUse_slider", "maskUse_slider_value", 0, 1, 0.1, 0.5)
+hygieneUse = make_slider("Personal Hygiene", "hygieneUse_slider", "hygieneUse_slider_value", 0, 1, 0.1, 0.5)
+isolationUse = make_slider("Isloation Rate", "isolationRate_slider", "isolationRate_slider_value", 0, 1, 0.1, 0.5)
+vaccineUse = make_slider("Percentage Vaccinated", "vaccineUse_slider", "vaccineUse_slider_value", 0, 1, 0.1, 0.3)
+
+
+# General Tab
+generalSettings_tab = dbc.Card([
+    dbc.CardBody([
+        html.Div([deathChance, html.Div(id='deathChance_container')]),
+        html.Div([recoveryTime, html.Div(id='recovery_container')]),
+        html.Div([incubationPeriod, html.Div(id='incubation_container')]),
+    ],
+    className="mt-1", id="genSettings_tab",
+    )
+])
+# Mitigation Strategy effectiveness Tab
+mitAgeSettings_tab = dbc.Card([
+    dbc.CardBody([
+        html.Div([socialDistancingUse, html.Div(id='socialDis_container')]),
+        html.Div([maskUse, html.Div(id='maskUse_container')]),
+        html.Div([hygieneUse, html.Div(id='hygieneUse_container')]),
+        html.Div([isolationUse, html.Div(id='isolationRate_container')]),
+        html.Div([vaccineUse, html.Div(id='vaccineUse_container')])
+    ],
+    className="mt-1", id="mitAgeSettings_tab",
+    )
+])
 
 #Location Tab
 loc_tab = dbc.Card([
@@ -106,12 +144,48 @@ loc_tab = dbc.Card([
     )
 ])
 
-#Tabs
+# Age group setting tabs
+ageDropdown = dcc.Dropdown(
+    id='age-dropdown',
+    options=[
+        {'label': '0-4', 'value': 0},
+        {'label': '5-9', 'value': 1},
+        {'label': '10-14', 'value': 2},
+        {'label': '15-19', 'value': 3},
+        {'label': '20-24', 'value': 4},
+        {'label': '25-29', 'value': 5},
+        {'label': '30-34', 'value': 6},
+        {'label': '35-39', 'value': 7},
+        {'label': '40-44', 'value': 8},
+        {'label': '45-49', 'value': 9},
+        {'label': '50-54', 'value': 10},
+        {'label': '55-59', 'value': 11},
+        {'label': '60-64', 'value': 12},
+        {'label': '65-69', 'value': 13},
+        {'label': '70-74', 'value': 14},
+        {'label': '75-79', 'value': 15},
+        {'label': '80-84', 'value': 16},
+        {'label': '85+', 'value': 17}
+    ],
+    clearable=False,
+    searchable=False,
+    placeholder="Select an age range..."
+)
+
+# Settings tabs in the global settings
 tabs = dbc.Tabs([
-    dbc.Tab(geo_tab, label="Geographical Risks", tab_id="geo_tab"),
+    dbc.Tab(mitigation_tab, label="Mitigation Effectiveness", tab_id="mitigation_tab"),
     dbc.Tab(loc_tab, label="Location Risks", tab_id="loc_tab"),
     ],
-    id="tabs", active_tab="geo_tab", persistence=True, persistence_type='session',
+    id="tabs", active_tab="mitigation_tab", persistence=True, persistence_type='session',
+)
+
+# Settings tabs in the age specific settings
+ageTabs = dbc.Tabs([
+    dbc.Tab(generalSettings_tab, label="General Settings", tab_id="generalSettings_tab"),
+    dbc.Tab(mitAgeSettings_tab, label="Mitigation Use Settings", tab_id="mitAgeSettings_tab")
+    ],
+    id="ageTabs", active_tab="generalSettings_tab", persistence=True, persistence_type='session',
 )
 
 #Function to make graph

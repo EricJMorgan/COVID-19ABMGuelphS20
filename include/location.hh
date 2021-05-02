@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 22/09/20
- * ver 1.00
+ * 12/11/20
+ * ver 2.01
  * 
  * This is the header file for the location class. This holds the
  * location grouping (The first 5 digits of a postal code), the locations
@@ -24,6 +24,7 @@
 
 using namespace std;
 
+//This defines each google maps value as 1 of 9 location types
 static std::map<std::string, condenseLocationType> locationTypeMap = boost::assign::map_list_of("accounting", SERVICES)("airport", TRANSPORT)("amusement_park", PARKSANDREC)
 ("aquarium", ENTERTAINMENT)("art_gallery", ENTERTAINMENT)("atm", UNNEEDED)("bakery", GENSTORE)("bank", SERVICES)("bar", ENTERTAINMENT)("beauty_salon", SERVICES)("bicycle_store", GENSTORE)
 ("book_store", GENSTORE)("bowling_alley", ENTERTAINMENT)("bus_station", TRANSPORT)("cafe", ENTERTAINMENT)("campground", PARKSANDREC)("car_dealer", SERVICES)
@@ -275,6 +276,20 @@ class Location : public GeographicalRisk {
      */
     int getLocationIndex();
 
+    
+    /**
+     * locationTimeStep
+     * 
+     * This method takes in the agents stats for mitagation chances
+     * the effectivness for minagation and each locations risk and uses
+     * an algorithm to determine the areas risk before moving to infect agents
+     * 
+     * @param the array of each age groups chance of using each mitagation strategy
+     * @param the array of each mitagation strategys effectivness
+     * @param the array of each location types risk of being there
+     */
+    void locationTimeStep(double agentMitagationChance[18][5], double mitagationEffectivness[5], double locationRisks[10]);
+
     private:
     int population;
     int pplDensity;
@@ -284,6 +299,7 @@ class Location : public GeographicalRisk {
     SIRtotals sirTotalLocation;
     string postalCodeGrouping;
     std::vector<string> postalCodes;
+    std::vector<int> amountOfAgeGroups();
 };
 
 #endif

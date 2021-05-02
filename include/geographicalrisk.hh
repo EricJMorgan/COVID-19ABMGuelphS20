@@ -1,7 +1,7 @@
 /****************
  * COVID-19ABMGuelphS20
- * 13/10/20
- * ver 1.03
+ * 27/11/20
+ * ver 2.01
  * 
  * This is the header file for the geographical risk class. The main
  * use for this class is to do the math for each area and decide how many 
@@ -63,73 +63,7 @@ class GeographicalRisk {
      * and various total counts it will then take the succeptible people in the region and 
      * 
      */
-    int infectPeople();
-
-    /**
-     * setAgentMitagationChance
-     * 
-     * This is responsible for setting each age groups chance of
-     * following each mitigation strategy. ageGroup 0 = 0 to 4, ageGroup 1 = 5 to 9 etc
-     * strategy is 0 = social distancing, 1 = maskwearing, 2 = hygine, 3 = isolation
-     * 
-     * @param the age group the set of agents are in range 0 - 17
-     * @param the mitigation strategy used in range 0 - 3
-     */
-    void setAgentMitagationChance(int ageGroup, int strategy, double value);
-
-    /**
-     * getAgentMitagationChance
-     * 
-     * This gets the ageGroups mitagation chance for the wanted
-     * strategy. where ageGroup: 0 = 0 - 4, 1 = 5 - 9 etc and 
-     * strategy: 0 = social distancing, 1 = maskwearing, etc.
-     * 
-     * @param ageGroup is the age group in range 0 - 17.
-     * @param strategy is the wanted strategy in range 0 - 3.
-     */
-    double getAgentMitagationChance(int ageGroup, int strategy);
-    
-    /**
-     * setMitagationEffectivness
-     * 
-     * This sets each mitigation strategys effectivness with a value 
-     * between 0 and 1.0. 0 = social distancing, 1 = maskwearing, 2 = hygine, 3 = isolation
-     * 
-     * @param int strategy this is the strategy too be used in range 0 - 3
-     * @param double value in range 0 - 1.0
-     */
-    void setMitagationEffectivness(int strategy, double value);
-
-    /**
-     * getMitagationEffectivness
-     * 
-     * This gets the mitagation strategys given effectivness
-     * where 0 = social distancing, 1 = maskwearing, etc.
-     * 
-     * @param strategy is the wanted strategy in range 0 - 3.
-     */
-    double getMitagationEffectivness(int strategy);
-
-    /**
-     * setLocationRisk
-     * 
-     * This sets each locations risk with a value
-     * between 0 and 1.0. 0 = genstore, 1 = transportation, etc
-     * 
-     * @param int location is the location to be checked in range 0 - 8
-     * @param double value in range 0 - 1.0
-     */
-    void setLocationRisk(int location, double value);
-
-    /**
-     * getLocationRisk
-     * 
-     * This gets each locations given risk where
-     * 0 = genreal store, 1 = transport, etc
-     * 
-     * @param the wanted location in range 0 - 8
-     */
-    double getLocationRisk(int location);
+    int infectPeople(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
     
 
@@ -140,31 +74,24 @@ class GeographicalRisk {
     int locationCount[LOCATIONTYPESIZE];
     int amountOfLocations;
     int socialDistancingSeverity;
-    double locationRisks[9];
+    
 
     std::vector<Agent *> susceptible;
     std::vector<Agent *> infected;
 
     private:
 
-    /**
-     * getLocationCountAt
-     * 
-     * This takes the current businesses and agents in the area and decides the amount of COVID transfer
-     * risk in the given region
-     * 
-     */
-    void updateAvgCountsAndRisk();
-
     // TODO: maybe needed later if not can be changed to local function variables
     double avgSymptomaticCarriers;
     double avgAsymptomatic;
     double avgMaskWearer;
     double avgHygiene;
+    double agentChanceOfInfection[18];
     SIRtotals sirTotalLocation;
 
-    double agentMitagationChance[18][4];
-    double mitagationEffectivness[4];
+    void updateAvgCountsAndRisk(double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
+
+    double calculateDensityRisk(double locationRisk[10]);
 };
 
 #endif
