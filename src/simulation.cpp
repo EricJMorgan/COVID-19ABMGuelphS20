@@ -114,14 +114,22 @@ int Simulation::getPopulation(){
 
 //This is where all the methods to update data are called for each 4 hour interval
 void Simulation::simulateTimeStep(){
-    cout << "infected total in timestep: " << getInfectedTotal() << "\n";
     
+    /* This section of codes updates the status 
+       of agents that are currently in the hospital 
+    */
+
     // hospital timestep method calls
     guelphHospital.HospitalTimeStep(sirTimeStep, agentRecoveryTime, agentDeathChance, agentChanceOfICU);
     deceasedAgents.insert(deceasedAgents.end(), guelphHospital.newlyDeceased.begin(), guelphHospital.newlyDeceased.end());
     guelphHospital.newlyDeceased.clear();
     recoveredAgents.insert(recoveredAgents.end(), guelphHospital.newlyRecovered.begin(), guelphHospital.newlyRecovered.end());//TODO distibute recoverd Agents into locations
     guelphHospital.newlyRecovered.clear();
+
+
+    /* This section of code updates the status 
+       of agents that are in isolation 
+    */
 
     // isolation compartment timestep method calls
     isoCompartment.SimulateIsoTimeStep(sirTimeStep, agentRecoveryTime, agentNeedsHospital);
@@ -132,35 +140,72 @@ void Simulation::simulateTimeStep(){
     }
     isoCompartment.newlyHospitalized.clear();
 
+
+    /* Each location will be checked to see if agents need to be moved into the hospital
+        This is currently done in the following process:
+        1. Loop through each location
+        2. For reach location get the number of infected agents
+        3. For each infected agent at that location we check and see if the agent needs to go to the hospital
+        4. If the agent does need to go to the hospital they are removed from the infected list and placed in the hospital list
+        5. Once all infected agents are checked for hospital status we then check and see if each agent needs a status update
+            5.1) It is checked if each agent has been in incubation long enough to now be infected
+            5.2) Then if the agent has been infected long enough to now recover
+    */
+
     Location *locationHolder;
     //gets each location and steps their time then checks if each agent will need the hospital
     for (int i = 0; i < locationInfo->getLocationListLength(); i++) {
         //locationInfo->getLocationAt(i)->locationTimeStep(agentMitagationChance, mitagationEffectivness, locationRisks);//TODO this is usless atm but may be needed later
         locationHolder = locationInfo->getLocationAt(i);
 
+        // loop through all agents at a given location
         for(int j = 0; j < locationHolder->getInfectedSize(); j++){
-            if(locationHolder->getInfectedAgentAt(j)->randomAgentNeedsHospital(agentNeedsHospital)){
-                guelphHospital.increaseHospitalCount(locationHolder->getInfectedAgentAt(j));
-                locationHolder->removeInfectedAgent(j);//TODO this might skip over other agents
-                j--;
-                continue;
-            }
-            
+
             if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INCUBATION){
                 //check if agent is past incubation time and into infected time
                 locationHolder->getInfectedAgentAt(j)->agentIncubationCheck(agentIncubationTime);
+
+                // check to see if an incubating agent will be entering isolation
+                if( (double)rand() / (double)RAND_MAX > 0.50) {
+                    isoCompartment.AddMildlyInfectedAgents(locationHolder->getInfectedAgentAt(j));
+                    locationHolder->removeInfectedAgent(j);
+                    j--;
+                    continue;
+                }
+
             }else if(locationHolder->getInfectedAgentAt(j)->getSeverity() == INFECTED){
+
+                //check to see if an infected agent will be entering isolation
+
+                //check to see if every single infected agent who has not yet completed a agentHopsitalRoll needs to go to the hospital
+                if(locationHolder->getInfectedAgentAt(j)->getAgentHospitalRoll() == -1){
+                    if(locationHolder->getInfectedAgentAt(j)->randomAgentNeedsHospital(agentNeedsHospital)){
+                        locationHolder->getInfectedAgentAt(j)->setAgentHospitalRoll(1); // TODO: DEFAULT VALUE OF 1 SET, this should be the number of timesteps until hospital 
+                        
+                        // TODO Currently all infected agents are moved to the hospital immediately, this needs to be updated to insertion over time
+                        guelphHospital.increaseHospitalCount(locationHolder->getInfectedAgentAt(j));
+                        locationHolder->removeInfectedAgent(j);//TODO this might skip over other agents
+                        j--;
+                        continue;
+                    }else{
+                        // if the roll fails then the agent will not be going to the hospital during the simulation
+                        locationHolder->getInfectedAgentAt(j)->setAgentHospitalRoll(0);
+                    }
+                }
+
                 //check if agent is past infected time and into recoverd time
                 locationHolder->getInfectedAgentAt(j)->agentInfectedCheck(agentRecoveryTime);
-                //if agent is recoverd we have to move them into the infected list
-                if(locationHolder->getInfectedAgentAt(j)->getSeverity() == RECOVERED){
+
+            // if agent is recovered we wat to remove them from the infected list               
+            }else if(locationHolder->getInfectedAgentAt(j)->getSeverity() == RECOVERED){
                     recoveredAgents.insert( recoveredAgents.end(), locationHolder->removeInfectedAgent(j));//TODO this could be an issue
                 }
             }
         }
-    }
     
-    // transport agents from location to location
+    /* Finally we check to see if the agents are going to move from
+       one location to another during the timestep.
+    */
     newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay, agentChanceOfMovment, agentMitagationChance, mitagationEffectivness, locationRisks);
 
     cout << "newly infected: " << newlyInfected << "\n";
@@ -196,8 +241,37 @@ void Simulation::simulateTimeStep(){
     cout << endl;
 
 
+
+    //print to log file for each timestep
+    ofstream logFile;
+    logFile.open("Results.txt", std::ios::app);
+
+    logFile << "Time elapsed: " << timeElapsed << " hours, " << daysTotal <<  " days" << endl;
+    logFile << "******************************" << endl;
+    logFile << "New cases " <<  newlyInfected << endl;
+    logFile << "Infected current " << infectedCurrent << endl;
+    logFile << "Infected total " << infectedTotal << endl;
+    logFile << "Deceased total " << deceasedTotal << endl;
+    logFile << "Recovered total " << recoveredTotal << endl;
+    
+    logFile << "Hospital current " << hospitalCurrent << endl;
+    logFile << "Hospital total " << hospitalTotal << endl;
+
+    logFile << "ICU current " << icuCurrent << endl;
+    logFile << "ICU total " << icuTotal << endl;
+    logFile << "******************************" << endl;
+    logFile << endl;
+
+    logFile.close();
+
     //increase time at end of day
     stepTime();
+}
+
+void Simulation::simDayTimeStep(){
+    for(int i = 0; i < 6; i++){
+        simulateTimeStep();
+    }
 }
 
 Agent *Simulation::getAgentAt(int index){
@@ -253,7 +327,6 @@ void Simulation::setUpAgents(string filename) {
         split(csvValues, line, boost::is_any_of(","));
     }
 
-    cout << "infected total in C after setUpAgents: " << infectedTotal << "\n";
     demographicFile.close();
 }
 
@@ -292,7 +365,6 @@ int Simulation::getInfectedCurrent() {
 }
 
 int Simulation::getInfectedTotal() {
-    cout << "infected total in C: " << infectedTotal << "\n";
     return infectedTotal;
 }
 
@@ -429,8 +501,6 @@ void Simulation::setAgentChanceOfICU(int ageGroup, double value){
     if(value < 0 || value > 1) return;
 
     agentChanceOfICU[ageGroup] = value;
-    cout << "Setting incubation time to: " << agentChanceOfICU[ageGroup] <<":" << value << "\n";
-
 }
 
 double Simulation::getAgentChanceOfICU(int ageGroup){
@@ -443,7 +513,6 @@ void Simulation::setAgentIncubationTime(int ageGroup, int value){
     if(ageGroup < 0 || ageGroup > 17) return;
 
     agentIncubationTime[ageGroup] = value;
-    cout << "Setting incubation time to: " << agentIncubationTime[ageGroup] <<":" << value << "\n";
 }
 
 int Simulation::getAgentIncubationTime(int ageGroup){
@@ -452,61 +521,64 @@ int Simulation::getAgentIncubationTime(int ageGroup){
     return agentIncubationTime[ageGroup];
 }
 
-void Simulation::simDayTimeStep(){
-    for(int i = 0; i < 6; i++){
-        simulateTimeStep();
-    }
-}
+int Simulation::saveCurrentPreset(int fileNum){
 
-int Simulation::saveCurrentPreset(string fileName){
-    ofstream newFile(fileName.append(".csv"));
+    ofstream newFile;
+    newFile.open("simulationValues.csv");
+
+    cout << "successfully opened file \n";
     //add agent mitagation chance to file each row denoting an ageGroup
     for(int i = 0; i < 18; i++){
         for(int j = 0; j < 5; j++){
             newFile << agentMitagationChance[i][j];
             if(j != 4) newFile << ",";
         }
-        newFile << "/n";
+        newFile << "\n";
     }
 
+    newFile << "-Mitigation Effectiveness-\n";
     for(int i = 0; i < 4; i++){
-        newFile << agentMitagationChance[i] << ",";
+        newFile << mitagationEffectivness[i] << ",";
     }
-    newFile << agentMitagationChance[4] << "/n";
+    newFile << mitagationEffectivness[4] << "\n-Location Risks-\n";
 
     for(int i = 0; i < 8; i++){
         newFile << locationRisks[i] << ",";
     }
-    newFile << locationRisks[8] << "/n";
+    newFile << locationRisks[8] << "\n-Agent Recovery Time-\n";
 
     for(int i = 0; i < 17; i++){
         newFile <<  agentRecoveryTime[i] << ",";
     }
-    newFile <<  agentRecoveryTime[17] << "/n";
+    newFile <<  agentRecoveryTime[17] << "\n-Agent Incubation Time-\n";
 
     for(int i = 0; i < 17; i++){
         newFile <<  agentIncubationTime[i] << ",";
     }
-    newFile <<  agentIncubationTime[17] << "/n";
+    newFile <<  agentIncubationTime[17] << "\n-Agent Hospital Chance-\n";
 
     for(int i = 0; i < 17; i++){
         newFile <<  agentNeedsHospital[i] << ",";
     }
-    newFile <<  agentNeedsHospital[17] << "/n";
+    newFile <<  agentNeedsHospital[17] << "\n-Agent Death Chance-\n";
 
     for(int i = 0; i < 17; i++){
         newFile <<  agentDeathChance[i] << ",";
     }
-    newFile <<  agentDeathChance[17] << "/n";
+    newFile <<  agentDeathChance[17] << "\n-Agent ICU Chance-\n";
 
     for(int i = 0; i < 17; i++){
         newFile <<  agentChanceOfICU[i] << ",";
     }
-    newFile <<  agentChanceOfICU[17] << "/n";
+    newFile <<  agentChanceOfICU[17] << "\n-Agent Chance of movement-\n";
 
     for(int i = 0; i < 18; i++){
         for(int j = 0; j < 2; j++){
             for(int k = 0; k < 6; k++){
+                // save the location movement chances for each agent for given age, weekday status, and time of day
+                newFile << i << ",";
+                newFile << j << ",";
+                newFile << k << ",";
                 newFile << agentChanceOfMovment[i][j][k][0] << ",";
                 newFile << agentChanceOfMovment[i][j][k][1] << ",";
                 newFile << agentChanceOfMovment[i][j][k][2] << ",";
@@ -520,7 +592,8 @@ int Simulation::saveCurrentPreset(string fileName){
         }
     }
     newFile.close();
-    return 0;
+    cout << "file writing complete \n";
+    return 5;
 }
 
 void Simulation::setPresets(int preset){
@@ -548,7 +621,6 @@ void Simulation::setPresets(int preset){
             break;
     }
     cout << "Pre-set complete\n";
-    cout << "infected total after preset" << infectedTotal << "\n";
 }
 
 void Simulation::setRealWorldPreset(){
@@ -783,14 +855,14 @@ void Simulation::setDefaultHospitalData(){
     setAgentChanceOfICU(2, .01);
     setAgentDeathChance(2, .001);
     setAgentIncubationTime(2, 8);
-    setAgentNeedsHospital(2, .1);
+    setAgentNeedsHospital(2, .01);
 
     //15 to 19
     setAgentRecoveryTime(3, 7);
     setAgentChanceOfICU(3, .01);
     setAgentDeathChance(3, .01);
     setAgentIncubationTime(3, 10);
-    setAgentNeedsHospital(3, .11);
+    setAgentNeedsHospital(3, .01);
 
     //20 to 44
     for(int i = 4; i < 9; i++){
@@ -798,7 +870,7 @@ void Simulation::setDefaultHospitalData(){
         setAgentChanceOfICU(i, .15);
         setAgentDeathChance(i, .01);
         setAgentIncubationTime(i, 10);
-        setAgentNeedsHospital(i, .11);
+        setAgentNeedsHospital(i, .03);
     }
 
     //45 to 64
@@ -807,16 +879,16 @@ void Simulation::setDefaultHospitalData(){
         setAgentChanceOfICU(i, .25);
         setAgentDeathChance(i, .04);
         setAgentIncubationTime(i, 10);
-        setAgentNeedsHospital(i, .15);
+        setAgentNeedsHospital(i, .08);
     }
 
     //65 to 85+
     for(int i = 13; i < 18; i++){
         setAgentRecoveryTime(i, 14);
-        setAgentChanceOfICU(i, .40);
+        setAgentChanceOfICU(i, .25);
         setAgentDeathChance(i, .15);
-        setAgentIncubationTime(i, 17);
-        setAgentNeedsHospital(i, .5);
+        setAgentIncubationTime(i, 10);
+        setAgentNeedsHospital(i, .10);
     }
 
     cout << "in function: " << getAgentIncubationTime(3) << "\n";

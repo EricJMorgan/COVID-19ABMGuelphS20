@@ -26,6 +26,9 @@ Agent::Agent(AgentInfo agentInfo) {
     DecideEducation();
     setEducationIndex(-1);
     setResidentialIndex(-1);
+    setAgentHospitalRoll(-1);
+    setAgentICURoll(-1);
+    setAgentDeathRoll(-1);
 }
 
 AgentInfo Agent::getAgentInfo(){
@@ -61,6 +64,29 @@ int Agent::getResidentialIndex(){
     return residentialIndex;
 }
 
+void Agent::setAgentHospitalRoll(short rollValue){
+    agentHospitalRoll = rollValue;
+}
+
+short Agent::getAgentHospitalRoll(){
+    return agentHospitalRoll;
+}
+
+void Agent::setAgentICURoll(short rollValue){
+    agentICURoll = rollValue;
+}
+
+short Agent::getAgentICURoll(){
+    return agentICURoll;
+}
+
+void Agent::setAgentDeathRoll(short rollValue){
+    agentDeathRoll = rollValue;
+}
+
+short Agent::getAgentDeathRoll(){
+    return agentDeathRoll;
+}
 
 void Agent::DecideEducation() {
     //if agents are younger than 20 they will not have a formal education yet
@@ -229,12 +255,18 @@ int Agent::getAgentAgeGroup() {
 }
 
 bool Agent::randomAgentNeedsHospital(double agentNeedsHospital[18]){
-    return agentNeedsHospital[getAgentAgeGroup()] >= ((double) rand() / (RAND_MAX)) && (getSeverity() != INCUBATION);
+    //cout << "AgentHospitalChance: " << agentNeedsHospital[getAgentAgeGroup()] << "\n";
+    double compVal = ((double) rand() / (RAND_MAX));
+    if(agentNeedsHospital[getAgentAgeGroup()] >= compVal){
+        cout << "Agent Should be going to hospital \n";
+    }
+    return agentNeedsHospital[getAgentAgeGroup()] >= compVal;
 }
 
 void Agent::agentIncubationCheck(int agentIncubationTime[18]){
     //this is multiplied by the currTime step because this time will increment every time step instead of every day
-    if((timeIncubating * 6) < ((int)agentIncubationTime[getAgentAgeGroup()])){
+    if((timeIncubating) > ((int)agentIncubationTime[getAgentAgeGroup()] * 6)){
+        //cout << "Inc time: " << timeIncubating << "    AgentInctTimeForAge: " << (int)agentIncubationTime[getAgentAgeGroup()] * 6 << "\n";
         timeIncubating = 0;
         infectAgent();
     }else{
@@ -243,7 +275,7 @@ void Agent::agentIncubationCheck(int agentIncubationTime[18]){
 }
 
 void Agent::agentInfectedCheck(int agentRecoveryTime[18]){
-    if((timeInfected * 6) < ((int)agentRecoveryTime[getAgentAgeGroup()])){
+    if((timeInfected) > ((int)agentRecoveryTime[getAgentAgeGroup()] * 6)){
         timeInfected = 0;
         recoverAgent();
     }else{

@@ -34,23 +34,33 @@ void IsolationCompartment::AddMildlyInfectedAgents(Agent *toIsolate) {
     isolated.push_back(toIsolate);
 }
 
-void IsolationCompartment::SimulateIsoTimeStep (double timeStep, int agentRecoveryTime[18], double agentNeedsHospital[18]) {
+void IsolationCompartment::SimulateIsoTimeStep(double timeStep, int agentRecoveryTime[18], double agentNeedsHospital[18]) {
     //loops through the isolated agent list
     Agent* currAgent;
     int agentAgeGroup;
     for (int i = 0; i < (int)isolated.size(); i++) {
         currAgent =  isolated[i];
         agentAgeGroup = currAgent->getAgentAgeGroup();
-        //check if the agent is in need of the hospital or good too leave isolation
-        if (agentNeedsHospital[agentAgeGroup] >= ((double) rand() / (RAND_MAX))) {
-            currAgent->timeInfected++;
-            isolated.erase(isolated.begin() + i);
-            newlyHospitalized.push_back(currAgent);
-        } else if (currAgent->timeInfected > agentRecoveryTime[agentAgeGroup]) {
+
+        // complete the agents hospital roll to see if they need to go to the hospital
+        if(currAgent->getAgentHospitalRoll() == -1){
+            if (agentNeedsHospital[agentAgeGroup] >= ((double) rand() / (RAND_MAX))) {
+                currAgent->setAgentHospitalRoll(1);
+                currAgent->timeInfected++;
+                isolated.erase(isolated.begin() + i);
+                newlyHospitalized.push_back(currAgent);
+            }else{
+                // if the roll fails then the agent will not be going to the hospital during the simulation
+                currAgent->setAgentHospitalRoll(0);
+            }
+        } else if (currAgent->timeInfected > (agentRecoveryTime[agentAgeGroup] * 6)) { // if the agent doesn't need to go to the hospital we will check if they are no longer infected
             currAgent->timeInfected = 0;
             currAgent->recoverAgent();
             isolated.erase(isolated.begin() + i);
             newlyRecovered.push_back(currAgent);
+        } else {
+            currAgent->timeInfected++; // if not hospitalized or recovered increase agent time infected
+
         }
     }
 }

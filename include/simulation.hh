@@ -435,7 +435,7 @@ public:
      */
     void setPresets(int preset);
 
-    int saveCurrentPreset(string fileName);
+    int saveCurrentPreset(int fileNum);
 
     int uploadCurrentPreset(string fileName);
     
@@ -637,6 +637,7 @@ extern "C"
     int getAgentIncubationTime(Simulation *sim, int ageGroup) { return sim->getAgentIncubationTime(ageGroup); }
     void simDayTimeStep(Simulation *sim) {sim->simDayTimeStep(); }
     void setPresets(Simulation *sim, int preset) {sim->setPresets(preset); }
+    int saveCurrentPreset(Simulation *sim, int fileNum) {return sim->saveCurrentPreset(fileNum); }
 }
 
 #endif

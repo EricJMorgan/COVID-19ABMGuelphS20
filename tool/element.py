@@ -30,6 +30,7 @@ navigator = dbc.Navbar(
 #Button Container
 buttons = html.Div([
     dbc.Button("Start Movement", outline=True, color="primary", className="mr-1", id="simulationStart"),
+    dbc.Button("Save Simulation Values", outline=True, color="primary", className="mr-1", id="saveSimSetup"),
     html.A(dbc.Button("Refresh Page", outline=True, color="info", className="mr-1", id="refresh"), href='/'),
     html.P(id='placeholderdiv')
 ])
@@ -61,9 +62,11 @@ def make_slider(label, id_tag, slider_value, minimum, maximum, step_value, start
 
 # Mitigation Risk Sliders (4)
 quarantine = make_slider("Quarantine", "Q_slider", "Q_slider_value", 0, 1, 0.05, 0.55)
-social_distance = make_slider("Social Distancing Severity", "SD_slider", "SD_slider_value", 0, 1, 0.05, 0.65)
+social_distance = make_slider("Social Distancing", "SD_slider", "SD_slider_value", 0, 1, 0.05, 0.65)
 mask_compliance = make_slider("Mask Compliance", "MC_slider", "MC_slider_value", 0, 1, 0.05, 0.75)
 hygiene_maint = make_slider("Hygiene Maintenance", "HM_slider", "HM_slider_value", 0, 1, 0.05, 0.60)
+vacc_effect = make_slider("Vaccine Effectiveness", "Vacc_slider", "Vacc_slider_value", 0, 1, 0.05, 1)
+
 
 # Mitigation Strategies Tab
 mitigation_tab = dbc.Card([
@@ -72,6 +75,7 @@ mitigation_tab = dbc.Card([
         html.Div([social_distance, html.Div(id='social_distance_container')]),
         html.Div([mask_compliance, html.Div(id='mask_compliance_container')]),
         html.Div([hygiene_maint, html.Div(id='hygiene_maint_container')]),
+        html.Div([vacc_effect, html.Div(id='vacc_effect_container')]),
     ],
     className="mt-1", id="mitigation_tab",
     )
@@ -97,6 +101,8 @@ socialDistancingUse = make_slider("Social Distancing", "socialDis_slider", "soci
 maskUse = make_slider("Mask Wearing", "maskUse_slider", "maskUse_slider_value", 0, 1, 0.1, 0.5)
 hygieneUse = make_slider("Personal Hygiene", "hygieneUse_slider", "hygieneUse_slider_value", 0, 1, 0.1, 0.5)
 isolationUse = make_slider("Isloation Rate", "isolationRate_slider", "isolationRate_slider_value", 0, 1, 0.1, 0.5)
+vaccineUse = make_slider("Percentage Vaccinated", "vaccineUse_slider", "vaccineUse_slider_value", 0, 1, 0.1, 0.3)
+
 
 # General Tab
 generalSettings_tab = dbc.Card([
@@ -114,7 +120,8 @@ mitAgeSettings_tab = dbc.Card([
         html.Div([socialDistancingUse, html.Div(id='socialDis_container')]),
         html.Div([maskUse, html.Div(id='maskUse_container')]),
         html.Div([hygieneUse, html.Div(id='hygieneUse_container')]),
-        html.Div([isolationUse, html.Div(id='isolationRate_container')])
+        html.Div([isolationUse, html.Div(id='isolationRate_container')]),
+        html.Div([vaccineUse, html.Div(id='vaccineUse_container')])
     ],
     className="mt-1", id="mitAgeSettings_tab",
     )
