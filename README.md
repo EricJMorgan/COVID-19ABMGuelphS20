@@ -30,7 +30,7 @@ ___
 ## Steps to Install and Run
 Firstly, clone the repository. You can do this by entering the following:
 ```bash
-git clone https://github.com/joyglitch/COVID-19ABMGuelphS20.git
+git clone https://github.com/EricJMorgan/COVID-19ABMGuelphS20.git
 ```
 Then, `cd` into the directory that contains the cloned repository and enter the following command:
 ```bash
@@ -40,6 +40,7 @@ Furthermore, ensure that you have installed all the necessary Python packages by
 ```bash
 pip install -r requirements.txt
 ```
+Alternatively: The AMB_Install.sh bash script may be used. Please refer to the GitHub Wiki Setup page for further instruction.
 
 ## Steps to Update Documentation
 For the documentation generation, we used [Doxygen](https://www.doxygen.nl/index.html) to create MD and HTML files. To learn more about the standards we used while documenting, please use the following resources:  
