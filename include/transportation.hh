@@ -108,12 +108,12 @@ class Transportation {
     Agent *moveSusceptibleToInfected(int locationIndex, int agentIndex);
 
     /**
-     * simulateAgentMovment
+     * simulateAgentMovement
      * 
      * When called this method will simulate the movment of the entire population of
      * the given location
      */
-    int simulateAgentMovment(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10], double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
+    int simulateAgentMovement(int timeOfDay, DayOfWeek currDay, double chanceOfMoving[18][2][6][10], double agentChanceOfMitigation[18][5], double mitigationEffect[5], double locationRisk[10]);
 
     /**
      * updateLocationRisks

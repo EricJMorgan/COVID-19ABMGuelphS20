@@ -206,7 +206,7 @@ void Simulation::simulateTimeStep(){
     /* Finally we check to see if the agents are going to move from
        one location to another during the timestep.
     */
-    newlyInfected = locationInfo->simulateAgentMovment(currTime, currDay, agentChanceOfMovment, agentMitagationChance, mitagationEffectivness, locationRisks);
+    newlyInfected = locationInfo->simulateAgentMovement(currTime, currDay, agentChanceOfMovment, agentMitagationChance, mitagationEffectivness, locationRisks);
 
     cout << "newly infected: " << newlyInfected << "\n";
 
