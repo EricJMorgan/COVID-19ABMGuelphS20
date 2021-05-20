@@ -16,13 +16,9 @@ The finished project entails a successfully working eABM that resembles Guelph. 
 
 The following list consists of potential improvements to be made:
 * A map of Guelph that displays the hotspots of where agents are getting infected the most
-* More buttons to start, pause, and reset the simulation
-* More work to be done to improve the user interface dashboard
-* More work to be done to improve the "accuracy" of agent behaviours
+* More buttons to pause and reset the simulation
 * Flu season in the Fall, especially with students coming to campus or not
 
-Here is a snapshot of the overall simulation functionality:
-![Alt text](Screenshot.gif)
 ___
 ## Contributions
 Currently, this project is made private. We will not be taking any pull requests. Stay safe!
